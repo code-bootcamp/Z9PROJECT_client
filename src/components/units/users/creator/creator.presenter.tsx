@@ -178,25 +178,32 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               </S.LabelWrapper>
             </S.SnsCheckWrapper>
           </S.SnsLabelInner>
+          <Upload01
+            onChangeCertifiFile={onChangeCertifiFile}
+            certifiFetchUrl={certifiFetchUrl}
+          />
         </S.SnsLabel>
 
-        <Upload01
-          onChangeCertifiFile={onChangeCertifiFile}
-          certifiFetchUrl={certifiFetchUrl}
-        />
-        <div>
-          <Upload02
-            onChageProfileFile={onChageProfileFile}
-            profileFetchUrl={profileFetchUrl}
+        <S.InfoWrapper>
+          <S.UpoloadWrapper>
+            <S.ProfileWrapper>
+              {profilePreview ? (
+                <img src={profilePreview} alt="기본이미지" />
+              ) : (
+                <img src="/users/user/img_id.svg" alt="기본이미지" />
+              )}
+            </S.ProfileWrapper>
+            <Upload02
+              onChageProfileFile={onChageProfileFile}
+              profileFetchUrl={profileFetchUrl}
+            />
+          </S.UpoloadWrapper>
+          <S.Introduce
+            placeholder="구매자에게 자신을 소개해주세요."
+            {...register("introduce")}
           />
-          <S.ProfileWrapper>
-            {profilePreview ? (
-              <img src={profilePreview} alt="기본이미지" />
-            ) : (
-              <img src="/users/user/img_id.svg" alt="기본이미지" />
-            )}
-          </S.ProfileWrapper>
-        </div>
+        </S.InfoWrapper>
+
         <S.WrapperTermsOfUse>
           <label>개인정보 이용약관</label>
           <S.TermsOfUse>

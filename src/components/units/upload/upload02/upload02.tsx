@@ -7,7 +7,7 @@ const Wrapper = styled.div`
 
 const UploadBtn = styled.div`
   padding: 23px;
-  width: 600px;
+  width: 200px;
   height: 70px;
   color: gray;
   background: #ffffff;
