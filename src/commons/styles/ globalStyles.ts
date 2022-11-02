@@ -5,7 +5,6 @@ export const globalStyles = css`
     box-sizing: border-box;
     margin: 0;
   }
-
   html,
   body {
     padding: 0;
