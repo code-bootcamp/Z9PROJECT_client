@@ -13,6 +13,7 @@ const schma = yup.object({
   address: yup.string().required("false"),
   addressDetail: yup.string().required("false"),
   creator: yup.string().required("false"),
+  introduce: yup.string().required("false"),
 });
 
 export default function CreatorRegisterContainer() {
