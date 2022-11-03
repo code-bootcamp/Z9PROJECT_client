@@ -6,6 +6,7 @@ export const Container = styled.div`
   .Navigation-Anchor {
     background-color: ${styleSet.colors.point2} !important;
   }
+  padding-top: 70px;
 `;
 export const Wrapper = styled.div`
   width: 1400px;
@@ -156,7 +157,7 @@ export const Message4 = styled.img`
 export const Message5 = styled.img`
   position: absolute;
   right: 4%;
-  top: 49%;
+  top: 52%;
   height: 400px;
 `;
 
