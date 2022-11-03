@@ -2,6 +2,7 @@ export const styleSet = {
   colors: {
     white: "#fff",
     black: "#000",
+    darkgray: "#777",
     gray: "#ccc",
     red: "#b1312d",
     tp: "transparent",
