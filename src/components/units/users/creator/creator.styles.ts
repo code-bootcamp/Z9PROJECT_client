@@ -10,10 +10,16 @@ export const Container = styled.section`
 
 export const Title = styled.h1`
   margin: 0 0 70px 0;
-  font-family: "Bodoni Moda";
+  font-family: ${styleSet.font.B};
   text-align: center;
-  font-size: 5rem;
+  font-size: ${styleSet.fontSize.s1};
   color: #5e5e5e;
+`;
+
+export const SubTitle = styled.label`
+  align-self: flex-start;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s5};
 `;
 
 export const Form = styled.form`
@@ -36,6 +42,7 @@ export const Label = styled.label`
   gap: 23px;
 
   position: relative;
+  overflow: hidden;
 `;
 
 export const SnsLabel = styled.label`
@@ -63,32 +70,43 @@ export const Svg = styled.svg`
   width: 18px;
 
   position: absolute;
-  left: 10px;
-  top: 14px;
+  left: 22px;
+  top: 23px;
+  z-index: 1;
 `;
 
 export const CertificationBtn = styled.button`
-  width: 120px;
-  height: 40px;
+  width: 150px;
+  height: 60px;
   color: white;
   background: ${styleSet.colors.subcolor2};
   border-radius: 10px;
 `;
 
 export const ConfirmBtn = styled.button`
-  width: 120px;
-  height: 40px;
+  width: 150px;
+  height: 60px;
   color: white;
   background: ${styleSet.colors.subcolor1};
   border-radius: 10px;
 `;
 
 export const ZipcodeBtn = styled.button`
-  width: 120px;
-  height: 40px;
+  width: 150px;
+  height: 60px;
   color: white;
   background: ${styleSet.colors.subcolor2};
   border-radius: 10px;
+`;
+
+export const AddressWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const ProfileWrapper = styled.div`
@@ -133,7 +151,9 @@ export const Introduce = styled.textarea`
   width: 100%;
   height: 150px;
   border: 1px solid ${styleSet.colors.gray};
+  border-radius: 10px;
   resize: none;
+  outline-color: ${styleSet.colors.primary};
 `;
 
 export const WrapperTermsOfUse = styled.div`
