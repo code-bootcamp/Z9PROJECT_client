@@ -140,6 +140,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               register={register("address")}
               error={formState.errors.address?.message}
             />
+<<<<<<< HEAD
           </S.Label>
           <S.Label>
             <S.Svg
@@ -218,6 +219,34 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               certifiFetchUrl={certifiFetchUrl}
             />
           </S.SnsLabel>
+=======
+          </S.SnsLabelInner>
+          <S.SnsLabelInner>
+            <S.SnsCheckWrapper className="wrapper">
+              <S.LabelWrapper>
+                <S.RadioInput type="radio" name="sns" />
+                <S.RadioPulse className="radio-pulse" />
+                <S.RadioButton className="radio-button" />
+                <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
+                <S.RadioLabel className="radio-label">인스타그램</S.RadioLabel>
+              </S.LabelWrapper>
+              <S.LabelWrapper>
+                <S.RadioInput type="radio" name="sns" />
+                <S.RadioPulse className="radio-pulse" />
+                <S.RadioButton className="radio-button" />
+                <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
+                <S.RadioLabel className="radio-label">유튜버</S.RadioLabel>
+              </S.LabelWrapper>
+            </S.SnsCheckWrapper>
+          </S.SnsLabelInner>
+          <Upload01
+            onChangeCertifiFile={onChangeCertifiFile}
+            certifiFetchUrl={certifiFetchUrl}
+          />
+        </S.SnsLabel>
+
+        <S.InfoWrapper>
+>>>>>>> develop
           <S.UpoloadWrapper>
             <S.ProfileWrapper>
               {profilePreview ? (
