@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
@@ -14,12 +13,6 @@ export const Title = styled.h1`
   text-align: center;
   font-size: ${styleSet.fontSize.s1};
   color: #5e5e5e;
-`;
-
-export const SubTitle = styled.label`
-  align-self: flex-start;
-  font-family: ${styleSet.font.B};
-  font-size: ${styleSet.fontSize.s5};
 `;
 
 export const Form = styled.form`
@@ -43,27 +36,6 @@ export const Label = styled.label`
 
   position: relative;
   overflow: hidden;
-`;
-
-export const SnsLabel = styled.label`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 23px;
-
-  position: relative;
-`;
-
-export const SnsLabelInner = styled.label`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
 `;
 
 export const Svg = styled.svg`
@@ -146,16 +118,6 @@ export const UpoloadWrapper = styled.div`
   align-items: flex-end;
 `;
 
-export const Introduce = styled.textarea`
-  padding: 20px;
-  width: 100%;
-  height: 150px;
-  border: 1px solid ${styleSet.colors.gray};
-  border-radius: 10px;
-  resize: none;
-  outline-color: ${styleSet.colors.primary};
-`;
-
 export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
@@ -214,107 +176,6 @@ export const CancelBtn = styled.button`
 
   &:hover {
     color: gray;
-  }
-`;
-
-export const SnsCheckWrapper = styled.div`
-  margin: 0 10px;
-  width: 100%;
-  display: flex;
-  gap: 2rem;
-`;
-
-export const LabelWrapper = styled.label`
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-export const RadioButton = styled.span`
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  padding: 5px;
-  border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-`;
-
-export const RadioButtonInner = styled.span`
-  display: block;
-  position: absolute;
-  z-index: 2;
-  height: 10px;
-  width: 10px;
-  top: 8px;
-  left: 5px;
-  border-radius: 50%;
-  background: ${styleSet.colors.primary};
-  visibility: hidden;
-  opacity: 0;
-  transform: scale(0);
-  transition: all 0.35s;
-`;
-
-export const RadioLabel = styled.span`
-  font-size: 1rem;
-  color: rgba(0, 0, 0, 0.66);
-`;
-
-export const pulse = keyframes`
-    0%{
-        opacity:0;
-        transform:scale(0.5);
-    }
-    50%{
-        opacity:0.25;
-    }
-    100%{
-        opacity:0;
-        transform:scale(1.75);
-    }
-`;
-
-export const RadioPulse = styled.span`
-  position: absolute;
-  display: none;
-  top: -14px;
-  left: -18px;
-  z-index: 0;
-  opacity: 0;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: ${styleSet.colors.primary};
-  animation: ${pulse} 0.4s linear;
-`;
-
-export const RadioInput = styled.input`
-  position: absolute;
-  display: none;
-
-  :checked ~ .radio-button-inner {
-    visibility: visible;
-    opacity: 1;
-    transform: scale(1);
-  }
-  :checked ~ .radio-button {
-    visibility: visible;
-    opacity: 1;
-    transform: scale(1);
-  }
-  :checked ~ .radio-pulse {
-    display: block;
-  }
-  :checked ~ .radio-button {
-    border-color: ${styleSet.colors.primary};
-  }
-  :checked ~ .radio-label {
-    color: rgba(0, 0, 0, 0.96);
   }
 `;
 
