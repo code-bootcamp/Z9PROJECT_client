@@ -2,9 +2,11 @@ import MyPageLayoutContainer from "../../../commons/myPageLayout/myPageLayout.co
 import MyPagePresenter from "./myPage.presenter";
 
 export default function MyPageContainer() {
+  const onChangePage = () => {};
+
   return (
     <MyPageLayoutContainer>
-      <MyPagePresenter />
+      <MyPagePresenter onChangePage={onChangePage} />
     </MyPageLayoutContainer>
   );
 }
