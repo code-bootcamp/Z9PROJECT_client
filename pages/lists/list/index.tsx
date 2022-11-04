@@ -2,4 +2,5 @@ import ProductList from "../../../src/components/units/product/list/list.contain
 
 export default function ListPage() {
   return <ProductList />;
+
 }
