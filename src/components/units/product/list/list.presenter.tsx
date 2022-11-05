@@ -108,6 +108,7 @@ export default function ProductListPresenter() {
                 </S.Price>
               </S.Bottom>
             </S.Section>
+
             <S.Section onClick={onClickMoveToPage("/product/useditemId")}>
               <S.User>
                 <img src="/img_user.jpeg" alt="크리에이터 이미지" />
