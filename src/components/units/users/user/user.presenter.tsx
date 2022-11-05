@@ -1,9 +1,8 @@
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import Input01 from "../../../commons/input/input01/input01";
-import Upload01 from "../../../commons/upload/upload01/upload01";
 import Upload02 from "../../../commons/upload/upload02/upload02";
-import * as S from "./creator.styles";
-import { ICreatorPresenterProps } from "./creator.types";
+import * as S from "./user.styles";
+import { ICreatorPresenterProps } from "./user.types";
 
 export default function CreatorPresenter(P: ICreatorPresenterProps) {
   const {
@@ -11,8 +10,6 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
     register,
     handleSubmit,
     formState,
-    certifiFetchUrl,
-    onChangeCertifiFile,
     onChageProfileFile,
     profilePreview,
     profileFetchUrl,
@@ -101,7 +98,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             placeholder="인증번호를 입력하세요."
             register={register("keyNumber")}
             error={formState.errors.keyNumber?.message}
-          />{" "}
+          />
           <S.ConfirmBtn type="button">인증번호확인</S.ConfirmBtn>
         </S.Label>
 
@@ -161,63 +158,6 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
         </S.AddressWrapper>
 
         <S.InfoWrapper>
-          <S.SubTitle>크레에이터 추가정보</S.SubTitle>
-          <S.SnsLabel>
-            <S.SnsLabelInner>
-              <S.Svg
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M608 960H416c-44.112 0-80-35.888-80-80v-17.6c0-57.68-27.232-112.64-74.72-150.832C153.2 624.576 98.464 489.92 114.88 351.328 136.464 169.248 284.448 22.544 466.784 2.496A416.8 416.8 0 0 1 512 0c220.56 0 400 179.44 400 400 0 123.632-55.856 238.336-153.232 314.704-44.32 34.72-70.768 90.88-70.768 150.192V880c0 44.112-35.888 80-80 80zM512 32c-13.808 0-27.856 0.768-41.728 2.304-167.68 18.432-303.792 153.36-323.6 320.784-15.104 127.568 35.232 251.52 134.672 331.536C336.4 730.928 368 794.992 368 862.4V880c0 26.464 21.536 48 48 48h192c26.464 0 48-21.536 48-48v-15.104c0-69.072 31.04-134.624 83.008-175.376C828.608 619.28 880 513.728 880 400 880 197.088 714.928 32 512 32z"
-                  fill="#1D1D1D"
-                />
-                <path
-                  d="M544 1024h-64c-26.464 0-48-21.536-48-48v-32a16 16 0 1 1 32 0v32a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-32a16 16 0 1 1 32 0v32c0 26.464-21.536 48-48 48zM650.432 624c-2.56 0-5.168-0.64-7.52-1.872L512 552.32l-130.912 69.792a16.032 16.032 0 0 1-23.312-16.8l25.072-148.096-106.096-104.848a16 16 0 0 1 8.928-27.2l146.4-21.584 65.536-134.608c5.376-11.008 23.392-11.008 28.768 0l65.52 134.608 146.432 21.584a16 16 0 0 1 8.912 27.2l-106.08 104.848 25.056 148.096A16.032 16.032 0 0 1 650.432 624zM512 518.208c2.592 0 5.168 0.624 7.52 1.872l109.712 58.48-21.008-124.192a16.064 16.064 0 0 1 4.528-14.048l89.2-88.16-123.056-18.128a15.984 15.984 0 0 1-12.064-8.832L512 212.56l-54.832 112.64a15.984 15.984 0 0 1-12.064 8.832l-123.056 18.128 89.2 88.16c3.712 3.68 5.392 8.912 4.528 14.048l-21.008 124.192 109.696-58.48a15.968 15.968 0 0 1 7.536-1.872zM672 896H496a16 16 0 1 1 0-32h176a16 16 0 1 1 0 32zM677.76 832H576a16 16 0 1 1 0-32h101.76a16 16 0 1 1 0 32zM448 896c-4.16 0-8.32-1.76-11.36-4.64-2.88-3.04-4.64-7.04-4.64-11.36 0-4.32 1.76-8.32 4.64-11.36 5.92-5.92 16.8-5.92 22.72 0 2.88 3.04 4.64 7.2 4.64 11.36s-1.76 8.32-4.64 11.36c-3.04 2.88-7.2 4.64-11.36 4.64zM64 416H16a16 16 0 1 1 0-32h48a16 16 0 1 1 0 32zM1008 416h-48a16 16 0 1 1 0-32h48a16 16 0 1 1 0 32zM195.216 99.216a15.952 15.952 0 0 1-11.312-4.688L149.968 60.592a16 16 0 1 1 22.624-22.624l33.936 33.936a16 16 0 0 1-11.312 27.312zM862.72 766.72a15.952 15.952 0 0 1-11.312-4.688l-33.936-33.936a16 16 0 1 1 22.624-22.624l33.92 33.92a16 16 0 0 1-11.296 27.328zM828.784 99.216a16 16 0 0 1-11.312-27.312l33.92-33.936a16 16 0 1 1 22.64 22.624l-33.936 33.936a15.952 15.952 0 0 1-11.312 4.688zM161.28 766.72a16 16 0 0 1-11.312-27.312l33.936-33.936a16 16 0 1 1 22.624 22.624l-33.92 33.92a15.952 15.952 0 0 1-11.328 4.704z"
-                  fill="#1D1D1D"
-                />
-                <path
-                  d="M98.112 244.56a16 16 0 0 1-6.128-1.232l-44.352-18.352a16 16 0 0 1 12.24-29.568l44.368 18.368a16 16 0 0 1-6.128 30.784zM970.24 605.808a15.984 15.984 0 0 1-6.112-1.216l-44.368-18.368a16 16 0 0 1 12.256-29.568l44.352 18.368a16 16 0 0 1-6.112 30.784z"
-                  fill="#1D1D1D"
-                />
-                <path
-                  d="M925.888 244.56a16 16 0 0 1-6.128-30.784l44.368-18.368a16 16 0 0 1 12.256 29.568l-44.368 18.352a16 16 0 0 1-6.128 1.232zM53.76 605.808a16 16 0 0 1-6.128-30.784l44.352-18.368a16 16 0 0 1 12.256 29.568l-44.368 18.368a15.984 15.984 0 0 1-6.128 1.216z"
-                  fill="#1D1D1D"
-                />
-              </S.Svg>
-              <Input01
-                type="text"
-                placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
-                register={register("creator")}
-                error={formState.errors.creator?.message}
-              />
-            </S.SnsLabelInner>
-            <S.SnsLabelInner>
-              <S.SnsCheckWrapper className="wrapper">
-                <S.LabelWrapper>
-                  <S.RadioInput type="radio" name="sns" />
-                  <S.RadioPulse className="radio-pulse" />
-                  <S.RadioButton className="radio-button" />
-                  <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
-                  <S.RadioLabel className="radio-label">
-                    인스타그램
-                  </S.RadioLabel>
-                </S.LabelWrapper>
-                <S.LabelWrapper>
-                  <S.RadioInput type="radio" name="sns" />
-                  <S.RadioPulse className="radio-pulse" />
-                  <S.RadioButton className="radio-button" />
-                  <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
-                  <S.RadioLabel className="radio-label">유튜버</S.RadioLabel>
-                </S.LabelWrapper>
-              </S.SnsCheckWrapper>
-            </S.SnsLabelInner>
-            <Upload01
-              onChangeCertifiFile={onChangeCertifiFile}
-              certifiFetchUrl={certifiFetchUrl}
-            />
-          </S.SnsLabel>
           <S.UpoloadWrapper>
             <S.ProfileWrapper>
               {profilePreview ? (
@@ -231,10 +171,6 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               profileFetchUrl={profileFetchUrl}
             />
           </S.UpoloadWrapper>
-          <S.Introduce
-            placeholder="구매자에게 자신을 소개해주세요."
-            {...register("introduce")}
-          />
         </S.InfoWrapper>
 
         <S.WrapperTermsOfUse>

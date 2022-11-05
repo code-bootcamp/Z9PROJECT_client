@@ -5,19 +5,25 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schma = yup.object({
-  id: yup.string().required("false"),
-  password: yup.string().required("false"),
-  passwordConfirm: yup.string().required("false"),
-  phoneNumber: yup.string().required("false"),
-  keyNumber: yup.number().required("false"),
-  address: yup.string().required("false"),
-  addressDetail: yup.string().required("false"),
-  creator: yup.string().required("false"),
+  email: yup.string().email("이메일 형식 확인").required("필수"),
+  password: yup.string().required("필수"),
+  passwordConfirm: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "비밀번호가 같지 않습니다.")
+    .required("필수"),
+  phoneNumber: yup.string().required("필수"),
+  keyNumber: yup.string().required("필수"),
+  zipcode: yup.string().required("필수"),
+  address: yup.string().required("필수"),
+  addressDetail: yup.string(),
+  creator: yup.string().required("필수"),
+  introduce: yup.string().required("필수"),
 });
 
 export default function CreatorRegisterContainer() {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schma),
+    mode: "onChange",
   });
   const [certifiFetchUrl, setCertifiFetchUrl] = useState<File>();
   const [profilePreview, setProfilePreview] = useState("");
