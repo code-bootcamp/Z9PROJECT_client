@@ -1,8 +1,10 @@
 import { HeartOutlined } from "@ant-design/icons";
 import Search from "antd/lib/transfer/search";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import * as S from "./list.styles";
 
-export default function ProductListUI() {
+export default function ProductListPresenter() {
+  const { onClickMoveToPage } = useMoveToPage();
   return (
     <>
       <S.Container>
@@ -18,7 +20,7 @@ export default function ProductListUI() {
             <Search placeholder="검색어를 입력해주세요." />
           </S.SearchBox>
           <S.Main>
-            <S.Section>
+            <S.Section onClick={onClickMoveToPage("/product/useditemId")}>
               <S.New src="/icon_new.png" alt="NEW 아이콘" />
               <S.User>
                 <img src="/img_user.jpeg" alt="크리에이터 이미지" />
@@ -50,7 +52,7 @@ export default function ProductListUI() {
               </S.Bottom>
             </S.Section>
 
-            <S.Section>
+            <S.Section onClick={onClickMoveToPage("/product/useditemId")}>
               <S.User>
                 <img src="/img_user.jpeg" alt="크리에이터 이미지" />
                 <S.UserName>creator name</S.UserName>
@@ -78,7 +80,7 @@ export default function ProductListUI() {
                 </S.Price>
               </S.Bottom>
             </S.Section>
-            <S.Section>
+            <S.Section onClick={onClickMoveToPage("/product/useditemId")}>
               <S.User>
                 <img src="/img_user.jpeg" alt="크리에이터 이미지" />
                 <S.UserName>creator name</S.UserName>
@@ -106,7 +108,8 @@ export default function ProductListUI() {
                 </S.Price>
               </S.Bottom>
             </S.Section>
-            <S.Section>
+
+            <S.Section onClick={onClickMoveToPage("/product/useditemId")}>
               <S.User>
                 <img src="/img_user.jpeg" alt="크리에이터 이미지" />
                 <S.UserName>creator name</S.UserName>
