@@ -1,9 +1,9 @@
-import ProductListUI from "./list.presenter";
+import ProductListPresenter from "./list.presenter";
 
-export default function ProductList() {
+export default function ProductListContainer() {
   return (
     <>
-      <ProductListUI />
+      <ProductListPresenter />
     </>
   );
 }
