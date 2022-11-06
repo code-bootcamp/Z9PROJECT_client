@@ -14,7 +14,7 @@ export default function HeaderPage() {
             </li>
             <li>상품 등록</li>
             <li onClick={onClickMoveToPage("/lists/list")}>리스트</li>
-            <li>Who's Best</li>
+            <li onClick={onClickMoveToPage("/lists/customList")}>Who's Best</li>
           </S.Ul>
 
           <S.Ul>
