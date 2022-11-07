@@ -27,8 +27,13 @@ export const Wrapper = styled.main`
   align-items: center;
 `;
 
+export const Logo = styled.img`
+  width: 100px;
+`;
+
 export const Ul = styled.ul`
   display: flex;
+  align-items: center;
   gap: 50px;
   li {
     transition: 0.5s;

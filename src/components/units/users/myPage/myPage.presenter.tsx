@@ -1,8 +1,9 @@
 import { PointFormatter } from "../../../../commons/utils";
 import { DatePicker, Pagination } from "antd";
 import * as S from "./myPage.styles";
+import { IMyPagePresenterProps } from "./myPage.types";
 
-export default function MyPagePresenter(P) {
+export default function MyPagePresenter(P: IMyPagePresenterProps) {
   const { onChangePage } = P;
   const { RangePicker } = DatePicker;
 
