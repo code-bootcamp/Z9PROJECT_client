@@ -1,6 +1,6 @@
 import { EyeOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
-import { styleSet } from "../../../src/commons/styles/styleSet";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
   width: 100%;
