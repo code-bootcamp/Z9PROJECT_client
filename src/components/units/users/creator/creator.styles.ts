@@ -6,6 +6,11 @@ export const Container = styled.section`
   margin: 0 auto;
   padding: 100px 30px;
   width: 660px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    min-width: 500px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -14,6 +19,16 @@ export const Title = styled.h1`
   text-align: center;
   font-size: ${styleSet.fontSize.s1};
   color: #5e5e5e;
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s2};
+  }
+`;
+
+export const SubTitle = styled.label`
+  align-self: flex-start;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s5};
 `;
 
 export const SubTitle = styled.label`
@@ -136,6 +151,13 @@ export const UpoloadWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Introduce = styled.textarea`

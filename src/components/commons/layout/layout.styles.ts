@@ -91,6 +91,10 @@ export const Hamburger = styled.div`
 
 export const Footer = styled.footer`
   max-width: 100%;
+`;
+
+export const Footer = styled.footer`
+  width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
 `;
@@ -105,6 +109,7 @@ export const Wrapper = styled.main`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   @media ${styleSet.breakePoints.mobile} {
     min-width: 550px;
     width: 100%;
@@ -144,6 +149,7 @@ export const Wrapper2 = styled.main`
   height: 100%;
   flex-direction: column;
   justify-content: center;
+
   @media ${styleSet.breakePoints.mobile} {
     min-width: 550px;
     width: 100%;
@@ -160,6 +166,7 @@ export const TopBox = styled.section`
       color: ${styleSet.colors.darkgray};
     }
   }
+
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
     padding-bottom: 10px;
@@ -181,6 +188,7 @@ export const Top = styled.ul`
     color: ${styleSet.colors.black};
     padding-right: 10px;
   }
+
   @media ${styleSet.breakePoints.mobile} {
     margin-top: 10px;
   }

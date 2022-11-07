@@ -6,7 +6,6 @@ import * as S from "./list.styles";
 
 export default function ProductListPresenter() {
   const { onClickMoveToPage } = useMoveToPage();
-
   const [tab, setTab] = useState("1");
 
   const onClickTab = (event: any) => {

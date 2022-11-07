@@ -1,4 +1,4 @@
-import { EyeOutlined, PropertySafetyFilled } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
@@ -7,6 +7,7 @@ export const Container = styled.section`
   height: 100%;
   background-color: #f4f5f9;
   padding-block: 100px;
+
   @media ${styleSet.breakePoints.mobile} {
     min-width: 550px;
     padding-block: 30px;
@@ -21,11 +22,13 @@ export const SearchBox = styled.div`
     border-radius: 5px;
     height: 40px;
   }
+  
   ul {
     display: flex;
     align-items: center;
     gap: 40px;
     position: relative;
+    
     li {
       font-size: ${styleSet.fontSize.s7};
       font-family: ${styleSet.font.B};
@@ -70,6 +73,7 @@ export const H1 = styled.h1`
   font-family: ${styleSet.font.B};
   text-align: center;
   padding-block: 50px;
+
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 10px;
     text-align: left;
@@ -116,6 +120,7 @@ export const User = styled.div`
   display: flex;
   align-items: center;
   background: #fff;
+
   img {
     width: 75px;
     height: 70px;
@@ -231,6 +236,7 @@ export const New = styled.img`
   position: absolute;
   right: 5%;
   top: 3%;
+
   @media ${styleSet.breakePoints.mobile} {
     top: 2%;
   }
