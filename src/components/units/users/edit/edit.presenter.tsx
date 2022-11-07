@@ -19,7 +19,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
     <S.Container>
       <S.SubTitle>회원정보 수정</S.SubTitle>
       <S.Form>
-        <S.UpoloadWrapper>
+        <S.UploadWrapper>
           <S.ProfileWrapper>
             {profilePreview ? (
               <img src={profilePreview} alt="프로필이미지" />
@@ -31,7 +31,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
             onChageProfileFile={onChageProfileFile}
             profileFetchUrl={profileFetchUrl}
           />
-        </S.UpoloadWrapper>
+        </S.UploadWrapper>
         <S.RowWrapper>
           <S.RowTitle>닉네임</S.RowTitle>
           <Input01
@@ -83,6 +83,10 @@ export default function EditPresenter(P: IEditPresenterProps) {
 
         <S.InfoWrapper>
           <S.SubTitle>크리에이터 추가정보</S.SubTitle>
+          <S.Introduce
+            placeholder="구매자에게 자신을 소개하세요."
+            {...register("introduce")}
+          />
           <S.SnsLabel>
             <S.SnsLabelInner>
               <Input01
@@ -90,7 +94,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
                 placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
                 register={register("creator")}
                 edit={true}
-                //   error={formState.errors.creator?.message}
+                error={formState.errors.creator?.message}
               />
             </S.SnsLabelInner>
             <S.SnsLabelInner>
@@ -118,20 +122,28 @@ export default function EditPresenter(P: IEditPresenterProps) {
               certifiFetchUrl={certifiFetchUrl}
             />
           </S.SnsLabel>
-          <S.BackWrapper>
+          <S.BankWrapper>
             <Input01
               type="text"
-              placeholder="예) 지구은행"
-              register={register("bank")}
-              edit={true}
-            />
-            <Input01
-              type="text"
-              placeholder="계좌번호"
+              placeholder="정산받을 계좌번호를 입력하세요."
               register={register("count")}
               edit={true}
             />
-          </S.BackWrapper>
+            <S.BankInner>
+              <Input01
+                type="text"
+                placeholder="은행을 입력하세요."
+                register={register("bank")}
+                edit={true}
+              />
+              <Input01
+                type="text"
+                placeholder="예금주 실명을 입력하세요."
+                register={register("countName")}
+                edit={true}
+              />
+            </S.BankInner>
+          </S.BankWrapper>
         </S.InfoWrapper>
         <S.LogInBtn>수정</S.LogInBtn>
       </S.Form>
