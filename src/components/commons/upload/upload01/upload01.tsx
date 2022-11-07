@@ -2,12 +2,13 @@ import styled from "@emotion/styled";
 import { ChangeEvent, useRef, useState } from "react";
 
 const Wrapper = styled.div`
+  width: 100%;
   position: relative;
 `;
 
 const UploadBtn = styled.div`
   padding: 23px;
-  width: 600px;
+  width: 100%;
   height: 70px;
   color: gray;
   background: #ffffff;
