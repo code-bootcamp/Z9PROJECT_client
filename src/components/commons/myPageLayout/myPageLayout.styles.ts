@@ -18,8 +18,8 @@ export const Container = styled.div`
 
 export const PreContainer = styled.div`
   margin: 0 auto;
-  padding: 50px 20px 0 0;
-  width: 200px;
+  padding: 50px 50px 0 0;
+  width: 300px;
 
   display: flex;
   flex-direction: column;
@@ -29,6 +29,7 @@ export const PreContainer = styled.div`
 
 export const Title = styled.h1`
   padding-bottom: 10px;
+  font-size: ${styleSet.fontSize.s2};
   font-family: ${styleSet.font.EB};
 `;
 
