@@ -23,7 +23,6 @@ export const SubTitle = styled.h2`
 export const BoardTopWrapper = styled.div`
   padding: 30px 0 0 0;
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;

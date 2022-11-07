@@ -42,6 +42,10 @@ export default function EditPresenter(P: IEditPresenterProps) {
           />
         </S.RowWrapper>
         <S.RowWrapper>
+          <S.RowTitle>자기소개</S.RowTitle>
+          <S.Introduce {...register("introduce")} />
+        </S.RowWrapper>
+        <S.RowWrapper>
           <S.RowTitle>핸드폰번호</S.RowTitle>
           <Input01
             type="text"
