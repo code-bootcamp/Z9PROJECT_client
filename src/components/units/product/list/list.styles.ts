@@ -22,13 +22,13 @@ export const SearchBox = styled.div`
     border-radius: 5px;
     height: 40px;
   }
-  
+
   ul {
     display: flex;
     align-items: center;
     gap: 40px;
     position: relative;
-    
+
     li {
       font-size: ${styleSet.fontSize.s7};
       font-family: ${styleSet.font.B};
@@ -96,11 +96,15 @@ export const Main = styled.main`
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 60px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    flex-direction: column;
+  }
 `;
 
 export const Section = styled.section`
   cursor: pointer;
-  max-width: 670px;
+  max-width: calc(50% - 30px);
   max-height: 800px;
   overflow: hidden;
   position: relative;
@@ -110,6 +114,9 @@ export const Section = styled.section`
   &:hover .bg_layer {
     transition: 0.8s;
     opacity: 1;
+  }
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 100%;
   }
 `;
 

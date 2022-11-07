@@ -90,10 +90,6 @@ export const Hamburger = styled.div`
 `;
 
 export const Footer = styled.footer`
-  max-width: 100%;
-`;
-
-export const Footer = styled.footer`
   width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
@@ -141,7 +137,7 @@ export const Ul = styled.ul`
 `;
 
 export const Wrapper2 = styled.main`
-  width: 1460px;
+  max-width: 1460px;
   height: 100%;
   padding: 0 30px;
   margin: 0 auto;
