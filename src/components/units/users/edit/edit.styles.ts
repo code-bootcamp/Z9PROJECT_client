@@ -14,7 +14,7 @@ export const Container = styled.section`
 export const SubTitle = styled.h2`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
-
+  
   @media ${styleSet.breakePoints.mobile} {
     display: none;
   }
@@ -270,7 +270,6 @@ export const BankWrapper = styled.div`
 
 export const BankInner = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: row;
   gap: 20px;

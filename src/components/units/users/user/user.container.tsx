@@ -16,6 +16,7 @@ const schma = yup.object({
   zipcode: yup.string().required("필수"),
   address: yup.string().required("필수"),
   addressDetail: yup.string(),
+  nickName: yup.string().required("필수"),
 });
 
 export default function UserRegisterContainer() {
