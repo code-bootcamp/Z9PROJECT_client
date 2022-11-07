@@ -5,11 +5,19 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.section`
   padding: 50px 0;
   width: 100%;
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding: 0;
+  }
 `;
 
 export const SubTitle = styled.h2`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: none;
+  }
 `;
 
 export const Form = styled.form`
@@ -21,13 +29,19 @@ export const Form = styled.form`
   gap: 40px;
 `;
 
-export const UpoloadWrapper = styled.div`
+export const UploadWrapper = styled.div`
   padding-left: 200px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
   gap: 40px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding-left: 0;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
@@ -171,7 +185,7 @@ export const RadioButtonInner = styled.span`
   z-index: 2;
   height: 10px;
   width: 10px;
-  top: 8px;
+  top: 7.5px;
   left: 5px;
   border-radius: 50%;
   background: ${styleSet.colors.primary};
@@ -247,7 +261,14 @@ export const LogInBtn = styled.button`
   background-color: ${styleSet.colors.primary};
 `;
 
-export const BackWrapper = styled.div`
+export const BankWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const BankInner = styled.div`
   width: 100%;
 
   display: flex;
