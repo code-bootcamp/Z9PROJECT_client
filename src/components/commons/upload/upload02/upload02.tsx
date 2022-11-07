@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
 import { ChangeEvent, useRef, useState } from "react";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 const Wrapper = styled.div`
   position: relative;
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding-top: 20px;
+    width: 100%;
+  }
 `;
 
 const UploadBtn = styled.div`
@@ -12,10 +18,14 @@ const UploadBtn = styled.div`
   color: gray;
   background: #ffffff;
   border: 1px solid #cccccc;
-
   text-align: center;
-
   cursor: pointer;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    height: 50px;
+    line-height: 0px;
+  }
 `;
 
 const Input = styled.input`
