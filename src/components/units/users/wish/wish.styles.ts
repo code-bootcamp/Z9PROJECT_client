@@ -4,17 +4,24 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.section`
   padding: 50px 0;
   width: 100%;
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding: 0;
+  }
 `;
 
 export const SubTitle = styled.h2`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: none;
+  }
 `;
 
 export const BoardBody = styled.div`
   padding: 20px 0;
   width: 100%;
-
   text-align: center;
 
   .ant-pagination {

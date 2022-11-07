@@ -288,7 +288,6 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 error={formState.errors.addressDetail?.message}
               />
             </S.Label>
-
             <S.Label>
               <S.Svg
                 viewBox="0 0 1024 1024"
