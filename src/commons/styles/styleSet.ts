@@ -32,4 +32,7 @@ export const styleSet = {
     s9: "0.9rem",
     s10: "0.8rem",
   },
+  breakePoints: {
+    mobile: "(max-width: 767px)",
+  },
 };
