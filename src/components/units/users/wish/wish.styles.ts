@@ -48,7 +48,6 @@ export const BoardBody = styled.div`
 
 export const BoardUl = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -62,7 +61,6 @@ export const BoardLi = styled.div`
   width: 100%;
   max-width: 248px;
   height: 370px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

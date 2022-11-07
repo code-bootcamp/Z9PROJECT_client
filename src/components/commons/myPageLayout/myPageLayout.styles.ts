@@ -9,7 +9,6 @@ export const Container = styled.div`
   padding: 100px 30px;
   max-width: 1460px;
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -27,7 +26,6 @@ export const PreContainer = styled.div`
   margin: 0 auto;
   padding: 50px 50px 0 0;
   width: 300px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

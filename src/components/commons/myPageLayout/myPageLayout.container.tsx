@@ -8,6 +8,7 @@ type IMyPageLayoutProps = {
 
 export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
   const { children } = P;
+
   const router = useRouter();
   const nowUrl = router.asPath;
   console.log(nowUrl.length);
