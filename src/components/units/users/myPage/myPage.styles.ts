@@ -28,6 +28,15 @@ export const Point = styled.span`
   font-family: ${styleSet.font.B};
 `;
 
+export const SubTitleWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
 export const HistoryWrapper = styled.section`
   padding: 40px 0;
   width: 100%;
@@ -162,4 +171,14 @@ export const BHistory = styled.span`
 export const BBalance = styled.span`
   width: 30%;
   text-align: center;
+`;
+
+export const Modal = styled.section`
+  width: 300px;
+  height: 300px;
+  background: ${styleSet.colors.darkgray};
+
+  position: fixed;
+  left: 50%;
+  top: 0;
 `;
