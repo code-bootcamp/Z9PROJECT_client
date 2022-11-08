@@ -4,6 +4,12 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.section`
   padding: 50px 0;
   width: 100%;
+  min-width: 600px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding: 0;
+    min-width: 550px;
+  }
 `;
 
 export const PointWrapper = styled.section`
@@ -17,6 +23,10 @@ export const PointWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media ${styleSet.breakePoints.mobile} {
+    margin-top: 40px;
+  }
 `;
 
 export const PointText = styled.span`
@@ -26,6 +36,15 @@ export const PointText = styled.span`
 export const Point = styled.span`
   font-size: ${styleSet.fontSize.s2};
   font-family: ${styleSet.font.B};
+`;
+
+export const SubTitleWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 
 export const HistoryWrapper = styled.section`
@@ -41,11 +60,16 @@ export const SubTitle = styled.h2`
 export const BoardTopWrapper = styled.div`
   padding: 30px 0 0 0;
   width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  @media ${styleSet.breakePoints.mobile} {
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
 `;
 
 export const PeriodWrapper = styled.div`
@@ -54,6 +78,10 @@ export const PeriodWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
 `;
 
 export const PeriodBtn = styled.button`
@@ -66,6 +94,10 @@ export const PeriodBtn = styled.button`
   :hover {
     border: 1px solid ${styleSet.colors.primary};
     color: ${styleSet.colors.primary};
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
   }
 `;
 
@@ -81,6 +113,25 @@ export const SearchWrapper = styled.div`
     height: 48px;
     border-radius: 10px;
     color: ${styleSet.colors.black};
+
+    @media ${styleSet.breakePoints.mobile} {
+      width: 100%;
+    }
+  }
+
+  .ant-picker:hover,
+  .ant-picker-focused {
+    border-color: ${styleSet.colors.subcolor1};
+  }
+
+  .ant-picker-input {
+    input {
+      text-align: center;
+    }
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
   }
 `;
 
@@ -91,6 +142,10 @@ export const SearchBtn = styled.button`
   background: ${styleSet.colors.gray};
   font-size: ${styleSet.fontSize.s8};
   color: ${styleSet.colors.white};
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 30%;
+  }
 `;
 
 export const BoardBody = styled.div`
@@ -162,4 +217,14 @@ export const BHistory = styled.span`
 export const BBalance = styled.span`
   width: 30%;
   text-align: center;
+`;
+
+export const Modal = styled.section`
+  width: 300px;
+  height: 300px;
+  background: ${styleSet.colors.darkgray};
+
+  position: fixed;
+  left: 50%;
+  top: 0;
 `;
