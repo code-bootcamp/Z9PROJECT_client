@@ -91,7 +91,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <li>
                     <S.MySelect
                       defaultValue="옵션을 선택해주세요."
-                      style={{ width: 120 }}
                       onChange={handleChange}
                       options={[
                         {
