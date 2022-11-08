@@ -2,7 +2,8 @@ import {
   BellOutlined,
   HeartFilled,
   HeartOutlined,
-  SnippetsOutlined,
+  MinusOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { IDetailPresenterProps } from "../detail.types";
 import * as S from "./product01.styles";
@@ -19,27 +20,41 @@ export default function Product01(P: IDetailPresenterProps) {
         <S.H1>[300개 한정]애플 에어팟 3세대</S.H1>
         <S.Text>
           <ul>
-            <li>판매가</li>
+            <li>시중 판매가</li>
             <S.Price>1,000,000원</S.Price>
           </ul>
-
           <ul>
             <li>할인판매가</li>
             <S.PriceSale>
               <strong>30%</strong>700,000원
             </S.PriceSale>
           </ul>
-
           <ul>
             <li>배송방법</li>
-            <li>택배(무료배송)</li>
+            <li>한진택배/무료배송</li>
           </ul>
-
           <ul>
-            <li>마감기준</li>
-            <S.Close>50,000,000원(달성시 마감)</S.Close>
+            <li>마감금액</li>
+            <S.Close>50,000,000원</S.Close>
           </ul>
-
+          <ul>
+            <li>마감일정</li>
+            <li>2022년 11월 11일(금요일)</li>
+          </ul>
+          <ul>
+            <li>수량선택</li>
+            <li>
+              <S.Choose>
+                <button id="qtyMinus" onClick={onClickCount}>
+                  <MinusOutlined />
+                </button>
+                {count}
+                <button id="qtyPlus" onClick={onClickCount}>
+                  <PlusOutlined />
+                </button>
+              </S.Choose>
+            </li>
+          </ul>
           <ul>
             <li>옵션</li>
             <li>
@@ -72,20 +87,6 @@ export default function Product01(P: IDetailPresenterProps) {
         </S.Text>
 
         <S.H2>3일 00:43:33</S.H2>
-        <S.Piece>
-          <p>
-            애플 에어팟 3세대<span>700,000원</span>
-          </p>
-          <S.Choose>
-            <button id="qtyMinus" onClick={onClickCount}>
-              <img src="/icon_min.png" alt="마이너스 아이콘" />
-            </button>
-            {count}
-            <button id="qtyPlus" onClick={onClickCount}>
-              <img src="/icon_max.png" alt="플러스 아이콘" />
-            </button>
-          </S.Choose>
-        </S.Piece>
 
         <S.H3>
           총 상품 금액 <strong>700,000원</strong>
