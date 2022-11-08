@@ -6,6 +6,7 @@ import * as S from "../layout.styles";
 
 export default function HeaderPage() {
   const { onClickMoveToPage } = useMoveToPage();
+  const { onClickMobileToPage } = useMoveToPage();
   const [hamburger, setHamburger] = useRecoilState(hamburgerState);
 
   const onClickMenu = () => {
@@ -44,12 +45,12 @@ export default function HeaderPage() {
         {hamburger && (
           <S.Hamburger id="hamburger" hamburger={hamburger}>
             <ul>
-              <li onClick={onClickMoveToPage("/users/signupintro")}>
+              <li onClick={onClickMobileToPage("/users/signupintro")}>
                 <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
                 &nbsp; 로그인
               </li>
-              <li onClick={onClickMoveToPage("/lists/list")}>리스트</li>
-              <li onClick={onClickMoveToPage("/lists/customList")}>
+              <li onClick={onClickMobileToPage("/lists/list")}>리스트</li>
+              <li onClick={onClickMobileToPage("/lists/customList")}>
                 Who's Best
               </li>
             </ul>
