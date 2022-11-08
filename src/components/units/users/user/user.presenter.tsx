@@ -83,7 +83,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             register={register("phoneNumber")}
             error={formState.errors.phoneNumber?.message}
           />
-          <S.CertificationBtn type="button">인증번호받기</S.CertificationBtn>
+          <S.Btn1 type="button">인증번호받기</S.Btn1>
         </S.Label>
         <S.Label>
           <S.Svg
@@ -99,7 +99,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             register={register("keyNumber")}
             error={formState.errors.keyNumber?.message}
           />
-          <S.ConfirmBtn type="button">인증번호확인</S.ConfirmBtn>
+          <S.Btn2 type="button">인증번호확인</S.Btn2>
         </S.Label>
 
         <S.AddressWrapper>
@@ -119,7 +119,8 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               register={register("zipcode")}
               error={formState.errors.zipcode?.message}
             />{" "}
-            <S.ZipcodeBtn type="button">주소검색</S.ZipcodeBtn>
+            
+            <S.Btn1 type="button">주소검색</S.Btn1>
           </S.Label>
           <S.Label>
             <S.Svg
@@ -156,9 +157,25 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             />
           </S.Label>
         </S.AddressWrapper>
-
+        <S.Label>
+          <S.Svg
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M1002.602667 318.912c-11.818667 0-21.354667 9.578667-21.354667 21.376l0 515.114667c0 69.376-56.448 125.824-125.824 125.824L168.554667 981.226667c-69.376 0-125.824-56.448-125.824-125.824L42.730667 168.533333c0-69.376 56.448-125.824 125.824-125.824L683.733333 42.709333c11.818667 0 21.354667-9.557333 21.354667-21.354667C705.088 9.557333 695.552 0 683.733333 0L168.554667 0C75.605333 0 0 75.605333 0 168.554667L0 855.466667C0 948.373333 75.605333 1024 168.554667 1024L855.466667 1024c92.906667 0 168.533333-75.626667 168.512-168.533333L1023.978667 340.288C1023.978667 328.490667 1014.421333 318.912 1002.602667 318.912z" />
+            <path d="M274.112 597.994667c-0.64 0.917333-1.514667 1.578667-2.048 2.624l-122.666667 245.290667c-4.096 8.213333-2.474667 18.133333 4.032 24.661333 4.074667 4.053333 9.557333 6.250667 15.125333 6.250667 3.242667 0 6.528-0.746667 9.557333-2.261333l245.290667-122.602667c1.216-0.597333 2.048-1.621333 3.093333-2.410667 0.789333-0.576 1.728-0.896 2.453333-1.621333L894.933333 281.898667c0.042667-0.042667 0.106667-0.042667 0.149333-0.085333s0.064-0.106667 0.106667-0.149333l70.485333-70.485333c17.962667-17.941333 27.882667-41.792 27.882667-67.157333s-9.92-49.194667-27.882667-67.157333l-18.581333-18.56c-17.92-17.962667-41.749333-27.818667-67.114667-27.818667s-49.173333 9.856-67.114667 27.818667l-536.746667 536.746667C275.221333 595.904 274.794667 597.034667 274.112 597.994667zM297.045333 646.208l80.768 80.746667-161.514667 80.746667L297.045333 646.208zM843.050667 88.533333c19.754667-19.733333 54.08-19.776 73.834667 0l18.581333 18.538667c9.877333 9.856 15.338667 22.997333 15.338667 36.928 0 13.952-5.461333 27.072-15.338667 36.949333l-55.509333 55.509333-92.416-92.437333L843.050667 88.533333zM757.333333 174.250667l92.416 92.437333L413.866667 702.592 321.429333 610.133333 757.333333 174.250667z" />
+          </S.Svg>
+          <Input01
+            type="text"
+            placeholder="지구에서 사용할 닉네임을 기입하세요."
+            register={register("nickName")}
+            error={formState.errors.nickName?.message}
+          />
+          <S.Btn1 type="button">중복확인</S.Btn1>
+        </S.Label>
         <S.InfoWrapper>
-          <S.UpoloadWrapper>
+          <S.UploadWrapper>
             <S.ProfileWrapper>
               {profilePreview ? (
                 <img src={profilePreview} alt="기본이미지" />
@@ -170,7 +187,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               onChageProfileFile={onChageProfileFile}
               profileFetchUrl={profileFetchUrl}
             />
-          </S.UpoloadWrapper>
+          </S.UploadWrapper>
         </S.InfoWrapper>
 
         <S.WrapperTermsOfUse>

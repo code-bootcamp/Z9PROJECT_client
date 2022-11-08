@@ -5,21 +5,26 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.main`
   width: 100%;
   height: 100%;
-  padding: 100px 0 0 0;
 `;
 
 export const ImgWrapper = styled.section`
-  width: 1400px;
+  max-width: 1460px;
+  padding: 0 30px;
   margin: 0 auto;
   display: flex;
   gap: 60px;
   flex-wrap: wrap;
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+    justify-content: center;
+  }
 `;
 
 export const Top = styled.section`
   width: 100%;
   background-color: cornsilk;
-  height: 1500px;
+  height: 1600px;
   position: relative;
   overflow: hidden;
   > img {
@@ -27,9 +32,20 @@ export const Top = styled.section`
     right: 17%;
     top: 1%;
   }
+  .mobile {
+    display: none;
+  }
+  @media ${styleSet.breakePoints.mobile} {
+    width: 550px;
+    & > img {
+      display: none;
+    }
+    .pc {
+      display: none;
+    }
+  }
 `;
 
-// 메인배너
 export const H2 = styled.h2`
   color: ${styleSet.colors.darkgray};
   font-family: ${styleSet.font.EB};
@@ -39,6 +55,7 @@ export const H2 = styled.h2`
     color: ${styleSet.colors.primary};
   }
 `;
+
 export const Square = styled.div`
   position: absolute;
   top: 30%;
@@ -50,7 +67,25 @@ export const Square = styled.div`
     border: none;
     background: rgba(9, 109, 217, 0.8);
   }
+  &:hover a {
+    background: #fff;
+    color: ${styleSet.colors.primary};
+    border: 1px solid ${styleSet.colors.white};
+  }
+  &:hover p {
+    color: ${styleSet.colors.white};
+  }
+  &:hover h2 {
+    color: ${styleSet.colors.white};
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 500px;
+    height: 500px;
+    left: 50%;
+  }
 `;
+
 export const Animantion = styled.span`
   position: absolute;
   top: 0;
@@ -94,6 +129,7 @@ export const Animantion = styled.span`
     animation: rotation3 8s linear infinite;
   }
 `;
+
 export const Contents = styled.p`
   padding: 40px 0;
   font-size: ${styleSet.fontSize.s5};
@@ -102,7 +138,7 @@ export const Contents = styled.p`
 
 export const Link = styled.a`
   padding: 40px 0;
-  font-size: ${styleSet.fontSize.s5};
+  font-size: ${styleSet.fontSize.s6};
   word-break: keep-all;
   display: inline-block;
   padding: 10px 22px;
@@ -110,7 +146,6 @@ export const Link = styled.a`
   color: ${styleSet.colors.primary};
   border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
   transition: 0.5s;
-  font-size: ${styleSet.fontSize.s3};
 `;
 
 export const ContentRanding = styled.div`
@@ -123,27 +158,10 @@ export const ContentRanding = styled.div`
   transform: translate(-50%, -50%);
   text-align: center;
   transition: 0.5s;
-  &:hover a {
-    background: #fff;
-    color: ${styleSet.colors.primary};
-    border: 1px solid ${styleSet.colors.white};
-  }
-  &:hover p {
-    color: ${styleSet.colors.white};
-  }
-  &:hover h2 {
-    color: ${styleSet.colors.white};
-  }
 `;
 
-export const Text = styled.div`
-  position: absolute;
-  right: 25%;
-  bottom: 15%;
-  z-index: 99;
-`;
 export const Search = styled.span`
-  background: ${styleSet.colors.darkgray};
+  background: ${styleSet.colors.white};
   border-radius: 50%;
   font-size: ${styleSet.fontSize.s7};
   width: 40px;
@@ -151,18 +169,33 @@ export const Search = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  span {
+    color: ${styleSet.colors.primary};
+  }
+`;
+
+export const Text = styled.div`
+  position: absolute;
+  right: 25%;
+  bottom: 5%;
+  z-index: 99;
+
+  @media ${styleSet.breakePoints.mobile} {
+    left: 5%;
+    top: 4%;
+  }
 `;
 
 export const Input = styled.input`
-  background: ${styleSet.colors.darkgray};
-  color: ${styleSet.colors.white};
+  background: ${styleSet.colors.white};
+  color: ${styleSet.colors.black};
   outline: none;
   padding: 15px;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 40px;
   border: none;
-  font-size: ${styleSet.fontSize.s7};
+  font-size: ${styleSet.fontSize.s9};
 `;
 
 export const H1 = styled.div`
@@ -177,6 +210,39 @@ export const H1 = styled.div`
     background: #096dd9;
     height: 10px;
     width: 500px;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s1};
+    white-space: nowrap;
+    span {
+      display: none;
+    }
+  }
+`;
+
+export const H3 = styled.div`
+  position: absolute;
+  top: -7px;
+  color: ${styleSet.colors.white};
+  font-size: 5rem;
+  font-family: ${styleSet.font.EB};
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  span {
+    display: block;
+    background: ${styleSet.colors.white};
+    height: 10px;
+    width: 500px;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s1};
+    white-space: nowrap;
+    span {
+      width: 100px;
+    }
   }
 `;
 
@@ -194,17 +260,33 @@ export const Ul = styled.div`
     align-items: center;
     cursor: pointer;
   }
+
+  @media ${styleSet.breakePoints.mobile} {
+    li {
+      white-space: nowrap;
+    }
+  }
 `;
 
 export const Bottom = styled.section`
-  background-color: ${styleSet.colors.black};
-  padding: 30px 0;
+  background: linear-gradient(rgb(0 0 0), rgb(0 0 0 / 70%));
+  padding: 300px 0 30px 0;
+  position: relative;
+  .mobile {
+    display: none;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+    width: 100%;
+    .mobile {
+      display: block;
+    }
+  }
 `;
 
 export const ImgBox = styled.div`
-  width: 300px;
-  height: 100%;
-  background: ${styleSet.colors.black};
+  background: ${styleSet.colors.tp};
   text-align: center;
   cursor: pointer;
   &:hover .bg_layer {
@@ -247,6 +329,7 @@ export const Octagon = styled.div`
   background: url("/reoj.jpeg") no-repeat;
   background-position: 50% 50%;
   position: relative;
+  background-size: contain;
   width: 300px;
   height: 300px;
   margin: 30px 0;
@@ -260,6 +343,12 @@ export const Octagon = styled.div`
     0% 70%,
     0% 30%
   );
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 210px;
+    height: 210px;
+    background-size: contain;
+  }
 `;
 
 export const SkewBg = styled.div`
@@ -275,5 +364,9 @@ export const SkewBg = styled.div`
   box-sizing: content-box;
   transform: skewY(-30deg);
   margin-top: -90px;
-  padding-bottom: 500px;
+  padding-bottom: 450px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: none;
+  }
 `;
