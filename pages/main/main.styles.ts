@@ -6,7 +6,6 @@ export const Container = styled.div`
   .Navigation-Anchor {
     background-color: ${styleSet.colors.point2} !important;
   }
-  padding-top: 70px;
 `;
 export const Wrapper = styled.div`
   width: 1400px;
@@ -283,7 +282,7 @@ export const Price = styled.p`
 // 스크롤 유도 이모션
 export const ScrollDown = styled.a`
   position: absolute;
-  top: 50rem;
+  top: 44rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
