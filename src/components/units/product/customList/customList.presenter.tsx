@@ -29,10 +29,13 @@ export default function CustomListPresenter() {
           <img src="/icon_megaphone.png" alt="메가폰 아이콘" />
           <S.SkewBg></S.SkewBg>
 
-          <S.Text>
+          <S.Text className="pc">
             <S.H1>
               Z9의 크리에이터 <span></span>
             </S.H1>
+            <S.H3>
+              Z9의 크리에이터 <span></span>
+            </S.H3>
 
             <S.Ul>
               <li>
@@ -42,16 +45,40 @@ export default function CustomListPresenter() {
                 인스타그램
               </li>
               <li>
+                <S.Input type="text" placeholder="크리에이터 검색" />
                 <S.Search>
                   <SearchOutlined />
                 </S.Search>
-                <S.Input type="text" placeholder="크리에이터 검색" />
               </li>
             </S.Ul>
           </S.Text>
         </S.Top>
 
         <S.Bottom>
+          <S.Text className="mobile">
+            <S.H1>
+              Z9의 크리에이터 <span></span>
+            </S.H1>
+            <S.H3>
+              Z9의 크리에이터 <span></span>
+            </S.H3>
+
+            <S.Ul>
+              <li>
+                <YoutubeOutlined />
+                유튜브
+                <InstagramOutlined />
+                인스타그램
+              </li>
+              <li>
+                <S.Input type="text" placeholder="크리에이터 검색" />
+                <S.Search>
+                  <SearchOutlined />
+                </S.Search>
+              </li>
+            </S.Ul>
+          </S.Text>
+
           <S.ImgWrapper>
             <S.ImgBox>
               <S.Octagon>
