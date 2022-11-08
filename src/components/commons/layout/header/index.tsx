@@ -24,7 +24,10 @@ export default function HeaderPage() {
           </S.Ul>
 
           <S.Ul>
-            <li onClick={onClickMoveToPage("/users/signupintro")}>
+            <li
+              onClick={onClickMoveToPage("/users/signupintro")}
+              className="mobile"
+            >
               <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
             </li>
             <li onClick={onClickMoveToPage("/main")} className="logo">
