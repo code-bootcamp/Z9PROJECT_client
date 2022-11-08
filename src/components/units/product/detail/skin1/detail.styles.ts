@@ -489,7 +489,7 @@ export const Wrapper3 = styled.div`
   padding: 30px;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
+    min-width: 500px;
     width: 100%;
   }
 `;

@@ -12,6 +12,7 @@ export const User = styled.section`
   }
   @media ${styleSet.breakePoints.mobile} {
     padding-left: 15px;
+    min-width: 500px;
   }
 `;
 

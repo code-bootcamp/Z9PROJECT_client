@@ -19,11 +19,8 @@ export default function CustomListPresenter() {
               <S.H2>
                 내가 좋아하는 <strong>크리에이터</strong>를 검색해보세요 !
               </S.H2>
-              <S.Contents>
-                Z9에 있는 크리에이터도 검색해보고 내가 원하는 크리에이터가
-                없다면 ?? 검색으로 불러올 수 있습니다.
-              </S.Contents>
-              <S.Link>Go Search</S.Link>
+              <S.Contents>크리에이터들의 판매목록을 조회해보세요!</S.Contents>
+              <S.Link>Go Go</S.Link>
             </S.ContentRanding>
           </S.Square>
           <img src="/icon_megaphone.png" alt="메가폰 아이콘" />

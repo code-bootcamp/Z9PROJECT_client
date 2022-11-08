@@ -54,6 +54,10 @@ export const H2 = styled.h2`
   strong {
     color: ${styleSet.colors.primary};
   }
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s3};
+  }
 `;
 
 export const Square = styled.div`
@@ -133,7 +137,13 @@ export const Animantion = styled.span`
 export const Contents = styled.p`
   padding: 40px 0;
   font-size: ${styleSet.fontSize.s5};
+  color: ${styleSet.colors.darkgray};
   word-break: keep-all;
+
+  @media ${styleSet.breakePoints.mobile} {
+    color: ${styleSet.colors.darkgray};
+    font-family: ${styleSet.font.B};
+  }
 `;
 
 export const Link = styled.a`
@@ -142,10 +152,15 @@ export const Link = styled.a`
   word-break: keep-all;
   display: inline-block;
   padding: 10px 22px;
-  border: 2px solid ${styleSet.colors.primary};
-  color: ${styleSet.colors.primary};
+  border: 2px solid ${styleSet.colors.black};
+  color: ${styleSet.colors.black};
   border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
   transition: 0.5s;
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s9};
+    color: ${styleSet.colors.black};
+  }
 `;
 
 export const ContentRanding = styled.div`
@@ -169,10 +184,16 @@ export const ContentRanding = styled.div`
   &:hover h2 {
     color: ${styleSet.colors.white};
   }
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding: 50px;
+    box-sizing: border-box;
+    margin-top: 30px;
+  }
 `;
 
 export const Search = styled.span`
-  background: ${styleSet.colors.darkgray};
+  background: ${styleSet.colors.white};
   border-radius: 50%;
   font-size: ${styleSet.fontSize.s7};
   width: 40px;
@@ -332,7 +353,7 @@ export const Name = styled.p`
   span {
     font-family: ${styleSet.font.EB};
     font-size: ${styleSet.fontSize.s5};
-    color: ${styleSet.colors.darkgray};
+    color: ${styleSet.colors.white};
   }
 `;
 
