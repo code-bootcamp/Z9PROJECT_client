@@ -158,10 +158,21 @@ export const ContentRanding = styled.div`
   transform: translate(-50%, -50%);
   text-align: center;
   transition: 0.5s;
+  &:hover a {
+    background: #fff;
+    color: ${styleSet.colors.primary};
+    border: 1px solid ${styleSet.colors.white};
+  }
+  &:hover p {
+    color: ${styleSet.colors.white};
+  }
+  &:hover h2 {
+    color: ${styleSet.colors.white};
+  }
 `;
 
 export const Search = styled.span`
-  background: ${styleSet.colors.white};
+  background: ${styleSet.colors.darkgray};
   border-radius: 50%;
   font-size: ${styleSet.fontSize.s7};
   width: 40px;

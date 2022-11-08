@@ -19,7 +19,10 @@ export default function CustomListPresenter() {
               <S.H2>
                 내가 좋아하는 <strong>크리에이터</strong>를 검색해보세요 !
               </S.H2>
-              <S.Contents></S.Contents>
+              <S.Contents>
+                Z9에 있는 크리에이터도 검색해보고 내가 원하는 크리에이터가
+                없다면 ?? 검색으로 불러올 수 있습니다.
+              </S.Contents>
               <S.Link>Go Search</S.Link>
             </S.ContentRanding>
           </S.Square>
