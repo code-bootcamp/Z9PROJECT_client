@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
+import { hamburgerState } from "../../store";
 import * as S from "../layout.styles";
 
 export default function HeaderPage() {
   const { onClickMoveToPage } = useMoveToPage();
-  const [hamburger, setHamburger] = useState("");
+  const [hamburger, setHamburger] = useRecoilState(hamburgerState);
 
   const onClickMenu = () => {
     setHamburger((prev) => !prev);

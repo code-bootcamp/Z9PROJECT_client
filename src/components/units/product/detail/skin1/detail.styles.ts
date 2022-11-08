@@ -14,9 +14,10 @@ export const Wrapper = styled.div`
   padding: 0 30px;
   margin: 0 auto;
   position: relative;
-  
+
   @media ${styleSet.breakePoints.mobile} {
     min-width: 550px;
+    width: 100%;
   }
 `;
 
@@ -85,6 +86,7 @@ export const ProdInfo = styled.section`
 
 export const InfoLeft = styled.div`
   text-align: center;
+  width: 48%;
   > img {
     border-radius: 20px;
     max-height: 750px;
@@ -134,7 +136,7 @@ export const Bell = styled.li`
   &:hover {
     background-color: ${styleSet.colors.point1};
   }
-  
+
   @media ${styleSet.breakePoints.mobile} {
     font-size: 0.7rem !important;
     img {
@@ -200,7 +202,7 @@ export const Text = styled.div`
       font-family: ${styleSet.font.B};
     }
   }
-  
+
   @media ${styleSet.breakePoints.mobile} {
     ul {
       padding-bottom: 10px;
@@ -241,6 +243,7 @@ export const MySelect = styled(Select)`
 
   @media ${styleSet.breakePoints.mobile} {
     font-size: 0.5rem;
+    min-width: 120px;
   }
 `;
 
