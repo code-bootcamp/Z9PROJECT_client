@@ -183,7 +183,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
 
             <S.Box>
               <QuestionList />
-              {/* <AnswerList /> */}
             </S.Box>
           </S.Wrapper3>
         </S.Comment>

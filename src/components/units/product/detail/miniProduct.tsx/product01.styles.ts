@@ -11,6 +11,7 @@ export const InfoRight = styled.div`
   background: ${styleSet.colors.white};
   right: 0;
   top: 50%;
+
   @media ${styleSet.breakePoints.mobile} {
     display: none;
   }

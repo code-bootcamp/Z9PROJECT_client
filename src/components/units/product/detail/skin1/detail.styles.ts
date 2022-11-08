@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   padding: 0 30px;
   margin: 0 auto;
   position: relative;
+  
   @media ${styleSet.breakePoints.mobile} {
     min-width: 550px;
   }
@@ -112,6 +113,7 @@ export const InfoRight = styled.div`
       }
     }
   }
+
   @media ${styleSet.breakePoints.mobile} {
     padding: 20px;
     img {
@@ -132,6 +134,7 @@ export const Bell = styled.li`
   &:hover {
     background-color: ${styleSet.colors.point1};
   }
+  
   @media ${styleSet.breakePoints.mobile} {
     font-size: 0.7rem !important;
     img {
@@ -197,6 +200,7 @@ export const Text = styled.div`
       font-family: ${styleSet.font.B};
     }
   }
+  
   @media ${styleSet.breakePoints.mobile} {
     ul {
       padding-bottom: 10px;
@@ -337,6 +341,7 @@ export const Choose = styled.p`
     border-radius: 50%;
     font-size: ${styleSet.fontSize.s9};
   }
+
   @media ${styleSet.breakePoints.mobile} {
     width: 50px;
     #qtyMinus {
