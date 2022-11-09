@@ -95,7 +95,6 @@ export const InfoWrapper = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
-
     width: 100%;
   }
 `;
@@ -231,7 +230,6 @@ export const Octagon = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     clip-path: inherit;
-
     width: 100%;
   }
 `;
@@ -258,7 +256,6 @@ export const Octagon2 = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     clip-path: inherit;
-
     width: 100%;
   }
 `;

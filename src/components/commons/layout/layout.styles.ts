@@ -94,9 +94,6 @@ export const Footer = styled.footer`
   width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
-
-  @media ${styleSet.breakePoints.mobile} {
-  }
 `;
 
 export const Wrapper = styled.main`

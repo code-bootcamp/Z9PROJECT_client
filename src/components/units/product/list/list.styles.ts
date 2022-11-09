@@ -83,8 +83,6 @@ export const Wrapper = styled.div`
   max-width: 1460px;
   margin: 0 auto;
   padding: 0 30px;
-  @media ${styleSet.breakePoints.mobile} {
-  }
 `;
 
 export const Main = styled.main`
