@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import CreatorPresenter from "./user.presenter";
+import UserPresenter from "./user.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useMutation } from "@apollo/client";
@@ -26,8 +26,11 @@ const schma = yup.object({
   zipcode: yup.string().required("필수"),
   address: yup.string().required("필수"),
   addressDetail: yup.string(),
-  nickName: yup.string().required("필수"),
-  terms: yup.string().required("필수"),
+  nickname: yup.string().required("필수"),
+  account: yup.string(),
+  bank: yup.string(),
+  accountName: yup.string(),
+  terms: yup.boolean().oneOf([true], "필수"),
 });
 
 export default function UserRegisterContainer() {
@@ -61,6 +64,10 @@ export default function UserRegisterContainer() {
       );
     }
   }, [watch("phoneNumber")]);
+
+  const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue("terms", e.target.checked);
+  };
 
   const onClickCertNumber = async () => {
     if (!openTime) {
@@ -130,7 +137,6 @@ export default function UserRegisterContainer() {
           createCommonUserInput: {
             ...rest,
             // userProfileImg: profileFetchUrl,
-            // creatorAuthImg: certifiFetchUrl,
           },
         },
       });
@@ -143,7 +149,7 @@ export default function UserRegisterContainer() {
   };
 
   return (
-    <CreatorPresenter
+    <UserPresenter
       onClickSignUp={onClickSignUp}
       register={register}
       handleSubmit={handleSubmit}
@@ -154,8 +160,9 @@ export default function UserRegisterContainer() {
       onClickCertNumber={onClickCertNumber}
       onClickCertConfirm={onClickCertConfirm}
       onClickNameConfirm={onClickNameConfirm}
-      setValue={setValue}
       openTime={openTime}
+      setValue={setValue}
+      onChangeChecked={onChangeChecked}
     />
   );
 }

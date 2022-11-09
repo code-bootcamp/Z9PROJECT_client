@@ -15,6 +15,7 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
 export const POST_SMS_TOKEN = gql`
   mutation postSmsToken($phoneNumber: String!) {
     postSmsToken(phoneNumber: $phoneNumber) {
@@ -23,6 +24,7 @@ export const POST_SMS_TOKEN = gql`
     }
   }
 `;
+
 export const PATCH_SMS_TOKEN = gql`
   mutation patchSmsToken(
     $phoneNumber: String!

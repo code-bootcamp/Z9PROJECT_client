@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
-import { IstlyesProps } from "../creator/creator.types";
+import { IStlyesProps } from "../creator/creator.types";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 100px 30px;
+  padding: 0 30px 50px 30px;
   width: 660px;
 
   @media ${styleSet.breakePoints.mobile} {
@@ -23,6 +23,12 @@ export const Title = styled.h1`
   @media ${styleSet.breakePoints.mobile} {
     font-size: ${styleSet.fontSize.s2};
   }
+`;
+
+export const SubTitle = styled.label`
+  align-self: flex-start;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s5};
 `;
 
 export const Form = styled.form`
@@ -120,7 +126,9 @@ export const UploadWrapper = styled.div`
   align-items: flex-end;
 
   @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
 `;
@@ -129,7 +137,7 @@ export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
 
-  border: ${(P: IstlyesProps) =>
+  border: ${(P: IStlyesProps) =>
     P.error
       ? `1px solid ${styleSet.colors.red}`
       : `1px solid ${styleSet.colors.lightGray}`};
@@ -221,4 +229,14 @@ export const Checkbox = styled.span`
   height: 20px;
   border: 2px solid rgba(0, 0, 0, 0.175);
   transition: all 0.35s;
+`;
+
+export const CountWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 `;

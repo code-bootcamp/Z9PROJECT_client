@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import {
   FieldError,
   FieldErrorsImpl,
@@ -24,9 +25,10 @@ export type ICreatorPresenterProps = {
   onClickNameConfirm: () => void;
   setValue: UseFormSetValue<FieldValues>;
   openTime: boolean;
+  onChangeChecked: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export type IstlyesProps = {
+export type IStlyesProps = {
   error?:
     | string
     | FieldError

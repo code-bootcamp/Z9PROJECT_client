@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import {
   FieldValues,
   FormState,
@@ -6,7 +7,7 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 
-export type ICreatorPresenterProps = {
+export type IUserPresenterProps = {
   onClickSignUp: (data: any) => void;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
@@ -19,4 +20,5 @@ export type ICreatorPresenterProps = {
   onClickNameConfirm: () => void;
   setValue: UseFormSetValue<FieldValues>;
   openTime: boolean;
+  onChangeChecked: (e: ChangeEvent<HTMLInputElement>) => void;
 };

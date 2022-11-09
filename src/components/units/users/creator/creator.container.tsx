@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import CreatorPresenter from "./creator.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import {
   CHECK_NICKNAME,
   CREATE_CREATOR,
@@ -34,6 +34,7 @@ const schma = yup.object({
   account: yup.string(),
   bank: yup.string(),
   accountName: yup.string(),
+  terms: yup.boolean().oneOf([true], "필수"),
 });
 
 export default function CreatorRegisterContainer() {
@@ -69,6 +70,10 @@ export default function CreatorRegisterContainer() {
       );
     }
   }, [watch("phoneNumber")]);
+
+  const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue("terms", e.target.checked);
+  };
 
   const onChangeCertifiFile = (file: File) => {
     setCertifiFetchUrl(file);
@@ -116,7 +121,6 @@ export default function CreatorRegisterContainer() {
   };
 
   const onClickNameConfirm = async () => {
-
     try {
       const result = await checkNickname({
         variables: {
@@ -175,6 +179,7 @@ export default function CreatorRegisterContainer() {
       onClickNameConfirm={onClickNameConfirm}
       setValue={setValue}
       openTime={openTime}
+      onChangeChecked={onChangeChecked}
     />
   );
 }
