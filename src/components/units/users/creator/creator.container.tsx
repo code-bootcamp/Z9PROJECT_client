@@ -116,7 +116,6 @@ export default function CreatorRegisterContainer() {
   };
 
   const onClickNameConfirm = async () => {
-    console.log(getValues("nickname"));
 
     try {
       const result = await checkNickname({

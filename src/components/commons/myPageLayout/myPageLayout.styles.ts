@@ -6,7 +6,7 @@ import { IBtnProps } from "./myPageLayout.types";
 
 export const Container = styled.div`
   margin: 0 auto;
-  padding: 100px 30px;
+  padding: 0 30px;
   max-width: 1460px;
   width: 100%;
   display: flex;

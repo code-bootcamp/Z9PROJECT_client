@@ -15,8 +15,8 @@ const schma = yup.object({
 });
 
 const LOGIN = gql`
-  mutation login($email: String!, $loginPassword: String!) {
-    login(email: $email, loginPassword: $loginPassword)
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password)
   }
 `;
 
@@ -35,8 +35,7 @@ export default function LogInContainer() {
     try {
       const result = await login({
         variables: {
-          email: data.email,
-          loginPassword: data.password,
+          ...data,
         },
       });
 
