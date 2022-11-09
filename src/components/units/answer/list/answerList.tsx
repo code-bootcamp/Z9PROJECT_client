@@ -1,25 +1,29 @@
 import * as S from "../answer.styles";
-import AnswerWriter from "../write/answerWriter";
 
 export default function AnswerList() {
   return (
     <>
-      <S.AnswerBox>
-        <AnswerWriter />
-        <S.User>
-          <img src="/img_user.jpeg" alt="유저 이미지" />
-          <S.UserInfo>
-            김빵빵<span>2022.11.03</span>
-          </S.UserInfo>
-        </S.User>
-        <S.Contents>
-          답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변답변
-        </S.Contents>
-        <S.Answer>
-          <p>수정</p>
-          <p>삭제</p>
-        </S.Answer>
-      </S.AnswerBox>
+      <S.User>
+        <S.AnswerBox>
+          <S.Div>
+            <S.Contents>
+              이거 좋아여??이거 좋아여??이거 좋아여??이거 좋아여??이거 좋아여??
+            </S.Contents>
+            <S.Text>
+              <S.AnswerContents>
+                <span>답변</span>
+                어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여
+              </S.AnswerContents>
+            </S.Text>
+            <S.Answer>
+              <S.UserInfo>Leo J</S.UserInfo>
+              <S.UserInfo>2022.11.03</S.UserInfo>
+              <button>수정</button>
+              <button>삭제</button>
+            </S.Answer>
+          </S.Div>
+        </S.AnswerBox>
+      </S.User>
     </>
   );
 }

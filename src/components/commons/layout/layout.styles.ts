@@ -25,6 +25,10 @@ export const Container = styled.header`
       min-width: 500px;
     }
   }
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+    width: 100%;
+  }
 `;
 
 export const P = styled.p`
@@ -93,6 +97,10 @@ export const Footer = styled.footer`
   width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+  }
 `;
 
 export const Wrapper = styled.main`
