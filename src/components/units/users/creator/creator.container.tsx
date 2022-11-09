@@ -28,6 +28,7 @@ const schma = yup.object({
   addressDetail: yup.string(),
   nickname: yup.string().required("필수"),
   snsName: yup.string().required("필수"),
+  snsChannel: yup.string().required("필수"),
   mainContents: yup.string(),
   introduce: yup.string(),
   account: yup.string(),
@@ -50,11 +51,7 @@ export default function CreatorRegisterContainer() {
   const [createCreator] = useMutation(CREATE_CREATOR);
   const [postSmsToken] = useMutation(POST_SMS_TOKEN);
   const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
-  const { data: checkNickname } = useQuery(CHECK_NICKNAME, {
-    variables: {
-      nickname: getValues("nickname"),
-    },
-  });
+  const [checkNickname] = useMutation(CHECK_NICKNAME);
 
   useEffect(() => {
     setConfirmId(uuidv4());
@@ -83,7 +80,6 @@ export default function CreatorRegisterContainer() {
   };
 
   const onClickCertNumber = async () => {
-    // const number = watch("phoneNumber").replace(/[^0-9]/g, "");
     if (!openTime) {
       try {
         const result = await postSmsToken({
@@ -119,13 +115,23 @@ export default function CreatorRegisterContainer() {
     }
   };
 
-  const onClickNameConfirm = () => {
-    console.log(checkNickname.checkNickname);
+  const onClickNameConfirm = async () => {
     console.log(getValues("nickname"));
-    if (checkNickname.checkNickname) {
-      SuccessModal("사용 가능한 닉네임입니다.");
-    } else {
-      ErrorModal("이미 사용중인 닉네임입니다.");
+
+    try {
+      const result = await checkNickname({
+        variables: {
+          nickname: getValues("nickname"),
+        },
+      });
+
+      if (result.data.checkNickname) {
+        ErrorModal("이미 사용중인 닉네임입니다.");
+      } else {
+        SuccessModal("사용 가능한 닉네임입니다.");
+      }
+    } catch (error) {
+      if (error instanceof Error) ErrorModal(error.message);
     }
   };
 
@@ -139,16 +145,17 @@ export default function CreatorRegisterContainer() {
             ...rest,
             isAuthedCreator: true,
             followerNumber: 10000000,
-            userProfileImg: profileFetchUrl,
-            creatorAuthImg: certifiFetchUrl,
+            // userProfileImg: profileFetchUrl,
+            // creatorAuthImg: certifiFetchUrl,
           },
         },
       });
       SuccessModal(
-        `${result.data.createInfluencer.nickname}님 가입을 환영합니다.`
+        `${result.data.createCreator.nickname}님 가입을 환영합니다.`
       );
       router.push("/users/login");
     } catch (error) {
+      console.log(error);
       if (error instanceof Error) ErrorModal(error.message);
     }
   };

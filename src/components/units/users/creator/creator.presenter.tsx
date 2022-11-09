@@ -224,7 +224,10 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               />
             </S.SnsLabelInner>
             <S.SnsLabelInner>
-              <S.SnsCheckWrapper className="wrapper">
+              <S.SnsCheckWrapper
+                className="wrapper"
+                error={formState.errors.snsChannel?.message}
+              >
                 <S.LabelWrapper>
                   <S.RadioInput
                     type="radio"

@@ -41,7 +41,7 @@ export const PATCH_SMS_TOKEN = gql`
 `;
 
 export const CHECK_NICKNAME = gql`
-  query checkNickname($nickname: String!) {
+  mutation checkNickname($nickname: String!) {
     checkNickname(nickname: $nickname)
   }
 `;

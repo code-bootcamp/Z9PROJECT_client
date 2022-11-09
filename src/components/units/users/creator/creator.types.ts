@@ -1,6 +1,9 @@
 import {
+  FieldError,
+  FieldErrorsImpl,
   FieldValues,
   FormState,
+  Merge,
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormSetValue,
@@ -21,4 +24,12 @@ export type ICreatorPresenterProps = {
   onClickNameConfirm: () => void;
   setValue: UseFormSetValue<FieldValues>;
   openTime: boolean;
+};
+
+export type IstlyesProps = {
+  error?:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
 };
