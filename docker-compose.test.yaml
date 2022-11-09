@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  zero9-client:
+    image: reg.brian-hong.tech/zero9/zero9-client:latest
+    container_name: zero9-client
+    restart: always
+    ports:
+      - 9090:3000
+    environment:
+      - TZ=Asia/Seoul
+    networks:
+      - zero9-client
+
+networks:
+  zero9-client:
+    driver: bridge
