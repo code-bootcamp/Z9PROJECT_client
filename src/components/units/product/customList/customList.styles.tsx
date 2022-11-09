@@ -16,7 +16,6 @@ export const ImgWrapper = styled.section`
   flex-wrap: wrap;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     justify-content: center;
   }
 `;
@@ -309,7 +308,6 @@ export const Bottom = styled.section`
   }
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
     .mobile {
       display: block;

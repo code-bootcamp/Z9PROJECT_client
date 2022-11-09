@@ -6,7 +6,6 @@ export const Container = styled.section`
   width: 100%;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     padding: 0;
   }
 `;
