@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import * as S from "../layout.styles";
 import { useRecoilState } from "recoil";
@@ -26,14 +27,17 @@ export default function HeaderPage() {
   const onClickMenu = () => {
     setHamburger((prev) => !prev);
   };
+
   const onClickProfile = () => {
     isOpenPop((prev) => !prev);
   };
+  
   const onClickLogout = () => {
     logout();
     sessionStorage.removeItem("accessToken");
     router.reload();
   };
+
 
   return (
     <>
@@ -82,6 +86,12 @@ export default function HeaderPage() {
             <li className="logo" onClick={onClickMenu}>
               <S.P></S.P>
             </li>
+            <li onClick={onClickMoveToPage("/main")} className="logo">
+              <S.Logo src="/icon_logo.png" alt="로고 아이콘" />
+            </li>
+            <li className="logo" onClick={onClickMenu}>
+              <S.P></S.P>
+            </li>
           </S.Ul>
           {hamburger && (
             <S.Hamburger id="hamburger" hamburger={hamburger}>
@@ -100,6 +110,21 @@ export default function HeaderPage() {
             </S.Hamburger>
           )}
         </S.Wrapper>
+
+        {hamburger && (
+          <S.Hamburger id="hamburger" hamburger={hamburger}>
+            <ul>
+              <li onClick={onClickMobileToPage("/users/signupintro")}>
+                <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
+                &nbsp; 로그인
+              </li>
+              <li onClick={onClickMobileToPage("/lists/list")}>리스트</li>
+              <li onClick={onClickMobileToPage("/lists/customList")}>
+                Who's Best
+              </li>
+            </ul>
+          </S.Hamburger>
+        )}
       </S.Container>
     </>
   );
