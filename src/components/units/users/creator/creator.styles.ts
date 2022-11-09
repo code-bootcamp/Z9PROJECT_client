@@ -4,7 +4,7 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 100px 30px;
+  padding: 0 30px 50px 30px;
   width: 660px;
 
   @media ${styleSet.breakePoints.mobile} {
@@ -38,7 +38,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 `;
 
 export const Label = styled.label`
@@ -148,7 +148,6 @@ export const UpoloadWrapper = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -177,7 +176,6 @@ export const Concept = styled.input`
 export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
-
   border: 1px solid lightgray;
   border-radius: 10px;
 
@@ -186,6 +184,8 @@ export const WrapperTermsOfUse = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
+
+  position: relative;
 
   label {
     font-size: 1.2rem;
