@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { LegacyRef, MutableRefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
 
 const Button = styled.button`
@@ -162,7 +162,7 @@ export default function ChargeModal() {
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
       },
-      function (rsp) {
+      function (rsp: any) {
         // if (rsp.success) {
         //   createPointTransactionOfLoading({
         //     variables: {

@@ -37,6 +37,7 @@
     "recoil": "^0.7.5",
     "sweetalert2": "^11.6.5",
     "swiper": "^8.4.4",
+    "uuid": "^9.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
