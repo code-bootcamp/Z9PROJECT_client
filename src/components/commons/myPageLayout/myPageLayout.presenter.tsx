@@ -3,7 +3,7 @@ import * as S from "./myPageLayout.styles";
 import { IMyPageLayoutPresenterProps } from "./myPageLayout.types";
 
 export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
-  const { nowUrl } = P;
+  const { nowUrl, onClickLogout } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
@@ -39,6 +39,9 @@ export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
           onClick={onClickMoveToPage("/users/mypage/edit")}
         >
           회원정보 수정
+        </S.Btn>
+        <S.Btn className="edit" onClick={onClickLogout}>
+          로그아웃
         </S.Btn>
       </S.BtnWrapper>
     </S.PreContainer>
