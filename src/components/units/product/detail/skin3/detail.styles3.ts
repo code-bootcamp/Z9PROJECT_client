@@ -17,7 +17,6 @@ export const Info = styled.section`
   @media ${styleSet.breakePoints.mobile} {
     margin-bottom: 30px;
     iframe {
-      min-width: 550px;
       width: 100%;
       height: 100vh;
     }
@@ -31,7 +30,6 @@ export const Wrapper = styled.div`
   position: relative;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
   }
 `;
@@ -503,7 +501,6 @@ export const Wrapper3 = styled.div`
   padding: 30px;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
   }
 `;
