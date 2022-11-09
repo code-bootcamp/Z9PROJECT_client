@@ -5,7 +5,6 @@ import { IMyPageLayoutPresenterProps } from "./myPageLayout.types";
 export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
   const { nowUrl, onClickLogout } = P;
   const { onClickMoveToPage } = useMoveToPage();
-
   return (
     <S.PreContainer>
       <S.Title>마이페이지</S.Title>

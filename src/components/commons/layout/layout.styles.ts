@@ -96,6 +96,10 @@ export const Footer = styled.footer`
   width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+  }
 `;
 
 export const Wrapper = styled.main`
