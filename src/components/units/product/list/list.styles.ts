@@ -9,7 +9,6 @@ export const Container = styled.section`
   padding-block: 100px;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     padding-block: 30px;
   }
 `;
@@ -85,7 +84,6 @@ export const Wrapper = styled.div`
   margin: 0 auto;
   padding: 0 30px;
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
   }
 `;
 

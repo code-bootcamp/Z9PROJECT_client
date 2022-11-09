@@ -28,10 +28,8 @@ export const DetailWrapper = styled.div`
   position: relative;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
     img {
-      min-width: 550px;
       width: 100%;
     }
   }
@@ -97,7 +95,7 @@ export const InfoWrapper = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
-    min-width: 550px;
+
     width: 100%;
   }
 `;
@@ -110,7 +108,6 @@ export const RightDiv = styled.div`
   align-items: center;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
     background-color: ${styleSet.colors.tp};
   }
@@ -124,7 +121,6 @@ export const LeftDiv = styled.div`
   justify-content: flex-end;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
     background-color: ${styleSet.colors.tp};
   }
@@ -235,7 +231,7 @@ export const Octagon = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     clip-path: inherit;
-    min-width: 600px;
+
     width: 100%;
   }
 `;
@@ -262,7 +258,7 @@ export const Octagon2 = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     clip-path: inherit;
-    min-width: 600px;
+
     width: 100%;
   }
 `;
@@ -322,7 +318,6 @@ export const Wrapper3 = styled.div`
   padding: 30px;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
   }
 `;

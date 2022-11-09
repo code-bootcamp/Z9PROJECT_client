@@ -9,7 +9,6 @@ export const Container = styled.section`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
-    min-width: 500px;
   }
 `;
 

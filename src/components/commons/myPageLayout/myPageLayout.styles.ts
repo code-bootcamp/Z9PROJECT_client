@@ -33,7 +33,7 @@ export const PreContainer = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
-    min-width: 550px;
+
     padding: 50px 0 0 0;
     align-items: center;
   }
