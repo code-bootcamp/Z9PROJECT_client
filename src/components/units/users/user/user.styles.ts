@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { IstlyesProps } from "../creator/creator.types";
 
 export const Container = styled.section`
   margin: 0 auto;
@@ -8,6 +9,7 @@ export const Container = styled.section`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
+    min-width: 500px;
   }
 `;
 
@@ -30,7 +32,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 `;
 
 export const Label = styled.label`
@@ -127,7 +129,10 @@ export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
 
-  border: 1px solid lightgray;
+  border: ${(P: IstlyesProps) =>
+    P.error
+      ? `1px solid ${styleSet.colors.red}`
+      : `1px solid ${styleSet.colors.lightGray}`};
   border-radius: 10px;
 
   display: flex;

@@ -6,20 +6,25 @@ import { ICreatorPresenterProps } from "./user.types";
 
 export default function CreatorPresenter(P: ICreatorPresenterProps) {
   const {
-    onSubmit,
+    onClickSignUp,
     register,
     handleSubmit,
     formState,
     onChageProfileFile,
     profilePreview,
     profileFetchUrl,
+    onClickCertNumber,
+    onClickCertConfirm,
+    onClickNameConfirm,
+    setValue,
+    openTime,
   } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
     <S.Container>
       <S.Title>회원가입</S.Title>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <S.Form onSubmit={handleSubmit(onClickSignUp)}>
         <S.Label>
           <S.Svg
             viewBox="0 0 1024 1024"
@@ -83,7 +88,9 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             register={register("phoneNumber")}
             error={formState.errors.phoneNumber?.message}
           />
-          <S.Btn1 type="button">인증번호받기</S.Btn1>
+          <S.Btn1 type="button" onClick={onClickCertNumber}>
+            인증번호받기
+          </S.Btn1>
         </S.Label>
         <S.Label>
           <S.Svg
@@ -99,7 +106,10 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             register={register("keyNumber")}
             error={formState.errors.keyNumber?.message}
           />
-          <S.Btn2 type="button">인증번호확인</S.Btn2>
+          {openTime && <CountDown min={3} sec={0} />}
+          <S.Btn2 type="button" onClick={onClickCertConfirm}>
+            인증번호확인
+          </S.Btn2>
         </S.Label>
 
         <S.AddressWrapper>
@@ -119,7 +129,6 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               register={register("zipcode")}
               error={formState.errors.zipcode?.message}
             />{" "}
-            
             <S.Btn1 type="button">주소검색</S.Btn1>
           </S.Label>
           <S.Label>
@@ -172,7 +181,9 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             register={register("nickName")}
             error={formState.errors.nickName?.message}
           />
-          <S.Btn1 type="button">중복확인</S.Btn1>
+          <S.Btn1 type="button" onClick={onClickNameConfirm}>
+            중복확인
+          </S.Btn1>
         </S.Label>
         <S.InfoWrapper>
           <S.UploadWrapper>
@@ -190,7 +201,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
           </S.UploadWrapper>
         </S.InfoWrapper>
 
-        <S.WrapperTermsOfUse>
+        <S.WrapperTermsOfUse error={formState.errors.password?.message}>
           <label>개인정보 이용약관</label>
           <S.TermsOfUse>
             <p>[ 제로나인 이용 약관 ]</p>
@@ -220,8 +231,8 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             </p>
           </S.TermsOfUse>
           <S.TermsCheckWrapper>
-            <S.InvisibleCheckbox type="checkbox" />
-            <S.Checkbox className="checkbox"></S.Checkbox>
+            <S.InvisibleCheckbox type="checkbox" {...register("terms")} />
+            <S.Checkbox className="checkbox" />
             <span> 동의합니다.</span>
           </S.TermsCheckWrapper>
         </S.WrapperTermsOfUse>
