@@ -91,7 +91,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <li>
                     <S.MySelect
                       defaultValue="옵션을 선택해주세요."
-                      style={{ width: 120 }}
                       onChange={handleChange}
                       options={[
                         {
@@ -171,11 +170,18 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               </li>
             </S.Count>
             <QuestionWriter />
-            <S.H4>댓글</S.H4>
+            <S.H4>QnA</S.H4>
+            <S.Title>
+              <li>프로필</li>
+              <li>답변여부</li>
+              <li>내용</li>
+              <li>작성자</li>
+              <li>등록일자</li>
+              <li></li>
+            </S.Title>
 
             <S.Box>
               <QuestionList />
-              <AnswerList />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>

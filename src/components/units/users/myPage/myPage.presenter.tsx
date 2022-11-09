@@ -1,8 +1,10 @@
 import { PointFormatter } from "../../../../commons/utils";
 import { DatePicker, Pagination } from "antd";
 import * as S from "./myPage.styles";
+import { IMyPagePresenterProps } from "./myPage.types";
+import ChargeModal from "../../../commons/modal/charge";
 
-export default function MyPagePresenter(P) {
+export default function MyPagePresenter(P: IMyPagePresenterProps) {
   const { onChangePage } = P;
   const { RangePicker } = DatePicker;
 
@@ -16,7 +18,10 @@ export default function MyPagePresenter(P) {
         <div>적절한 구입은 삶에 큰 도움이 됩니다.</div>
       </S.PointWrapper>
       <S.HistoryWrapper>
-        <S.SubTitle>포인트 적립 및 사용 내역</S.SubTitle>
+        <S.SubTitleWrapper>
+          <S.SubTitle>포인트 적립 및 사용 내역</S.SubTitle>
+          <ChargeModal />
+        </S.SubTitleWrapper>
         <S.BoardTopWrapper>
           <S.PeriodWrapper>
             <S.PeriodBtn>1개월</S.PeriodBtn>

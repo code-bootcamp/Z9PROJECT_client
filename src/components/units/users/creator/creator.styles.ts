@@ -1,11 +1,16 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { IstlyesProps } from "./creator.types";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 100px 30px;
+  padding: 0 30px 50px 30px;
   width: 660px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`
@@ -14,6 +19,10 @@ export const Title = styled.h1`
   text-align: center;
   font-size: ${styleSet.fontSize.s1};
   color: #5e5e5e;
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s2};
+  }
 `;
 
 export const SubTitle = styled.label`
@@ -29,7 +38,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 `;
 
 export const Label = styled.label`
@@ -136,6 +145,13 @@ export const UpoloadWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Introduce = styled.textarea`
@@ -160,7 +176,6 @@ export const Concept = styled.input`
 export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
-
   border: 1px solid lightgray;
   border-radius: 10px;
 
@@ -169,6 +184,8 @@ export const WrapperTermsOfUse = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
+
+  position: relative;
 
   label {
     font-size: 1.2rem;
@@ -223,6 +240,9 @@ export const SnsCheckWrapper = styled.div`
   width: 100%;
   display: flex;
   gap: 2rem;
+
+  background: ${(P: IstlyesProps) =>
+    P.error ? `${styleSet.colors.subcolor1}` : `none`};
 `;
 
 export const LabelWrapper = styled.label`

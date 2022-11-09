@@ -1,12 +1,16 @@
 import {
+  FieldError,
+  FieldErrorsImpl,
   FieldValues,
   FormState,
+  Merge,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 
 export type ICreatorPresenterProps = {
-  onSubmit: (data: any) => void;
+  onClickSignUp: (data: any) => void;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
@@ -15,4 +19,17 @@ export type ICreatorPresenterProps = {
   onChageProfileFile: (url: string, file: File) => void;
   profilePreview: string;
   profileFetchUrl: File | undefined;
+  onClickCertNumber: () => void;
+  onClickCertConfirm: () => void;
+  onClickNameConfirm: () => void;
+  setValue: UseFormSetValue<FieldValues>;
+  openTime: boolean;
+};
+
+export type IstlyesProps = {
+  error?:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
 };
