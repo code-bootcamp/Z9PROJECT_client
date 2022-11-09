@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { hamburgerState } from "../../store";

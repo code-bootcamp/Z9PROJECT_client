@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link
+          crossOrigin="true"
           href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css"
           rel="stylesheet"
         ></link>
