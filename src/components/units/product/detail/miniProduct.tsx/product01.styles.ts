@@ -10,11 +10,15 @@ export const InfoRight = styled.div`
   position: absolute;
   background: ${styleSet.colors.white};
   right: 0;
-  top: 38%;
+  top: 50%;
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: none;
+  }
 `;
 
 export const H1 = styled.h1`
-  font-size: ${styleSet.fontSize.s3};
+  font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
   padding-block: 10px;
   letter-spacing: -1.4px;
@@ -24,7 +28,6 @@ export const H1 = styled.h1`
 
 export const Text = styled.div`
   border-bottom: 2px dashed ${styleSet.colors.gray};
-  padding-bottom: 10px;
   ul {
     display: flex;
     justify-content: space-between;
@@ -32,6 +35,7 @@ export const Text = styled.div`
     padding-bottom: 15px;
     li {
       font-size: ${styleSet.fontSize.s9};
+      font-family: ${styleSet.font.B};
     }
   }
 `;
@@ -47,16 +51,16 @@ export const PriceSale = styled.li`
   font-family: ${styleSet.font.EB};
   strong {
     background: ${styleSet.colors.primary};
-    font-size: ${styleSet.fontSize.s9};
+    font-size: 0.7rem;
     color: ${styleSet.colors.white};
-    padding: 5px 10px;
-    border-radius: 15px;
-    margin-right: 15px;
+    font-family: ${styleSet.font.B};
+    padding: 5px 5px;
+    border-radius: 7px;
+    margin-right: 5px;
   }
 `;
 
 export const Close = styled.li`
-  color: ${styleSet.colors.point1};
   font-family: ${styleSet.font.EB};
 `;
 
@@ -92,17 +96,23 @@ export const Piece = styled.aside`
 `;
 
 export const Choose = styled.p`
-  width: 120px;
-  border: 1px solid #eee;
-  border-radius: 20px;
+  width: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   #qtyMinus {
     margin-left: -7px;
+    background: ${styleSet.colors.primary};
+    color: ${styleSet.colors.white};
+    border-radius: 50%;
+    font-size: ${styleSet.fontSize.s9};
   }
   #qtyPlus {
     margin-right: -7px;
+    background: ${styleSet.colors.primary};
+    color: ${styleSet.colors.white};
+    border-radius: 50%;
+    font-size: ${styleSet.fontSize.s9};
   }
 `;
 
@@ -131,9 +141,12 @@ export const BoxBtn = styled.div`
     font-family: ${styleSet.font.B};
     height: 60px;
     width: 40%;
+    svg {
+      color: ${styleSet.colors.red};
+    }
   }
   .buy {
-    background: ${styleSet.colors.red};
+    background-color: ${styleSet.colors.subcolor4};
     font-size: ${styleSet.fontSize.s7};
     font-family: ${styleSet.font.B};
     height: 60px;
