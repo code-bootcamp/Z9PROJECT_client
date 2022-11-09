@@ -2,6 +2,7 @@ export const styleSet = {
   colors: {
     white: "#fff",
     black: "#000",
+    darkgray: "#777",
     gray: "#ccc",
     red: "#b1312d",
     tp: "transparent",
@@ -9,6 +10,9 @@ export const styleSet = {
     primary: "#f46a22",
     subcolor1: "#FF772E",
     subcolor2: "#E85D13",
+    subcolor3: "#f4f5f9",
+    subcolor4: "#f9c349",
+    subcolor5: "#ff772e21",
     point1: "#009C96",
     point2: "#13E8E0",
   },
@@ -28,5 +32,8 @@ export const styleSet = {
     s8: "1rem",
     s9: "0.9rem",
     s10: "0.8rem",
+  },
+  breakePoints: {
+    mobile: "(max-width: 767px)",
   },
 };

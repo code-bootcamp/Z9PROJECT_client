@@ -22,3 +22,7 @@ export const dateTimeFormatter = (rawDate: Date) => {
 export const PriceFormatter = (price: Maybe<number> | undefined) => {
   return `₩${price?.toLocaleString()}`;
 };
+
+export const PointFormatter = (point: Maybe<number> | undefined) => {
+  return `${point?.toLocaleString()}`;
+};

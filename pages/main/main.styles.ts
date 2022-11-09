@@ -156,7 +156,7 @@ export const Message4 = styled.img`
 export const Message5 = styled.img`
   position: absolute;
   right: 4%;
-  top: 49%;
+  top: 52%;
   height: 400px;
 `;
 
@@ -282,7 +282,7 @@ export const Price = styled.p`
 // 스크롤 유도 이모션
 export const ScrollDown = styled.a`
   position: absolute;
-  top: 50rem;
+  top: 44rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

@@ -1,17 +1,33 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 30px;
+  padding: 0 30px 50px 30px;
   width: 660px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`
-  font-family: "Bodoni Moda";
+  margin: 50px 0 50px 0;
+  font-family: ${styleSet.font.B};
   text-align: center;
-  font-size: 5rem;
+  font-size: ${styleSet.fontSize.s1};
   color: #5e5e5e;
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s2};
+  }
+`;
+
+export const SubTitle = styled.label`
+  align-self: flex-start;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s5};
 `;
 
 export const Form = styled.form`
@@ -21,7 +37,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 80px;
+  gap: 40px;
 `;
 
 export const Label = styled.label`
@@ -34,6 +50,7 @@ export const Label = styled.label`
   gap: 23px;
 
   position: relative;
+  overflow: hidden;
 `;
 
 export const SnsLabel = styled.label`
@@ -61,36 +78,38 @@ export const Svg = styled.svg`
   width: 18px;
 
   position: absolute;
-  left: 10px;
-  top: 14px;
+  left: 22px;
+  top: 23px;
+  z-index: 1;
 `;
 
-export const CertificationBtn = styled.button`
-  width: 120px;
-  height: 40px;
+export const Btn1 = styled.button`
+  width: 150px;
+  height: 60px;
   color: white;
-  background: #2b2d42;
+  background: ${styleSet.colors.subcolor2};
   border-radius: 10px;
 `;
 
-export const ConfirmBtn = styled.button`
-  width: 120px;
-  height: 40px;
+export const Btn2 = styled.button`
+  width: 150px;
+  height: 60px;
   color: white;
-  background: #c7002e;
+  background: ${styleSet.colors.subcolor1};
   border-radius: 10px;
 `;
 
-export const ZipcodeBtn = styled.button`
-  width: 120px;
-  height: 40px;
-  color: white;
-  background: #2b2d42;
-  border-radius: 10px;
+export const AddressWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const ProfileWrapper = styled.div`
-  margin: 50px 0 0 0;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -106,10 +125,56 @@ export const ProfileWrapper = styled.div`
   }
 `;
 
+export const InfoWrapper = styled.div`
+  padding: 40px;
+  width: 100%;
+  border-radius: 10px;
+  background: ${styleSet.colors.lightGray};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+`;
+
+export const UpoloadWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const Introduce = styled.textarea`
+  padding: 20px;
+  width: 100%;
+  height: 150px;
+  border: 1px solid ${styleSet.colors.gray};
+  border-radius: 10px;
+  resize: none;
+  outline-color: ${styleSet.colors.primary};
+`;
+
+export const Concept = styled.input`
+  padding: 20px;
+  width: 100%;
+  border: 1px solid ${styleSet.colors.gray};
+  border-radius: 10px;
+  resize: none;
+  outline-color: ${styleSet.colors.primary};
+`;
+
 export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
-
   border: 1px solid lightgray;
   border-radius: 10px;
 
@@ -118,6 +183,8 @@ export const WrapperTermsOfUse = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 20px;
+
+  position: relative;
 
   label {
     font-size: 1.2rem;
@@ -139,13 +206,19 @@ export const BtnWrapper = styled.div`
 `;
 
 export const SignUpBtn = styled.button`
-  padding: 10px 40px;
-  border: none;
-  border-bottom: 5px solid black;
-  border-radius: 0;
+  height: 3.5rem;
+  padding: 0 5rem;
+  border-radius: 0.375rem;
+  background: ${styleSet.colors.primary};
+  color: #ffffff;
+  box-shadow: 0 0.4rem 0 0 ${styleSet.colors.subcolor2};
+  letter-spacing: 3px;
+  transition: all 0.3s;
 
-  font-size: 1.5rem;
-  cursor: pointer;
+  :active {
+    transform: translateY(0.3rem);
+    box-shadow: 0 0.2rem 0 0 ${styleSet.colors.subcolor2};
+  }
 `;
 
 export const CancelBtn = styled.button`
@@ -197,7 +270,7 @@ export const RadioButtonInner = styled.span`
   top: 8px;
   left: 5px;
   border-radius: 50%;
-  background: #8f44fd;
+  background: ${styleSet.colors.primary};
   visibility: hidden;
   opacity: 0;
   transform: scale(0);
@@ -233,8 +306,8 @@ export const RadioPulse = styled.span`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #8f44fd;
-  animation: ${pulse} 0.5s linear;
+  background-color: ${styleSet.colors.primary};
+  animation: ${pulse} 0.4s linear;
 `;
 
 export const RadioInput = styled.input`
@@ -255,7 +328,7 @@ export const RadioInput = styled.input`
     display: block;
   }
   :checked ~ .radio-button {
-    border-color: #8f44fd;
+    border-color: ${styleSet.colors.primary};
   }
   :checked ~ .radio-label {
     color: rgba(0, 0, 0, 0.96);
@@ -266,8 +339,13 @@ export const TermsCheckWrapper = styled.label`
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
-  position: relative;
+
+  span {
+    font-size: ${styleSet.fontSize.s8};
+  }
 `;
 
 export const InvisibleCheckbox = styled.input`
@@ -275,21 +353,28 @@ export const InvisibleCheckbox = styled.input`
 
   :checked ~ .checkbox {
     margin: 0 5px 0 10px;
-    transform: rotate(45deg);
-    width: 15px;
-    border-color: #1ac0a2;
+    transform: rotate(45deg) translateX(-20%) translateY(-20%);
+    width: 10px;
+    border-color: ${styleSet.colors.primary};
     border-top-color: transparent;
     border-left-color: transparent;
-
-    position: relative;
-    top: -4px;
   }
 `;
 
 export const Checkbox = styled.span`
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border: 2px solid rgba(0, 0, 0, 0.175);
   transition: all 0.35s;
+`;
+
+export const CountWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 `;
