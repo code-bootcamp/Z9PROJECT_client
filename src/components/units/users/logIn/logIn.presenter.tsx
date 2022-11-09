@@ -1,10 +1,13 @@
 import Link from "next/link";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import Input01 from "../../../commons/input/input01/input01";
 import * as S from "./logIn.styles";
 import { ILogInPresenterProps } from "./logIn.types";
 
 export default function LogInPresenter(P: ILogInPresenterProps) {
   const { onSubmit, register, handleSubmit, formState } = P;
+  const { onClickMoveToPage } = useMoveToPage();
+
   return (
     <S.Container>
       <S.Title>로그인</S.Title>
@@ -42,8 +45,10 @@ export default function LogInPresenter(P: ILogInPresenterProps) {
         <S.LogInBtn>로그인</S.LogInBtn>
       </S.Form>
       <S.SignUpWrapper>
-        <button>비밀번호 재설정</button>
-        <button>회원가입</button>
+        아직 회원이 아니신가요?
+        <button onClick={onClickMoveToPage("/users/signupintro")}>
+          회원가입
+        </button>
       </S.SignUpWrapper>
       <S.SnsLoginWrapper>
         <S.SubTitle>SNS 계정으로 간편 로그인/회원가입</S.SubTitle>
