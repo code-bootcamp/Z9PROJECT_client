@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { IstlyesProps } from "./creator.types";
 
 export const Container = styled.section`
   margin: 0 auto;
@@ -9,7 +10,6 @@ export const Container = styled.section`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
-    min-width: 500px;
   }
 `;
 
@@ -240,6 +240,9 @@ export const SnsCheckWrapper = styled.div`
   width: 100%;
   display: flex;
   gap: 2rem;
+
+  background: ${(P: IstlyesProps) =>
+    P.error ? `${styleSet.colors.subcolor1}` : `none`};
 `;
 
 export const LabelWrapper = styled.label`

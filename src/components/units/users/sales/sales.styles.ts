@@ -4,10 +4,8 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.section`
   padding: 50px 0;
   width: 100%;
-  min-width: 600px;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     padding: 0;
   }
 `;
