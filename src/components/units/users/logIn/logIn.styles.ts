@@ -3,8 +3,8 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 100px 30px;
-  width: 660px;
+  padding: 0 30px 50px 30px;
+  max-width: 600px;
 `;
 
 export const Title = styled.h1`
@@ -79,10 +79,12 @@ export const SignUpWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 10px;
 
-  a img {
-    width: 4rem;
+  button {
+    &:hover {
+      font-family: ${styleSet.font.B};
+    }
   }
 `;
 export const WrapperInner = styled.div`

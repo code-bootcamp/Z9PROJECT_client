@@ -23,6 +23,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
     onClickNameConfirm,
     setValue,
     openTime,
+    onChangeChecked,
   } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -224,7 +225,10 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               />
             </S.SnsLabelInner>
             <S.SnsLabelInner>
-              <S.SnsCheckWrapper className="wrapper">
+              <S.SnsCheckWrapper
+                className="wrapper"
+                error={formState.errors.snsChannel?.message}
+              >
                 <S.LabelWrapper>
                   <S.RadioInput
                     type="radio"
@@ -329,7 +333,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
           </S.CountWrapper>
         </S.InfoWrapper>
 
-        <S.WrapperTermsOfUse>
+        <S.WrapperTermsOfUse error={formState.errors.terms?.message}>
           <label>개인정보 이용약관</label>
           <S.TermsOfUse>
             <p>[ 제로나인 이용 약관 ]</p>
@@ -359,7 +363,11 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             </p>
           </S.TermsOfUse>
           <S.TermsCheckWrapper>
-            <S.InvisibleCheckbox type="checkbox" />
+            <S.InvisibleCheckbox
+              type="checkbox"
+              {...register("terms")}
+              onChange={onChangeChecked}
+            />
             <S.Checkbox className="checkbox"></S.Checkbox>
             <span> 동의합니다.</span>
           </S.TermsCheckWrapper>
