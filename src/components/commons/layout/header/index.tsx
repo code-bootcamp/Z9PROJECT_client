@@ -21,8 +21,8 @@ export default function HeaderPage() {
               <S.Logo src="/icon_logo.png" alt="로고 아이콘" />
             </li>
             <li onClick={onClickMoveToPage("/product/register")}>상품 등록</li>
-            <li onClick={onClickMoveToPage("/lists/list")}>리스트</li>
-            <li onClick={onClickMoveToPage("/lists/customList")}>Who's Best</li>
+            <li onClick={onClickMoveToPage("/list/list")}>리스트</li>
+            <li onClick={onClickMoveToPage("/list/customList")}>Who's Best</li>
           </S.Ul>
 
           <S.Ul>
@@ -48,8 +48,8 @@ export default function HeaderPage() {
                 <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
                 &nbsp; 로그인
               </li>
-              <li onClick={onClickMobileToPage("/lists/list")}>리스트</li>
-              <li onClick={onClickMobileToPage("/lists/customList")}>
+              <li onClick={onClickMobileToPage("/list/list")}>리스트</li>
+              <li onClick={onClickMobileToPage("/list/customList")}>
                 Who's Best
               </li>
             </ul>

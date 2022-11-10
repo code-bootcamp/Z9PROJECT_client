@@ -35,7 +35,7 @@ export const Top = styled.section`
     display: none;
   }
   @media ${styleSet.breakePoints.mobile} {
-    width: 550px;
+    width: 600px;
     & > img {
       display: none;
     }
@@ -83,7 +83,7 @@ export const Square = styled.div`
   }
 
   @media ${styleSet.breakePoints.mobile} {
-    width: 500px;
+    width: 600px;
     height: 500px;
     left: 50%;
   }
@@ -240,7 +240,7 @@ export const H1 = styled.div`
     display: block;
     background: #096dd9;
     height: 10px;
-    width: 500px;
+    width: 600px;
   }
 
   @media ${styleSet.breakePoints.mobile} {
@@ -265,7 +265,7 @@ export const H3 = styled.div`
     display: block;
     background: ${styleSet.colors.white};
     height: 10px;
-    width: 500px;
+    width: 600px;
   }
 
   @media ${styleSet.breakePoints.mobile} {

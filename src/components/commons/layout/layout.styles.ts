@@ -207,7 +207,7 @@ export const Bottom = styled.ul`
 export const Section = styled.section`
   display: flex;
   gap: 10px;
-  p {
+  a {
     background-color: ${styleSet.colors.primary};
     width: 50px;
     height: 50px;
