@@ -147,7 +147,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             onClickCart={onClickCart}
           />
           <S.Button>
-            <button onClick={onClickMoveToPage("/lists/list")}>목록으로</button>
+            <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button>수정</button>
             <button>삭제</button>
           </S.Button>
