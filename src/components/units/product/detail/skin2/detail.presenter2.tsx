@@ -93,7 +93,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             onClickCart={onClickCart}
           />
           <S.Button>
-            <button onClick={onClickMoveToPage("/lists/list")}>목록으로</button>
+            <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button>수정</button>
             <button>삭제</button>
           </S.Button>
@@ -106,11 +106,18 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               </li>
             </S.Count>
             <QuestionWriter />
-            <S.H4>댓글</S.H4>
+            <S.H4>QnA</S.H4>
+            <S.Title>
+              <li>프로필</li>
+              <li>답변여부</li>
+              <li>내용</li>
+              <li>작성자</li>
+              <li>등록일자</li>
+              <li></li>
+            </S.Title>
 
             <S.Box>
               <QuestionList />
-              <AnswerList />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>

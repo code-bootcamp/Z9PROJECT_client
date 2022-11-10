@@ -1,16 +1,20 @@
+import { DollarOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { LegacyRef, MutableRefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
 
 const Button = styled.button`
   line-height: 100%;
   font-family: ${styleSet.font.B};
-  color: ${styleSet.colors.red};
+  color: ${styleSet.colors.white};
+  font-size: ${styleSet.fontSize.s7};
+
+  padding: 30px 30px 0 0;
 
   :hover {
-    font-family: ${styleSet.font.EB};
+    color: ${styleSet.colors.black};
   }
 `;
 
@@ -72,6 +76,7 @@ const Title = styled.span`
   font-weight: 700;
   font-size: 20px;
   line-height: 29px;
+  color: ${styleSet.colors.black};
 `;
 
 const Input = styled.input`
@@ -162,7 +167,7 @@ export default function ChargeModal() {
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181",
       },
-      function (rsp) {
+      function (rsp: any) {
         // if (rsp.success) {
         //   createPointTransactionOfLoading({
         //     variables: {
@@ -191,7 +196,10 @@ export default function ChargeModal() {
           src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
         ></script>
       </Head>
-      <Button onClick={onClickGoToCharge}>충전하기</Button>
+      <Button onClick={onClickGoToCharge}>
+        <DollarOutlined />
+        &nbsp; 충전하기
+      </Button>
       {isChargeOpen && (
         <Background>
           <Container>

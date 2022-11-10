@@ -5,33 +5,49 @@ import { IMyPagePresenterProps } from "./myPage.types";
 import ChargeModal from "../../../commons/modal/charge";
 
 export default function MyPagePresenter(P: IMyPagePresenterProps) {
-  const { onChangePage } = P;
+  const { onChangePage, tab, setTab, onClickTab } = P;
   const { RangePicker } = DatePicker;
 
   return (
     <S.Container>
       <S.PointWrapper>
-        <S.PointText>보유 포인트</S.PointText>
-        <S.PointText>
-          <S.Point>{PointFormatter(12310002310)}</S.Point> p
-        </S.PointText>
-        <div>적절한 구입은 삶에 큰 도움이 됩니다.</div>
+        <div>
+          <S.PointText>보유 포인트</S.PointText>
+          <S.PointText>
+            <S.Point>
+              {PointFormatter(12310002310)} <strong>P</strong>
+            </S.Point>
+          </S.PointText>
+          <div>적절한 구입은 삶에 큰 도움이 됩니다.</div>
+        </div>
+        <S.Charge>
+          <ChargeModal />
+        </S.Charge>
       </S.PointWrapper>
       <S.HistoryWrapper>
         <S.SubTitleWrapper>
           <S.SubTitle>포인트 적립 및 사용 내역</S.SubTitle>
-          <ChargeModal />
         </S.SubTitleWrapper>
         <S.BoardTopWrapper>
-          <S.PeriodWrapper>
-            <S.PeriodBtn>1개월</S.PeriodBtn>
-            <S.PeriodBtn>3개월</S.PeriodBtn>
-            <S.PeriodBtn>6개월</S.PeriodBtn>
-            <S.PeriodBtn>12개월</S.PeriodBtn>
+          <S.PeriodWrapper tab={tab}>
+            <S.PeriodBtn id="1" onClick={onClickTab}>
+              1개월
+            </S.PeriodBtn>
+            <S.PeriodBtn id="2" onClick={onClickTab}>
+              3개월
+            </S.PeriodBtn>
+            <S.PeriodBtn id="3" onClick={onClickTab}>
+              6개월
+            </S.PeriodBtn>
+            <S.PeriodBtn id="4" onClick={onClickTab}>
+              12개월
+            </S.PeriodBtn>
           </S.PeriodWrapper>
           <S.SearchWrapper>
             <RangePicker />
-            <S.SearchBtn>조회</S.SearchBtn>
+            <S.SearchBtn>
+              <span>조회</span>
+            </S.SearchBtn>
           </S.SearchWrapper>
         </S.BoardTopWrapper>
         <S.BoardBody>
