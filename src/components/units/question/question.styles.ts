@@ -40,7 +40,6 @@ export const User = styled.section`
   }
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
     img {
       min-width: 30px;

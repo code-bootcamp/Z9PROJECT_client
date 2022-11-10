@@ -30,13 +30,13 @@ export default function ProductDetailContainer() {
 
   return (
     <>
-      {/* <ProductDetailPresenter
+      <ProductDetailPresenter
         handleChange={handleChange}
         onClickCount={onClickCount}
         count={count}
         onClickCart={onClickCart}
         cart={cart}
-      /> */}
+      />
       {/* <ProductDetailPresenter2
         handleChange={handleChange}
         onClickCount={onClickCount}
@@ -44,13 +44,13 @@ export default function ProductDetailContainer() {
         onClickCart={onClickCart}
         cart={cart}
       /> */}
-      <ProductDetailPresenter3
+      {/* <ProductDetailPresenter3
         handleChange={handleChange}
         onClickCount={onClickCount}
         count={count}
         onClickCart={onClickCart}
         cart={cart}
-      />
+      /> */}
     </>
   );
 }
