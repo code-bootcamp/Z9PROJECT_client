@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { MutableRefObject } from "react";
 import {
   FieldError,
   FieldErrorsImpl,
@@ -45,6 +46,7 @@ type IInput02Props = {
     | Merge<FieldError, FieldErrorsImpl<any>>
     | undefined;
   edit?: boolean;
+  ref?: MutableRefObject<any>;
 };
 
 type IInputProps = {

@@ -9,7 +9,7 @@ export default function FooterPage() {
             <S.Top className="none">
               <li>
                 <strong>TEL :</strong>
-                010 - 2725 - 2996
+                010 - 0000 - 0000
               </li>
               <li>
                 <strong>EMAIL :</strong>
@@ -33,12 +33,12 @@ export default function FooterPage() {
             </S.Bottom>
 
             <S.Section>
-              <p>
+              <a href="https://www.instagram.com/" target="_blank">
                 <img src="/icon_insta.svg" alt="인스타그램 로고" />
-              </p>
-              <p>
+              </a>
+              <a href="https://www.youtube.com/" target="_blank">
                 <img src="/icon_youtube.svg" alt="유튜브 로고" />
-              </p>
+              </a>
             </S.Section>
           </S.BottomBox>
         </S.Wrapper2>

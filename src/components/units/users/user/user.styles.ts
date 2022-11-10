@@ -1,18 +1,34 @@
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { IStlyesProps } from "../creator/creator.types";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 30px;
+  padding: 0 30px 50px 30px;
   width: 660px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    min-width: 500px;
+  }
 `;
 
 export const Title = styled.h1`
-  margin: 0 0 70px 0;
+  margin: 50px 0 50px 0;
   font-family: ${styleSet.font.B};
   text-align: center;
   font-size: ${styleSet.fontSize.s1};
   color: #5e5e5e;
+
+  @media ${styleSet.breakePoints.mobile} {
+    font-size: ${styleSet.fontSize.s2};
+  }
+`;
+
+export const SubTitle = styled.label`
+  align-self: flex-start;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s5};
 `;
 
 export const Form = styled.form`
@@ -22,7 +38,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 `;
 
 export const Label = styled.label`
@@ -47,7 +63,7 @@ export const Svg = styled.svg`
   z-index: 1;
 `;
 
-export const CertificationBtn = styled.button`
+export const Btn1 = styled.button`
   width: 150px;
   height: 60px;
   color: white;
@@ -55,19 +71,11 @@ export const CertificationBtn = styled.button`
   border-radius: 10px;
 `;
 
-export const ConfirmBtn = styled.button`
+export const Btn2 = styled.button`
   width: 150px;
   height: 60px;
   color: white;
   background: ${styleSet.colors.subcolor1};
-  border-radius: 10px;
-`;
-
-export const ZipcodeBtn = styled.button`
-  width: 150px;
-  height: 60px;
-  color: white;
-  background: ${styleSet.colors.subcolor2};
   border-radius: 10px;
 `;
 
@@ -110,19 +118,29 @@ export const InfoWrapper = styled.div`
   gap: 40px;
 `;
 
-export const UpoloadWrapper = styled.div`
+export const UploadWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
 
-  border: 1px solid lightgray;
+  border: ${(P: IStlyesProps) =>
+    P.error
+      ? `1px solid ${styleSet.colors.red}`
+      : `1px solid ${styleSet.colors.lightGray}`};
   border-radius: 10px;
 
   display: flex;
@@ -211,4 +229,14 @@ export const Checkbox = styled.span`
   height: 20px;
   border: 2px solid rgba(0, 0, 0, 0.175);
   transition: all 0.35s;
+`;
+
+export const CountWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 `;
