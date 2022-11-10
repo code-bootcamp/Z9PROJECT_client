@@ -40,7 +40,7 @@ export default function HeaderPage() {
       <S.Container>
         <S.Wrapper>
           <S.Ul className="mobile">
-            <li onClick={onClickMoveToPage("/main")}>
+            <li onClick={onClickMoveToPage("/")}>
               <S.Logo src="/icon_logo.png" alt="로고 아이콘" />
             </li>
             <li onClick={onClickMoveToPage("/product/register")}>상품 등록</li>
@@ -76,7 +76,7 @@ export default function HeaderPage() {
                 )}
               </li>
             )}
-            <li onClick={onClickMoveToPage("/main")} className="logo">
+            <li onClick={onClickMoveToPage("/")} className="logo">
               <S.Logo src="/icon_logo.png" alt="로고 아이콘" />
             </li>
             <li className="logo" onClick={onClickMenu}>
@@ -92,8 +92,8 @@ export default function HeaderPage() {
                     &nbsp; 로그인
                   </li>
                 )}
-                <li onClick={onClickMobileToPage("/lists/list")}>리스트</li>
-                <li onClick={onClickMobileToPage("/lists/customList")}>
+                <li onClick={onClickMobileToPage("/list/list")}>리스트</li>
+                <li onClick={onClickMobileToPage("/list/customList")}>
                   Who's Best
                 </li>
               </ul>
