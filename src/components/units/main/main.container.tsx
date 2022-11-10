@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import MainPresenter from "./main.presenter";
 
 export default function MainContainer() {
-  const [swiperRef, setSwiperRef] = useState();
+  const [swiperRef, setSwiperRef] = useState<any>();
 
   const handleLeftClick = useCallback(() => {
     if (!swiperRef) return;
