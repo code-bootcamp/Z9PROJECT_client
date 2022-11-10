@@ -55,6 +55,7 @@ export const LeftSection = styled.div`
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
     align-items: flex-end;
+    height: 68%;
   }
 `;
 

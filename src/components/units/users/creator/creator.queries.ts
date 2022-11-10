@@ -45,3 +45,13 @@ export const CHECK_NICKNAME = gql`
     checkNickname(nickname: $nickname)
   }
 `;
+
+export const UPLOAD_IMAGE = gql`
+  mutation uploadImage($image: Upload!) {
+    uploadImage(image: $image) {
+      id
+      imageUrl
+      createdAt
+    }
+  }
+`;
