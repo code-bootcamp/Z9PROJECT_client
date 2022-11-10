@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 const Container = styled.section`
   width: 100%;
@@ -25,7 +26,7 @@ const CreatorBtn = styled.div`
   gap: 10px;
 
   font-size: 2rem;
-  background: rgba(43, 45, 66, 1);
+  background: ${styleSet.colors.primary};
   color: white;
   span {
     font-size: 0.9rem;
@@ -65,7 +66,7 @@ export default function SignUpIntroContainer() {
         <LinkTag>
           <UserBtn>
             <img src="/users/signupintro/img_register.png" />
-            일반회원
+            구매자
             <span>회원가입</span>
           </UserBtn>
         </LinkTag>

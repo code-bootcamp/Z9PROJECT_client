@@ -4,22 +4,32 @@ import * as S from "./purchase.styles";
 import { IPurchasePresenterProps } from "./purchase.types";
 
 export default function PurchasePresenter(P: IPurchasePresenterProps) {
-  const { onChangePage } = P;
+  const { onChangePage, tab, setTab, onClickTab } = P;
   const { RangePicker } = DatePicker;
 
   return (
     <S.Container>
       <S.SubTitle>구매내역</S.SubTitle>
       <S.BoardTopWrapper>
-        <S.PeriodWrapper>
-          <S.PeriodBtn>1개월</S.PeriodBtn>
-          <S.PeriodBtn>3개월</S.PeriodBtn>
-          <S.PeriodBtn>6개월</S.PeriodBtn>
-          <S.PeriodBtn>12개월</S.PeriodBtn>
+        <S.PeriodWrapper tab={tab}>
+          <S.PeriodBtn id="1" onClick={onClickTab}>
+            1개월
+          </S.PeriodBtn>
+          <S.PeriodBtn id="2" onClick={onClickTab}>
+            3개월
+          </S.PeriodBtn>
+          <S.PeriodBtn id="3" onClick={onClickTab}>
+            6개월
+          </S.PeriodBtn>
+          <S.PeriodBtn id="4" onClick={onClickTab}>
+            12개월
+          </S.PeriodBtn>
         </S.PeriodWrapper>
         <S.SearchWrapper>
           <RangePicker />
-          <S.SearchBtn>조회</S.SearchBtn>
+          <S.SearchBtn>
+            <span>조회</span>
+          </S.SearchBtn>
         </S.SearchWrapper>
       </S.BoardTopWrapper>
       <S.BoardBody>
@@ -37,7 +47,9 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
             <S.BPrice>{PointFormatter(100000)}</S.BPrice>
             <S.BSeller>아가사</S.BSeller>
             <S.BRefund>
-              <S.RefundBtn>환불</S.RefundBtn>
+              <S.RefundBtn>
+                <span>환불</span>
+              </S.RefundBtn>
             </S.BRefund>
           </S.BoardLi>
           <S.BoardLi>

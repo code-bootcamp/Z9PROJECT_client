@@ -24,7 +24,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
             {profilePreview ? (
               <img src={profilePreview} alt="프로필이미지" />
             ) : (
-              <img src="/users/user/img_id.svg" alt="기본이미지" />
+              <img src="/test.jpeg" alt="기본이미지" />
             )}
           </S.ProfileWrapper>
           <Upload02
@@ -32,6 +32,8 @@ export default function EditPresenter(P: IEditPresenterProps) {
             profileFetchUrl={profileFetchUrl}
           />
         </S.UploadWrapper>
+
+        <S.SubTitle className="h2">나의 정보</S.SubTitle>
         <S.RowWrapper>
           <S.RowTitle>닉네임</S.RowTitle>
           <Input01
@@ -50,7 +52,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
             edit={true}
           />
         </S.RowWrapper>
-        <S.RowWrapper>
+        <S.RowWrapper className="line">
           <S.RowTitle>주소</S.RowTitle>
           <S.AddressWrapper>
             <S.Label>
@@ -60,7 +62,9 @@ export default function EditPresenter(P: IEditPresenterProps) {
                 register={register("zipcode")}
                 edit={true}
               />{" "}
-              <S.ZipcodeBtn type="button">주소검색</S.ZipcodeBtn>
+              <S.ZipcodeBtn type="button">
+                <span>주소검색</span>
+              </S.ZipcodeBtn>
             </S.Label>
             <Input01
               type="text"
@@ -76,25 +80,20 @@ export default function EditPresenter(P: IEditPresenterProps) {
             />
           </S.AddressWrapper>
         </S.RowWrapper>
-
-        <S.InfoWrapper>
-          <S.SubTitle>크리에이터 추가정보</S.SubTitle>
+        <S.RowWrapper className="line">
+          <S.RowTitle>한줄소개</S.RowTitle>
           <S.Introduce
             placeholder="구매자에게 자신을 소개하세요."
             {...register("introduce")}
           />
+        </S.RowWrapper>
+
+        <S.RowWrapper className="line">
+          <S.RowTitle>주 플랫폼</S.RowTitle>
+
           <S.SnsLabel>
             <S.SnsLabelInner>
-              <Input01
-                type="text"
-                placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
-                register={register("creator")}
-                edit={true}
-                error={formState.errors.creator?.message}
-              />
-            </S.SnsLabelInner>
-            <S.SnsLabelInner>
-              <S.SnsCheckWrapper className="wrapper">
+              <S.SnsCheckWrapper className="wrapper radio">
                 <S.LabelWrapper>
                   <S.RadioInput type="radio" name="sns" />
                   <S.RadioPulse className="radio-pulse" />
@@ -113,11 +112,24 @@ export default function EditPresenter(P: IEditPresenterProps) {
                 </S.LabelWrapper>
               </S.SnsCheckWrapper>
             </S.SnsLabelInner>
+            <S.SnsLabelInner>
+              <Input01
+                type="text"
+                placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
+                register={register("creator")}
+                edit={true}
+                error={formState.errors.creator?.message}
+              />
+            </S.SnsLabelInner>
+
             <Upload01
               onChangeCertifiFile={onChangeCertifiFile}
               certifiFetchUrl={certifiFetchUrl}
             />
           </S.SnsLabel>
+        </S.RowWrapper>
+        <S.RowWrapper className="line">
+          <S.RowTitle>계좌 정보</S.RowTitle>
           <S.BankWrapper>
             <Input01
               type="text"
@@ -140,8 +152,11 @@ export default function EditPresenter(P: IEditPresenterProps) {
               />
             </S.BankInner>
           </S.BankWrapper>
-        </S.InfoWrapper>
-        <S.LogInBtn>수정</S.LogInBtn>
+        </S.RowWrapper>
+
+        <S.LogInBtn>
+          <span>수정완료</span>
+        </S.LogInBtn>
       </S.Form>
     </S.Container>
   );

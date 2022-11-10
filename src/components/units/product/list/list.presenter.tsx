@@ -10,7 +10,6 @@ export default function ProductListPresenter() {
 
   const onClickTab = (event: any) => {
     setTab(event?.currentTarget.id);
-    console.log(tab);
   };
 
   return (
