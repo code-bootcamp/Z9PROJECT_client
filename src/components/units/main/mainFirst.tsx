@@ -1,5 +1,5 @@
 import { useInView } from "react-intersection-observer";
-import HeaderPage from "../../../commons/layout/header";
+import HeaderPage from "../../commons/layout/header";
 import * as S from "./main.styles";
 
 export default function MainFirst() {

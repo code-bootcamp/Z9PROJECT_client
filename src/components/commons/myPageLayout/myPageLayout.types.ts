@@ -1,7 +1,6 @@
 export type IMyPageLayoutPresenterProps = {
   nowUrl: string;
-
-  onClickLogout: () => void;
+  onClickMore: () => void;
 };
 
 export type IBtnProps = {

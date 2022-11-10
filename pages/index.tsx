@@ -1,4 +1,4 @@
-import MainContainer from "../src/components/units/product/main/main.container";
+import MainContainer from "../src/components/units/main/main.container";
 
 export default function Home() {
   return <MainContainer />;

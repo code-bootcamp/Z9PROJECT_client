@@ -18,7 +18,7 @@ export default function MainSecond(P: IMainPresenterProps) {
   return (
     <>
       <S.FullPage ref={ref}>
-        <S.Message1 src="img_intro.wepb" alt="일러스트 이미지" />
+        <S.Message1 src="/img_intro.webp" alt="일러스트 이미지" />
         <S.Message2 src="/img_intro2.png" alt="일러스트 이미지" />
         <S.Message3 src="/icon_emoticon.png" alt="일러스트 이미지" />
         <S.Message4 src="/icon_like.png" alt="일러스트 이미지" />

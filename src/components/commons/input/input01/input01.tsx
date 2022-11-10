@@ -17,7 +17,7 @@ const Input = styled.input`
   padding: ${(P: IInputProps) =>
     P.edit ? `20px 20px 20px 20px` : `20px 20px 20px 55px`};
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid ${styleSet.colors.gray};
   outline-color: ${styleSet.colors.primary};
 
