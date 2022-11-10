@@ -123,6 +123,10 @@ type IStylesProps = {
   isActive: boolean;
 };
 
+declare const window: typeof globalThis & {
+  IMP: any;
+};
+
 export default function ChargeModal() {
   const [isChargeOpen, setIsChargeOpen] = useState(false);
   const [isPriceOpen, setIsPriceOpen] = useState(false);
