@@ -26,7 +26,9 @@ export const Container = styled.section`
   }
 `;
 
-export const FullPage = styled.div``;
+export const FullPage = styled.div`
+  position: relative;
+`;
 
 export const Wrapper = styled.div`
   width: 1400px;
@@ -55,6 +57,7 @@ export const LeftSection = styled.div`
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
     align-items: flex-end;
+    height: 68%;
   }
 `;
 
@@ -284,8 +287,7 @@ export const Product = styled.section`
     width: 500px;
     min-height: 200px;
     padding: 20px;
-    bottom: 38%;
-    position: relative;
+    bottom: 10%;
   }
 `;
 
