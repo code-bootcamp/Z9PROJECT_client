@@ -1,5 +1,5 @@
-import MainPresenter from "./main.presenter";
 import { useCallback, useState } from "react";
+import MainPresenter from "./main.presenter";
 
 export default function MainContainer() {
   const [swiperRef, setSwiperRef] = useState();

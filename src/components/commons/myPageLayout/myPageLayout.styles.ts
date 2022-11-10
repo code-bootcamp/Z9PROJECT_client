@@ -41,7 +41,7 @@ export const PreContainer = styled.div`
 export const Title = styled.h1`
   padding-bottom: 10px;
   min-width: 182px;
-  font-size: ${styleSet.fontSize.s2};
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
 `;
 
@@ -105,5 +105,5 @@ export const BtnWrapper = styled.div`
 `;
 
 export const Btn = styled.button`
-  font-size: ${styleSet.fontSize.s6};
+  font-size: ${styleSet.fontSize.s8};
 `;

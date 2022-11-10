@@ -7,6 +7,8 @@ import { PointFormatter } from "../../../../commons/utils";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { useRouter } from "next/router";
 import { gql, useMutation } from "@apollo/client";
+import Swal from "sweetalert2";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 const LOGOUT = gql`
   mutation logout {
@@ -29,6 +31,23 @@ export default function HeaderPage() {
   const onClickProfile = () => {
     isOpenPop((prev) => !prev);
   };
+
+  const onClickMore = () => {
+    Swal.fire({
+      title: "로그아웃 하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: `${styleSet.colors.darkgray}`,
+      cancelButtonColor: `${styleSet.colors.red}`,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onClickLogout();
+      }
+    });
+  };
+
   const onClickLogout = () => {
     logout();
     sessionStorage.removeItem("accessToken");
@@ -58,6 +77,9 @@ export default function HeaderPage() {
             )}
             {accessToken && (
               <li onClick={onClickProfile} className="mobile">
+                <S.Span>
+                  <strong>(닉네임)</strong> 님 환영합니다.
+                </S.Span>
                 <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
                 {openPop && (
                   <S.Ul2>
@@ -71,7 +93,7 @@ export default function HeaderPage() {
                     <li onClick={onClickMoveToPage("/users/mypage")}>
                       마이페이지
                     </li>
-                    <li onClick={onClickLogout}>로그아웃</li>
+                    <li onClick={onClickMore}>로그아웃</li>
                   </S.Ul2>
                 )}
               </li>
