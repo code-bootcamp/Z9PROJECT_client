@@ -1,6 +1,5 @@
 import * as S from "./main.styles";
 import { IMainPresenterProps } from "./main.types";
-import { useInView } from "react-intersection-observer";
 import MainFirst from "./mainFirst";
 import MainSecond from "./mainSecond";
 
