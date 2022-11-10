@@ -45,6 +45,7 @@ type IInput02Props = {
     | Merge<FieldError, FieldErrorsImpl<any>>
     | undefined;
   edit?: boolean;
+  ref?: MutableRefObject<any>;
 };
 
 type IInputProps = {

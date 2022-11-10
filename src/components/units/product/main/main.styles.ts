@@ -26,9 +26,7 @@ export const Container = styled.section`
   }
 `;
 
-export const FullPage = styled.div`
-  position: relative;
-`;
+export const FullPage = styled.div``;
 
 export const Wrapper = styled.div`
   width: 1400px;
@@ -287,7 +285,8 @@ export const Product = styled.section`
     width: 500px;
     min-height: 200px;
     padding: 20px;
-    bottom: 10%;
+    bottom: 38%;
+    position: relative;
   }
 `;
 
