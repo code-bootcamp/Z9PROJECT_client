@@ -1,6 +1,10 @@
+import { ChangeEvent } from "react";
 import {
+  FieldError,
+  FieldErrorsImpl,
   FieldValues,
   FormState,
+  Merge,
   UseFormHandleSubmit,
   UseFormRegister,
   UseFormSetValue,
@@ -21,4 +25,13 @@ export type ICreatorPresenterProps = {
   onClickNameConfirm: () => void;
   setValue: UseFormSetValue<FieldValues>;
   openTime: boolean;
+  onChangeChecked: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type IStlyesProps = {
+  error?:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
 };

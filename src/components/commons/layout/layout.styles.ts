@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
+import { ILayoutStylesProps } from "./layout.types";
 
 export const Container = styled.header`
   max-width: 100%;
@@ -20,6 +21,7 @@ export const Container = styled.header`
       display: block;
     }
     ul {
+      width: 100%;
       justify-content: space-between;
     }
   }
@@ -62,7 +64,7 @@ export const Hamburger = styled.div`
   height: 100vh;
   position: absolute;
   top: 100px;
-  right: ${(props: any) => (props.hamburger ? "0%" : "100%")};
+  right: ${(props: ILayoutStylesProps) => (props.hamburger ? "0%" : "100%")};
   transition: 0.5s;
   padding: 20px;
   text-align: center;
@@ -94,6 +96,10 @@ export const Footer = styled.footer`
   width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+  }
 `;
 
 export const Wrapper = styled.main`
@@ -102,7 +108,6 @@ export const Wrapper = styled.main`
   height: 100%;
   margin: 0 auto;
   display: flex;
-  height: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -121,6 +126,7 @@ export const Ul = styled.ul`
   align-items: center;
   gap: 50px;
   li {
+    position: relative;
     transition: 0.5s;
     &:hover {
       color: ${styleSet.colors.black};
@@ -133,6 +139,68 @@ export const Ul = styled.ul`
       font-size: ${styleSet.fontSize.s9};
       padding-right: 15px;
     }
+  }
+`;
+
+export const Ul2 = styled.ul`
+  padding: 10px;
+  width: 150px;
+  height: 150px;
+  background: ${styleSet.colors.white};
+  border: 1px solid ${styleSet.colors.gray};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  position: absolute;
+  top: 60px;
+  right: -5px;
+
+  &::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: ${styleSet.colors.white};
+    border-right: 1px solid ${styleSet.colors.gray};
+    border-bottom: 1px solid ${styleSet.colors.gray};
+    position: absolute;
+    transform: rotate(-135deg);
+    top: -8px;
+    right: 15px;
+  }
+
+  li {
+    width: 100%;
+    text-align: center;
+    font-family: ${styleSet.font.L};
+    font-size: ${styleSet.fontSize.s7};
+    span {
+      font-size: ${styleSet.fontSize.s8};
+      padding: 0;
+      cursor: default;
+    }
+  }
+`;
+
+export const LiPoint = styled.li`
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 1px solid ${styleSet.colors.lightGray};
+  span {
+    padding: 0;
+    strong {
+      font-family: ${styleSet.font.B};
+      font-size: ${styleSet.fontSize.s10};
+    }
+  }
+  &:hover {
+    background: none;
   }
 `;
 
@@ -207,7 +275,7 @@ export const Bottom = styled.ul`
 export const Section = styled.section`
   display: flex;
   gap: 10px;
-  p {
+  a {
     background-color: ${styleSet.colors.primary};
     width: 50px;
     height: 50px;

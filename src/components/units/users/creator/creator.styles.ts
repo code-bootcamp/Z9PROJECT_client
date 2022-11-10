@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { IStlyesProps } from "./creator.types";
 
 export const Container = styled.section`
   margin: 0 auto;
@@ -175,7 +176,10 @@ export const Concept = styled.input`
 export const WrapperTermsOfUse = styled.div`
   padding: 30px;
   width: 100%;
-  border: 1px solid lightgray;
+  border: ${(P: IStlyesProps) =>
+    P.error
+      ? `1px solid ${styleSet.colors.red}`
+      : `1px solid ${styleSet.colors.gray}`};
   border-radius: 10px;
 
   display: flex;
@@ -239,6 +243,9 @@ export const SnsCheckWrapper = styled.div`
   width: 100%;
   display: flex;
   gap: 2rem;
+
+  background: ${(P: IStlyesProps) =>
+    P.error ? `${styleSet.colors.subcolor1}` : `none`};
 `;
 
 export const LabelWrapper = styled.label`

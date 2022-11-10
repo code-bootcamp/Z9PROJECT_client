@@ -1,18 +1,17 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_CREATOR = gql`
-  mutation createCreator(
+export const CREATE_USER = gql`
+  mutation createUser(
     $signupId: String!
-    $createCreatorInput: CreateCreatorInput!
+    $createCommonUserInput: CreateCreatorInput!
   ) {
-    createCreator(
+    createUser(
       signupId: $signupId
-      createCreatorInput: $createCreatorInput
+      createCommonUserInput: $CreateCommonUserInput
     ) {
       id
       nickname
       userType
-      mainContents
     }
   }
 `;
