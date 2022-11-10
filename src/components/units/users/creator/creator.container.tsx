@@ -10,6 +10,7 @@ import {
   CREATE_CREATOR,
   PATCH_SMS_TOKEN,
   POST_SMS_TOKEN,
+  UPLOAD_IMAGE,
 } from "./creator.queries";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import { useRouter } from "next/router";
@@ -44,15 +45,16 @@ export default function CreatorRegisterContainer() {
       mode: "onChange",
     });
   const router = useRouter();
-  const [certifiFetchUrl, setCertifiFetchUrl] = useState<File>();
+  const [certFile, setCertFile] = useState<File>();
   const [profilePreview, setProfilePreview] = useState("");
-  const [profileFetchUrl, setProfileFetchUrl] = useState<File>();
+  const [profileFile, setProfileFile] = useState<File>();
   const [confirmId, setConfirmId] = useState("");
   const [openTime, setOpenTime] = useState(false);
   const [createCreator] = useMutation(CREATE_CREATOR);
   const [postSmsToken] = useMutation(POST_SMS_TOKEN);
   const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
   const [checkNickname] = useMutation(CHECK_NICKNAME);
+  const [uploadImage] = useMutation(UPLOAD_IMAGE);
 
   useEffect(() => {
     setConfirmId(uuidv4());
@@ -76,12 +78,12 @@ export default function CreatorRegisterContainer() {
   };
 
   const onChangeCertifiFile = (file: File) => {
-    setCertifiFetchUrl(file);
+    setCertFile(file);
   };
 
   const onChageProfileFile = (url: string, file: File) => {
     setProfilePreview(url);
-    setProfileFetchUrl(file);
+    setProfileFile(file);
   };
 
   const onClickCertNumber = async () => {
@@ -114,7 +116,10 @@ export default function CreatorRegisterContainer() {
           signupId: confirmId,
         },
       });
-      if (result.data.patchSmsToken) SuccessModal("인증 성공");
+      if (result.data.patchSmsToken) {
+        setOpenTime(false);
+        SuccessModal("인증 성공");
+      }
     } catch (error) {
       ErrorModal(error);
     }
@@ -139,8 +144,20 @@ export default function CreatorRegisterContainer() {
   };
 
   const onClickSignUp = async (data: any) => {
-    const { keyNumber, passwordConfirm, ...rest } = data;
+    const { keyNumber, passwordConfirm, terms, ...rest } = data;
+
     try {
+      const resultCert = await uploadImage({
+        variables: {
+          image: certFile,
+        },
+      });
+      const resultProfile = await uploadImage({
+        variables: {
+          image: profileFile,
+        },
+      });
+
       const result = await createCreator({
         variables: {
           signupId: confirmId,
@@ -148,8 +165,8 @@ export default function CreatorRegisterContainer() {
             ...rest,
             isAuthedCreator: true,
             followerNumber: 10000000,
-            // userProfileImg: profileFetchUrl,
-            // creatorAuthImg: certifiFetchUrl,
+            profileImg: resultProfile.data.uploadImage.imageUrl,
+            creatorAuthImg: resultCert.data.uploadImage.imageUrl,
           },
         },
       });
@@ -169,11 +186,9 @@ export default function CreatorRegisterContainer() {
       register={register}
       handleSubmit={handleSubmit}
       formState={formState}
-      certifiFetchUrl={certifiFetchUrl}
       onChangeCertifiFile={onChangeCertifiFile}
       onChageProfileFile={onChageProfileFile}
       profilePreview={profilePreview}
-      profileFetchUrl={profileFetchUrl}
       onClickCertNumber={onClickCertNumber}
       onClickCertConfirm={onClickCertConfirm}
       onClickNameConfirm={onClickNameConfirm}

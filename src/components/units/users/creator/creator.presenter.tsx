@@ -13,11 +13,9 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
     register,
     handleSubmit,
     formState,
-    certifiFetchUrl,
     onChangeCertifiFile,
     onChageProfileFile,
     profilePreview,
-    profileFetchUrl,
     onClickCertNumber,
     onClickCertConfirm,
     onClickNameConfirm,
@@ -255,10 +253,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 </S.LabelWrapper>
               </S.SnsCheckWrapper>
             </S.SnsLabelInner>
-            <Upload01
-              onChangeCertifiFile={onChangeCertifiFile}
-              certifiFetchUrl={certifiFetchUrl}
-            />
+            <Upload01 onChangeCertifiFile={onChangeCertifiFile} />
           </S.SnsLabel>
           <S.UpoloadWrapper>
             <S.ProfileWrapper>
@@ -268,10 +263,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 <img src="/users/user/img_id.svg" alt="기본 이미지" />
               )}
             </S.ProfileWrapper>
-            <Upload02
-              onChageProfileFile={onChageProfileFile}
-              profileFetchUrl={profileFetchUrl}
-            />
+            <Upload02 onChageProfileFile={onChageProfileFile} />
           </S.UpoloadWrapper>
           <S.Concept
             placeholder="주력 콘텐츠를 입력하세요. 예) 뷰티, 브이로그, 게임"

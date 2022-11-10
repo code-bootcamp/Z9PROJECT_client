@@ -10,6 +10,7 @@ import {
   CREATE_USER,
   PATCH_SMS_TOKEN,
   POST_SMS_TOKEN,
+  UPLOAD_IMAGE,
 } from "./user.queries";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import { useRouter } from "next/router";
@@ -40,18 +41,20 @@ export default function UserRegisterContainer() {
       mode: "onChange",
     });
   const [profilePreview, setProfilePreview] = useState("");
-  const [profileFetchUrl, setProfileFetchUrl] = useState<File>();
+  const [profileFile, setProfileFile] = useState<File>();
   const [confirmId, setConfirmId] = useState("");
   const [openTime, setOpenTime] = useState(false);
   const [createUser] = useMutation(CREATE_USER);
   const [postSmsToken] = useMutation(POST_SMS_TOKEN);
   const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
   const [checkNickname] = useMutation(CHECK_NICKNAME);
+  const [uploadImage] = useMutation(UPLOAD_IMAGE);
   const router = useRouter();
 
   useEffect(() => {
     setConfirmId(uuidv4());
   }, []);
+
   useEffect(() => {
     if (
       watch("phoneNumber").length === 11 &&
@@ -99,7 +102,10 @@ export default function UserRegisterContainer() {
           signupId: confirmId,
         },
       });
-      if (result.data.patchSmsToken) SuccessModal("인증 성공");
+      if (result.data.patchSmsToken) {
+        setOpenTime(false);
+        SuccessModal("인증 성공");
+      }
     } catch (error) {
       ErrorModal(error);
     }
@@ -125,18 +131,25 @@ export default function UserRegisterContainer() {
 
   const onChageProfileFile = (url: string, file: File) => {
     setProfilePreview(url);
-    setProfileFetchUrl(file);
+    setProfileFile(file);
   };
 
   const onClickSignUp = async (data: any) => {
     const { keyNumber, passwordConfirm, terms, ...rest } = data;
+
     try {
+      const resultProfile = await uploadImage({
+        variables: {
+          image: profileFile,
+        },
+      });
+
       const result = await createUser({
         variables: {
           signupId: confirmId,
           createCommonUserInput: {
             ...rest,
-            // userProfileImg: profileFetchUrl,
+            profileImg: resultProfile.data.uploadImage.imageUrl,
           },
         },
       });
@@ -156,7 +169,6 @@ export default function UserRegisterContainer() {
       formState={formState}
       onChageProfileFile={onChageProfileFile}
       profilePreview={profilePreview}
-      profileFetchUrl={profileFetchUrl}
       onClickCertNumber={onClickCertNumber}
       onClickCertConfirm={onClickCertConfirm}
       onClickNameConfirm={onClickNameConfirm}
