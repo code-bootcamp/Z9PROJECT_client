@@ -30,11 +30,10 @@ const Svg = styled.svg`
 
 type IUpload01Props = {
   onChangeCertifiFile: (file: File) => void;
-  certifiFetchUrl: File | undefined;
 };
 
 export default function Upload01(P: IUpload01Props) {
-  const { certifiFetchUrl, onChangeCertifiFile } = P;
+  const { onChangeCertifiFile } = P;
   const inputRef = useRef<HTMLInputElement>(null);
   const [creatorCertifiImg, setCreatorCerifiImg] = useState("");
 

@@ -34,11 +34,10 @@ const Input = styled.input`
 
 type IUpload02Props = {
   onChageProfileFile: (url: string, file: File) => void;
-  profileFetchUrl: File | undefined;
 };
 
 export default function Upload02(P: IUpload02Props) {
-  const { onChageProfileFile, profileFetchUrl } = P;
+  const { onChageProfileFile } = P;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickUpload = () => {
