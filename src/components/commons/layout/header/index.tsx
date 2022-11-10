@@ -44,8 +44,8 @@ export default function HeaderPage() {
               <S.Logo src="/icon_logo.png" alt="로고 아이콘" />
             </li>
             <li onClick={onClickMoveToPage("/product/register")}>상품 등록</li>
-            <li onClick={onClickMoveToPage("/lists/list")}>리스트</li>
-            <li onClick={onClickMoveToPage("/lists/customList")}>Who's Best</li>
+            <li onClick={onClickMoveToPage("/list/list")}>리스트</li>
+            <li onClick={onClickMoveToPage("/list/customList")}>Who's Best</li>
           </S.Ul>
           <S.Ul>
             {!accessToken && (
