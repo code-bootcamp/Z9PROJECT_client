@@ -3,11 +3,11 @@ import { gql } from "@apollo/client";
 export const CREATE_USER = gql`
   mutation createUser(
     $signupId: String!
-    $createCommonUserInput: CreateCreatorInput!
+    $createCommonUserInput: CreateCommonUserInput!
   ) {
     createUser(
       signupId: $signupId
-      createCommonUserInput: $CreateCommonUserInput
+      createCommonUserInput: $createCommonUserInput
     ) {
       id
       nickname
@@ -42,5 +42,15 @@ export const PATCH_SMS_TOKEN = gql`
 export const CHECK_NICKNAME = gql`
   mutation checkNickname($nickname: String!) {
     checkNickname(nickname: $nickname)
+  }
+`;
+
+export const UPLOAD_IMAGE = gql`
+  mutation uploadImage($image: Upload!) {
+    uploadImage(image: $image) {
+      id
+      imageUrl
+      createdAt
+    }
   }
 `;
