@@ -9,6 +9,11 @@ export default function MyPageContainer() {
   const { data: fetchUser } = useQuery(FETCH_USER);
 
   const onChangePage = () => {};
+  const [tab, setTab] = useState("1");
+
+  const onClickTab = (event: any) => {
+    setTab(event?.currentTarget.id);
+  };
 
   const onClickTab = (event: any) => {
     setTab(event?.currentTarget.id);
