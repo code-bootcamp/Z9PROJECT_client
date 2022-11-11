@@ -11,13 +11,11 @@ export default function PurchaseContainer() {
   };
 
   return (
-    <MyPageLayoutContainer>
-      <PurchasePresenter
-        onChangePage={onChangePage}
-        setTab={setTab}
-        tab={tab}
-        onClickTab={onClickTab}
-      />
-    </MyPageLayoutContainer>
+    <PurchasePresenter
+      onChangePage={onChangePage}
+      setTab={setTab}
+      tab={tab}
+      onClickTab={onClickTab}
+    />
   );
 }

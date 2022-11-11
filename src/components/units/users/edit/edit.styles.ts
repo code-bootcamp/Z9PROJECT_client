@@ -48,6 +48,8 @@ export const UploadWrapper = styled.div`
 
 export const ProfileWrapper = styled.div`
   img {
+    width: 100%;
+    aspect-ratio: 1/1;
     max-width: 205px;
     max-height: 205px;
     background: url("/users/user/img_id.svg");
@@ -84,7 +86,7 @@ export const RowTitle = styled.span`
   }
 `;
 
-export const AddressWrapper = styled.div`
+export const InnerWrapper = styled.div`
   width: 100%;
 
   display: flex;
@@ -334,4 +336,20 @@ export const BankInner = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+`;
+
+export const Btn1 = styled.button`
+  width: 150px;
+  height: 60px;
+  color: white;
+  background: ${styleSet.colors.subcolor2};
+  border-radius: 10px;
+`;
+
+export const Btn2 = styled.button`
+  width: 150px;
+  height: 60px;
+  color: white;
+  background: ${styleSet.colors.subcolor1};
+  border-radius: 10px;
 `;

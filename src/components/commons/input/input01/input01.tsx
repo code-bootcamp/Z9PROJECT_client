@@ -47,6 +47,7 @@ type IInput01Props = {
     | Merge<FieldError, FieldErrorsImpl<any>>
     | undefined;
   edit?: boolean;
+  defaultValue?: string;
 };
 
 type IInputProps = {
@@ -59,7 +60,7 @@ type IInputProps = {
 };
 
 export default function Input01(P: IInput01Props) {
-  const { type, placeholder, register, error, edit } = P;
+  const { type, placeholder, register, error, edit, defaultValue } = P;
 
   return (
     <Wrapper>
@@ -69,6 +70,7 @@ export default function Input01(P: IInput01Props) {
         {...register}
         error={error}
         edit={edit}
+        defaultValue={defaultValue}
       />
       <Error className="error" error={error}>
         {error}
