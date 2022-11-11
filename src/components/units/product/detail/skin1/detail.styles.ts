@@ -6,7 +6,6 @@ export const Container = styled.section`
   width: 100%;
   height: 100%;
   padding: 50px 0;
-  position: relative;
 `;
 
 export const Wrapper = styled.div`
@@ -24,6 +23,12 @@ export const H5 = styled.h5`
   font-family: ${styleSet.font.B};
   font-size: ${styleSet.fontSize.s2};
   padding-bottom: 30px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    &.mobile {
+      display: none;
+    }
+  }
 `;
 export const Button = styled.div`
   display: flex;
@@ -88,16 +93,22 @@ export const InfoLeft = styled.div`
   width: 48%;
   > img {
     border-radius: 20px;
-    max-height: 750px;
+    height: 610px;
     overflow: hidden;
     max-width: 100%;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      height: 300px;
+    }
   }
 `;
 
 export const InfoRight = styled.div`
   background: #f8f8f8;
   border-radius: 20px;
-  padding: 50px;
+  padding: 20px 50px 0 50px;
   .top {
     display: flex;
     justify-content: space-between;
@@ -128,6 +139,7 @@ export const Bell = styled.li`
   font-size: ${styleSet.fontSize.s8} !important;
   padding: 5px 10px;
   color: ${styleSet.colors.white};
+  white-space: nowrap;
   border-radius: 10px;
   img {
     margin-left: 5px;
@@ -155,11 +167,12 @@ export const ul = styled.ul`
     overflow: hidden;
     width: calc(100% / 3 - 10px);
     cursor: pointer;
-    border: 2px solid ${styleSet.colors.tp};
+    border: 1px solid ${styleSet.colors.subcolor3};
     &:hover {
-      border: 2px solid ${styleSet.colors.primary};
+      border: 1px solid ${styleSet.colors.primary};
     }
     img {
+      border-radius: 10px;
       width: 100%;
       height: 100%;
     }
@@ -172,7 +185,7 @@ export const H1 = styled.h1`
   padding-block: 20px;
 
   @media ${styleSet.breakePoints.mobile} {
-    font-size: ${styleSet.fontSize.s6};
+    font-size: ${styleSet.fontSize.s3};
     padding-block: 10px;
   }
 `;
@@ -183,10 +196,6 @@ export const Strong = styled.strong`
   color: ${styleSet.colors.black};
   margin-bottom: 10px;
   display: block;
-
-  @media ${styleSet.breakePoints.mobile} {
-    font-size: 0.8rem;
-  }
 `;
 
 export const Text = styled.div`
@@ -195,7 +204,7 @@ export const Text = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     li {
       font-size: ${styleSet.fontSize.s8};
       font-family: ${styleSet.font.B};
@@ -207,7 +216,7 @@ export const Text = styled.div`
       padding-bottom: 10px;
       li {
         white-space: nowrap;
-        font-size: 0.7rem;
+        font-size: ${styleSet.fontSize.s6};
       }
     }
   }
@@ -238,25 +247,14 @@ export const Close = styled.li`
 `;
 
 export const MySelect = styled(Select)`
-  max-width: 250px !important;
-
-  @media ${styleSet.breakePoints.mobile} {
-    font-size: 0.5rem;
-    min-width: 120px;
-  }
+  width: 250px;
 `;
 
 export const Persent = styled.ul`
   li {
     color: ${styleSet.colors.darkgray};
     font-family: ${styleSet.font.L};
-    font-size: 0.8rem !important;
-  }
-
-  @media ${styleSet.breakePoints.mobile} {
-    li {
-      font-size: 0.5rem !important;
-    }
+    font-size: 0.8rem;
   }
 `;
 
@@ -283,22 +281,15 @@ export const Graph = styled.p`
     left: 0;
     font-family: ${styleSet.font.B};
   }
-
-  @media ${styleSet.breakePoints.mobile} {
-    span {
-      font-size: 0.5rem;
-    }
-  }
 `;
 
 export const H2 = styled.h2`
   font-size: ${styleSet.fontSize.s3};
   font-family: ${styleSet.font.EB};
-  padding-block: 20px;
+  padding-top: 20px;
   text-align: right;
 
   @media ${styleSet.breakePoints.mobile} {
-    font-size: ${styleSet.fontSize.s7};
     padding-block: 10px;
   }
 `;
@@ -345,54 +336,34 @@ export const Choose = styled.p`
   }
 
   @media ${styleSet.breakePoints.mobile} {
-    width: 50px;
-    #qtyMinus {
-      font-size: 0.6rem;
-      width: 15px;
-      height: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #qtyPlus {
-      font-size: 0.6rem;
-      width: 15px;
-      height: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    width: 80px;
   }
 `;
 
 export const H3 = styled.h3`
   font-size: ${styleSet.fontSize.s6};
-  padding-top: 10px;
+  padding: 30px 0;
   font-family: ${styleSet.font.B};
-  padding-block: 20px;
+  padding-bottom: 10px;
   text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
   strong {
-    font-size: ${styleSet.fontSize.s7};
+    font-size: ${styleSet.fontSize.s5};
     color: ${styleSet.colors.primary};
     font-family: ${styleSet.font.EB};
   }
 
   @media ${styleSet.breakePoints.mobile} {
     padding: 0 0 15px 0;
-    font-size: ${styleSet.fontSize.s7};
-    strong {
-      font-size: ${styleSet.fontSize.s8};
-    }
   }
 `;
 
 export const BoxBtn = styled.div`
   display: flex;
   justify-content: space-between;
-
+  margin-top: 10px;
   .cart {
     background: ${styleSet.colors.white};
     font-size: ${styleSet.fontSize.s7};
@@ -412,19 +383,6 @@ export const BoxBtn = styled.div`
     width: 60%;
     color: ${styleSet.colors.white};
   }
-
-  @media ${styleSet.breakePoints.mobile} {
-    .cart {
-      font-size: ${styleSet.fontSize.s9};
-      width: 40%;
-      height: 40px;
-    }
-    .buy {
-      font-size: ${styleSet.fontSize.s9};
-      width: 55%;
-      height: 40px;
-    }
-  }
 `;
 
 export const Randing = styled.img`
@@ -438,7 +396,7 @@ export const Randing = styled.img`
 export const Reset = styled.img`
   cursor: pointer;
   position: fixed;
-  right: 10%;
+  right: 15%;
   bottom: 5%;
 `;
 

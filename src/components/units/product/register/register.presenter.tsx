@@ -226,7 +226,9 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
           잠깐! 모든 항목을 입력하셨나요?
           <div>모든 항목을 기입해야 상품 등록됩니다:)</div>
         </S.BottomText>
-        <S.SubmitBtn>{false ? "상품 수정" : "상품 등록"}</S.SubmitBtn>
+        <S.SubmitBtn>
+          <span>{false ? "상품 수정" : "상품 등록"}</span>
+        </S.SubmitBtn>
       </form>
     </S.Container>
   );
