@@ -3,7 +3,7 @@ import { Global } from "@emotion/react";
 import { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import ApolloSetting from "../src/components/commons/apollo";
-import { globalStyles } from "../src/commons/styles/ globalStyles";
+import { globalStyles } from "../src/commons/styles/globalStyles";
 import Head from "next/head";
 import "animate.css";
 import Layout from "../src/components/commons/layout";
