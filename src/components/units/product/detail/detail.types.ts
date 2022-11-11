@@ -1,12 +1,12 @@
 import { MouseEvent } from "react";
 
 export type IDetailPresenterProps = {
-  handleChange: (value: string) => void;
-  onClickCount: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleChange?: (value: unknown) => void;
+  onClickCount?: (e: MouseEvent<HTMLButtonElement>) => void;
   count: number;
-  onClickCart: () => void;
+  onClickCart?: () => void;
   cart: boolean;
   data?: any;
   discount?: number;
-  onClickLike: (productId: any) => Promise<void>;
+  onClickLike?: (productId: any) => Promise<void>;
 };

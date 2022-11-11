@@ -19,7 +19,7 @@ export default function ProductDetailContainer() {
 
   const [likeProduct] = useMutation(LIKE_PRODUCT);
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: any) => {
     console.log(`selected ${value}`);
   };
 

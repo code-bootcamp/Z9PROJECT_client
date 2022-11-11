@@ -13,7 +13,7 @@ export const Container = styled.section`
   }
 `;
 
-export const SearchBox = styled.div`
+export const SearchBox: any = styled.div`
   display: flex;
   justify-content: space-between;
   .ant-input-affix-wrapper {
