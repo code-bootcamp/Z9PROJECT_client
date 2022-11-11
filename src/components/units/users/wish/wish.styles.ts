@@ -29,6 +29,7 @@ export const BoardBody = styled.ul`
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
+
   .ant-pagination {
     padding: 20px 0;
     font-size: ${styleSet.fontSize.s7};

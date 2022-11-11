@@ -6,23 +6,18 @@ import { accessTokenState } from "../../../../commons/store";
 import { PointFormatter } from "../../../../commons/utils";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { useRouter } from "next/router";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import Swal from "sweetalert2";
 import { styleSet } from "../../../../commons/styles/styleSet";
-
-const LOGOUT = gql`
-  mutation logout {
-    logout
-  }
-`;
+import { FETCH_USER, LOGOUT } from "../layout.queries";
 
 export default function HeaderPage() {
-  const { onClickMoveToPage } = useMoveToPage();
-  const { onClickMobileToPage } = useMoveToPage();
-  const [hamburger, setHamburger] = useRecoilState(hamburgerState);
+  const { onClickMoveToPage, onClickMobileToPage } = useMoveToPage();
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [hamburger, setHamburger] = useRecoilState(hamburgerState);
   const [openPop, isOpenPop] = useState(false);
   const [logout] = useMutation(LOGOUT);
+  const { data: fetchUser } = useQuery(FETCH_USER);
   const router = useRouter();
 
   const onClickMenu = () => {
@@ -78,7 +73,8 @@ export default function HeaderPage() {
             {accessToken && (
               <li onClick={onClickProfile} className="mobile">
                 <S.Span>
-                  <strong>(닉네임)</strong> 님 환영합니다.
+                  <strong>{fetchUser?.fetchUser.nickname}</strong> 님
+                  환영합니다.
                 </S.Span>
                 <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
                 {openPop && (
@@ -86,7 +82,7 @@ export default function HeaderPage() {
                     <S.LiPoint>
                       <span>내 포인트</span>
                       <span>
-                        {PointFormatter(1234)}
+                        {PointFormatter(Number(fetchUser?.fetchUser.point))}
                         <strong> P</strong>
                       </span>
                     </S.LiPoint>
@@ -115,9 +111,21 @@ export default function HeaderPage() {
                   </li>
                 )}
                 {accessToken && (
-                  <S.Mobile>
-                    <strong>(닉네임) </strong>님 환영합니다.
-                  </S.Mobile>
+                  <>
+                    <S.Mobile>
+                      <strong>{fetchUser?.fetchUser.nickname} </strong>님
+                      환영합니다.
+                    </S.Mobile>
+                    <S.LiPointM>
+                      <div>
+                        <div>내 포인트</div>
+                        <span>
+                          {PointFormatter(Number(fetchUser?.fetchUser.point))}
+                          <strong> P</strong>
+                        </span>
+                      </div>
+                    </S.LiPointM>
+                  </>
                 )}
                 <li onClick={onClickMobileToPage("/list/list")}>리스트</li>
                 <li onClick={onClickMobileToPage("/list/customList")}>
