@@ -6,7 +6,7 @@ import { IBtnProps } from "./myPageLayout.types";
 
 export const Container = styled.div`
   margin: 0 auto;
-  padding: 100px 30px;
+  padding: 0 30px;
   max-width: 1460px;
   width: 100%;
   display: flex;
@@ -33,7 +33,6 @@ export const PreContainer = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
-    min-width: 550px;
     padding: 50px 0 0 0;
     align-items: center;
   }
@@ -42,7 +41,7 @@ export const PreContainer = styled.div`
 export const Title = styled.h1`
   padding-bottom: 10px;
   min-width: 182px;
-  font-size: ${styleSet.fontSize.s2};
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
 `;
 
@@ -106,5 +105,5 @@ export const BtnWrapper = styled.div`
 `;
 
 export const Btn = styled.button`
-  font-size: ${styleSet.fontSize.s6};
+  font-size: ${styleSet.fontSize.s8};
 `;

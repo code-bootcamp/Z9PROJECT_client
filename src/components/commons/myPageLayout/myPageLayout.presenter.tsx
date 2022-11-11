@@ -3,9 +3,8 @@ import * as S from "./myPageLayout.styles";
 import { IMyPageLayoutPresenterProps } from "./myPageLayout.types";
 
 export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
-  const { nowUrl } = P;
+  const { nowUrl, onClickMore } = P;
   const { onClickMoveToPage } = useMoveToPage();
-
   return (
     <S.PreContainer>
       <S.Title>마이페이지</S.Title>
@@ -40,6 +39,7 @@ export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
         >
           회원정보 수정
         </S.Btn>
+        <S.Btn onClick={onClickMore}>로그아웃</S.Btn>
       </S.BtnWrapper>
     </S.PreContainer>
   );

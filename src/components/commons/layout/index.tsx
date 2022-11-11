@@ -2,16 +2,19 @@ import { useRouter } from "next/router";
 import FooterPage from "./footer";
 import HeaderPage from "./header";
 
-export default function Layout(P) {
-  const { children } = P;
+const HIDDEN_LAYOUT = ["/"];
 
+export default function Layout(P: { children: any }) {
   const router = useRouter();
+  const hiddenLayout = HIDDEN_LAYOUT.includes(router.asPath);
+
+  const { children } = P;
 
   return (
     <>
-      <HeaderPage />
+      {!hiddenLayout && <HeaderPage />}
       <div>{children}</div>
-      <FooterPage />
+      {!hiddenLayout && <FooterPage />}
     </>
   );
 }

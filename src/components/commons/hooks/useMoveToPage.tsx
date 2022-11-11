@@ -11,7 +11,13 @@ export function useMoveToPage() {
     setHamburger((prev) => !prev);
   };
 
+  const onClickMobileToPage = (path: string) => () => {
+    void router.push(path);
+    setHamburger((prev) => !prev);
+  };
+
   return {
     onClickMoveToPage,
+    onClickMobileToPage,
   };
 }
