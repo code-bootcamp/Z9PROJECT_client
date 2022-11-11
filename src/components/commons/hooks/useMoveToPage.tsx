@@ -8,6 +8,7 @@ export function useMoveToPage() {
 
   const onClickMoveToPage = (path: string) => () => {
     void router.push(path);
+    setHamburger((prev) => !prev);
   };
 
   const onClickMobileToPage = (path: string) => () => {
