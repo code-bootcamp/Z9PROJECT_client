@@ -8,9 +8,36 @@ import { FieldValues, UseFormSetValue } from "react-hook-form";
 export const Button = styled.button`
   width: 150px;
   height: 60px;
-  color: white;
   background: ${styleSet.colors.subcolor2};
   border-radius: 10px;
+  color: ${styleSet.colors.white};
+  position: relative;
+  overflow: hidden;
+
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 `;
 
 export type IZipcodeModalP = {
@@ -34,7 +61,9 @@ const ZipcodeModal = (P: IZipcodeModalP) => {
 
   return (
     <>
-      <Button onClick={onClickModalToggle}>우편번호 검색</Button>
+      <Button type="button" onClick={onClickModalToggle}>
+        <span>주소검색</span>
+      </Button>
       {isModalOpen && (
         <Modal
           open={isModalOpen}

@@ -1,10 +1,10 @@
 import MyPageLayoutContainer from "../../../../src/components/commons/myPageLayout/myPageLayout.container";
-import PurchaseContainer from "../../../../src/components/units/users/purchase/purchase.container";
+import PasswordContainer from "../../../../src/components/units/users/password/password.container";
 
-export default function PurchasePage() {
+export default function () {
   return (
     <MyPageLayoutContainer>
-      <PurchaseContainer />
+      <PasswordContainer />
     </MyPageLayoutContainer>
   );
 }

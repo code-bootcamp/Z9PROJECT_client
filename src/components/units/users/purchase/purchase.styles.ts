@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { IStylesProps } from "./purchase.types";
 
 export const Container = styled.section`
   padding: 50px 0;
@@ -41,7 +42,7 @@ export const PeriodWrapper = styled.ul`
   align-items: center;
   gap: 10px;
   li {
-    &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
+    &:nth-of-type(${(props: IStylesProps) => (props.tab ? props.tab : 1)}) {
       border: 1px solid ${styleSet.colors.primary};
       color: ${styleSet.colors.primary};
     }
@@ -100,6 +101,10 @@ export const SearchWrapper = styled.div`
     input {
       text-align: center;
     }
+  }
+
+  .ant-picker-active-bar {
+    background: ${styleSet.colors.primary};
   }
 
   @media ${styleSet.breakePoints.mobile} {
