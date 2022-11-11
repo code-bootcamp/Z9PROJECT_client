@@ -20,7 +20,6 @@ export const CREATE_PRODUCT = gql`
       validFrom
       validUntil
       images
-      detailImages
       content
       option1
       option2
