@@ -6,3 +6,7 @@ export type IPurchasePresenterProps = {
   tab: string;
   onClickTab: (event: any) => void;
 };
+
+export type IStylesProps = {
+  tab?: string;
+};

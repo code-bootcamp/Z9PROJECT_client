@@ -102,6 +102,10 @@ export const SearchWrapper = styled.div`
     }
   }
 
+  .ant-picker-active-bar {
+    background: ${styleSet.colors.primary};
+  }
+
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
   }
