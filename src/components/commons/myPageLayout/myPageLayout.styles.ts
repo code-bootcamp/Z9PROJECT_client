@@ -101,6 +101,14 @@ export const BtnWrapper = styled.div`
       color: ${(P: IBtnProps) =>
         P.nowUrl.includes("edit") ? `${styleSet.colors.white}` : null};
     }
+    .password {
+      width: ${(P: IBtnProps) =>
+        P.nowUrl.includes("password") ? "100%" : null};
+      background: ${(P: IBtnProps) =>
+        P.nowUrl.includes("password") ? `${styleSet.colors.subcolor1}` : null};
+      color: ${(P: IBtnProps) =>
+        P.nowUrl.includes("password") ? `${styleSet.colors.white}` : null};
+    }
   }
 `;
 
