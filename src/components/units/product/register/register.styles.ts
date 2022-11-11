@@ -97,11 +97,38 @@ export const SubWrapper = styled.div`
 `;
 
 export const SubmitBtn = styled.button`
-  width: 100%;
+  width: 200px;
+  margin: 20px auto;
   height: 60px;
   font-size: ${styleSet.fontSize.s7};
-  color: ${styleSet.colors.white};
-  background-color: ${styleSet.colors.primary};
+  border: 2px solid ${styleSet.colors.primary};
+  position: relative;
+  color: ${styleSet.colors.primary};
+  overflow: hidden;
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.primary};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 `;
 
 export const CategoryWrapper = styled.div`
