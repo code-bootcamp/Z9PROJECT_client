@@ -114,6 +114,9 @@ export default function HeaderPage() {
                     &nbsp; 로그인
                   </li>
                 )}
+                <li>
+                  <strong>(닉네임) </strong>님 환영합니다.
+                </li>
                 <li onClick={onClickMobileToPage("/list/list")}>리스트</li>
                 <li onClick={onClickMobileToPage("/list/customList")}>
                   Who's Best
