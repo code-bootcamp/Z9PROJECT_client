@@ -6,7 +6,7 @@ export const Container = styled.section`
   width: 100%;
   height: 100%;
   background-color: #f4f5f9;
-  padding-block: 100px;
+  padding-bottom: 100px;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 30px;

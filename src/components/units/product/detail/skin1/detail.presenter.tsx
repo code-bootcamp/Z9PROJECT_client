@@ -11,31 +11,36 @@ import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import QuestionWriter from "../../../question/write/questionWriter";
 import QuestionList from "../../../question/list/questionList";
-import AnswerList from "../../../answer/list/answerList";
 
 export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   const { onClickMoveToPage } = useMoveToPage();
 
-  const { handleChange, onClickCount, count, cart, onClickCart } = P;
+  const {
+    handleChange,
+    onClickCount,
+    count,
+    cart,
+    onClickCart,
+    data,
+    discount,
+    onClickLike,
+  } = P;
+
   return (
     <>
       <S.Container>
         <S.Reset src="/icon_top.svg" alt="상단 바로가기 아이콘" />
         <S.Wrapper>
-          <S.H5>상품 정보</S.H5>
+          <S.H5 className="mobile">상품 정보</S.H5>
           <S.ProdInfo>
             <S.InfoLeft>
-              <img src="/test.webp" alt="상품이미지" />
+              <img src={data?.fetchProduct.images[0]} alt="상품이미지" />
               <S.ul>
-                <li>
-                  <img src="/test.webp" alt="상품 상세이미지" />
-                </li>
-                <li>
-                  <img src="/test.webp" alt="상품 상세이미지" />
-                </li>
-                <li>
-                  <img src="/test.webp" alt="상품 상세이미지" />
-                </li>
+                {data?.fetchProduct.images.slice(1, 4).map((el: string) => (
+                  <li key={el}>
+                    <img src={el} />
+                  </li>
+                ))}
               </S.ul>
             </S.InfoLeft>
 
@@ -48,29 +53,40 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <img src="/icon_copy.png" alt="공유하기 아이콘" />
                 </li>
               </ul>
-              <S.H1>[300개 한정]애플 에어팟 3세대</S.H1>
+              <S.H1>
+                [{data?.fetchProduct.quantity}개 한정]{data?.fetchProduct.name}
+              </S.H1>
               <S.Text>
                 <ul>
                   <li>시중 판매가</li>
-                  <S.Price>1,000,000원</S.Price>
+                  <S.Price>
+                    {data?.fetchProduct.originPrice?.toLocaleString()}원
+                  </S.Price>
                 </ul>
                 <ul>
                   <li>할인판매가</li>
                   <S.PriceSale>
-                    <strong>30%</strong>700,000원
+                    <strong>{discount}%</strong>
+                    {data?.fetchProduct.discountPrice?.toLocaleString()}원
                   </S.PriceSale>
                 </ul>
                 <ul>
                   <li>배송방법</li>
-                  <li>한진택배/무료배송</li>
+                  <li>{data?.fetchProduct.delivery}</li>
                 </ul>
                 <ul>
-                  <li>마감금액</li>
-                  <S.Close>50,000,000원</S.Close>
+                  <li>마감수량</li>
+                  <S.Close>{data?.fetchProduct.quantity} 개</S.Close>
                 </ul>
                 <ul>
                   <li>마감일정</li>
-                  <li>2022년 11월 11일(금요일)</li>
+                  <li>
+                    {data?.fetchProduct.validUntil
+                      .slice(0, 10)
+                      .replace("-", "년 ")
+                      .replace("-", "월 ")}
+                    일
+                  </li>
                 </ul>
                 <ul>
                   <li>수량선택</li>
@@ -116,7 +132,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </ul>
                 <S.Strong>진행현황</S.Strong>
                 <S.Graph>
-                  <span>15,000,000원</span>
+                  <span>100개</span>
                 </S.Graph>
                 <S.Persent>
                   <li>0%</li>
@@ -128,11 +144,15 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <S.H2>3일 00:43:33</S.H2>
 
               <S.H3>
-                총 상품 금액 <strong>700,000원</strong>
+                총 상품 금액{" "}
+                <strong>
+                  {(data?.fetchProduct.discountPrice * count).toLocaleString()}
+                  원
+                </strong>
               </S.H3>
 
               <S.BoxBtn>
-                <button className="cart" onClick={onClickCart}>
+                <button className="cart" onClick={onClickLike}>
                   {!cart && <HeartOutlined />} {``}
                   {cart && <HeartFilled />} {``}
                   관심상품
@@ -154,6 +174,9 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             count={count}
             cart={cart}
             onClickCart={onClickCart}
+            data={data}
+            discount={discount}
+            onClickLike={onClickLike}
           />
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
