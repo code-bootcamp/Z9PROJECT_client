@@ -281,3 +281,31 @@ export const H4 = styled.h4`
   padding: 40px 0 10px 0;
   border-bottom: 1px solid ${styleSet.colors.gray};
 `;
+
+export const Title = styled.ul`
+  font-size: ${styleSet.fontSize.s9};
+  font-family: ${styleSet.font.B};
+  color: ${styleSet.colors.darkgray};
+  padding: 40px 20px 10px 20px;
+  border-bottom: 1px solid ${styleSet.colors.gray};
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  li {
+    &:nth-last-of-type(1) {
+      max-width: 100px;
+      width: 100%;
+    }
+    &:nth-last-of-type(4) {
+      max-width: 185px;
+      width: 100%;
+    }
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding-top: 0;
+    li {
+      display: none;
+    }
+  }
+`;
