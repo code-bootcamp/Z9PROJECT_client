@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 
 export type IDetailPresenterProps = {
-  handleChange?: ((value: string) => void) | undefined;
+  handleChange?: ((value: any) => void) | undefined;
   onClickCount?: (e: MouseEvent<HTMLButtonElement>) => void;
   count: number;
   onClickCart?: () => void;
