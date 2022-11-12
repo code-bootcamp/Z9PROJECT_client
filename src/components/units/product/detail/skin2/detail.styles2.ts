@@ -4,6 +4,7 @@ import { styleSet } from "../../../../../commons/styles/styleSet";
 export const Container = styled.section`
   width: 100%;
   height: 100%;
+  padding: 100px 0;
 `;
 
 export const Reset = styled.img`
@@ -22,17 +23,9 @@ export const Wrapper = styled.div`
 `;
 
 export const DetailWrapper = styled.div`
-  max-width: 1460px;
-  padding: 0 30px;
+  width: 1400px;
   margin: 50px auto;
   position: relative;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
-    img {
-      width: 100%;
-    }
-  }
 `;
 
 export const H1 = styled.h1`
@@ -72,31 +65,19 @@ export const Info = styled.section`
 
 export const InfoImg = styled.div`
   background: url("/leoj.png") no-repeat;
-  width: 600px;
+  width: 500px;
   height: 500px;
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 50%;
   margin-right: 20%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 250px;
-    height: 250px;
-    margin: 0 0 50px 0;
-  }
 `;
 
 export const InfoWrapper = styled.div`
-  max-width: 1460px;
-  padding: 0 30px;
+  width: 1400px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-
-  @media ${styleSet.breakePoints.mobile} {
-    flex-direction: column;
-    width: 100%;
-  }
 `;
 
 export const RightDiv = styled.div`
@@ -105,11 +86,6 @@ export const RightDiv = styled.div`
   background: #f4f5f9;
   display: flex;
   align-items: center;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
-    background-color: ${styleSet.colors.tp};
-  }
 `;
 export const LeftDiv = styled.div`
   width: 1460px;
@@ -118,11 +94,6 @@ export const LeftDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
-    background-color: ${styleSet.colors.tp};
-  }
 `;
 
 export const Right = styled.section`
@@ -161,52 +132,34 @@ export const ImgBox2 = styled.div`
 
 export const Text = styled.p`
   margin-right: 1%;
+  strong {
+  }
   color: ${styleSet.colors.darkgray};
   font-size: ${styleSet.fontSize.s3};
   font-family: ${styleSet.font.B};
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
-
 export const Text2 = styled.p`
   margin-left: 5%;
+
   color: ${styleSet.colors.gray};
   font-size: 8rem;
   font-family: ${styleSet.font.EB};
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Like = styled.img`
   position: absolute;
   top: 15%;
   left: 45%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Emoticon = styled.img`
   position: absolute;
   bottom: 10%;
   right: 0;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Iframe = styled.iframe`
   margin-top: -17%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Octagon = styled.div`
@@ -227,11 +180,6 @@ export const Octagon = styled.div`
     0% 70%,
     0% 30%
   );
-
-  @media ${styleSet.breakePoints.mobile} {
-    clip-path: inherit;
-    width: 100%;
-  }
 `;
 
 export const Octagon2 = styled.div`
@@ -253,11 +201,6 @@ export const Octagon2 = styled.div`
     0% 70%,
     0% 30%
   );
-
-  @media ${styleSet.breakePoints.mobile} {
-    clip-path: inherit;
-    width: 100%;
-  }
 `;
 
 export const Button = styled.div`
@@ -309,14 +252,12 @@ export const Comment = styled.section`
 `;
 
 export const Wrapper3 = styled.div`
-  max-width: 1460px;
+  width: 1400px;
   margin: 0 auto;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
   background: ${styleSet.colors.white};
+  border-radius: 20px;
   padding: 30px;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
-  }
 `;
 
 export const Count = styled.ul`
@@ -330,43 +271,13 @@ export const Count = styled.ul`
   }
 `;
 
-export const Box = styled.section``;
-
-export const H4 = styled.h4`
-  font-size: ${styleSet.fontSize.s6};
-  padding-top: 40px;
-  font-family: ${styleSet.font.B};
-  display: none;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: block;
-  }
+export const Box = styled.section`
+  border-bottom: 1px solid ${styleSet.colors.gray};
 `;
 
-export const Title = styled.ul`
-  font-size: ${styleSet.fontSize.s9};
+export const H4 = styled.h4`
+  font-size: ${styleSet.fontSize.s7};
   font-family: ${styleSet.font.B};
-  color: ${styleSet.colors.darkgray};
-  padding: 40px 20px 10px 20px;
+  padding: 40px 0 10px 0;
   border-bottom: 1px solid ${styleSet.colors.gray};
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  li {
-    &:nth-last-of-type(1) {
-      max-width: 100px;
-      width: 100%;
-    }
-    &:nth-last-of-type(4) {
-      max-width: 185px;
-      width: 100%;
-    }
-  }
-
-  @media ${styleSet.breakePoints.mobile} {
-    padding-top: 0;
-    li {
-      display: none;
-    }
-  }
 `;
