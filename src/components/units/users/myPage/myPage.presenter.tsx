@@ -5,7 +5,7 @@ import { IMyPagePresenterProps } from "./myPage.types";
 import ChargeModal from "../../../commons/modal/charge";
 
 export default function MyPagePresenter(P: IMyPagePresenterProps) {
-  const { onChangePage, tab, setTab, onClickTab, fetchUser } = P;
+  const { onChangePage, tab, onClickTab, fetchUser } = P;
   const { RangePicker } = DatePicker;
 
   return (

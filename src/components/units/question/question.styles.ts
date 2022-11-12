@@ -115,7 +115,7 @@ export const Contents = styled.p`
 `;
 
 export const Answer = styled.p`
-  color: ${styleSet.colors.primary};
+  color: ${styleSet.colors.black};
   font-family: ${styleSet.font.B};
   display: flex;
   justify-content: flex-end;

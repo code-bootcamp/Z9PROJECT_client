@@ -1,6 +1,5 @@
 import { MessageOutlined } from "@ant-design/icons";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import AnswerList from "../../../answer/list/answerList";
 import QuestionList from "../../../question/list/questionList";
 import QuestionWriter from "../../../question/write/questionWriter";
 import { IDetailPresenterProps } from "../detail.types";
@@ -10,7 +9,17 @@ import * as S from "./detail.styles2";
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const { onClickMoveToPage } = useMoveToPage();
 
-  const { handleChange, onClickCount, count, cart, onClickCart } = P;
+  const {
+    handleChange,
+    onClickCount,
+    count,
+    cart,
+    data,
+    discount,
+    onClickLike,
+    onClickAnswer,
+    isTrue,
+  } = P;
 
   return (
     <>
@@ -56,7 +65,8 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 <S.Octagon></S.Octagon>
               </S.ImgBox>
               <S.Text>
-                <strong>[레오제이 공동개발]</strong>비플레인 녹두 모공 클레이 팩
+                <strong>[{data?.fetchProduct.quantity}개 한정]</strong>
+                {data?.fetchProduct.name}
               </S.Text>
               <S.Like src="/icon_like.png" alt="좋아요 아이콘" />
               <S.Emoticon src="/icon_emoticon.png" alt="하트 이모티콘 아이콘" />
@@ -90,7 +100,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             onClickCount={onClickCount}
             count={count}
             cart={cart}
-            onClickCart={onClickCart}
+            data={data}
+            discount={discount}
+            onClickLike={onClickLike}
           />
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
@@ -117,7 +129,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             </S.Title>
 
             <S.Box>
-              <QuestionList />
+              <QuestionList onClickAnswer={onClickAnswer} isTrue={isTrue} />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>
