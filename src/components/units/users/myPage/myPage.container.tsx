@@ -18,7 +18,6 @@ export default function MyPageContainer() {
     <MyPageLayoutContainer>
       <MyPagePresenter
         onChangePage={onChangePage}
-        setTab={setTab}
         tab={tab}
         onClickTab={onClickTab}
         fetchUser={fetchUser}

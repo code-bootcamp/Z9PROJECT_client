@@ -20,10 +20,13 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickCount,
     count,
     cart,
-    onClickCart,
     data,
     discount,
     onClickLike,
+    thumbnail,
+    onClickImages,
+    onClickAnswer,
+    isTrue,
   } = P;
 
   return (
@@ -31,14 +34,13 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
       <S.Container>
         <S.Reset src="/icon_top.svg" alt="상단 바로가기 아이콘" />
         <S.Wrapper>
-          <S.H5 className="mobile">상품 정보</S.H5>
           <S.ProdInfo>
             <S.InfoLeft>
-              <img src={data?.fetchProduct.images[0]} alt="상품이미지" />
+              <img src={thumbnail} alt="상품이미지" />
               <S.ul>
-                {data?.fetchProduct.images.slice(1, 4).map((el: string) => (
+                {data?.fetchProduct.images.map((el: string) => (
                   <li key={el}>
-                    <img src={el} />
+                    <img src={el} onClick={onClickImages} />
                   </li>
                 ))}
               </S.ul>
@@ -140,7 +142,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <li>100%</li>
                 </S.Persent>
               </S.Text>
-
               <S.H2>3일 00:43:33</S.H2>
 
               <S.H3>
@@ -165,19 +166,56 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             <li>제품상세</li>
             <li>QnA</li>
           </S.Tab>
-          <S.Randing
-            src="/img_detailTest.jpeg"
-            alt="레오제이 녹두팩 랜딩이미지"
-          />
-          <Product01
-            onClickCount={onClickCount}
-            count={count}
-            cart={cart}
-            onClickCart={onClickCart}
-            data={data}
-            discount={discount}
-            onClickLike={onClickLike}
-          />
+
+          <S.Ref>
+            <S.Randing
+              src="/img_detailTest.jpeg"
+              alt="레오제이 녹두팩 랜딩이미지"
+            />
+            <Product01
+              onClickCount={onClickCount}
+              count={count}
+              cart={cart}
+              data={data}
+              discount={discount}
+              onClickLike={onClickLike}
+            />
+          </S.Ref>
+
+          <S.H3Info>필수 표기정보</S.H3Info>
+          <S.Company>
+            <li>
+              <strong>품명 및 모델명</strong>
+              <data>품명 및 모델명 적거라</data>
+            </li>
+            <li>
+              <strong>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함)
+              </strong>
+              <data>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함) 적거라
+              </data>
+            </li>
+          </S.Company>
+          <S.Company>
+            <li>
+              <strong>품명 및 모델명</strong>
+              <data>품명 및 모델명 적거라</data>
+            </li>
+            <li>
+              <strong>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함)
+              </strong>
+              <data>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함) 적거라
+              </data>
+            </li>
+          </S.Company>
+
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button>수정</button>
@@ -204,7 +242,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </S.Title>
 
             <S.Box>
-              <QuestionList />
+              <QuestionList onClickAnswer={onClickAnswer} isTrue={isTrue} />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>
