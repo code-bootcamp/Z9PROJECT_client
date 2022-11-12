@@ -4,7 +4,7 @@ import { styleSet } from "../../../../../commons/styles/styleSet";
 export const Container = styled.section`
   width: 100%;
   height: 100%;
-  padding: 100px 0;
+  padding-bottom: 100px;
 `;
 
 export const Reset = styled.img`
@@ -98,7 +98,7 @@ export const LeftDiv = styled.div`
 
 export const Right = styled.section`
   width: 100%;
-  height: 360px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
@@ -107,7 +107,7 @@ export const Right = styled.section`
 
 export const Left = styled.section`
   width: 100%;
-  height: 360px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   justify-content: flex-start;
@@ -167,8 +167,8 @@ export const Octagon = styled.div`
   background-size: cover;
   background-position: 50% 50%;
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   margin: 30px 0;
   clip-path: polygon(
     30% 0%,
@@ -187,8 +187,8 @@ export const Octagon2 = styled.div`
   background-size: cover;
   background-position: 50% 50%;
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   margin: 30px 0;
 
   clip-path: polygon(
@@ -247,23 +247,23 @@ export const Button = styled.div`
 // 댓글
 export const Comment = styled.section`
   border-radius: 15px;
-  padding-block: 30px;
-  margin-top: 30px;
 `;
 
 export const Wrapper3 = styled.div`
-  width: 1400px;
+  max-width: 1460px;
   margin: 0 auto;
-  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
   background: ${styleSet.colors.white};
-  border-radius: 20px;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
 `;
 
 export const Count = styled.ul`
   display: flex;
   gap: 15px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid ${styleSet.colors.black};
   padding-block: 20px;
   li {
     font-size: ${styleSet.fontSize.s8};
@@ -271,13 +271,38 @@ export const Count = styled.ul`
   }
 `;
 
-export const Box = styled.section`
-  border-bottom: 1px solid ${styleSet.colors.gray};
-`;
+export const Box = styled.section``;
 
 export const H4 = styled.h4`
   font-size: ${styleSet.fontSize.s7};
   font-family: ${styleSet.font.B};
   padding: 40px 0 10px 0;
   border-bottom: 1px solid ${styleSet.colors.gray};
+`;
+export const Title = styled.ul`
+  font-size: ${styleSet.fontSize.s9};
+  font-family: ${styleSet.font.B};
+  color: ${styleSet.colors.darkgray};
+  padding: 40px 20px 10px 20px;
+  border-bottom: 1px solid ${styleSet.colors.gray};
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  li {
+    &:nth-last-of-type(1) {
+      max-width: 100px;
+      width: 100%;
+    }
+    &:nth-last-of-type(4) {
+      max-width: 185px;
+      width: 100%;
+    }
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding-top: 0;
+    li {
+      display: none;
+    }
+  }
 `;
