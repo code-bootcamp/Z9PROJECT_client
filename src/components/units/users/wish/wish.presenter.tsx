@@ -1,24 +1,34 @@
 import * as S from "./wish.styles";
 import { PriceFormatter } from "../../../../commons/utils";
+import { IWishPresenterProps } from "./wish.types";
+import Link from "next/link";
 
-export default function WishPresenter() {
+export default function WishPresenter(P: IWishPresenterProps) {
+  const { onClickMore, totalPage, presentPage, presentArray } = P;
+
   return (
     <S.Container>
       <S.SubTitle>찜 목록</S.SubTitle>
       <S.BoardBody>
-        <S.BoardLi>
-          <S.Img src="/img_product.png" />
-          <S.Box>
-            <S.Price>{PriceFormatter(100000)}</S.Price>
-            <S.Discount>{`20%`}</S.Discount>{" "}
-          </S.Box>
-          <S.Name>태양열 슈퍼보드 배터리, 충전기 포함</S.Name>
-          <S.Creator>제이제이</S.Creator>
-        </S.BoardLi>
+        {presentArray?.map((el: any, i) => (
+          <Link href={`/product/${el.id}`} key={i}>
+            <a>
+              <S.BoardLi>
+                <S.Img src={el.images[0]} />
+                <S.Box>
+                  <S.Price>{PriceFormatter(el.discountPrice)}</S.Price>
+                  <S.Discount>{`${el.discountRate}%`}</S.Discount>{" "}
+                </S.Box>
+                <S.Name>{el.name}</S.Name>
+                <S.Creator>{el.user?.nickname}</S.Creator>
+              </S.BoardLi>
+            </a>
+          </Link>
+        ))}
       </S.BoardBody>
-      <S.MoreBtn>
+      <S.MoreBtn onClick={onClickMore}>
         <span>
-          더보기 <data>1</data> / 1
+          더보기 <data>{presentPage}</data> / {totalPage}
         </span>
       </S.MoreBtn>
     </S.Container>
