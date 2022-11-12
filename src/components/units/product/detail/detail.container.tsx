@@ -42,9 +42,17 @@ export default function ProductDetailContainer() {
     }
   }, [fetchIsLiked]);
 
+  const { data } = useQuery(FETCH_PRODUCT, {
+    variables: { productId: String(router.query.useditemId) },
+  });
+  console.log(data);
+
+  const [likeProduct] = useMutation(LIKE_PRODUCT);
+
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+
 
   const onClickImages = (event: any) => {
     setThumbnail(event.target.src);
@@ -118,7 +126,6 @@ export default function ProductDetailContainer() {
         onClickImages={onClickImages}
         onClickAnswer={onClickAnswer}
         isTrue={isTrue}
-
       /> */}
     </>
   );

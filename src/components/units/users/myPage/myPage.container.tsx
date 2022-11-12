@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import MyPageLayoutContainer from "../../../commons/myPageLayout/myPageLayout.container";
 import MyPagePresenter from "./myPage.presenter";
-import { FETCH_USER } from "./myPage.queries";
+import { FETCH_USER } from "./mypage.queries";
 
 export default function MyPageContainer() {
   const [tab, setTab] = useState("1");

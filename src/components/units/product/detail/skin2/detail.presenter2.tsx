@@ -82,9 +82,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                   width="500"
                   height="230"
                   src="https://www.youtube.com/embed/LCtZIA_-nCA?rel=0&amp;autoplay=1&mute=1&amp;loop=1;"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></S.Iframe>
               </div>
 

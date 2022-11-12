@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { ChangeEvent, useEffect, useState } from "react";
 import CreatorPresenter from "./creator.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -100,7 +100,7 @@ export default function CreatorRegisterContainer() {
         }, 180000);
         console.log(result.data.postSmsToken.message);
       } catch (error) {
-        ErrorModal(error);
+        ErrorModal(error as string);
       }
     } else {
       ErrorModal("이미 인증번도 받기를 누르셨습니다. 핸드폰을 확인바랍니다.");
@@ -121,7 +121,7 @@ export default function CreatorRegisterContainer() {
         SuccessModal("인증 성공");
       }
     } catch (error) {
-      ErrorModal(error);
+      ErrorModal(error as string);
     }
   };
 

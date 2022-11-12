@@ -19,7 +19,7 @@ export default function Product01(P: IDetailPresenterProps) {
     onClickLike,
   } = P;
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: any) => {
     console.log(`selected ${value}`);
   };
   return (

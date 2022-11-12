@@ -139,6 +139,12 @@ export const Company = styled.ul`
       align-items: center;
     }
   }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      height: 300px;
+    }
+  }
 `;
 
 export const Ref = styled.section``;
@@ -146,7 +152,7 @@ export const Ref = styled.section``;
 export const InfoRight = styled.div`
   background: #f8f8f8;
   border-radius: 20px;
-  padding: 50px;
+  padding: 20px 50px 0 50px;
   .top {
     display: flex;
     justify-content: space-between;
