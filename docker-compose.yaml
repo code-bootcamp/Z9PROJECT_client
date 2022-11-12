@@ -4,5 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: zero9-client
+    restart: always
     ports:
       - 3000:3000
+    environment:
+      - TZ=Asia/Seoul

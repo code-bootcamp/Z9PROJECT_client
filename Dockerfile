@@ -1,10 +1,10 @@
-FROM node:16
+FROM node:16-alpine
 
-COPY ./package.json /zeor9/
-COPY ./yarn.lock /zeor9/
-WORKDIR /zeor9/
-RUN yarn install
+WORKDIR /zero9/
+COPY ./package.json /zero9/
+# COPY ./yarn.lock /zero9/
+RUN yarn install --force --network-timeout 1000000
 
-COPY . /zeor9/
+COPY . /zero9/
 RUN yarn build
 CMD yarn start
