@@ -191,6 +191,7 @@ export const Ul2 = styled.ul`
     font-family: ${styleSet.font.L};
     font-size: ${styleSet.fontSize.s8};
     color: ${styleSet.colors.black};
+
     &:nth-last-of-type(1) {
       border-top: 1px solid ${styleSet.colors.lightGray};
       padding-top: 5px;
@@ -222,6 +223,31 @@ export const LiPoint = styled.li`
     strong {
       font-family: ${styleSet.font.B};
       font-size: ${styleSet.fontSize.s8};
+    }
+  }
+  &:hover {
+    background: none;
+  }
+`;
+export const LiPointM = styled.li`
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    div {
+      font-family: ${styleSet.font.L};
+      color: ${styleSet.colors.black};
+    }
+  }
+
+  span {
+    padding: 0;
+    font-family: ${styleSet.font.B};
+    color: ${styleSet.colors.black};
+    font-size: ${styleSet.fontSize.s7};
+    strong {
+      font-family: ${styleSet.font.B};
+      font-size: ${styleSet.fontSize.s10};
     }
   }
   &:hover {
