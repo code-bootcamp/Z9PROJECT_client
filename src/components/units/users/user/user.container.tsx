@@ -86,7 +86,7 @@ export default function UserRegisterContainer() {
         }, 180000);
         console.log(result.data.postSmsToken.message);
       } catch (error) {
-        ErrorModal(error);
+        ErrorModal(error as string);
       }
     } else {
       ErrorModal("이미 인증번도 받기를 누르셨습니다. 핸드폰을 확인바랍니다.");
@@ -107,7 +107,7 @@ export default function UserRegisterContainer() {
         SuccessModal("인증 성공");
       }
     } catch (error) {
-      ErrorModal(error);
+      ErrorModal(error as string);
     }
   };
 

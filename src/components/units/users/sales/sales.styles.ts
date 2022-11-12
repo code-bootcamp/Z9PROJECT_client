@@ -34,7 +34,7 @@ export const BoardTopWrapper = styled.div`
   }
 `;
 
-export const PeriodWrapper = styled.ul`
+export const PeriodWrapper: any = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
