@@ -1,6 +1,6 @@
 import { MessageOutlined } from "@ant-design/icons";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import QuestionList from "../../../question/list/questionList";
+import QuestionPresenter from "../../../question/list/questionList.presenter";
 import QuestionWriter from "../../../question/write/questionWriter";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
@@ -10,7 +10,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const { onClickMoveToPage } = useMoveToPage();
 
   const {
-    handleChange,
     onClickCount,
     count,
     cart,
@@ -18,7 +17,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     discount,
     onClickLike,
     onClickAnswer,
-    isTrue,
   } = P;
 
   return (
@@ -171,7 +169,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             </S.Title>
 
             <S.Box>
-              <QuestionList onClickAnswer={onClickAnswer} isTrue={isTrue} />
+              <QuestionPresenter onClickAnswer={onClickAnswer} />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>

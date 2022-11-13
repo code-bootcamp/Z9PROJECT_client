@@ -1,10 +1,10 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import QuestionModal from "../../../commons/modal/question";
-import { closeState } from "../../../commons/store";
+import { FETCH_LOGIN_USER_ANSWER } from "../../answer/answer.queries";
 import AnswerList from "../../answer/list/answerList";
+import AnswerWriter from "../../answer/write/answerWriter";
 import {
   DELETE_QUESTION,
   FETCH_QUESTIONS,
@@ -13,12 +13,20 @@ import {
 import * as S from "../question.styles";
 
 export default function QuestionList(P: any) {
-  const { el, data } = P;
+  const { el } = P;
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
+
   const [question, setQuestion] = useState("");
   const [close, setClose] = useState(false);
   const [isTrue, setIsTrue] = useState(false);
+  const [answerModal, setAnswerModal] = useState(false);
+  const [isAnswer, setIsAnswer] = useState(false);
+
+  const { data } = useQuery(FETCH_LOGIN_USER_ANSWER, {
+    fetchPolicy: "cache-first",
+    variables: { questionId: String(el.id) },
+  });
 
   const onClickEdit = () => {
     setClose((prev) => !prev);
@@ -59,6 +67,12 @@ export default function QuestionList(P: any) {
   const onClickAnswer = () => {
     setIsTrue((prev) => !prev);
   };
+
+  const onClickAnswerModal = () => {
+    setAnswerModal(true);
+    setIsAnswer(false);
+  };
+
   return (
     <>
       <S.User>
@@ -76,14 +90,13 @@ export default function QuestionList(P: any) {
               일
             </S.UserInfo>
             <S.Answer>
-              <p>답변</p>
+              <p onClick={onClickAnswerModal}>답변</p>
               <p id={el.id} onClick={onClickEdit}>
                 수정
               </p>
               <p onClick={onClickdelete}>삭제</p>
             </S.Answer>
           </S.Div>
-          {isTrue && <AnswerList data={data} el={el} />}
           {close && (
             <QuestionModal
               onClickUpdate={onClickUpdate}
@@ -91,6 +104,26 @@ export default function QuestionList(P: any) {
               setQuestion={setQuestion}
               question={question}
               setClose={setClose}
+            />
+          )}
+          {data?.fetchLoginUserAnswer.map((dom: any) => (
+            <AnswerList
+              el={el}
+              key={dom.id}
+              dom={dom}
+              isAnswer={isAnswer}
+              setIsAnswer={setIsAnswer}
+              setAnswerModal={setAnswerModal}
+              isTrue={isTrue}
+              answerModal={answerModal}
+            />
+          ))}
+          {answerModal && (
+            <AnswerWriter
+              setAnswerModal={setAnswerModal}
+              questionEl={el}
+              isAnswer={false}
+              setIsAnswer={setIsAnswer}
             />
           )}
         </div>
