@@ -1,9 +1,7 @@
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, EditOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import React, { ChangeEvent, useState } from "react";
-import { useRecoilState } from "recoil";
 import { styleSet } from "../../../commons/styles/styleSet";
-import { closeState } from "../store";
 
 const Modal = styled.section`
   width: 30%;
@@ -19,13 +17,15 @@ const Modal = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 40px;
+  align-items: flex-start;
+  gap: 20px;
   z-index: 11;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
 `;
 
 const H1 = styled.h1`
   font-size: ${styleSet.fontSize.s3};
+  font-family: ${styleSet.font.B};
 `;
 
 const Textarea1 = styled.textarea`
@@ -34,20 +34,22 @@ const Textarea1 = styled.textarea`
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  border: 1px solid ${styleSet.colors.black};
+  border: 1px solid ${styleSet.colors.gray};
   &:focus {
     outline: none;
   }
 `;
 
 const SubmitBtn = styled.button`
-  width: 100px;
-  height: 60px;
-  font-size: ${styleSet.fontSize.s8};
-  border: 1px solid ${styleSet.colors.red};
+  width: 100%;
+  height: 100px;
+  font-size: ${styleSet.fontSize.s7};
+  font-family: ${styleSet.font.B};
+  border: 1px solid ${styleSet.colors.black};
   position: relative;
-  color: ${styleSet.colors.red};
+  color: ${styleSet.colors.black};
   overflow: hidden;
+  background: ${styleSet.colors.white};
   &&::before {
     content: "";
     display: block;
@@ -56,7 +58,7 @@ const SubmitBtn = styled.button`
     left: -10%;
     width: 0;
     height: 120%;
-    background: ${styleSet.colors.red};
+    background: ${styleSet.colors.black};
     transition: all 0.3s ease;
     transform: skewX(15deg);
   }
@@ -90,7 +92,7 @@ const Close = styled(CloseCircleOutlined)`
   top: 5%;
   font-size: ${styleSet.fontSize.s6};
   cursor: pointer;
-  color: ${styleSet.colors.red};
+  color: ${styleSet.colors.black};
 `;
 
 export default function QuestionModal(P: any) {
@@ -109,7 +111,9 @@ export default function QuestionModal(P: any) {
       <BgLayer></BgLayer>
       <Modal>
         <Close onClick={onClickClose} />
-        <H1>질문 수정하기</H1>
+        <H1>
+          <EditOutlined /> 질문 수정
+        </H1>
         <Textarea1
           onChange={onChangeQuestion}
           placeholder="수정하실 질문을 입력해주세요."

@@ -10,8 +10,7 @@ import * as S from "./detail.styles3";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import QuestionWriter from "../../../question/write/questionWriter";
-import QuestionList from "../../../question/list/questionList";
-import AnswerList from "../../../answer/list/answerList";
+import QuestionPresenter from "../../../question/list/questionList.presenter";
 
 export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   const { onClickMoveToPage } = useMoveToPage();
@@ -27,7 +26,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     thumbnail,
     onClickImages,
     onClickAnswer,
-    isTrue,
   } = P;
   return (
     <>
@@ -253,7 +251,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </S.Title>
 
             <S.Box>
-              <QuestionList onClickAnswer={onClickAnswer} isTrue={isTrue} />
+              <QuestionPresenter onClickAnswer={onClickAnswer} />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>
