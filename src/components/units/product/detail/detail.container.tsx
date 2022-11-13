@@ -12,12 +12,11 @@ export default function ProductDetailContainer() {
   const [count, setCount] = useState(1);
   const [cart, setCart] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
-  const [isTrue, setIsTrue] = useState(false);
 
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
+    fetchPolicy: "cache-first",
   });
-  console.log(data);
 
   useEffect(() => {
     setThumbnail(data?.fetchProduct.images[0]);
@@ -42,17 +41,9 @@ export default function ProductDetailContainer() {
     }
   }, [fetchIsLiked]);
 
-  const { data } = useQuery(FETCH_PRODUCT, {
-    variables: { productId: String(router.query.useditemId) },
-  });
-  console.log(data);
-
-  const [likeProduct] = useMutation(LIKE_PRODUCT);
-
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
-
 
   const onClickImages = (event: any) => {
     setThumbnail(event.target.src);
@@ -82,13 +73,10 @@ export default function ProductDetailContainer() {
       data?.fetchProduct.originPrice) *
       100
   );
-  const onClickAnswer = () => {
-    setIsTrue((prev) => !prev);
-  };
 
   return (
     <>
-      {/* <ProductDetailPresenter
+      <ProductDetailPresenter
         handleChange={handleChange}
         onClickCount={onClickCount}
         count={count}
@@ -98,22 +86,18 @@ export default function ProductDetailContainer() {
         onClickLike={onClickLike}
         thumbnail={thumbnail}
         onClickImages={onClickImages}
-        onClickAnswer={onClickAnswer}
-        isTrue={isTrue}
-      /> */}
-      <ProductDetailPresenter2
-        handleChange={handleChange}
-        onClickCount={onClickCount}
-        count={count}
-        cart={cart}
-        data={data}
-        discount={discount}
-        onClickLike={onClickLike}
-        thumbnail={thumbnail}
-        onClickImages={onClickImages}
-        onClickAnswer={onClickAnswer}
-        isTrue={isTrue}
       />
+      {/* <ProductDetailPresenter2
+        handleChange={handleChange}
+        onClickCount={onClickCount}
+        count={count}
+        cart={cart}
+        data={data}
+        discount={discount}
+        onClickLike={onClickLike}
+        thumbnail={thumbnail}
+        onClickImages={onClickImages}
+      /> */}
       {/* <ProductDetailPresenter3
         handleChange={handleChange}
         onClickCount={onClickCount}
@@ -124,8 +108,6 @@ export default function ProductDetailContainer() {
         onClickLike={onClickLike}
         thumbnail={thumbnail}
         onClickImages={onClickImages}
-        onClickAnswer={onClickAnswer}
-        isTrue={isTrue}
       /> */}
     </>
   );
