@@ -58,6 +58,11 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           </S.InfoWrapper>
         </S.Info>
 
+        <S.Tab>
+          <li>제품상세</li>
+          <li>QnA</li>
+        </S.Tab>
+
         <S.Right>
           <S.RightDiv>
             <S.Wrapper>
@@ -95,15 +100,52 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           </S.LeftDiv>
         </S.Left>
         <S.DetailWrapper>
-          <img src="/img_detailTest.jpeg" alt="상세랜딩이미지" />
-          <Product01
-            onClickCount={onClickCount}
-            count={count}
-            cart={cart}
-            data={data}
-            discount={discount}
-            onClickLike={onClickLike}
-          />
+          <S.Ref>
+            <img src="/img_detailTest.jpeg" alt="상세랜딩이미지" />
+            <Product01
+              onClickCount={onClickCount}
+              count={count}
+              cart={cart}
+              data={data}
+              discount={discount}
+              onClickLike={onClickLike}
+            />
+          </S.Ref>
+
+          <S.H3Info>필수 표기정보</S.H3Info>
+          <S.Company>
+            <li>
+              <strong>품명 및 모델명</strong>
+              <data>품명 및 모델명 적거라</data>
+            </li>
+            <li>
+              <strong>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함)
+              </strong>
+              <data>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함) 적거라
+              </data>
+            </li>
+          </S.Company>
+          <S.Company>
+            <li>
+              <strong>품명 및 모델명</strong>
+              <data>품명 및 모델명 적거라</data>
+            </li>
+            <li>
+              <strong>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함)
+              </strong>
+              <data>
+                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
+                표시의무 화학물질에 한함) 적거라
+              </data>
+            </li>
+          </S.Company>
+
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button>수정</button>
