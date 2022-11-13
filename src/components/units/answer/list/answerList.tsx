@@ -1,14 +1,14 @@
+import { IQnaProps } from "../../question/question.types";
 import * as S from "../answer.styles";
 
-export default function AnswerList() {
+export default function AnswerList(P: IQnaProps) {
+  const { el } = P;
   return (
     <>
       <S.User>
         <S.AnswerBox>
           <S.Div>
-            <S.Contents>
-              이거 좋아여??이거 좋아여??이거 좋아여??이거 좋아여??이거 좋아여??
-            </S.Contents>
+            <S.Contents>{el.question}</S.Contents>
             <S.Text>
               <S.AnswerContents>
                 <span>답변</span>

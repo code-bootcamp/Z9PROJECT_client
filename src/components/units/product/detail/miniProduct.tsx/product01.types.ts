@@ -1,15 +1,10 @@
 import { MouseEvent } from "react";
 
-export type IDetailPresenterProps = {
-  handleChange?: (value: unknown) => void;
+export type IProduct01Props = {
   onClickCount?: (e: MouseEvent<HTMLButtonElement>) => void;
   count: number;
   cart: boolean;
   data?: any;
   discount?: number;
   onClickLike: (productId: any) => Promise<void>;
-  thumbnail: any;
-  onClickImages: any;
-  onClickAnswer: () => void;
-  isTrue: boolean;
 };

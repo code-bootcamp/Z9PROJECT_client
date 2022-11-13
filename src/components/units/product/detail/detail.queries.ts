@@ -22,6 +22,9 @@ export const FETCH_PRODUCT = gql`
       brn
       mobn
       skin
+      user {
+        id
+      }
       color
       createdAt
       option1
