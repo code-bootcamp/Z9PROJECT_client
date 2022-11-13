@@ -24,8 +24,9 @@ export const Wrapper = styled.div`
 
 export const DetailWrapper = styled.div`
   width: 1400px;
-  margin: 50px auto;
+  margin: 0 auto;
   position: relative;
+  padding-top: 50px;
 `;
 
 export const H1 = styled.h1`
@@ -146,6 +147,44 @@ export const Text2 = styled.p`
   font-family: ${styleSet.font.EB};
 `;
 
+export const H3Info = styled.h3`
+  font-family: ${styleSet.font.B};
+  padding-bottom: 10px;
+`;
+
+export const Company = styled.ul`
+  display: flex;
+  margin-top: -1px;
+
+  li {
+    width: calc(100% / 2);
+    border-block: 1px solid ${styleSet.colors.gray};
+    display: flex;
+    font-size: ${styleSet.fontSize.s9};
+    word-break: keep-all;
+    strong {
+      background: ${styleSet.colors.subcolor3};
+      color: ${styleSet.colors.black};
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+    data {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      height: 300px;
+    }
+  }
+`;
+
+export const Ref = styled.section``;
+
 export const Like = styled.img`
   position: absolute;
   top: 15%;
@@ -207,7 +246,7 @@ export const Button = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-top: 30px;
+  padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
   margin-top: 50px;
   button {
@@ -303,6 +342,27 @@ export const Title = styled.ul`
     padding-top: 0;
     li {
       display: none;
+    }
+  }
+`;
+
+export const Tab = styled.ul`
+  max-width: 1400px;
+  height: 60px;
+  display: flex;
+  border-block: 1px solid ${styleSet.colors.gray};
+  justify-content: center;
+  line-height: 60px;
+  margin: 50px auto;
+  li {
+    cursor: pointer;
+    width: calc(100% / 2 - 10px);
+    height: 100%;
+    text-align: center;
+    font-size: ${styleSet.fontSize.s8};
+    color: ${styleSet.colors.darkgray};
+    &:first-of-type {
+      border-right: 1px solid ${styleSet.colors.gray};
     }
   }
 `;
