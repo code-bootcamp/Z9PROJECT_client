@@ -4,7 +4,6 @@ export type IDetailPresenterProps = {
   handleChange?: ((value: any) => void) | undefined;
   onClickCount?: (e: MouseEvent<HTMLButtonElement>) => void;
   count: number;
-  onClickCart?: () => void;
   cart: boolean;
   data?: any;
   discount?: number;

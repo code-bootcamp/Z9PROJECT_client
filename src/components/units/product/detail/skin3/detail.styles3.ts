@@ -39,6 +39,7 @@ export const Button = styled.div`
   gap: 10px;
   padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
+  margin-top: 50px;
   button {
     color: ${styleSet.colors.point1};
     background: ${styleSet.colors.white};
