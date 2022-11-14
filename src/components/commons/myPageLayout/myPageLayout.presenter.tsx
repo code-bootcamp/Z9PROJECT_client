@@ -21,8 +21,9 @@ export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
         <S.Btn className="point" onClick={onClickMoveToPage("/users/mypage")}>
           포인트
         </S.Btn>
-        {btnArray.map((el) => (
+        {btnArray.map((el, i) => (
           <S.Btn
+            key={i}
             className={el.class}
             onClick={onClickMoveToPage(`/users/mypage/${el.class}`)}
           >
