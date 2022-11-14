@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import QuestionModal from "../../../commons/modal/question";
@@ -13,6 +14,7 @@ import {
 import * as S from "../question.styles";
 
 export default function QuestionList(P: any) {
+  const router = useRouter();
   const { el } = P;
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
@@ -58,10 +60,11 @@ export default function QuestionList(P: any) {
       refetchQueries: [
         {
           query: FETCH_QUESTIONS,
-          variables: { questionId: String(el.id) },
+          variables: { productId: String(router.query.useditemId) },
         },
       ],
     });
+    SuccessModal("삭제가 완료되었습니다.");
   };
 
   const onClickAnswer = () => {
@@ -79,9 +82,11 @@ export default function QuestionList(P: any) {
         <div>
           <S.Div>
             <img src="/img_user.jpeg" alt="유저 이미지" />
-            <S.Check>답변완료</S.Check>
+            <S.Check>답변대기</S.Check>
             <S.Contents onClick={onClickAnswer}>{el.question}</S.Contents>
-            <S.UserInfo>유저닉네임</S.UserInfo>
+            <S.UserInfo className="writer">
+              {el.user.nickname.slice(0, 8)}
+            </S.UserInfo>
             <S.UserInfo>
               {el.createdAt
                 ?.slice(0, 10)

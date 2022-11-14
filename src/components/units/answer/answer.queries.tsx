@@ -16,9 +16,7 @@ export const CREATE_ANSWER = gql`
         id
         question
         createdAt
-        product {
-          id
-        }
+        status
       }
     }
   }
@@ -34,6 +32,7 @@ export const FETCH_LOGIN_USER_ANSWER = gql`
         id
         question
         createdAt
+        status
       }
     }
   }

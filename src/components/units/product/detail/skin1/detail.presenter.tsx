@@ -235,8 +235,8 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <li>프로필</li>
               <li>답변여부</li>
               <li>내용</li>
-              <li>작성자</li>
-              <li>등록일자</li>
+              <li className="writer">작성자</li>
+              <li className="createdAt">등록일자</li>
               <li></li>
             </S.Title>
 
