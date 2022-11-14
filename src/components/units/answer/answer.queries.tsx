@@ -16,7 +16,6 @@ export const CREATE_ANSWER = gql`
         id
         question
         createdAt
-        status
       }
     }
   }
