@@ -6,5 +6,5 @@ export type IProduct01Props = {
   cart: boolean;
   data?: any;
   discount?: number;
-  onClickLike: (productId: any) => Promise<void>;
+  onClickLike: any;
 };
