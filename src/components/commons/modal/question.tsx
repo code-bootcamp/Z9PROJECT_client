@@ -99,7 +99,7 @@ export default function QuestionModal(P: any) {
   const { onClickUpdate, el, setQuestion, question, setClose } = P;
 
   const onClickClose = () => {
-    setClose((prev) => !prev);
+    setClose((prev: any) => !prev);
   };
 
   const onChangeQuestion = (e: ChangeEvent<HTMLTextAreaElement>) => {
