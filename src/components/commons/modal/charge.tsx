@@ -1,9 +1,14 @@
 import { DollarOutlined } from "@ant-design/icons";
+import { useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
+import { PriceFormatter } from "../../../commons/utils";
+import { CREATE_PAYMENT } from "../../units/users/myPage/mypage.queries";
+import { FETCH_USER } from "../layout/layout.queries";
+import { ErrorModal, SuccessModal } from "./modal";
 
 const Button = styled.button`
   line-height: 100%;
@@ -86,6 +91,7 @@ const Input = styled.input`
   border: none;
   border-bottom: 2px solid #000000;
   font-weight: 700;
+  color: ${styleSet.colors.black};
 `;
 
 const ArrowDown = styled.img`
@@ -134,6 +140,9 @@ export default function ChargeModal() {
   const [price, setPrice] = useState(0);
   const inputRef = useRef<any>(0);
   const router = useRouter();
+  const [createPayment] = useMutation(CREATE_PAYMENT);
+  const { data: fetchUser } = useQuery(FETCH_USER);
+
   const onClickGoToCharge = () => {
     setIsChargeOpen(true);
   };
@@ -155,51 +164,41 @@ export default function ChargeModal() {
   const onClickCharge = () => {
     onClickClose();
     const IMP = window.IMP;
-    IMP.init("imp49910675");
-
+    IMP.init("imp40524836");
     IMP.request_pay(
       {
         // param
-        pg: "nice",
+        pg: "html5_inicis",
         pay_method: "card",
         // merchant_uid: "ORD20180131-0000011",
-        name: "포인트 충전",
+        name: "Z9 포인트 충전",
         amount: price,
-        buyer_email: "gildong@gmail.com",
-        buyer_name: "홍길동",
-        buyer_tel: "010-4242-4242",
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181",
+        buyer_email: "",
+        buyer_name: fetchUser?.fetchUser.nickname,
+        // buyer_tel: fetchUser?.fetchUser.phoneNumber,
+        // buyer_addr: fetchUser?.fetchUser.address,
+        // buyer_postcode: fetchUser?.fetchUser.zipcode,
       },
       function (rsp: any) {
-        // if (rsp.success) {
-        //   createPointTransactionOfLoading({
-        //     variables: {
-        //       impUid: rsp.imp_uid,
-        //     },
-        //   });
-        //   alert("충전 성공!");
-        //   onClickClose();
-        //   router.reload();
-        // } else {
-        //   alert("충전 실패!");
-        // }
+        if (rsp.success) {
+          const result = createPayment({
+            variables: {
+              impUid: rsp.imp_uid,
+              amount: rsp.paid_amount,
+            },
+          });
+          SuccessModal(`${PriceFormatter(rsp.paid_amount)}원 충전 완료!`);
+          onClickClose();
+          router.reload();
+        } else {
+          ErrorModal("충전 실패. 다시 시도 바랍니다.");
+        }
       }
     );
   };
 
   return (
     <>
-      <Head>
-        <script
-          type="text/javascript"
-          src="https://code.jquery.com/jquery-1.12.4.min.js"
-        ></script>
-        <script
-          type="text/javascript"
-          src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
-        ></script>
-      </Head>
       <Button onClick={onClickGoToCharge}>
         <DollarOutlined />
         &nbsp; 충전하기

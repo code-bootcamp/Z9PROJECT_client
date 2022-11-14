@@ -5,19 +5,11 @@ import {
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { IDetailPresenterProps } from "../detail.types";
 import * as S from "./product01.styles";
+import { IProduct01Props } from "./product01.types";
 
-export default function Product01(P: IDetailPresenterProps) {
-  const {
-    onClickCount,
-    count,
-    cart,
-    onClickCart,
-    data,
-    discount,
-    onClickLike,
-  } = P;
+export default function Product01(P: IProduct01Props) {
+  const { onClickCount, count, cart, data, discount, onClickLike } = P;
 
   const handleChange = (value: any) => {
     console.log(`selected ${value}`);

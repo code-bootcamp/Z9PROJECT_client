@@ -30,12 +30,14 @@ export const H5 = styled.h5`
     }
   }
 `;
+
 export const Button = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-top: 30px;
+  padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
+  margin-top: 50px;
   button {
     color: ${styleSet.colors.point1};
     background: ${styleSet.colors.white};
@@ -79,6 +81,7 @@ export const ProdInfo = styled.section`
   > div {
     width: calc(100% / 2 - 10px);
   }
+
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
     > div {
@@ -92,10 +95,50 @@ export const InfoLeft = styled.div`
   text-align: center;
   width: 48%;
   > img {
-    border-radius: 20px;
-    height: 610px;
+    border-radius: 10px;
+    height: 700px;
     overflow: hidden;
     max-width: 100%;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      aspect-ratio: 1/1;
+      width: 100%;
+      height: min-content;
+    }
+  }
+`;
+
+export const H3Info = styled.h3`
+  font-family: ${styleSet.font.B};
+  padding-bottom: 10px;
+`;
+
+export const Company = styled.ul`
+  display: flex;
+  margin-top: -1px;
+
+  li {
+    width: calc(100% / 2);
+    border-block: 1px solid ${styleSet.colors.gray};
+    display: flex;
+    font-size: ${styleSet.fontSize.s9};
+    word-break: keep-all;
+    strong {
+      background: ${styleSet.colors.subcolor3};
+      color: ${styleSet.colors.black};
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+    data {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
   }
 
   @media ${styleSet.breakePoints.mobile} {
@@ -104,6 +147,8 @@ export const InfoLeft = styled.div`
     }
   }
 `;
+
+export const Ref = styled.section``;
 
 export const InfoRight = styled.div`
   background: #f8f8f8;
@@ -162,9 +207,9 @@ export const ul = styled.ul`
   display: flex;
   justify-content: space-between;
   li {
-    border-radius: 10px;
     text-align: center;
     overflow: hidden;
+    border-radius: 10px;
     width: calc(100% / 3 - 10px);
     cursor: pointer;
     border: 1px solid ${styleSet.colors.subcolor3};
@@ -175,6 +220,7 @@ export const ul = styled.ul`
       border-radius: 10px;
       width: 100%;
       height: 100%;
+      aspect-ratio: 1/1;
     }
   }
 `;
@@ -342,7 +388,7 @@ export const Choose = styled.p`
 
 export const H3 = styled.h3`
   font-size: ${styleSet.fontSize.s6};
-  padding: 30px 0;
+  padding-block: 5%;
   font-family: ${styleSet.font.B};
   padding-bottom: 10px;
   text-align: left;
@@ -363,7 +409,6 @@ export const H3 = styled.h3`
 export const BoxBtn = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
   .cart {
     background: ${styleSet.colors.white};
     font-size: ${styleSet.fontSize.s7};
@@ -443,7 +488,7 @@ export const Wrapper3 = styled.div`
   max-width: 1460px;
   margin: 0 auto;
   background: ${styleSet.colors.white};
-  padding: 30px;
+  padding: 0 30px 30px 30px;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
@@ -478,15 +523,13 @@ export const UserInfo = styled.p`
 
 export const Comment = styled.section`
   border-radius: 15px;
-  padding-block: 30px;
-  margin-top: 30px;
 `;
 
 export const Count = styled.ul`
   display: flex;
   gap: 15px;
-  border-bottom: 1px solid #000;
-  padding-block: 20px;
+  border-bottom: 1px solid ${styleSet.colors.black};
+  padding-bottom: 20px;
   li {
     font-size: ${styleSet.fontSize.s8};
     color: ${styleSet.colors.darkgray};
