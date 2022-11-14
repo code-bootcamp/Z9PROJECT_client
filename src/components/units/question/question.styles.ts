@@ -31,6 +31,7 @@ export const Check = styled.strong`
 `;
 
 export const User = styled.section`
+  position: relative;
   img {
     max-width: 60px;
     max-height: 60px;
@@ -98,13 +99,13 @@ export const Contents = styled.p`
   font-size: ${styleSet.fontSize.s9};
   flex-direction: column;
   cursor: pointer;
-  max-width: 210px;
+  width: 210px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 
   @media ${styleSet.breakePoints.mobile} {
-    max-width: 100%;
+    width: 100%;
     min-height: 50px;
     overflow: auto;
     white-space: normal;
@@ -115,7 +116,7 @@ export const Contents = styled.p`
 `;
 
 export const Answer = styled.p`
-  color: ${styleSet.colors.primary};
+  color: ${styleSet.colors.black};
   font-family: ${styleSet.font.B};
   display: flex;
   justify-content: flex-end;

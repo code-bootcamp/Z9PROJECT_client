@@ -1,3 +1,4 @@
+import { CloseCircleOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
 
@@ -100,9 +101,6 @@ export const Contents = styled.p`
   display: block;
   width: 100%;
   padding: 10px 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 
   @media ${styleSet.breakePoints.mobile} {
     max-height: 300px;
@@ -118,6 +116,7 @@ export const Answer = styled.p`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  align-items: flex-end;
   button {
     font-family: ${styleSet.font.B};
     color: ${styleSet.colors.primary};
@@ -131,4 +130,142 @@ export const Answer = styled.p`
   @media ${styleSet.breakePoints.mobile} {
     padding: 0 0 10px 30px;
   }
+`;
+
+export const Modal = styled.section`
+  max-width: 600px;
+  height: 800px;
+  background: ${styleSet.colors.white};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid ${styleSet.colors.darkgray};
+  border-radius: 10px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  z-index: 11;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+`;
+
+export const H1 = styled.h1`
+  font-size: ${styleSet.fontSize.s5};
+  font-family: ${styleSet.font.B};
+  &:last-of-type {
+    border-top: 1px solid ${styleSet.colors.black};
+    width: 100%;
+    padding-top: 15px;
+  }
+`;
+
+export const Textarea1 = styled.textarea`
+  resize: none;
+  padding: 15px;
+  width: 100%;
+  height: 55%;
+  border-radius: 10px;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SubmitBtn = styled.button`
+  width: 100%;
+  height: 15%;
+  font-size: ${styleSet.fontSize.s7};
+  font-family: ${styleSet.font.B};
+  border: 1px solid ${styleSet.colors.black};
+  position: relative;
+  color: ${styleSet.colors.black};
+  overflow: hidden;
+  background: ${styleSet.colors.white};
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.black};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+`;
+
+export const BgLayer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+`;
+export const Close = styled(CloseCircleOutlined)`
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-size: ${styleSet.fontSize.s6};
+  cursor: pointer;
+  color: ${styleSet.colors.black};
+`;
+
+export const UserBox = styled.section`
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  width: 100%;
+  height: 70%;
+`;
+export const Div3 = styled.div`
+  width: 25%;
+  img {
+    max-height: 80px;
+    max-width: 80px;
+  }
+`;
+
+export const Div2 = styled.div`
+  width: 75%;
+  height: 100%;
+
+  p {
+    &:nth-last-of-type(1) {
+      text-align: right;
+      padding: 10px 0;
+    }
+  }
+`;
+
+export const UserName = styled.div`
+  word-break: keep-all;
+  white-space: nowrap;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s8};
+`;
+export const Question = styled.p`
+  height: 180px;
+  overflow: auto;
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+  width: 370px;
 `;

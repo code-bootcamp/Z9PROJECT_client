@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { ErrorModal } from "../../../commons/modal/modal";
-import { FETCH_PRODUCT, LIKE_PRODUCT } from "./detail.queries";
+import { FETCH_IS_LIKED, FETCH_PRODUCT, LIKE_PRODUCT } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
 import ProductDetailPresenter3 from "./skin3/detail.presenter3";
@@ -11,16 +11,42 @@ export default function ProductDetailContainer() {
   const router = useRouter();
   const [count, setCount] = useState(1);
   const [cart, setCart] = useState(false);
+  const [thumbnail, setThumbnail] = useState("");
 
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
+    fetchPolicy: "cache-first",
   });
-  console.log(data);
 
-  const [likeProduct] = useMutation(LIKE_PRODUCT);
+  useEffect(() => {
+    setThumbnail(data?.fetchProduct.images[0]);
+  }, [data]);
+
+  const [likeProduct] = useMutation(LIKE_PRODUCT, {
+    refetchQueries: [
+      {
+        query: FETCH_IS_LIKED,
+        variables: { productId: String(router.query.useditemId) },
+      },
+    ],
+  });
+
+  const { data: fetchIsLiked } = useQuery(FETCH_IS_LIKED, {
+    variables: { productId: String(router.query.useditemId) },
+  });
+
+  useEffect(() => {
+    if (fetchIsLiked?.fetchIsLiked === true) {
+      setCart(true);
+    }
+  }, [fetchIsLiked]);
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
+  };
+
+  const onClickImages = (event: any) => {
+    setThumbnail(event.target.src);
   };
 
   const onClickCount = (e: MouseEvent<HTMLButtonElement>) => {
@@ -35,10 +61,10 @@ export default function ProductDetailContainer() {
     }
   };
 
-  const onClickLike = async (productId: any) => {
+  const onClickLike = async () => {
     setCart((prev) => !prev);
     await likeProduct({
-      variables: { productId: router.query.productId },
+      variables: { productId: String(router.query.useditemId) },
     });
   };
 
@@ -58,6 +84,8 @@ export default function ProductDetailContainer() {
         data={data}
         discount={discount}
         onClickLike={onClickLike}
+        thumbnail={thumbnail}
+        onClickImages={onClickImages}
       />
       {/* <ProductDetailPresenter2
         handleChange={handleChange}
@@ -65,8 +93,10 @@ export default function ProductDetailContainer() {
         count={count}
         cart={cart}
         data={data}
-        onClickLike={onClickLike}
         discount={discount}
+        onClickLike={onClickLike}
+        thumbnail={thumbnail}
+        onClickImages={onClickImages}
       /> */}
       {/* <ProductDetailPresenter3
         handleChange={handleChange}
@@ -76,6 +106,8 @@ export default function ProductDetailContainer() {
         data={data}
         discount={discount}
         onClickLike={onClickLike}
+        thumbnail={thumbnail}
+        onClickImages={onClickImages}
       /> */}
     </>
   );
