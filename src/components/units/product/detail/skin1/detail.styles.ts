@@ -465,13 +465,19 @@ export const Title = styled.ul`
   display: flex;
   justify-content: space-between;
   text-align: center;
+  &.writer {
+    max-width: 110px;
+    min-width: 50px;
+  }
+  &.createdAt {
+  }
   li {
     &:nth-last-of-type(1) {
       max-width: 100px;
       width: 100%;
     }
     &:nth-last-of-type(4) {
-      max-width: 185px;
+      max-width: 165px;
       width: 100%;
     }
   }

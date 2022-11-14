@@ -5,9 +5,9 @@ export const CREATE_QUESTION = gql`
     createQuestion(createQuestionInput: $createQuestionInput) {
       id
       question
+      status
       createdAt
       deletedAt
-      isDeleted
       product {
         id
         name
@@ -25,36 +25,38 @@ export const CREATE_QUESTION = gql`
         option5
         createdAt
       }
-      # user {
-      #   id
-      #   email
-      #   userType
-      #   nickname
-      #   createdAt
-      #   updatedAt
-      #   deletedAt
-      # }
+      user {
+        id
+        email
+        userType
+        nickname
+        createdAt
+        profileImg
+      }
     }
   }
 `;
 
 export const FETCH_QUESTIONS = gql`
-  query fetchQuestions {
-    fetchQuestions {
+  query fetchQuestions($productId: String!) {
+    fetchQuestions(productId: $productId) {
       id
       question
+      status
       createdAt
       deletedAt
-      isDeleted
-      # user {
-      #   id
-      #   email
-      #   userType
-      #   nickname
-      #   createdAt
-      #   updatedAt
-      #   deletedAt
-      # }
+      user {
+        id
+        email
+        userType
+        nickname
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      product {
+        id
+      }
     }
   }
 `;
@@ -80,8 +82,13 @@ export const UPDATE_QUESTION = gql`
       id
       question
       createdAt
-      deletedAt
-      isDeleted
+      # user {
+      #   id
+      #   email
+      #   userType
+      #   nickname
+      #   createdAt
+      # }
     }
   }
 `;
