@@ -88,3 +88,20 @@ export const FETCH_USER = gql`
     }
   }
 `;
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $productId: String
+    $updateProductInput: UpdateProductInput!
+    $updateProductDetailInput: UpdateProductDetailInput!
+  ) {
+    updateProduct(
+      productId: $productId
+      updateProductInput: $updateProductInput
+      updateProductDetailInput: $updateProductDetailInput
+    ) {
+      id
+      name
+    }
+  }
+`;
