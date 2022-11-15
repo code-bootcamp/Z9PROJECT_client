@@ -17,7 +17,7 @@ const Input = styled.input`
   padding: ${(P: IInputProps) =>
     P.edit ? `20px 20px 20px 20px` : `20px 20px 20px 55px`};
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid ${styleSet.colors.gray};
   outline-color: ${styleSet.colors.primary};
 
@@ -47,6 +47,7 @@ type IInput01Props = {
     | Merge<FieldError, FieldErrorsImpl<any>>
     | undefined;
   edit?: boolean;
+  defaultValue?: string;
 };
 
 type IInputProps = {
@@ -59,7 +60,7 @@ type IInputProps = {
 };
 
 export default function Input01(P: IInput01Props) {
-  const { type, placeholder, register, error, edit } = P;
+  const { type, placeholder, register, error, edit, defaultValue } = P;
 
   return (
     <Wrapper>
@@ -69,6 +70,7 @@ export default function Input01(P: IInput01Props) {
         {...register}
         error={error}
         edit={edit}
+        defaultValue={defaultValue}
       />
       <Error className="error" error={error}>
         {error}

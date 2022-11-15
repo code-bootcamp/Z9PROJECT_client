@@ -4,13 +4,17 @@ import { styleSet } from "../../../../../commons/styles/styleSet";
 
 export const InfoRight = styled.div`
   width: 380px;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 30px;
   border: 1px solid #eee;
-  position: absolute;
+  position: sticky;
+  bottom: 30%;
   background: ${styleSet.colors.white};
-  right: 0;
-  top: 50%;
+  margin-left: 73%;
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: none;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -133,7 +137,7 @@ export const BoxBtn = styled.div`
 
   .cart {
     font-size: ${styleSet.fontSize.s7};
-    border: 1px solid #ccc;
+    border: 1px solid ${styleSet.colors.lightGray};
     font-family: ${styleSet.font.B};
     height: 60px;
     width: 40%;
