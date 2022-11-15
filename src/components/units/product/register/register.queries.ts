@@ -34,6 +34,40 @@ export const CREATE_PRODUCT = gql`
       createdAt
       updatedAt
       deletedAt
+      user {
+        id
+        userType
+        nickname
+        profileImg
+        creatorAuthImg
+        isAuthedCreator
+        snsName
+        snsChannel
+        followerNumber
+        mainContents
+        introduce
+        createdAt
+      }
+      skin
+      color
+      productDetail {
+        id
+        type
+        option1
+        option2
+        option3
+        option4
+        option5
+        option6
+        option7
+        option8
+        option9
+        option10
+        option11
+        option12
+        option13
+        option14
+      }
     }
   }
 `;
