@@ -60,7 +60,7 @@ export default function AnswerWriter(P: any) {
       });
       SuccessModal("답변이 수정되었습니다.");
       setAnswerModal(false);
-      setIsAnswer(false);
+      setIsAnswer((prev: any) => !prev);
     } catch (error) {
       ErrorModal(error as string);
     }
