@@ -47,3 +47,25 @@ export const FETCH_IS_LIKED = gql`
     fetchIsLiked(productId: $productId)
   }
 `;
+
+export const CREATE_ORDER = gql`
+  mutation createOrder($productId: String!, $price: Float!, $quantity: Float!) {
+    createOrder(productId: $productId, price: $price, quantity: $quantity) {
+      id
+      price
+      quantity
+      status
+      createdAt
+      updatedAt
+      user {
+        id
+        nickname
+        phoneNumber
+        profileImg
+        snsName
+        snsChannel
+        point
+      }
+    }
+  }
+`;
