@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../../commons/styles/styleSet";
@@ -43,16 +43,14 @@ const Img = styled.img`
 
 type IImgDropzoneProps = {
   onDropImg: (inputFiles: File[]) => void;
+  fetchImg?: any;
 };
 
 export default function ImgDropzone(P: IImgDropzoneProps) {
+  const { onDropImg, fetchImg } = P;
   const [preview, setPreview] = useState<string[]>([]);
 
   const onDrop = (acceptedFiles: Array<File>) => {
-    console.log(preview);
-    console.log(preview.length);
-    console.log(acceptedFiles.length);
-
     if (acceptedFiles.length > 4 || preview.length + acceptedFiles.length > 4) {
       ErrorModal("이미지는 최대 4장까지 가능합니다.");
       return;
@@ -66,7 +64,7 @@ export default function ImgDropzone(P: IImgDropzoneProps) {
         setPreview((prev: any) => [...prev, file]);
       };
     });
-    P.onDropImg(acceptedFiles);
+    onDropImg(acceptedFiles);
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -86,9 +84,16 @@ export default function ImgDropzone(P: IImgDropzoneProps) {
         )}
       </UploadWrapper>
       <ImgWrapper>
+        {preview?.length !== 0 || fetchImg?.length !== undefined ? (
+          <div>미리보기</div>
+        ) : null}
         {preview?.length !== 0
           ? preview.map((el, i) => (
-              <Img src={el} alt={`업로드한 이미지 ${i + 1}`} />
+              <Img src={el} alt={`업로드한 이미지 ${i + 1}`} key={i} />
+            ))
+          : fetchImg?.length !== 0
+          ? fetchImg?.map((el: any, i: number) => (
+              <Img src={el} alt={`저장된 이미지 ${i + 1}`} key={i} />
             ))
           : null}
       </ImgWrapper>
