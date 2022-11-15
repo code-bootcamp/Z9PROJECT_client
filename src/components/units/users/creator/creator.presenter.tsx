@@ -4,25 +4,31 @@ import Input01 from "../../../commons/input/input01/input01";
 import Upload01 from "../../../commons/upload/upload01/upload01";
 import Upload02 from "../../../commons/upload/upload02/upload02";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
+import ZipcodeModal from "../../../commons/modal/zipcode";
+import CountDown from "../../../commons/count";
 
 export default function CreatorPresenter(P: ICreatorPresenterProps) {
   const {
-    onSubmit,
+    onClickSignUp,
     register,
     handleSubmit,
     formState,
-    certifiFetchUrl,
     onChangeCertifiFile,
     onChageProfileFile,
     profilePreview,
-    profileFetchUrl,
+    onClickCertNumber,
+    onClickCertConfirm,
+    onClickNameConfirm,
+    setValue,
+    openTime,
+    onChangeChecked,
   } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
     <S.Container>
       <S.Title>크리에이터 회원가입</S.Title>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <S.Form onSubmit={handleSubmit(onClickSignUp)}>
         <S.Label>
           <S.Svg
             viewBox="0 0 1024 1024"
@@ -86,7 +92,9 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             register={register("phoneNumber")}
             error={formState.errors.phoneNumber?.message}
           />
-          <S.Btn1 type="button">인증번호받기</S.Btn1>
+          <S.Btn1 type="button" onClick={onClickCertNumber}>
+            인증번호받기
+          </S.Btn1>
         </S.Label>
         <S.Label>
           <S.Svg
@@ -101,8 +109,11 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             placeholder="인증번호를 입력하세요."
             register={register("keyNumber")}
             error={formState.errors.keyNumber?.message}
-          />{" "}
-          <S.Btn2 type="button">인증번호확인</S.Btn2>
+          />
+          {openTime && <CountDown min={3} sec={0} />}
+          <S.Btn2 type="button" onClick={onClickCertConfirm}>
+            인증번호확인
+          </S.Btn2>
         </S.Label>
 
         <S.AddressWrapper>
@@ -122,7 +133,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               register={register("zipcode")}
               error={formState.errors.zipcode?.message}
             />{" "}
-            <S.Btn1 type="button">주소검색</S.Btn1>
+            <ZipcodeModal setValue={setValue} />
           </S.Label>
           <S.Label>
             <S.Svg
@@ -171,10 +182,12 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
           <Input01
             type="text"
             placeholder="지구에서 사용할 닉네임을 기입하세요."
-            register={register("nickName")}
-            error={formState.errors.nickName?.message}
+            register={register("nickname")}
+            error={formState.errors.nickname?.message}
           />
-          <S.Btn1 type="button">중복확인</S.Btn1>
+          <S.Btn1 type="button" onClick={onClickNameConfirm}>
+            중복확인
+          </S.Btn1>
         </S.Label>
         <S.InfoWrapper>
           <S.SubTitle>크리에이터 추가정보</S.SubTitle>
@@ -205,14 +218,21 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               <Input01
                 type="text"
                 placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
-                register={register("creator")}
-                error={formState.errors.creator?.message}
+                register={register("snsName")}
+                error={formState.errors.snsName?.message}
               />
             </S.SnsLabelInner>
             <S.SnsLabelInner>
-              <S.SnsCheckWrapper className="wrapper">
+              <S.SnsCheckWrapper
+                className="wrapper"
+                error={formState.errors.snsChannel?.message}
+              >
                 <S.LabelWrapper>
-                  <S.RadioInput type="radio" name="sns" />
+                  <S.RadioInput
+                    type="radio"
+                    value={"INSTAGRAM"}
+                    {...register("snsChannel")}
+                  />
                   <S.RadioPulse className="radio-pulse" />
                   <S.RadioButton className="radio-button" />
                   <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
@@ -221,7 +241,11 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                   </S.RadioLabel>
                 </S.LabelWrapper>
                 <S.LabelWrapper>
-                  <S.RadioInput type="radio" name="sns" />
+                  <S.RadioInput
+                    type="radio"
+                    value={"YOUTUBE"}
+                    {...register("snsChannel")}
+                  />
                   <S.RadioPulse className="radio-pulse" />
                   <S.RadioButton className="radio-button" />
                   <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
@@ -229,10 +253,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 </S.LabelWrapper>
               </S.SnsCheckWrapper>
             </S.SnsLabelInner>
-            <Upload01
-              onChangeCertifiFile={onChangeCertifiFile}
-              certifiFetchUrl={certifiFetchUrl}
-            />
+            <Upload01 onChangeCertifiFile={onChangeCertifiFile} />
           </S.SnsLabel>
           <S.UpoloadWrapper>
             <S.ProfileWrapper>
@@ -242,14 +263,11 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 <img src="/users/user/img_id.svg" alt="기본 이미지" />
               )}
             </S.ProfileWrapper>
-            <Upload02
-              onChageProfileFile={onChageProfileFile}
-              profileFetchUrl={profileFetchUrl}
-            />
+            <Upload02 onChageProfileFile={onChageProfileFile} />
           </S.UpoloadWrapper>
           <S.Concept
             placeholder="주력 콘텐츠를 입력하세요. 예) 뷰티, 브이로그, 게임"
-            {...register("concept")}
+            {...register("mainContents")}
           />
           <S.Introduce
             placeholder="구매자에게 자신을 소개해주세요."
@@ -269,7 +287,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               <Input01
                 type="text"
                 placeholder="정산받을 계좌번호를 입력하세요."
-                register={register("count")}
+                register={register("account")}
                 error={formState.errors.addressDetail?.message}
               />
             </S.Label>
@@ -300,14 +318,14 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               <Input01
                 type="text"
                 placeholder="예금주 실명을 입력하세요."
-                register={register("countName")}
+                register={register("accountName")}
                 error={formState.errors.addressDetail?.message}
               />
             </S.Label>
           </S.CountWrapper>
         </S.InfoWrapper>
 
-        <S.WrapperTermsOfUse>
+        <S.WrapperTermsOfUse error={formState.errors.terms?.message}>
           <label>개인정보 이용약관</label>
           <S.TermsOfUse>
             <p>[ 제로나인 이용 약관 ]</p>
@@ -337,7 +355,11 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
             </p>
           </S.TermsOfUse>
           <S.TermsCheckWrapper>
-            <S.InvisibleCheckbox type="checkbox" />
+            <S.InvisibleCheckbox
+              type="checkbox"
+              {...register("terms")}
+              onChange={onChangeChecked}
+            />
             <S.Checkbox className="checkbox"></S.Checkbox>
             <span> 동의합니다.</span>
           </S.TermsCheckWrapper>

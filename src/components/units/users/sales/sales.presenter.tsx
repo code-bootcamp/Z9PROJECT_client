@@ -4,22 +4,32 @@ import * as S from "./sales.styles";
 import { ISalesPresenterProps } from "./sales.types";
 
 export default function SalesPresenter(P: ISalesPresenterProps) {
-  const { onChangePage } = P;
+  const { onChangePage, tab, setTab, onClickTab } = P;
   const { RangePicker } = DatePicker;
 
   return (
     <S.Container>
       <S.SubTitle>판매내역</S.SubTitle>
       <S.BoardTopWrapper>
-        <S.PeriodWrapper>
-          <S.PeriodBtn>1개월</S.PeriodBtn>
-          <S.PeriodBtn>3개월</S.PeriodBtn>
-          <S.PeriodBtn>6개월</S.PeriodBtn>
-          <S.PeriodBtn>12개월</S.PeriodBtn>
+        <S.PeriodWrapper tab={tab}>
+          <S.PeriodBtn id="1" onClick={onClickTab}>
+            1개월
+          </S.PeriodBtn>
+          <S.PeriodBtn id="2" onClick={onClickTab}>
+            3개월
+          </S.PeriodBtn>
+          <S.PeriodBtn id="3" onClick={onClickTab}>
+            6개월
+          </S.PeriodBtn>
+          <S.PeriodBtn id="4" onClick={onClickTab}>
+            12개월
+          </S.PeriodBtn>
         </S.PeriodWrapper>
         <S.SearchWrapper>
           <RangePicker />
-          <S.SearchBtn>조회</S.SearchBtn>
+          <S.SearchBtn>
+            <span>조회</span>
+          </S.SearchBtn>
         </S.SearchWrapper>
       </S.BoardTopWrapper>
       <S.BoardBody>
@@ -37,7 +47,13 @@ export default function SalesPresenter(P: ISalesPresenterProps) {
             <S.BPrice>{PointFormatter(100000)}</S.BPrice>
             <S.BPurchaser>코난</S.BPurchaser>
             <S.BRefund>
-              {true ? <S.RefundBtn>환불</S.RefundBtn> : "환불완료"}
+              {true ? (
+                <S.RefundBtn>
+                  <span>환불신청</span>
+                </S.RefundBtn>
+              ) : (
+                "환불완료"
+              )}
             </S.BRefund>
           </S.BoardLi>
           <S.BoardLi>

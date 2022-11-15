@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
+import { ILayoutStylesProps } from "./layout.types";
 
 export const Container = styled.header`
   max-width: 100%;
@@ -13,7 +14,6 @@ export const Container = styled.header`
     display: none;
   }
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 500px;
     .mobile {
       display: none;
     }
@@ -21,9 +21,19 @@ export const Container = styled.header`
       display: block;
     }
     ul {
+      width: 100%;
       justify-content: space-between;
-      min-width: 500px;
     }
+  }
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
+`;
+
+export const Span = styled.span`
+  strong {
+    text-decoration-line: underline;
+    text-underline-position: under;
   }
 `;
 
@@ -61,7 +71,7 @@ export const Hamburger = styled.div`
   height: 100vh;
   position: absolute;
   top: 100px;
-  right: ${(props: any) => (props.hamburger ? "0%" : "100%")};
+  right: ${(props: ILayoutStylesProps) => (props.hamburger ? "0%" : "100%")};
   transition: 0.5s;
   padding: 20px;
   text-align: center;
@@ -89,14 +99,22 @@ export const Hamburger = styled.div`
   }
 `;
 
-export const Footer = styled.footer`
-  max-width: 100%;
+export const Mobile = styled.li`
+  cursor: pointer;
+  strong {
+    text-decoration-line: underline;
+    text-underline-position: under;
+  }
 `;
 
 export const Footer = styled.footer`
   width: 100%;
   height: 250px;
   border-top: 1px solid ${styleSet.colors.black};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 550px;
+  }
 `;
 
 export const Wrapper = styled.main`
@@ -105,13 +123,11 @@ export const Wrapper = styled.main`
   height: 100%;
   margin: 0 auto;
   display: flex;
-  height: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
   }
 `;
@@ -125,6 +141,7 @@ export const Ul = styled.ul`
   align-items: center;
   gap: 50px;
   li {
+    position: relative;
     transition: 0.5s;
     &:hover {
       color: ${styleSet.colors.black};
@@ -140,8 +157,106 @@ export const Ul = styled.ul`
   }
 `;
 
+export const Ul2 = styled.ul`
+  padding: 10px;
+  width: 150px;
+  height: 150px;
+  background: ${styleSet.colors.white};
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  top: 60px;
+  right: -5px;
+
+  &::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background: ${styleSet.colors.white};
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    position: absolute;
+    transform: rotate(-135deg);
+    top: -8px;
+    right: 15px;
+  }
+
+  li {
+    width: 100%;
+    text-align: center;
+    font-family: ${styleSet.font.L};
+    font-size: ${styleSet.fontSize.s8};
+    color: ${styleSet.colors.black};
+
+    &:nth-last-of-type(1) {
+      border-top: 1px solid ${styleSet.colors.lightGray};
+      padding-top: 5px;
+    }
+    &:hover {
+      color: ${styleSet.colors.primary};
+      font-family: ${styleSet.font.B};
+    }
+
+    span {
+      font-size: ${styleSet.fontSize.s8};
+      padding: 0;
+      cursor: default;
+    }
+  }
+`;
+
+export const LiPoint = styled.li`
+  padding-bottom: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 1px solid ${styleSet.colors.gray};
+  span {
+    padding: 0;
+    font-family: ${styleSet.font.B};
+    color: ${styleSet.colors.black};
+    strong {
+      font-family: ${styleSet.font.B};
+      font-size: ${styleSet.fontSize.s8};
+    }
+  }
+  &:hover {
+    background: none;
+  }
+`;
+export const LiPointM = styled.li`
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    div {
+      font-family: ${styleSet.font.L};
+      color: ${styleSet.colors.black};
+    }
+  }
+
+  span {
+    padding: 0;
+    font-family: ${styleSet.font.B};
+    color: ${styleSet.colors.black};
+    font-size: ${styleSet.fontSize.s7};
+    strong {
+      font-family: ${styleSet.font.B};
+      font-size: ${styleSet.fontSize.s10};
+    }
+  }
+  &:hover {
+    background: none;
+  }
+`;
+
 export const Wrapper2 = styled.main`
-  width: 1460px;
+  max-width: 1460px;
   height: 100%;
   padding: 0 30px;
   margin: 0 auto;
@@ -151,7 +266,6 @@ export const Wrapper2 = styled.main`
   justify-content: center;
 
   @media ${styleSet.breakePoints.mobile} {
-    min-width: 550px;
     width: 100%;
   }
 `;
@@ -212,7 +326,7 @@ export const Bottom = styled.ul`
 export const Section = styled.section`
   display: flex;
   gap: 10px;
-  p {
+  a {
     background-color: ${styleSet.colors.primary};
     width: 50px;
     height: 50px;
