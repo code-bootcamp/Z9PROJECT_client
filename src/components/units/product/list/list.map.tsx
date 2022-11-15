@@ -1,10 +1,10 @@
 import Search from "antd/lib/transfer/search";
-import InfiniteScroll from "react-infinite-scroller";
+import InfiniteScroll from "react-infinite-scroll-component";
 import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
 
 export default function ProductListMap(P: any) {
-  const { onClickTab, tab, data, onLoadMore } = P;
+  const { onClickTab, tab, data, onLoadMore, length } = P;
 
   return (
     <>
@@ -29,7 +29,14 @@ export default function ProductListMap(P: any) {
             <Search placeholder="검색어를 입력해주세요." />
           </S.SearchBox>
           <S.Main>
-            <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
+            <InfiniteScroll
+              className="infinite-scroll"
+              dataLength={length}
+              loader={<h1>Loading...</h1>}
+              endMessage={<h1>야 끝났어 더 내리지마;;</h1>}
+              next={onLoadMore}
+              hasMore={true}
+            >
               {data?.fetchProductsByPages.map((el: any) => (
                 <ProductListPresenter key={el.id} el={el} />
               ))}
