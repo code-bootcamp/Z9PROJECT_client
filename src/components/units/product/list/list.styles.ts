@@ -87,7 +87,7 @@ export const Wrapper = styled.div`
 
 export const Main = styled.main`
   margin-top: 50px;
-  & > div {
+  .infinite-scroll {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -96,7 +96,7 @@ export const Main = styled.main`
   }
 
   @media ${styleSet.breakePoints.mobile} {
-    & > div {
+    .infinite-scroll {
       flex-direction: column;
     }
   }

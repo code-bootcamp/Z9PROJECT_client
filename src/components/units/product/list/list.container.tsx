@@ -5,6 +5,7 @@ import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
+  const [length, setLength] = useState(0);
 
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "network-only",
@@ -17,12 +18,14 @@ export default function ProductListContainer() {
 
   const onLoadMore = () => {
     if (!data) return;
-
+    setLength(data?.fetchProductsByPages.length);
+    console.log(length);
     void fetchMore({
       variables: { page: Math.ceil(data?.fetchProductsByPages.length / 4) + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchProductsByPages)
+        if (!fetchMoreResult?.fetchProductsByPages) {
           return { fetchProductsByPages: [...prev.fetchProductsByPages] };
+        }
         return {
           fetchProductsByPages: [
             ...prev.fetchProductsByPages,
@@ -36,6 +39,7 @@ export default function ProductListContainer() {
   return (
     <>
       <ProductListMap
+        length={length}
         tab={tab}
         onClickTab={onClickTab}
         data={data}
