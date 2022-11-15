@@ -12,4 +12,8 @@ export type IDetailPresenterProps = {
   onClickImages?: any;
   onClickAnswer?: () => void;
   isTrue?: boolean;
+  onClickOrder: () => Promise<void>;
+  onClickTab: () => void;
+  onClickTab2: () => void;
+  important: boolean;
 };

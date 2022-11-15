@@ -34,6 +34,22 @@ export const CREATE_PRODUCT = gql`
       createdAt
       updatedAt
       deletedAt
+      user {
+        id
+        userType
+        nickname
+        profileImg
+        creatorAuthImg
+        isAuthedCreator
+        snsName
+        snsChannel
+        followerNumber
+        mainContents
+        introduce
+        createdAt
+      }
+      skin
+      color
       productDetail {
         id
         type
