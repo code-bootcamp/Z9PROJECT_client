@@ -1,20 +1,20 @@
 import { DatePicker } from "antd";
 import * as S from "./register.styles";
+import ImgDropzone from "./atom/dropzone";
+import { selectCategory } from "./atom/category";
 import { IRegisterPresenterProps } from "./register.types";
 import Input02 from "../../../commons/input/input02/input02";
 import dynamic from "next/dynamic";
 const EditorPage = dynamic(() => import("./atom/editor"), {
   ssr: false,
 });
-import ImgDropzone from "./atom/dropzone";
-import { selectCategory } from "./atom/category";
-import { PriceFormatter } from "../../../../commons/utils";
+import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
 
 export default function RegisterPresenter(P: IRegisterPresenterProps) {
   const {
+    edit,
     register,
     handleSubmit,
-    formState,
     getValues,
     onChangeCategory,
     category,
@@ -25,15 +25,21 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
     optionEntity,
     selectDate,
     onClickCreate,
+    onClickUpdate,
     onDropImg,
     watch,
+    fetchProduct,
   } = P;
   const { RangePicker } = DatePicker;
 
   return (
     <S.Container>
-      <form onSubmit={handleSubmit(onClickCreate)}>
-        <S.Title>{false ? "상품 수정 " : "상품 등록"}</S.Title>
+      <form
+        onSubmit={
+          edit ? handleSubmit(onClickUpdate) : handleSubmit(onClickCreate)
+        }
+      >
+        <S.Title>{edit ? "상품 수정 " : "상품 등록"}</S.Title>
         <S.TypeWrapper>
           <S.Item>
             <S.SubTitle>상품명</S.SubTitle>
@@ -62,17 +68,29 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
                 -
               </S.OptionMinuBtn>
             </S.OptionWrapper>
-            {new Array(option).fill(1).map((el, i) => (
+            {new Array(option).fill(1).map((_, i) => (
               <Input02
                 type="text"
                 placeholder="없으면 빈 칸"
                 register={register(`option${i + 2}`)}
+                key={i}
               />
             ))}
           </S.Item>
           <S.Item>
             <S.SubTitle>판매 기간</S.SubTitle>
-            <RangePicker onChange={selectDate} />
+            <RangePicker
+              onChange={selectDate}
+              // format={dateFormat}
+              placeholder={
+                edit
+                  ? [
+                      dateFormatter(getValues("validFrom")),
+                      dateFormatter(getValues("validUntil")),
+                    ]
+                  : ["시작 날짜", "종료 날짜"]
+              }
+            />
           </S.Item>
           <S.Item>
             <S.SubTitle>
@@ -122,7 +140,10 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
             <S.SubTitle>
               상품 이미지<span>&nbsp;(최대 4개)</span>
             </S.SubTitle>
-            <ImgDropzone onDropImg={onDropImg} />
+            <ImgDropzone
+              onDropImg={onDropImg}
+              fetchImg={fetchProduct?.fetchProduct.images}
+            />
           </S.Item>
           <S.Item>
             <S.SubTitle>상세 설명</S.SubTitle>
@@ -130,7 +151,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
               <EditorPage
                 contentsRef={contentsRef}
                 onChangeContents={onChangeContents}
-                // initialValue={""}
+                initialValue={fetchProduct?.fetchProduct.content}
               />
             </div>
           </S.Item>
@@ -138,21 +159,21 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
             <S.SubTitle>스킨 선택</S.SubTitle>
             <S.CheckWrapper className="wrapper">
               <S.LabelWrapper>
-                <S.RadioInput type="radio" value={1} {...register("skin")} />
+                <S.RadioInput type="radio" value={"1"} {...register("skin")} />
                 <S.RadioPulse className="radio-pulse" />
                 <S.RadioButton className="radio-button" />
                 <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
                 <S.RadioLabel className="radio-label">기본</S.RadioLabel>
               </S.LabelWrapper>
               <S.LabelWrapper>
-                <S.RadioInput type="radio" value={2} {...register("skin")} />
+                <S.RadioInput type="radio" value={"2"} {...register("skin")} />
                 <S.RadioPulse className="radio-pulse" />
                 <S.RadioButton className="radio-button" />
                 <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
                 <S.RadioLabel className="radio-label">크리에이터</S.RadioLabel>
               </S.LabelWrapper>
               <S.LabelWrapper>
-                <S.RadioInput type="radio" value={3} {...register("skin")} />
+                <S.RadioInput type="radio" value={"3"} {...register("skin")} />
                 <S.RadioPulse className="radio-pulse" />
                 <S.RadioButton className="radio-button" />
                 <S.RadioButtonInner className="radio-button-inner"></S.RadioButtonInner>
@@ -170,13 +191,13 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
             </span>
           </S.SubTitle>
           <S.CategorySelect
-            defaultValue="default"
+            defaultValue={edit ? getValues("info.type") : "default"}
             onChange={onChangeCategory}
             options={selectCategory}
           />
           <S.CategoryWrapper>
             {category.map((el, i) => (
-              <S.SubWrapper>
+              <S.SubWrapper key={i}>
                 <S.CategoryTitle>{el ? el : "카테고리"}</S.CategoryTitle>{" "}
                 <Input02
                   type="text"
@@ -227,7 +248,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
           <div>모든 항목을 기입해야 상품 등록됩니다:)</div>
         </S.BottomText>
         <S.SubmitBtn>
-          <span>{false ? "상품 수정" : "상품 등록"}</span>
+          <span>{edit ? "수정하기" : "등록하기"}</span>
         </S.SubmitBtn>
       </form>
     </S.Container>
