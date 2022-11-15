@@ -9,7 +9,15 @@ import * as S from "./product01.styles";
 import { IProduct01Props } from "./product01.types";
 
 export default function Product01(P: IProduct01Props) {
-  const { onClickCount, count, cart, data, discount, onClickLike } = P;
+  const {
+    onClickCount,
+    count,
+    cart,
+    data,
+    discount,
+    onClickLike,
+    onClickOrder,
+  } = P;
 
   const handleChange = (value: any) => {
     console.log(`selected ${value}`);
@@ -112,7 +120,9 @@ export default function Product01(P: IProduct01Props) {
             {cart && <HeartFilled />} {``}
             관심상품
           </button>
-          <button className="buy">바로 구매하기</button>
+          <button className="buy" onClick={onClickOrder}>
+            바로 구매하기
+          </button>
         </S.BoxBtn>
       </S.InfoRight>
     </>

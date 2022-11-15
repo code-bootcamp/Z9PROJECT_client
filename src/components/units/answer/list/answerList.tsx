@@ -1,4 +1,3 @@
-import { IQnaProps } from "../../question/question.types";
 import * as S from "../answer.styles";
 import AnswerWriter from "../write/answerWriter";
 
@@ -41,7 +40,9 @@ export default function AnswerList(P: any) {
             setAnswerModal={setAnswerModal}
             questionEl={el}
             isAnswer={true}
+            setIsAnswer={setIsAnswer}
             dom={dom}
+            onClickEditAnswer={onClickEditAnswer}
           />
         )}
       </S.User>
