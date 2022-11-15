@@ -34,6 +34,24 @@ export const CREATE_PRODUCT = gql`
       createdAt
       updatedAt
       deletedAt
+      productDetail {
+        id
+        type
+        option1
+        option2
+        option3
+        option4
+        option5
+        option6
+        option7
+        option8
+        option9
+        option10
+        option11
+        option12
+        option13
+        option14
+      }
     }
   }
 `;
@@ -51,6 +69,23 @@ export const FETCH_USER = gql`
   query fetchUser {
     fetchUser {
       id
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $productId: String
+    $updateProductInput: UpdateProductInput!
+    $updateProductDetailInput: UpdateProductDetailInput!
+  ) {
+    updateProduct(
+      productId: $productId
+      updateProductInput: $updateProductInput
+      updateProductDetailInput: $updateProductDetailInput
+    ) {
+      id
+      name
     }
   }
 `;
