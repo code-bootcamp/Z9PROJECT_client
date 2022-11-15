@@ -150,8 +150,8 @@ export default function ProductDetailContainer() {
         onClickOrder={onClickOrder}
         onClickTab={onClickTab}
         onClickTab2={onClickTab2}
-        important={important} */}
-      />
+        important={important}
+      /> */}
     </>
   );
 }
