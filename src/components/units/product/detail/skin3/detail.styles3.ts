@@ -149,6 +149,9 @@ export const InfoRight = styled.div`
   background: #f8f8f8;
   border-radius: 20px;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .top {
     display: flex;
     justify-content: space-between;
@@ -411,22 +414,56 @@ export const BoxBtn = styled.div`
   justify-content: space-between;
   .cart {
     background: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
+    border: 1px solid ${styleSet.colors.lightGray};
     width: 35%;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
     svg {
       color: ${styleSet.colors.red};
     }
   }
   .buy {
     background-color: ${styleSet.colors.subcolor4};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
     width: 60%;
     color: ${styleSet.colors.white};
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -5%;
+      left: -10%;
+      width: 0;
+      height: 120%;
+      background: #f6a70a;
+      transition: all 0.3s ease;
+      transform: skewX(15deg);
+    }
+    &:hover {
+      color: ${styleSet.colors.white};
+      ::before {
+        width: 120%;
+      }
+    }
+    .emotion {
+      display: block;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+  }
+
+  button {
+    font-size: ${styleSet.fontSize.s7};
+    font-family: ${styleSet.font.B};
+    position: relative;
+    overflow: hidden;
+    height: 60px;
   }
 `;
 

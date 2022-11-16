@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import UseAuth from "../hooks/useAuth";
 import MyPageLayoutPresenter from "./myPageLayout.presenter";
@@ -19,8 +19,10 @@ const LOGOUT = gql`
 export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
   const { children } = P;
   UseAuth();
+
   const [logout] = useMutation(LOGOUT);
   const router = useRouter();
+
   const nowUrl = router.asPath;
 
   const onClickMore = () => {
