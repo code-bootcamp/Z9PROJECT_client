@@ -15,6 +15,7 @@ export type IEditPresenterProps = {
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   onClickUpdate: (data: any) => void;
   profilePreview: string;
+  onClickMore: () => void;
   onClickCertNumber: () => Promise<void>;
   onClickCertConfirm: () => Promise<void>;
   onClickNameConfirm: () => Promise<void>;

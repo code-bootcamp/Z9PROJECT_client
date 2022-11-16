@@ -30,6 +30,8 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
+
+  position: relative;
 `;
 
 export const UploadWrapper = styled.div`
@@ -351,4 +353,10 @@ export const Btn2 = styled.button`
   color: white;
   background: ${styleSet.colors.subcolor1};
   border-radius: 10px;
+`;
+
+export const DeleteBtn = styled.button`
+  position: absolute;
+  right: 0;
+  bottom: 60px;
 `;
