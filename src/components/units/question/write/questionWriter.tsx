@@ -2,15 +2,18 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import { CREATE_QUESTION, FETCH_USER } from "../question.queries";
+import {
+  CREATE_QUESTION,
+  FETCH_QUESTIONS,
+  FETCH_USER,
+} from "../question.queries";
 import * as S from "../question.styles";
 
 export default function QuestionWriter() {
   const router = useRouter();
-  const [question, setQuestion] = useState("");
   const [createQuestion] = useMutation(CREATE_QUESTION);
-
   const { data: userData } = useQuery(FETCH_USER);
+  const [question, setQuestion] = useState("");
 
   const onChangeQuestion = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setQuestion(e.target.value);
@@ -24,19 +27,16 @@ export default function QuestionWriter() {
         variables: {
           createQuestionInput: {
             question,
-            userId: userData?.fetchUser.id,
-            productId: router.query.useditemId,
+            userId: String(userData?.fetchUser.id),
+            productId: String(router.query.useditemId),
           },
         },
-        update(cache, { data }) {
-          cache.modify({
-            fields: {
-              fetchQuestions: (prev) => {
-                return [data, ...prev];
-              },
-            },
-          });
-        },
+        refetchQueries: [
+          {
+            query: FETCH_QUESTIONS,
+            variables: { productId: String(router.query.useditemId) },
+          },
+        ],
       });
       SuccessModal("질문이 등록되었습니다.");
     } catch (error) {

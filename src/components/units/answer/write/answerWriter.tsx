@@ -1,12 +1,15 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
-import { CREATE_ANSWER, UPDATE_ANSWER } from "../answer.queries";
+import {
+  CREATE_ANSWER,
+  FETCH_LOGIN_USER_ANSWER,
+  UPDATE_ANSWER,
+} from "../answer.queries";
 import * as S from "../answer.styles";
-import { IAnswerProps } from "../answer.types";
 import { EditOutlined, MessageOutlined } from "@ant-design/icons";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 
-export default function AnswerWriter(P: IAnswerProps) {
+export default function AnswerWriter(P: any) {
   const { setAnswerModal, questionEl, dom, isAnswer, setIsAnswer } = P;
   const [createAnswer] = useMutation(CREATE_ANSWER);
   const [updateAnswer] = useMutation(UPDATE_ANSWER);
@@ -21,26 +24,24 @@ export default function AnswerWriter(P: IAnswerProps) {
 
   const onClickAnswer = async () => {
     if (answer === "") return;
+
     try {
       await createAnswer({
         variables: {
           createAnswerInput: { answer },
           questionId: String(questionEl.id),
         },
-        update(cache, { data }) {
-          cache.modify({
-            fields: {
-              fetchLoginUserAnswer: (prev) => {
-                return [data, ...prev];
-              },
-            },
-          });
-        },
+        refetchQueries: [
+          {
+            query: FETCH_LOGIN_USER_ANSWER,
+            variables: { questionId: String(questionEl.id) },
+          },
+        ],
       });
       SuccessModal("답변이 등록되었습니다.");
       setAnswerModal(false);
     } catch (error) {
-      ErrorModal("수정으로 진행해주세요.");
+      ErrorModal(error as string);
     }
     setAnswer("");
   };
@@ -59,12 +60,11 @@ export default function AnswerWriter(P: IAnswerProps) {
       });
       SuccessModal("답변이 수정되었습니다.");
       setAnswerModal(false);
-      setIsAnswer(false);
+      setIsAnswer((prev: any) => !prev);
     } catch (error) {
       ErrorModal(error as string);
     }
   };
-
   return (
     <>
       <S.BgLayer></S.BgLayer>
@@ -76,7 +76,7 @@ export default function AnswerWriter(P: IAnswerProps) {
         <S.UserBox>
           <S.Div3>
             <img src="/img_user.jpeg" alt="유저이미지" />
-            <S.UserName>유저닉네임</S.UserName>
+            <S.UserName>{questionEl?.user.nickname}</S.UserName>
           </S.Div3>
           <S.Div2>
             <S.Question>{questionEl?.question}</S.Question>

@@ -24,7 +24,7 @@ export const Container = styled.div`
 
 export const PreContainer = styled.div`
   margin: 0 auto;
-  padding: 50px 50px 0 0;
+  padding: 50px 50px 50px 0;
   width: 300px;
   display: flex;
   flex-direction: column;

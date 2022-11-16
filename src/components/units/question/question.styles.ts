@@ -52,6 +52,10 @@ export const User = styled.section`
 export const UserInfo = styled.p`
   display: flex;
   font-size: ${styleSet.fontSize.s9};
+  &.writer {
+    max-width: 110px;
+    min-width: 50px;
+  }
   span {
     display: block;
     color: #aaa;
