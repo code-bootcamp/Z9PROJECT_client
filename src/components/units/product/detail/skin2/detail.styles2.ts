@@ -4,6 +4,7 @@ import { styleSet } from "../../../../../commons/styles/styleSet";
 export const Container = styled.section`
   width: 100%;
   height: 100%;
+  padding-bottom: 100px;
 `;
 
 export const Reset = styled.img`
@@ -21,18 +22,19 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const DetailWrapper = styled.div`
-  max-width: 1460px;
-  padding: 0 30px;
-  margin: 50px auto;
-  position: relative;
+export const Randing = styled.img`
+  margin-bottom: 30px;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
-    img {
-      width: 100%;
-    }
   }
+`;
+
+export const DetailWrapper = styled.div`
+  width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 50px;
 `;
 
 export const H1 = styled.h1`
@@ -72,31 +74,19 @@ export const Info = styled.section`
 
 export const InfoImg = styled.div`
   background: url("/leoj.png") no-repeat;
-  width: 600px;
+  width: 500px;
   height: 500px;
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 50%;
   margin-right: 20%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 250px;
-    height: 250px;
-    margin: 0 0 50px 0;
-  }
 `;
 
 export const InfoWrapper = styled.div`
-  max-width: 1460px;
-  padding: 0 30px;
+  width: 1400px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-
-  @media ${styleSet.breakePoints.mobile} {
-    flex-direction: column;
-    width: 100%;
-  }
 `;
 
 export const RightDiv = styled.div`
@@ -105,11 +95,6 @@ export const RightDiv = styled.div`
   background: #f4f5f9;
   display: flex;
   align-items: center;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
-    background-color: ${styleSet.colors.tp};
-  }
 `;
 export const LeftDiv = styled.div`
   width: 1460px;
@@ -118,25 +103,20 @@ export const LeftDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
-  @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
-    background-color: ${styleSet.colors.tp};
-  }
 `;
 
 export const Right = styled.section`
   width: 100%;
-  height: 360px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 export const Left = styled.section`
   width: 100%;
-  height: 360px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   justify-content: flex-start;
@@ -161,52 +141,72 @@ export const ImgBox2 = styled.div`
 
 export const Text = styled.p`
   margin-right: 1%;
+  strong {
+  }
   color: ${styleSet.colors.darkgray};
   font-size: ${styleSet.fontSize.s3};
   font-family: ${styleSet.font.B};
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
-
 export const Text2 = styled.p`
   margin-left: 5%;
+
   color: ${styleSet.colors.gray};
   font-size: 8rem;
   font-family: ${styleSet.font.EB};
+`;
+
+export const H3Info = styled.h3`
+  font-family: ${styleSet.font.B};
+  padding-bottom: 10px;
+`;
+
+export const Company = styled.ul`
+  display: flex;
+  margin-top: -1px;
+
+  li {
+    width: calc(100% / 2);
+    border-block: 1px solid ${styleSet.colors.gray};
+    display: flex;
+    font-size: ${styleSet.fontSize.s9};
+    word-break: keep-all;
+    strong {
+      background: ${styleSet.colors.subcolor3};
+      color: ${styleSet.colors.black};
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+    data {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+  }
 
   @media ${styleSet.breakePoints.mobile} {
-    display: none;
+    > img {
+      height: 300px;
+    }
   }
 `;
+
+export const Ref = styled.section``;
 
 export const Like = styled.img`
   position: absolute;
   top: 15%;
   left: 45%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Emoticon = styled.img`
   position: absolute;
   bottom: 10%;
   right: 0;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Iframe = styled.iframe`
   margin-top: -17%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: none;
-  }
 `;
 
 export const Octagon = styled.div`
@@ -214,8 +214,8 @@ export const Octagon = styled.div`
   background-size: cover;
   background-position: 50% 50%;
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   margin: 30px 0;
   clip-path: polygon(
     30% 0%,
@@ -227,11 +227,6 @@ export const Octagon = styled.div`
     0% 70%,
     0% 30%
   );
-
-  @media ${styleSet.breakePoints.mobile} {
-    clip-path: inherit;
-    width: 100%;
-  }
 `;
 
 export const Octagon2 = styled.div`
@@ -239,8 +234,8 @@ export const Octagon2 = styled.div`
   background-size: cover;
   background-position: 50% 50%;
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   margin: 30px 0;
 
   clip-path: polygon(
@@ -253,18 +248,13 @@ export const Octagon2 = styled.div`
     0% 70%,
     0% 30%
   );
-
-  @media ${styleSet.breakePoints.mobile} {
-    clip-path: inherit;
-    width: 100%;
-  }
 `;
 
 export const Button = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-top: 30px;
+  padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
   margin-top: 50px;
   button {
@@ -304,15 +294,13 @@ export const Button = styled.div`
 // 댓글
 export const Comment = styled.section`
   border-radius: 15px;
-  padding-block: 30px;
-  margin-top: 30px;
 `;
 
 export const Wrapper3 = styled.div`
   max-width: 1460px;
   margin: 0 auto;
   background: ${styleSet.colors.white};
-  padding: 30px;
+  padding: 0 30px 30px 30px;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
@@ -322,7 +310,7 @@ export const Wrapper3 = styled.div`
 export const Count = styled.ul`
   display: flex;
   gap: 15px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid ${styleSet.colors.black};
   padding-block: 20px;
   li {
     font-size: ${styleSet.fontSize.s8};
@@ -333,16 +321,11 @@ export const Count = styled.ul`
 export const Box = styled.section``;
 
 export const H4 = styled.h4`
-  font-size: ${styleSet.fontSize.s6};
-  padding-top: 40px;
+  font-size: ${styleSet.fontSize.s7};
   font-family: ${styleSet.font.B};
-  display: none;
-
-  @media ${styleSet.breakePoints.mobile} {
-    display: block;
-  }
+  padding: 40px 0 10px 0;
+  border-bottom: 1px solid ${styleSet.colors.gray};
 `;
-
 export const Title = styled.ul`
   font-size: ${styleSet.fontSize.s9};
   font-family: ${styleSet.font.B};
@@ -368,5 +351,37 @@ export const Title = styled.ul`
     li {
       display: none;
     }
+  }
+`;
+
+export const Tab = styled.ul`
+  max-width: 1400px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  margin: 100px 0 50px 0;
+  gap: 30px;
+  align-items: center;
+  li {
+    cursor: pointer;
+    border-block: 1px solid ${styleSet.colors.primary};
+    height: 100%;
+    text-align: center;
+    font-size: ${styleSet.fontSize.s8};
+    color: ${styleSet.colors.primary};
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      border-block: 1px solid ${styleSet.colors.point2};
+      color: ${styleSet.colors.point2};
+    }
+  }
+`;
+
+export const Important = styled.section`
+  h3 {
+    font-size: ${styleSet.fontSize.s5};
   }
 `;

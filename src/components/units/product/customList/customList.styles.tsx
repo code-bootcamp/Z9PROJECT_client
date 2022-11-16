@@ -311,6 +311,7 @@ export const Bottom = styled.section`
     width: 100%;
     .mobile {
       display: block;
+      height: min-content;
     }
   }
 `;

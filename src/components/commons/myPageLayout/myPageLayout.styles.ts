@@ -24,7 +24,7 @@ export const Container = styled.div`
 
 export const PreContainer = styled.div`
   margin: 0 auto;
-  padding: 50px 50px 0 0;
+  padding: 50px 50px 50px 0;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -40,8 +40,7 @@ export const PreContainer = styled.div`
 
 export const Title = styled.h1`
   padding-bottom: 10px;
-  min-width: 182px;
-  font-size: ${styleSet.fontSize.s2};
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
 `;
 
@@ -101,9 +100,21 @@ export const BtnWrapper = styled.div`
       color: ${(P: IBtnProps) =>
         P.nowUrl.includes("edit") ? `${styleSet.colors.white}` : null};
     }
+    .password {
+      width: ${(P: IBtnProps) =>
+        P.nowUrl.includes("password") ? "100%" : null};
+      background: ${(P: IBtnProps) =>
+        P.nowUrl.includes("password") ? `${styleSet.colors.subcolor1}` : null};
+      color: ${(P: IBtnProps) =>
+        P.nowUrl.includes("password") ? `${styleSet.colors.white}` : null};
+    }
   }
 `;
 
 export const Btn = styled.button`
-  font-size: ${styleSet.fontSize.s6};
+  font-size: ${styleSet.fontSize.s8};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-height: 40px;
+  }
 `;

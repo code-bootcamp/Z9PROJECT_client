@@ -11,30 +11,6 @@ export const CREATE_PRODUCT = gql`
     ) {
       id
       name
-      originPrice
-      discountRate
-      discountPrice
-      isSoldout
-      delivery
-      endType
-      validFrom
-      validUntil
-      images
-      detailImages
-      content
-      option1
-      option2
-      option3
-      option4
-      option5
-      youtubeLink
-      shopName
-      ceo
-      brn
-      mobn
-      createdAt
-      updatedAt
-      deletedAt
     }
   }
 `;
@@ -52,6 +28,23 @@ export const FETCH_USER = gql`
   query fetchUser {
     fetchUser {
       id
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $productId: String!
+    $updateProductInput: UpdateProductInput!
+    $updateProductDetailInput: UpdateProductDetailInput!
+  ) {
+    updateProduct(
+      productId: $productId
+      updateProductInput: $updateProductInput
+      updateProductDetailInput: $updateProductDetailInput
+    ) {
+      id
+      name
     }
   }
 `;
