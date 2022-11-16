@@ -21,6 +21,7 @@ export default function ProductDetailContainer() {
   const [thumbnail, setThumbnail] = useState("");
   const [important, setImportant] = useState(false);
   const [graph, setGraph] = useState(0);
+  const [skin, setSkin] = useState(1);
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
@@ -133,65 +134,86 @@ export default function ProductDetailContainer() {
     }
   };
 
+  const handleCopyClipBoard = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `https://zero9.brian-hong.tech/product/${data?.fetchProduct.id}`
+      );
+      SuccessModal("클립보드에 링크가 복사되었습니다.");
+    } catch (error) {
+      ErrorModal("복사에 실패하였습니다");
+    }
+  };
+
   return (
     <>
-      <ProductDetailPresenter
-        handleChange={handleChange}
-        onClickCount={onClickCount}
-        count={count}
-        cart={cart}
-        data={data}
-        discount={discount}
-        onClickLike={onClickLike}
-        thumbnail={thumbnail}
-        onClickImages={onClickImages}
-        onClickOrder={onClickOrder}
-        onClickTab={onClickTab}
-        onClickTab2={onClickTab2}
-        important={important}
-        commentData={commentData}
-        setGraph={setGraph}
-        graph={graph}
-        onClickDelete={onClickDelete}
-      />
-      <ProductDetailPresenter2
-        handleChange={handleChange}
-        onClickCount={onClickCount}
-        count={count}
-        cart={cart}
-        data={data}
-        discount={discount}
-        onClickLike={onClickLike}
-        thumbnail={thumbnail}
-        onClickImages={onClickImages}
-        onClickOrder={onClickOrder}
-        onClickTab={onClickTab}
-        onClickTab2={onClickTab2}
-        important={important}
-        commentData={commentData}
-        setGraph={setGraph}
-        graph={graph}
-        onClickDelete={onClickDelete}
-      />
-      <ProductDetailPresenter3
-        handleChange={handleChange}
-        onClickCount={onClickCount}
-        count={count}
-        cart={cart}
-        data={data}
-        discount={discount}
-        onClickLike={onClickLike}
-        thumbnail={thumbnail}
-        onClickImages={onClickImages}
-        onClickOrder={onClickOrder}
-        onClickTab={onClickTab}
-        onClickTab2={onClickTab2}
-        important={important}
-        commentData={commentData}
-        setGraph={setGraph}
-        graph={graph}
-        onClickDelete={onClickDelete}
-      />
+      {data?.fetchProduct.skin === 1 && (
+        <ProductDetailPresenter
+          handleChange={handleChange}
+          onClickCount={onClickCount}
+          count={count}
+          cart={cart}
+          data={data}
+          discount={discount}
+          onClickLike={onClickLike}
+          thumbnail={thumbnail}
+          onClickImages={onClickImages}
+          onClickOrder={onClickOrder}
+          onClickTab={onClickTab}
+          onClickTab2={onClickTab2}
+          important={important}
+          commentData={commentData}
+          setGraph={setGraph}
+          graph={graph}
+          onClickDelete={onClickDelete}
+          handleCopyClipBoard={handleCopyClipBoard}
+        />
+      )}
+      {data?.fetchProduct.skin === 2 && (
+        <ProductDetailPresenter2
+          handleChange={handleChange}
+          onClickCount={onClickCount}
+          count={count}
+          cart={cart}
+          data={data}
+          discount={discount}
+          onClickLike={onClickLike}
+          thumbnail={thumbnail}
+          onClickImages={onClickImages}
+          onClickOrder={onClickOrder}
+          onClickTab={onClickTab}
+          onClickTab2={onClickTab2}
+          important={important}
+          commentData={commentData}
+          setGraph={setGraph}
+          graph={graph}
+          onClickDelete={onClickDelete}
+          handleCopyClipBoard={handleCopyClipBoard}
+        />
+      )}
+
+      {data?.fetchProduct.skin === 3 && (
+        <ProductDetailPresenter3
+          handleChange={handleChange}
+          onClickCount={onClickCount}
+          count={count}
+          cart={cart}
+          data={data}
+          discount={discount}
+          onClickLike={onClickLike}
+          thumbnail={thumbnail}
+          onClickImages={onClickImages}
+          onClickOrder={onClickOrder}
+          onClickTab={onClickTab}
+          onClickTab2={onClickTab2}
+          important={important}
+          commentData={commentData}
+          setGraph={setGraph}
+          graph={graph}
+          onClickDelete={onClickDelete}
+          handleCopyClipBoard={handleCopyClipBoard}
+        />
+      )}
     </>
   );
 }

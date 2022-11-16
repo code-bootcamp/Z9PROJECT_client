@@ -196,6 +196,7 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
     }
   };
 
+  console.log();
   return (
     <RegisterPresenter
       edit={edit}

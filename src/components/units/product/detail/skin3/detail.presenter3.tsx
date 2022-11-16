@@ -79,6 +79,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     setGraph,
     graph,
     onClickDelete,
+    handleCopyClipBoard,
   } = P;
 
   setGraph(
@@ -129,7 +130,11 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   알림받기 <img src="/icon_bell.png" alt="알람아이콘" />
                 </S.Bell>
                 <li>
-                  <img src="/icon_copy.png" alt="공유하기 아이콘" />
+                  <img
+                    onClick={handleCopyClipBoard}
+                    src="/icon_copy.png"
+                    alt="공유하기 아이콘"
+                  />
                 </li>
               </ul>
               <S.H1>

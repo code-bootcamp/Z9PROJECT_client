@@ -20,4 +20,5 @@ export type IDetailPresenterProps = {
   setGraph: any;
   graph: number;
   onClickDelete: () => Promise<void>;
+  handleCopyClipBoard: any;
 };

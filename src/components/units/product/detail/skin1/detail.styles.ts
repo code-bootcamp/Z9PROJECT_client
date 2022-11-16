@@ -165,6 +165,12 @@ export const Company = styled.ul`
     > img {
       height: 300px;
     }
+    li {
+      strong {
+        width: 150px;
+        padding: 0 10px;
+      }
+    }
   }
 `;
 

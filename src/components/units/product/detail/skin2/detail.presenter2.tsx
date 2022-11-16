@@ -27,6 +27,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     important,
     setGraph,
     onClickDelete,
+    handleCopyClipBoard,
   } = P;
 
   return (
