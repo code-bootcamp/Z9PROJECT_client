@@ -52,16 +52,20 @@ export default function QuestionContainer(P: any) {
   };
 
   const onClickdelete = async () => {
-    await deleteQuestion({
-      variables: { questionId: String(el.id) },
-      refetchQueries: [
-        {
-          query: FETCH_QUESTIONS,
-          variables: { productId: String(router.query.useditemId) },
-        },
-      ],
-    });
-    SuccessModal("삭제가 완료되었습니다.");
+    try {
+      await deleteQuestion({
+        variables: { questionId: String(el.id) },
+        refetchQueries: [
+          {
+            query: FETCH_QUESTIONS,
+            variables: { productId: String(router.query.useditemId) },
+          },
+        ],
+      });
+      SuccessModal("삭제가 완료되었습니다.");
+    } catch (error) {
+      ErrorModal(error as string);
+    }
   };
 
   const onClickAnswer = () => {
