@@ -11,6 +11,14 @@ export const Container = styled.section`
   padding: 50px 0;
 `;
 
+export const Timer = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: ${styleSet.fontSize.s6};
+  }
+`;
+
 export const Wrapper = styled.div`
   max-width: 1460px;
   padding: 0 30px;
@@ -156,6 +164,12 @@ export const Company = styled.ul`
   @media ${styleSet.breakePoints.mobile} {
     > img {
       height: 300px;
+    }
+    li {
+      strong {
+        width: 150px;
+        padding: 0 10px;
+      }
     }
   }
 `;
@@ -365,7 +379,7 @@ export const GraphPercent = styled.span`
 `;
 
 export const H2 = styled.div`
-  font-size: ${styleSet.fontSize.s3};
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
   padding-top: 20px;
   text-align: right;
@@ -640,3 +654,4 @@ export const Important = styled.section`
     font-size: ${styleSet.fontSize.s5};
   }
 `;
+ㅇ;

@@ -15,6 +15,7 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
 import { useState } from "react";
 import { useInterval } from "../../../../commons/hooks/timer";
+import { useRouter } from "next/router";
 
 const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
   const [result, setResult] = useState(calculator());
@@ -42,13 +43,21 @@ const CountDownView = ({ targetISOString }: { targetISOString: any }) => {
   const sec = Math.floor(remain % 60);
 
   return (
-    <div className="CountDownWrap">
-      {day}일{hour}:{min}:{sec}
-    </div>
+    <S.Timer className="CountDownWrap">
+      {day}
+      <span>일</span>
+      {hour}
+      <span>시</span>
+      {min}
+      <span>분</span>
+      {sec}
+      <span>초</span>
+    </S.Timer>
   );
 };
 
 export default function ProductDetailPresenter(P: IDetailPresenterProps) {
+  const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
 
   const {
@@ -68,6 +77,8 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     commentData,
     setGraph,
     graph,
+    onClickDelete,
+    handleCopyClipBoard,
   } = P;
 
   setGraph(
@@ -79,12 +90,12 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   );
 
   const targetISOString = data?.fetchProduct.validUntil;
-  console.log(targetISOString);
 
   const isNotYet = useResultOfIntervalCalculator(
     () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,
     10
   );
+
   return (
     <>
       <S.Container>
@@ -107,7 +118,11 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   알림받기 <img src="/icon_bell.png" alt="알람아이콘" />
                 </S.Bell>
                 <li>
-                  <img src="/icon_copy.png" alt="공유하기 아이콘" />
+                  <img
+                    onClick={handleCopyClipBoard}
+                    src="/icon_copy.png"
+                    alt="공유하기 아이콘"
+                  />
                 </li>
               </ul>
               <S.H1>
@@ -234,13 +249,18 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   {cart && <HeartFilled />} {``}
                   <span className="emotion">관심상품</span>
                 </button>
+
                 {isNotYet ? (
                   <button className="buy" onClick={onClickOrder}>
                     <span className="emotion">바로 구매하기</span>
                   </button>
-                ) : (
+                ) : !isNotYet ? (
                   <button className="closed">
                     <span className="emotion">마감</span>
+                  </button>
+                ) : (
+                  <button className="closed">
+                    <span className="emotion">시작예정</span>
                   </button>
                 )}
               </S.BoxBtn>
@@ -273,6 +293,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
+                setGraph={setGraph}
               />
             </S.Ref>
           )}
@@ -305,8 +326,14 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
 
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
-            <button>수정</button>
-            <button>삭제</button>
+            <button
+              onClick={onClickMoveToPage(
+                `/product/${router.query.useditemId}/edit`
+              )}
+            >
+              수정
+            </button>
+            <button onClick={onClickDelete}>삭제</button>
           </S.Button>
         </S.Wrapper>
 

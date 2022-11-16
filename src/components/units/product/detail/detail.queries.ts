@@ -110,3 +110,9 @@ export const FETCH_SALES_TOTAL = gql`
     fetchSalesTotal(productId: $productId)
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($productId: String!) {
+    deleteProduct(productId: $productId)
+  }
+`;

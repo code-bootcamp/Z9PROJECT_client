@@ -19,4 +19,6 @@ export type IDetailPresenterProps = {
   commentData: any;
   setGraph: any;
   graph: number;
+  onClickDelete: () => Promise<void>;
+  handleCopyClipBoard: any;
 };
