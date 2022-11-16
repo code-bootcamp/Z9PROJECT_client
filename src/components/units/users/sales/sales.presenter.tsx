@@ -1,32 +1,35 @@
-import { PointFormatter } from "../../../../commons/utils";
+import { dateFormatter, PointFormatter } from "../../../../commons/utils";
 import { DatePicker, Pagination } from "antd";
 import * as S from "./sales.styles";
 import { ISalesPresenterProps } from "./sales.types";
 
 export default function SalesPresenter(P: ISalesPresenterProps) {
-  const { onChangePage, tab, setTab, onClickTab } = P;
+  const {
+    tab,
+    setTab,
+    onClickTab,
+    sellHistory,
+    HistoryCount,
+    onClickPage,
+    onChangeDate,
+    onClickAccept,
+  } = P;
   const { RangePicker } = DatePicker;
+  const btnArray = ["1개월", "3개월", "6개월", "12개월"];
 
   return (
     <S.Container>
       <S.SubTitle>판매내역</S.SubTitle>
       <S.BoardTopWrapper>
         <S.PeriodWrapper tab={tab}>
-          <S.PeriodBtn id="1" onClick={onClickTab}>
-            1개월
-          </S.PeriodBtn>
-          <S.PeriodBtn id="2" onClick={onClickTab}>
-            3개월
-          </S.PeriodBtn>
-          <S.PeriodBtn id="3" onClick={onClickTab}>
-            6개월
-          </S.PeriodBtn>
-          <S.PeriodBtn id="4" onClick={onClickTab}>
-            12개월
-          </S.PeriodBtn>
+          {btnArray.map((el: any, i: number) => (
+            <S.PeriodBtn id={String(i + 1)} onClick={onClickTab} key={i}>
+              {el}
+            </S.PeriodBtn>
+          ))}
         </S.PeriodWrapper>
         <S.SearchWrapper>
-          <RangePicker />
+          <RangePicker onChange={onChangeDate} />
           <S.SearchBtn>
             <span>조회</span>
           </S.SearchBtn>
@@ -38,35 +41,40 @@ export default function SalesPresenter(P: ISalesPresenterProps) {
           <S.BContents>상품명</S.BContents>
           <S.BPrice>판매액</S.BPrice>
           <S.BPurchaser>구매자</S.BPurchaser>
-          <S.BRefund>환불</S.BRefund>
+          <S.BRefund>상태</S.BRefund>
         </S.BoardTh>
-        <S.BoardUl>
-          <S.BoardLi>
-            <S.BDate>2020.02.20</S.BDate>
-            <S.BContents>아기다리고기다리던아버지가방에들어가신다</S.BContents>
-            <S.BPrice>{PointFormatter(100000)}</S.BPrice>
-            <S.BPurchaser>코난</S.BPurchaser>
-            <S.BRefund>
-              {true ? (
-                <S.RefundBtn>
-                  <span>환불신청</span>
-                </S.RefundBtn>
-              ) : (
-                "환불완료"
-              )}
-            </S.BRefund>
-          </S.BoardLi>
-          <S.BoardLi>
-            <S.BDate>2020.02.20</S.BDate>
-            <S.BContents>아기다리고기다리던아버지가방에들어가신다</S.BContents>
-            <S.BPrice>{PointFormatter(100000)}</S.BPrice>
-            <S.BPurchaser>코난</S.BPurchaser>
-            <S.BRefund>
-              {false ? <S.RefundBtn>환불</S.RefundBtn> : "환불완료"}
-            </S.BRefund>
-          </S.BoardLi>
-        </S.BoardUl>
-        <Pagination size="small" total={50} onChange={onChangePage} />
+        <ul>
+          {sellHistory?.fetchOrdersByCreatorId.length !== 0 ? (
+            sellHistory?.fetchOrdersByCreatorId.map((el: any, i: number) => (
+              <S.BoardLi key={i}>
+                <S.BDate>{dateFormatter(el.createdAt)}</S.BDate>
+                <S.BContents>{el.product.name}</S.BContents>
+                <S.BPrice>{PointFormatter(el.price)}</S.BPrice>
+                <S.BPurchaser>{el.user.nickname}</S.BPurchaser>
+                <S.BRefund>
+                  {el.status === "PAID" ? (
+                    "판매"
+                  ) : el.status === "PENDING_REFUND" ? (
+                    <S.RefundBtn type="button" onClick={onClickAccept(el.id)}>
+                      <span>환불</span>
+                    </S.RefundBtn>
+                  ) : (
+                    "환불"
+                  )}
+                </S.BRefund>
+              </S.BoardLi>
+            ))
+          ) : (
+            <S.BoardLiEmpty>
+              <span>판매 내역이 없습니다.</span>
+            </S.BoardLiEmpty>
+          )}
+        </ul>
+        <Pagination
+          size="small"
+          total={HistoryCount?.fetchCountOfOrderByCreatorId}
+          onChange={onClickPage}
+        />
       </S.BoardBody>
     </S.Container>
   );
