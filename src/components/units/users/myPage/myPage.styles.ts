@@ -245,22 +245,17 @@ export const BoardLi = styled.div`
 `;
 
 export const BDate = styled.span`
-  width: 20%;
+  width: 30%;
   text-align: center;
 `;
 
 export const BContents = styled.span`
-  width: 20%;
+  width: 30%;
   text-align: center;
 `;
 
 export const BHistory = styled.span`
-  width: 30%;
-  text-align: center;
-`;
-
-export const BBalance = styled.span`
-  width: 30%;
+  width: 40%;
   text-align: center;
 `;
 
