@@ -13,6 +13,7 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
     onChangeDate,
     historyCount,
     PonintHistory,
+    currentPage,
   } = P;
   const { RangePicker } = DatePicker;
   const btnArray = ["1개월", "3개월", "6개월", "12개월"];
@@ -84,6 +85,8 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
             size="small"
             total={historyCount?.fetchCountOfPointHistory}
             onChange={onClickPage}
+            defaultCurrent={1}
+            current={currentPage}
           />
         </S.BoardBody>
       </S.HistoryWrapper>

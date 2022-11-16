@@ -16,17 +16,20 @@ import { useRouter } from "next/router";
 import { IRegisterContainerProps } from "./register.types";
 
 export default function RegisterContainer(P: IRegisterContainerProps) {
-  const { edit, fetchProduct } = P;
-  const { register, handleSubmit, setValue, getValues, watch } = useForm({
-    resolver: yupResolver(edit ? updateSchema : schema),
-    mode: "onChange",
-  });
+  const { isEdit, fetchProduct } = P;
+  const { register, handleSubmit, setValue, getValues, watch, formState } =
+    useForm({
+      resolver: yupResolver(isEdit ? updateSchema : schema),
+      mode: "onChange",
+    });
 
   let optionLength: string[] = [];
   const router = useRouter();
   const [option, setOption] = useState(0);
   const [imgFiles, setImgFiles] = useState<File[]>();
   const [category, setCategory] = useState<string[]>([""]);
+  const [textColor, setTextColor] = useState<string>("#ffffff");
+  const [bgColor, setBgColor] = useState<string>("#f46a22");
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [uploadImages] = useMutation(UPLOAD_IMAGES);
@@ -45,7 +48,7 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
     setValue("validUntil", fetchProduct?.fetchProduct.validUntil);
     setValue("originPrice", fetchProduct?.fetchProduct.originPrice);
     setValue("discountPrice", fetchProduct?.fetchProduct.discountPrice);
-    setValue("quantity", fetchProduct?.fetchProduct.quantity);
+    setValue("originalQuantity", fetchProduct?.fetchProduct.originalQuantity);
     setValue("youtubeLink", fetchProduct?.fetchProduct.youtubeLink);
     setValue("content", fetchProduct?.fetchProduct.content);
     setValue("skin", String(fetchProduct?.fetchProduct.skin));
@@ -111,6 +114,16 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
     }
   };
 
+  const onChangeTextColor = (color: string) => {
+    setTextColor(color);
+    setValue("textColor", color);
+  };
+
+  const onChangebgColor = (color: string) => {
+    setBgColor(color);
+    setValue("bgColor", color);
+  };
+
   const onChangeContents = () => {
     const text = contentsRef?.current?.getInstance().getHTML();
     setValue("content", text === "<p><br><p>" ? "" : text);
@@ -150,7 +163,6 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
             endType: "TOTAL_QTY",
             userId: String(fetchUser.id),
             images: imgUrl,
-            // detailImages: "",
           },
           createProductDetailInput: {
             ...info,
@@ -160,14 +172,12 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
       SuccessModal("상품 등록 완료!");
       router.push(`/product/${result.data?.createProduct.id}`);
     } catch (error) {
-      if (error instanceof Error) {
-        ErrorModal(error.message);
-      }
+      if (error instanceof Error) ErrorModal(error.message);
     }
   };
 
-  const onClickUpdate = () => async (data: any) => {
-    alert("aaaa");
+  const onClickUpdate = async (data: any) => {
+    console.log("aaaa");
     const { info, ...rest } = data;
     try {
       let imgUrl = "";
@@ -195,17 +205,21 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
+  console.log(formState.errors);
 
-  console.log();
   return (
     <RegisterPresenter
-      edit={edit}
+      isEdit={isEdit}
       register={register}
       handleSubmit={handleSubmit}
       getValues={getValues}
       category={category}
       nameRef={nameRef}
       option={option}
+      bgColor={bgColor}
+      textColor={textColor}
+      onChangebgColor={onChangebgColor}
+      onChangeTextColor={onChangeTextColor}
       onDropImg={onDropImg}
       selectDate={selectDate}
       contentsRef={contentsRef}

@@ -371,6 +371,3 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     </>
   );
 }
-function padStart(arg0: number): any {
-  throw new Error("Function not implemented.");
-}

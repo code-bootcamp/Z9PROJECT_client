@@ -1,7 +1,6 @@
 import { MessageOutlined } from "@ant-design/icons";
 import DOMPurify from "dompurify";
 import { useRouter } from "next/router";
-import ReactPlayer from "react-player";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";

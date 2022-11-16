@@ -17,14 +17,6 @@ export const InfoRight = styled.div`
   }
 `;
 
-export const Timer = styled.div`
-  display: flex;
-  align-items: center;
-  span {
-    font-size: ${styleSet.fontSize.s6};
-  }
-`;
-
 export const H1 = styled.h1`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
@@ -80,8 +72,7 @@ export const H2 = styled.h2`
   font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
   padding-block: 10px;
-  display: flex;
-  justify-content: flex-end;
+  text-align: right;
 `;
 
 export const Piece = styled.aside`
@@ -143,66 +134,23 @@ export const H3 = styled.h3`
 export const BoxBtn = styled.div`
   display: flex;
   justify-content: space-between;
-  .cart {
-    background: ${styleSet.colors.white};
-    border: 1px solid ${styleSet.colors.lightGray};
-    width: 35%;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
 
+  .cart {
+    font-size: ${styleSet.fontSize.s7};
+    border: 1px solid ${styleSet.colors.lightGray};
+    font-family: ${styleSet.font.B};
+    height: 60px;
+    width: 40%;
     svg {
       color: ${styleSet.colors.red};
     }
   }
-  .closed {
-    background-color: ${styleSet.colors.darkgray};
-    width: 60%;
-    color: ${styleSet.colors.white};
-    position: relative;
-    overflow: hidden;
-    cursor: help;
-  }
-
   .buy {
     background-color: ${styleSet.colors.subcolor4};
-    width: 60%;
-    color: ${styleSet.colors.white};
-    position: relative;
-    overflow: hidden;
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: -5%;
-      left: -10%;
-      width: 0;
-      height: 120%;
-      background: #f6a70a;
-      transition: all 0.3s ease;
-      transform: skewX(15deg);
-    }
-    &:hover {
-      color: ${styleSet.colors.white};
-      ::before {
-        width: 120%;
-      }
-    }
-    .emotion {
-      display: block;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s ease;
-    }
-  }
-
-  button {
     font-size: ${styleSet.fontSize.s7};
     font-family: ${styleSet.font.B};
-    position: relative;
-    overflow: hidden;
     height: 60px;
+    width: 55%;
+    color: ${styleSet.colors.white};
   }
 `;

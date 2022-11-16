@@ -21,7 +21,6 @@ export default function ProductDetailContainer() {
   const [thumbnail, setThumbnail] = useState("");
   const [important, setImportant] = useState(false);
   const [graph, setGraph] = useState(0);
-  const [skin, setSkin] = useState(1);
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
