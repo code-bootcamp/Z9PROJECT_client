@@ -1,15 +1,15 @@
-import Swal from "sweetalert2";
 import { useState } from "react";
 import * as S from "../layout.styles";
-import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { hamburgerState } from "../../store";
-import { useMutation, useQuery } from "@apollo/client";
-import { FETCH_USER, LOGOUT } from "../layout.queries";
-import { useMoveToPage } from "../../hooks/useMoveToPage";
-import { PointFormatter } from "../../../../commons/utils";
 import { accessTokenState } from "../../../../commons/store";
+import { PointFormatter } from "../../../../commons/utils";
+import { useMoveToPage } from "../../hooks/useMoveToPage";
+import { useRouter } from "next/router";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import Swal from "sweetalert2";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { FETCH_USER, LOGOUT } from "../layout.queries";
 
 export default function HeaderPage() {
   const { onClickMoveToPage, onClickMobileToPage } = useMoveToPage();
@@ -38,11 +38,15 @@ export default function HeaderPage() {
       cancelButtonText: "취소",
     }).then((result) => {
       if (result.isConfirmed) {
-        logout();
-        sessionStorage.removeItem("accessToken");
-        router.reload();
+        onClickLogout();
       }
     });
+  };
+
+  const onClickLogout = () => {
+    logout();
+    sessionStorage.removeItem("accessToken");
+    router.reload();
   };
 
   return (
@@ -53,11 +57,7 @@ export default function HeaderPage() {
             <li onClick={onClickMoveToPage("/")}>
               <S.Logo src="/icon_logo.png" alt="로고 아이콘" />
             </li>
-            {fetchUser?.fetchUser.userType === "CREATOR" && (
-              <li onClick={onClickMoveToPage("/product/register")}>
-                상품 등록
-              </li>
-            )}
+            <li onClick={onClickMoveToPage("/product/register")}>상품 등록</li>
             <li onClick={onClickMoveToPage("/list/list")}>리스트</li>
             <li onClick={onClickMoveToPage("/list/customList")}>Who's Best</li>
           </S.Ul>
@@ -131,7 +131,7 @@ export default function HeaderPage() {
                 <li onClick={onClickMobileToPage("/list/customList")}>
                   Who's Best
                 </li>
-                {accessToken && <li onClick={onClickMore}>로그아웃</li>}
+                {accessToken && <li>로그아웃</li>}
               </ul>
             </S.Hamburger>
           )}

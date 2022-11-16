@@ -12,8 +12,8 @@ export const FETCH_USER = gql`
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation updatePassword($password: String!) {
-    updatePassword(password: $password) {
+  mutation updatePassword($userId: String!, $password: String!) {
+    updatePassword(userId: $userId, password: $password) {
       id
       nickname
     }
