@@ -74,6 +74,7 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
           size="small"
           total={HistoryCount?.fetchCountOfOrderByUserId}
           onChange={onClickPage}
+          defaultCurrent={1}
         />
       </S.BoardBody>
     </S.Container>

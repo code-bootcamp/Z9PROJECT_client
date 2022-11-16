@@ -56,10 +56,11 @@ export default function MyPageContainer() {
   return (
     <MyPageLayoutContainer>
       <MyPagePresenter
-        onClickPage={onClickPage}
         tab={tab}
-        onClickTab={onClickTab}
         fetchUser={fetchUser}
+        onClickTab={onClickTab}
+        currentPage={currentPage}
+        onClickPage={onClickPage}
         onChangeDate={onChangeDate}
         historyCount={historyCount}
         PonintHistory={PonintHistory}
