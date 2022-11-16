@@ -26,7 +26,6 @@ export default function PasswordContainer() {
     try {
       const result = await updatePassword({
         variables: {
-          userId: String(fetchUser.fetchUser.id),
           password,
         },
       });

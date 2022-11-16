@@ -5,6 +5,7 @@ import { IMyPageLayoutPresenterProps } from "./myPageLayout.types";
 export default function MyPageLayoutPresenter(P: IMyPageLayoutPresenterProps) {
   const { nowUrl, onClickMore } = P;
   const { onClickMoveToPage } = useMoveToPage();
+
   const btnArray = [
     { name: "찜 목록", class: "wish" },
     { name: "판매 목록", class: "sales" },

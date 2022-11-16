@@ -336,22 +336,27 @@ export const H2 = styled.h2`
 `;
 
 export const Tab = styled.ul`
-  width: 100%;
+  max-width: 1400px;
   height: 60px;
   display: flex;
-  border-block: 1px solid ${styleSet.colors.gray};
   justify-content: center;
-  line-height: 60px;
-  margin-bottom: 50px;
+  margin: 100px 0 50px 0;
+  gap: 30px;
+  align-items: center;
   li {
     cursor: pointer;
-    width: calc(100% / 2 - 10px);
+    border-block: 1px solid ${styleSet.colors.primary};
     height: 100%;
     text-align: center;
     font-size: ${styleSet.fontSize.s8};
-    color: ${styleSet.colors.darkgray};
-    &:first-of-type {
-      border-right: 1px solid ${styleSet.colors.gray};
+    color: ${styleSet.colors.primary};
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      border-block: 1px solid ${styleSet.colors.point2};
+      color: ${styleSet.colors.point2};
     }
   }
 `;
@@ -532,3 +537,9 @@ export const Count = styled.ul`
 `;
 
 export const Box = styled.section``;
+
+export const Important = styled.section`
+  h3 {
+    font-size: ${styleSet.fontSize.s5};
+  }
+`;

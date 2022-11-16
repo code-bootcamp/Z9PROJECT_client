@@ -1,6 +1,6 @@
 import { MessageOutlined } from "@ant-design/icons";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import QuestionPresenter from "../../../question/list/questionList.presenter";
+import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
@@ -16,13 +16,15 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     data,
     discount,
     onClickLike,
-    onClickAnswer,
+    onClickOrder,
+    onClickTab,
+    onClickTab2,
+    important,
   } = P;
 
   return (
     <>
       <S.Container>
-        <S.Reset src="/icon_top.svg" alt="상단 바로가기 아이콘" />
         <S.Info>
           <S.InfoWrapper>
             <S.InfoImg></S.InfoImg>
@@ -55,11 +57,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             </div>
           </S.InfoWrapper>
         </S.Info>
-
-        <S.Tab>
-          <li>제품상세</li>
-          <li>QnA</li>
-        </S.Tab>
 
         <S.Right>
           <S.RightDiv>
@@ -98,51 +95,64 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           </S.LeftDiv>
         </S.Left>
         <S.DetailWrapper>
-          <S.Ref>
-            <img src="/img_detailTest.jpeg" alt="상세랜딩이미지" />
-            <Product01
-              onClickCount={onClickCount}
-              count={count}
-              cart={cart}
-              data={data}
-              discount={discount}
-              onClickLike={onClickLike}
-            />
-          </S.Ref>
+          <S.Tab>
+            <li onClick={onClickTab2}>제품상세</li>
+            <li onClick={onClickTab}>QnA</li>
+          </S.Tab>
 
-          <S.H3Info>필수 표기정보</S.H3Info>
-          <S.Company>
-            <li>
-              <strong>품명 및 모델명</strong>
-              <data>품명 및 모델명 적거라</data>
-            </li>
-            <li>
-              <strong>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함)
-              </strong>
-              <data>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함) 적거라
-              </data>
-            </li>
-          </S.Company>
-          <S.Company>
-            <li>
-              <strong>품명 및 모델명</strong>
-              <data>품명 및 모델명 적거라</data>
-            </li>
-            <li>
-              <strong>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함)
-              </strong>
-              <data>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함) 적거라
-              </data>
-            </li>
-          </S.Company>
+          {!important && (
+            <S.Ref>
+              <S.Randing
+                src="/img_detailTest.jpeg"
+                alt="레오제이 녹두팩 랜딩이미지"
+              />
+              <Product01
+                onClickCount={onClickCount}
+                count={count}
+                cart={cart}
+                data={data}
+                discount={discount}
+                onClickLike={onClickLike}
+                onClickOrder={onClickOrder}
+              />
+            </S.Ref>
+          )}
+
+          <S.Important>
+            <S.H3Info>필수 표기정보</S.H3Info>
+            <S.Company>
+              <li>
+                <strong>품명 및 모델명</strong>
+                <data>품명 및 모델명 적거라</data>
+              </li>
+              <li>
+                <strong>
+                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
+                  따른 표시의무 화학물질에 한함)
+                </strong>
+                <data>
+                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
+                  따른 표시의무 화학물질에 한함) 적거라
+                </data>
+              </li>
+            </S.Company>
+            <S.Company>
+              <li>
+                <strong>품명 및 모델명</strong>
+                <data>품명 및 모델명 적거라</data>
+              </li>
+              <li>
+                <strong>
+                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
+                  따른 표시의무 화학물질에 한함)
+                </strong>
+                <data>
+                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
+                  따른 표시의무 화학물질에 한함) 적거라
+                </data>
+              </li>
+            </S.Company>
+          </S.Important>
 
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
@@ -159,6 +169,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             </S.Count>
             <QuestionWriter />
             <S.H4>QnA</S.H4>
+
             <S.Title>
               <li>프로필</li>
               <li>답변여부</li>
@@ -169,7 +180,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             </S.Title>
 
             <S.Box>
-              <QuestionPresenter onClickAnswer={onClickAnswer} />
+              <QuestionMap />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>

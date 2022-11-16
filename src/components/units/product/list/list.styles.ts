@@ -87,14 +87,18 @@ export const Wrapper = styled.div`
 
 export const Main = styled.main`
   margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 60px;
+  .infinite-scroll {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 60px;
+  }
 
   @media ${styleSet.breakePoints.mobile} {
-    flex-direction: column;
+    .infinite-scroll {
+      flex-direction: column;
+    }
   }
 `;
 
@@ -168,6 +172,12 @@ export const ProdImg = styled.div`
   justify-content: center;
   img {
     width: 100%;
+    width: 700px;
+  }
+  @media ${styleSet.breakePoints.mobile} {
+    img {
+      width: -webkit-fill-available;
+    }
   }
 `;
 

@@ -1,13 +1,13 @@
-import { IQnaProps } from "../../question/question.types";
 import * as S from "../answer.styles";
 import AnswerWriter from "../write/answerWriter";
 
-export default function AnswerList(P: IQnaProps) {
+export default function AnswerList(P: any) {
   const { el, dom, isAnswer, setIsAnswer, setAnswerModal, isTrue } = P;
 
   const onClickEditAnswer = () => {
     setIsAnswer(true);
   };
+
   return (
     <>
       <S.User>
@@ -22,7 +22,7 @@ export default function AnswerList(P: IQnaProps) {
                 </S.AnswerContents>
               </S.Text>
               <S.Answer>
-                <S.UserInfo>Leo J </S.UserInfo>
+                <S.UserInfo>{el.nickname}</S.UserInfo>
                 <S.UserInfo>
                   {dom?.createdAt
                     ?.slice(0, 10)
@@ -40,8 +40,9 @@ export default function AnswerList(P: IQnaProps) {
             setAnswerModal={setAnswerModal}
             questionEl={el}
             isAnswer={true}
-            dom={dom}
             setIsAnswer={setIsAnswer}
+            dom={dom}
+            onClickEditAnswer={onClickEditAnswer}
           />
         )}
       </S.User>
