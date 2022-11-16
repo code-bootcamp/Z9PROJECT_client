@@ -123,21 +123,24 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                       onChange={handleChange}
                       options={[
                         {
-                          value: "S 사이즈",
-                          label: "S 사이즈",
+                          value: data?.fetchProduct?.option1,
+                          label: data?.fetchProduct?.option1,
                         },
                         {
-                          value: "M 사이즈",
-                          label: "M 사이즈",
+                          value: data?.fetchProduct?.option2,
+                          label: data?.fetchProduct?.option2,
                         },
                         {
-                          value: "L 사이즈",
-                          label: "L 사이즈",
+                          value: data?.fetchProduct?.option3,
+                          label: data?.fetchProduct?.option3,
                         },
                         {
-                          value: "disabled",
-                          disabled: true,
-                          label: "Disabled",
+                          value: data?.fetchProduct?.option4,
+                          label: data?.fetchProduct?.option4,
+                        },
+                        {
+                          value: data?.fetchProduct?.option5,
+                          label: data?.fetchProduct?.option5,
                         },
                       ]}
                     />
@@ -168,10 +171,10 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 <button className="cart" onClick={onClickLike}>
                   {!cart && <HeartOutlined />} {``}
                   {cart && <HeartFilled />} {``}
-                  관심상품
+                  <span className="emotion">관심상품</span>
                 </button>
                 <button className="buy" onClick={onClickOrder}>
-                  바로 구매하기
+                  <span className="emotion">바로 구매하기</span>
                 </button>
               </S.BoxBtn>
             </S.InfoRight>

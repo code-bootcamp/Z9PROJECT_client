@@ -33,7 +33,7 @@ export default function QuestionPresenter(P: any) {
             <S.Check>답변대기</S.Check>
             <S.Contents onClick={onClickAnswer}>{el.question}</S.Contents>
             <S.UserInfo className="writer">
-              {el.user.nickname.slice(0, 8)}
+              {el.user?.nickname.slice(0, 8)}
             </S.UserInfo>
             <S.UserInfo>
               {el.createdAt

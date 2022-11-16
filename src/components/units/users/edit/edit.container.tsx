@@ -7,7 +7,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
   CHECK_NICKNAME,
-  DELETE_USER,
   FETCH_USER,
   PATCH_SMS_TOKEN,
   POST_SMS_TOKEN,
@@ -16,9 +15,6 @@ import {
 } from "./edit.queries";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IChangeInput } from "./edit.types";
-import Swal from "sweetalert2";
-import { styleSet } from "../../../../commons/styles/styleSet";
-import { useRouter } from "next/router";
 
 const schema = yup.object({
   nickname: yup.string(),
@@ -48,9 +44,7 @@ export default function EditContainer() {
   const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
   const [checkNickname] = useMutation(CHECK_NICKNAME);
   const [uploadImage] = useMutation(UPLOAD_IMAGE);
-  const [deleteUser] = useMutation(DELETE_USER);
   const { data: fetchUser } = useQuery(FETCH_USER);
-  const router = useRouter();
 
   useEffect(() => {
     setValue("snsChannel", fetchUser?.fetchUser.snsChannel);
@@ -218,24 +212,6 @@ export default function EditContainer() {
     }
   };
 
-  const onClickMore = () => {
-    Swal.fire({
-      title: "회원을 탈퇴하시겠습니까?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: `${styleSet.colors.darkgray}`,
-      cancelButtonColor: `${styleSet.colors.red}`,
-      confirmButtonText: "확인",
-      cancelButtonText: "취소",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteUser();
-        sessionStorage.removeItem("accessToken");
-        router.reload();
-      }
-    });
-  };
-
   return (
     <EditPresenter
       register={register}
@@ -243,7 +219,6 @@ export default function EditContainer() {
       setValue={setValue}
       formState={formState}
       fetchUser={fetchUser}
-      onClickMore={onClickMore}
       handleSubmit={handleSubmit}
       onClickUpdate={onClickUpdate}
       profilePreview={profilePreview}

@@ -188,10 +188,7 @@ export const BoardTh = styled.div`
   display: flex;
 `;
 
-export const BoardLiEmpty = styled.div`
-  padding: 20px;
-  border-bottom: 1px solid ${styleSet.colors.gray};
-`;
+export const BoardUl = styled.div``;
 
 export const BoardLi = styled.div`
   padding: 20px 0;
