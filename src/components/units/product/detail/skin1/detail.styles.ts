@@ -654,4 +654,3 @@ export const Important = styled.section`
     font-size: ${styleSet.fontSize.s5};
   }
 `;
-ㅇ;
