@@ -18,6 +18,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
     onClickUpdate,
     openTime,
     setValue,
+    onClickMore,
     onClickCertNumber,
     onClickCertConfirm,
     onClickNameConfirm,
@@ -115,7 +116,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
             />
           </S.InnerWrapper>
         </S.RowWrapper>
-        {fetchUser?.fetchUser.userType !== "CREATOR" ? (
+        {fetchUser?.fetchUser.userType === "CREATOR" ? (
           <>
             <S.RowWrapper className="line">
               <S.RowTitle>한줄소개</S.RowTitle>
@@ -191,7 +192,11 @@ export default function EditPresenter(P: IEditPresenterProps) {
           <S.BankWrapper>
             <Input01
               type="text"
-              placeholder="정산받을 계좌번호를 입력하세요."
+              placeholder={
+                fetchUser?.fetchUser.userType === "CREATOR"
+                  ? "정산받을 계좌번호를 입력하세요."
+                  : "인출할 계좌번호를 입력하세요."
+              }
               register={register("account")}
               edit={true}
               defaultValue={fetchUser?.fetchUser.account}
@@ -218,6 +223,9 @@ export default function EditPresenter(P: IEditPresenterProps) {
         <S.LogInBtn>
           <span>수정완료</span>
         </S.LogInBtn>
+        <S.DeleteBtn type="button" onClick={onClickMore}>
+          탈퇴하기
+        </S.DeleteBtn>
       </S.Form>
     </S.Container>
   );
