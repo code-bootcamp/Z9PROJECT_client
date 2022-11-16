@@ -45,15 +45,15 @@ export const FETCH_QUESTIONS = gql`
       status
       createdAt
       deletedAt
-      user {
-        id
-        email
-        userType
-        nickname
-        createdAt
-        updatedAt
-        deletedAt
-      }
+      # user {
+      #   id
+      #   email
+      #   userType
+      #   nickname
+      #   createdAt
+      #   updatedAt
+      #   deletedAt
+      # }
       product {
         id
       }

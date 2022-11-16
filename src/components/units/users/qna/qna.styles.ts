@@ -89,4 +89,83 @@ export const Title = styled.ul`
   }
 `;
 
-export const Box = styled.section``;
+export const BoardBody = styled.div`
+  padding: 20px 0;
+  width: 100%;
+
+  text-align: center;
+
+  .ant-pagination {
+    padding: 20px 0;
+    font-size: ${styleSet.fontSize.s7};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 10px;
+  }
+
+  .ant-pagination-item-active {
+    border-color: ${styleSet.colors.primary};
+  }
+  .ant-pagination-item:hover a {
+    color: ${styleSet.colors.primary};
+  }
+  .ant-pagination-item-active a {
+    color: ${styleSet.colors.primary};
+  }
+`;
+
+export const BoardTh = styled.div`
+  padding: 20px 0;
+  width: 100%;
+  background: #f7f7f7;
+  border-top: 2px solid ${styleSet.colors.subcolor1};
+  font-size: ${styleSet.fontSize.s7};
+  display: flex;
+`;
+
+export const BoardLiEmpty = styled.div`
+  padding: 20px;
+  border-bottom: 1px solid ${styleSet.colors.gray};
+`;
+
+export const BoardLi = styled.div`
+  padding: 20px 0;
+  width: 100%;
+  border-bottom: 1px solid ${styleSet.colors.gray};
+  font-size: ${styleSet.fontSize.s8};
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+`;
+
+export const QuestionLi = styled.div`
+  padding: 20px 40px;
+  width: 100%;
+  background: #f7f7f7;
+  flex-wrap: wrap;
+`;
+
+export const BDate = styled.span`
+  width: 30%;
+  text-align: center;
+`;
+
+export const BContents = styled.span`
+  width: 40%;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
+export const BPrice = styled.span`
+  width: 30%;
+  text-align: center;
+`;
+
+export const QuestionWrapper = styled.div`
+  width: 100%;
+`;
