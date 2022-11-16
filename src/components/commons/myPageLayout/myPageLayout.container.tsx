@@ -1,20 +1,12 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
-import UseAuth from "../hooks/useAuth";
-import MyPageLayoutPresenter from "./myPageLayout.presenter";
 import Swal from "sweetalert2";
+import UseAuth from "../hooks/useAuth";
+import { useRouter } from "next/router";
 import * as S from "./myPageLayout.styles";
+import { useMutation, useQuery } from "@apollo/client";
+import { FETCH_USER, LOGOUT } from "./myPageLayout.queires";
 import { styleSet } from "../../../commons/styles/styleSet";
-
-type IMyPageLayoutProps = {
-  children: JSX.Element;
-};
-
-const LOGOUT = gql`
-  mutation logout {
-    logout
-  }
-`;
+import { IMyPageLayoutProps } from "./myPageLayout.types";
+import MyPageLayoutPresenter from "./myPageLayout.presenter";
 
 export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
   const { children } = P;
@@ -22,6 +14,7 @@ export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
   const [logout] = useMutation(LOGOUT);
   const router = useRouter();
   const nowUrl = router.asPath;
+  const { data: fetchUser } = useQuery(FETCH_USER);
 
   const onClickMore = () => {
     Swal.fire({
@@ -47,7 +40,11 @@ export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
 
   return (
     <S.Container>
-      <MyPageLayoutPresenter nowUrl={nowUrl} onClickMore={onClickMore} />
+      <MyPageLayoutPresenter
+        nowUrl={nowUrl}
+        onClickMore={onClickMore}
+        fetchUser={fetchUser}
+      />
       {children}
     </S.Container>
   );

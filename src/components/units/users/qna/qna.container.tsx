@@ -1,35 +1,37 @@
 import { useQuery } from "@apollo/client";
+import { useState } from "react";
 import { FETCH_USER } from "../edit/edit.queries";
-import QnaItemList from "./qna.itemList";
-import * as S from "./qna.styles";
+import QnaPresenterCommon from "./qna.presenterCommon";
+import QnaPresenterCreator from "./qna.presenterCreator";
+import { FETCH_MY_QUESTIONS, FETCH_PRODUCTS_BY_CREATOR } from "./qna.queries";
 
 export default function QnaContainer() {
+  const [currentPage, setCurrentPage] = useState(1);
   const { data: fetchUser } = useQuery(FETCH_USER);
+  const { data: fetchProductsByCreator } = useQuery(FETCH_PRODUCTS_BY_CREATOR, {
+    variables: {
+      page: currentPage,
+    },
+  });
+  const { data: fetchMyQuestions } = useQuery(FETCH_MY_QUESTIONS);
+
+  const onClickPage = (id: number) => {
+    setCurrentPage(id);
+  };
+
+  console.log(fetchMyQuestions);
 
   return (
-    <S.Container>
-      <S.SubTitle>상품 Q&A</S.SubTitle>
+    <>
       {fetchUser?.fetchUser.userType === "CREATOR" ? (
-        <span>크리에이터용 상품Q&A 페이지</span>
-      ) : null}
-      <S.Comment>
-        <S.Wrapper>
-          <S.H4>QnA</S.H4>
-          <S.Title>
-            <li>프로필</li>
-            <li>답변여부</li>
-            <li>내용</li>
-            <li className="writer">작성자</li>
-            <li className="createdAt">등록일자</li>
-            <li></li>
-          </S.Title>
-          {fetchUser?.fetchUser.userType === "CREATOR" ? (
-            <S.Box>{/* <QnaItemList /> */}</S.Box>
-          ) : (
-            <S.Box>{/* <QnaItemList /> */}</S.Box>
-          )}
-        </S.Wrapper>
-      </S.Comment>
-    </S.Container>
+        <QnaPresenterCreator
+          fetchProductsByCreator={fetchProductsByCreator}
+          onClickPage={onClickPage}
+          currentPage={currentPage}
+        />
+      ) : (
+        <QnaPresenterCommon fetchMyQuestions={fetchMyQuestions} />
+      )}
+    </>
   );
 }
