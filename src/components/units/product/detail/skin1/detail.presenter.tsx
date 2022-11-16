@@ -10,7 +10,43 @@ import * as S from "./detail.styles";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import QuestionWriter from "../../../question/write/questionWriter";
-import QuestionList from "../../../question/list/questionList";
+import QuestionMap from "../../../question/list/questionList.map";
+import { categoryContents, categoryTitle } from "../../register/atom/category";
+import * as DOMPurify from "dompurify";
+import { useState } from "react";
+import { useInterval } from "../../../../commons/hooks/timer";
+
+const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
+  const [result, setResult] = useState(calculator());
+  useInterval(() => {
+    const newResult = calculator();
+    if (newResult !== result) setResult(newResult);
+  }, delay);
+
+  return result;
+};
+
+const CountDownView = ({ targetISOString }: { targetISOString: any }) => {
+  const remain = useResultOfIntervalCalculator(
+    () =>
+      Math.floor(
+        ((new Date(targetISOString) as any) -
+          (new Date().setHours(new Date().getHours() + 9) as any)) /
+          1000
+      ),
+    10
+  );
+  const day = Math.floor(remain / (60 * 60 * 24));
+  const hour = Math.floor((remain % (60 * 60 * 24)) / (60 * 60));
+  const min = Math.floor((remain % (60 * 60)) / 60);
+  const sec = Math.floor(remain % 60);
+
+  return (
+    <div className="CountDownWrap">
+      {day}일{hour}:{min}:{sec}
+    </div>
+  );
+};
 
 export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   const { onClickMoveToPage } = useMoveToPage();
@@ -25,20 +61,39 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickLike,
     thumbnail,
     onClickImages,
-    onClickAnswer,
-    isTrue,
+    onClickOrder,
+    onClickTab,
+    onClickTab2,
+    important,
+    commentData,
+    setGraph,
+    graph,
   } = P;
 
+  setGraph(
+    Math.floor(
+      ((data?.fetchProduct.originalQuantity - data?.fetchProduct.quantity) *
+        100) /
+        data?.fetchProduct.originalQuantity
+    )
+  );
+
+  const targetISOString = data?.fetchProduct.validUntil;
+  console.log(targetISOString);
+
+  const isNotYet = useResultOfIntervalCalculator(
+    () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,
+    10
+  );
   return (
     <>
       <S.Container>
-        <S.Reset src="/icon_top.svg" alt="상단 바로가기 아이콘" />
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>
               <img src={thumbnail} alt="상품이미지" />
               <S.ul>
-                {data?.fetchProduct.images.map((el: string) => (
+                {data?.fetchProduct.images?.map((el: string) => (
                   <li key={el}>
                     <img src={el} onClick={onClickImages} />
                   </li>
@@ -78,16 +133,20 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </ul>
                 <ul>
                   <li>마감수량</li>
-                  <S.Close>{data?.fetchProduct.quantity} 개</S.Close>
+                  <S.Close>{data?.fetchProduct.originalQuantity} 개</S.Close>
                 </ul>
                 <ul>
                   <li>마감일정</li>
                   <li>
+                    {data?.fetchProduct.validFrom
+                      .slice(0, 10)
+                      .replace("-", ".")
+                      .replace("-", ".")}{" "}
+                    ~{" "}
                     {data?.fetchProduct.validUntil
                       .slice(0, 10)
-                      .replace("-", "년 ")
-                      .replace("-", "월 ")}
-                    일
+                      .replace("-", ".")
+                      .replace("-", ".")}
                   </li>
                 </ul>
                 <ul>
@@ -112,29 +171,37 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                       onChange={handleChange}
                       options={[
                         {
-                          value: "S 사이즈",
-                          label: "S 사이즈",
+                          value: data?.fetchProduct?.option1,
+                          label: data?.fetchProduct?.option1,
                         },
                         {
-                          value: "M 사이즈",
-                          label: "M 사이즈",
+                          value: data?.fetchProduct?.option2,
+                          label: data?.fetchProduct?.option2,
                         },
                         {
-                          value: "L 사이즈",
-                          label: "L 사이즈",
+                          value: data?.fetchProduct?.option3,
+                          label: data?.fetchProduct?.option3,
                         },
                         {
-                          value: "disabled",
-                          disabled: true,
-                          label: "Disabled",
+                          value: data?.fetchProduct?.option4,
+                          label: data?.fetchProduct?.option4,
+                        },
+                        {
+                          value: data?.fetchProduct?.option5,
+                          label: data?.fetchProduct?.option5,
                         },
                       ]}
                     />
                   </li>
                 </ul>
-                <S.Strong>진행현황</S.Strong>
+                <S.Strong>
+                  <p>
+                    진행현황 <span>({graph}%)</span>
+                  </p>
+                  <span>남은 수량 : {data?.fetchProduct.quantity} 개</span>
+                </S.Strong>
                 <S.Graph>
-                  <span>100개</span>
+                  <S.GraphPercent graph={graph}></S.GraphPercent>
                 </S.Graph>
                 <S.Persent>
                   <li>0%</li>
@@ -142,10 +209,19 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <li>100%</li>
                 </S.Persent>
               </S.Text>
-              <S.H2>3일 00:43:33</S.H2>
+
+              <S.H2>
+                {isNotYet ? (
+                  <CountDownView
+                    targetISOString={targetISOString}
+                  ></CountDownView>
+                ) : (
+                  "마감되었습니다"
+                )}
+              </S.H2>
 
               <S.H3>
-                총 상품 금액{" "}
+                총 상품 금액
                 <strong>
                   {(data?.fetchProduct.discountPrice * count).toLocaleString()}
                   원
@@ -156,65 +232,76 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 <button className="cart" onClick={onClickLike}>
                   {!cart && <HeartOutlined />} {``}
                   {cart && <HeartFilled />} {``}
-                  관심상품
+                  <span className="emotion">관심상품</span>
                 </button>
-                <button className="buy">바로 구매하기</button>
+                {isNotYet ? (
+                  <button className="buy" onClick={onClickOrder}>
+                    <span className="emotion">바로 구매하기</span>
+                  </button>
+                ) : (
+                  <button className="closed">
+                    <span className="emotion">마감</span>
+                  </button>
+                )}
               </S.BoxBtn>
             </S.InfoRight>
           </S.ProdInfo>
+
           <S.Tab>
-            <li>제품상세</li>
-            <li>QnA</li>
+            <li onClick={onClickTab2}>
+              <span>제품상세</span>
+            </li>
+            <li onClick={onClickTab}>
+              <span>QnA</span>
+            </li>
           </S.Tab>
 
-          <S.Ref>
-            <S.Randing
-              src="/img_detailTest.jpeg"
-              alt="레오제이 녹두팩 랜딩이미지"
-            />
-            <Product01
-              onClickCount={onClickCount}
-              count={count}
-              cart={cart}
-              data={data}
-              discount={discount}
-              onClickLike={onClickLike}
-            />
-          </S.Ref>
+          {!important && (
+            <S.Ref>
+              {process.browser && (
+                <S.Randing
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
+                  }}
+                ></S.Randing>
+              )}
+              <Product01
+                onClickCount={onClickCount}
+                count={count}
+                cart={cart}
+                data={data}
+                discount={discount}
+                onClickLike={onClickLike}
+                onClickOrder={onClickOrder}
+              />
+            </S.Ref>
+          )}
 
-          <S.H3Info>필수 표기정보</S.H3Info>
-          <S.Company>
-            <li>
-              <strong>품명 및 모델명</strong>
-              <data>품명 및 모델명 적거라</data>
-            </li>
-            <li>
-              <strong>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함)
-              </strong>
-              <data>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함) 적거라
-              </data>
-            </li>
-          </S.Company>
-          <S.Company>
-            <li>
-              <strong>품명 및 모델명</strong>
-              <data>품명 및 모델명 적거라</data>
-            </li>
-            <li>
-              <strong>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함)
-              </strong>
-              <data>
-                제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른
-                표시의무 화학물질에 한함) 적거라
-              </data>
-            </li>
-          </S.Company>
+          <S.Important>
+            <S.H3Info>필수 표기정보</S.H3Info>
+            <S.Company>
+              {categoryContents[
+                categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
+              ]?.map((el, idx) => (
+                <li>
+                  <strong>{el}</strong>
+                  <data>
+                    {data?.fetchProduct.productDetail[`option${idx + 1}`]}
+                  </data>
+                </li>
+              ))}
+              {categoryContents[
+                categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
+              ]?.length %
+                2 ==
+              1 ? (
+                <li>
+                  <strong></strong>
+                  <data></data>
+                </li>
+              ) : null}
+            </S.Company>
+          </S.Important>
 
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
@@ -227,7 +314,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
           <S.Wrapper3>
             <S.Count>
               <li>
-                <MessageOutlined /> 10
+                <MessageOutlined /> {commentData?.fetchQuestions.length}
               </li>
             </S.Count>
             <QuestionWriter />
@@ -236,13 +323,13 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <li>프로필</li>
               <li>답변여부</li>
               <li>내용</li>
-              <li>작성자</li>
-              <li>등록일자</li>
+              <li className="writer">작성자</li>
+              <li className="createdAt">등록일자</li>
               <li></li>
             </S.Title>
 
             <S.Box>
-              <QuestionList onClickAnswer={onClickAnswer} isTrue={isTrue} />
+              <QuestionMap />
             </S.Box>
           </S.Wrapper3>
         </S.Comment>

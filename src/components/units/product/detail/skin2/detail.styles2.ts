@@ -22,10 +22,19 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const Randing = styled.img`
+  margin-bottom: 30px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
+`;
+
 export const DetailWrapper = styled.div`
   width: 1400px;
-  margin: 50px auto;
+  margin: 0 auto;
   position: relative;
+  padding-top: 50px;
 `;
 
 export const H1 = styled.h1`
@@ -102,7 +111,7 @@ export const Right = styled.section`
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 export const Left = styled.section`
@@ -145,6 +154,44 @@ export const Text2 = styled.p`
   font-size: 8rem;
   font-family: ${styleSet.font.EB};
 `;
+
+export const H3Info = styled.h3`
+  font-family: ${styleSet.font.B};
+  padding-bottom: 10px;
+`;
+
+export const Company = styled.ul`
+  display: flex;
+  margin-top: -1px;
+
+  li {
+    width: calc(100% / 2);
+    border-block: 1px solid ${styleSet.colors.gray};
+    display: flex;
+    font-size: ${styleSet.fontSize.s9};
+    word-break: keep-all;
+    strong {
+      background: ${styleSet.colors.subcolor3};
+      color: ${styleSet.colors.black};
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+    data {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      height: 300px;
+    }
+  }
+`;
+
+export const Ref = styled.section``;
 
 export const Like = styled.img`
   position: absolute;
@@ -207,7 +254,7 @@ export const Button = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-top: 30px;
+  padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
   margin-top: 50px;
   button {
@@ -304,5 +351,37 @@ export const Title = styled.ul`
     li {
       display: none;
     }
+  }
+`;
+
+export const Tab = styled.ul`
+  max-width: 1400px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  margin: 100px 0 50px 0;
+  gap: 30px;
+  align-items: center;
+  li {
+    cursor: pointer;
+    border-block: 1px solid ${styleSet.colors.primary};
+    height: 100%;
+    text-align: center;
+    font-size: ${styleSet.fontSize.s8};
+    color: ${styleSet.colors.primary};
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      border-block: 1px solid ${styleSet.colors.point2};
+      color: ${styleSet.colors.point2};
+    }
+  }
+`;
+
+export const Important = styled.section`
+  h3 {
+    font-size: ${styleSet.fontSize.s5};
   }
 `;

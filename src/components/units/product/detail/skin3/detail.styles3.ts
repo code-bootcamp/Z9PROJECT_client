@@ -39,6 +39,7 @@ export const Button = styled.div`
   gap: 10px;
   padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
+  margin-top: 50px;
   button {
     color: ${styleSet.colors.point1};
     background: ${styleSet.colors.white};
@@ -148,6 +149,9 @@ export const InfoRight = styled.div`
   background: #f8f8f8;
   border-radius: 20px;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .top {
     display: flex;
     justify-content: space-between;
@@ -335,22 +339,27 @@ export const H2 = styled.h2`
 `;
 
 export const Tab = styled.ul`
-  width: 100%;
+  max-width: 1400px;
   height: 60px;
   display: flex;
-  border-block: 1px solid ${styleSet.colors.gray};
   justify-content: center;
-  line-height: 60px;
-  margin-bottom: 50px;
+  margin: 100px 0 50px 0;
+  gap: 30px;
+  align-items: center;
   li {
     cursor: pointer;
-    width: calc(100% / 2 - 10px);
+    border-block: 1px solid ${styleSet.colors.primary};
     height: 100%;
     text-align: center;
     font-size: ${styleSet.fontSize.s8};
-    color: ${styleSet.colors.darkgray};
-    &:first-of-type {
-      border-right: 1px solid ${styleSet.colors.gray};
+    color: ${styleSet.colors.primary};
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      border-block: 1px solid ${styleSet.colors.point2};
+      color: ${styleSet.colors.point2};
     }
   }
 `;
@@ -405,22 +414,56 @@ export const BoxBtn = styled.div`
   justify-content: space-between;
   .cart {
     background: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
+    border: 1px solid ${styleSet.colors.lightGray};
     width: 35%;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
     svg {
       color: ${styleSet.colors.red};
     }
   }
   .buy {
     background-color: ${styleSet.colors.subcolor4};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
     width: 60%;
     color: ${styleSet.colors.white};
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -5%;
+      left: -10%;
+      width: 0;
+      height: 120%;
+      background: #f6a70a;
+      transition: all 0.3s ease;
+      transform: skewX(15deg);
+    }
+    &:hover {
+      color: ${styleSet.colors.white};
+      ::before {
+        width: 120%;
+      }
+    }
+    .emotion {
+      display: block;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+  }
+
+  button {
+    font-size: ${styleSet.fontSize.s7};
+    font-family: ${styleSet.font.B};
+    position: relative;
+    overflow: hidden;
+    height: 60px;
   }
 `;
 
@@ -531,3 +574,9 @@ export const Count = styled.ul`
 `;
 
 export const Box = styled.section``;
+
+export const Important = styled.section`
+  h3 {
+    font-size: ${styleSet.fontSize.s5};
+  }
+`;
