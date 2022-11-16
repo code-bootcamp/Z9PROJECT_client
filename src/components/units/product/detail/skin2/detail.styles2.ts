@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { url } from "inspector";
+import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
@@ -48,8 +50,9 @@ export const Ul = styled.ul`
   li {
     &.title:after {
       content: "";
-      width: 22px;
+      width: 40px;
       height: 3px;
+      font-size: ${styleSet.fontSize.s1};
       background: ${styleSet.colors.white};
       position: absolute;
       top: -10px;
@@ -57,10 +60,10 @@ export const Ul = styled.ul`
     }
     &:first-child {
       font-family: ${styleSet.font.L};
-      font-size: ${styleSet.fontSize.s9};
+      font-size: ${styleSet.fontSize.s6};
     }
     color: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s7};
+    font-size: ${styleSet.fontSize.s5};
   }
 `;
 
@@ -73,7 +76,6 @@ export const Info = styled.section`
 `;
 
 export const InfoImg = styled.div`
-  background: url("/leoj.png") no-repeat;
   width: 500px;
   height: 500px;
   background-position: 50% 50%;
@@ -205,12 +207,11 @@ export const Emoticon = styled.img`
   right: 0;
 `;
 
-export const Iframe = styled.iframe`
+export const Iframe = styled(ReactPlayer)`
   margin-top: -17%;
 `;
 
 export const Octagon = styled.div`
-  background: url("/test1.jpeg") no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   position: relative;

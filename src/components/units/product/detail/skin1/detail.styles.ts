@@ -1,11 +1,22 @@
 import styled from "@emotion/styled";
 import { Select } from "antd";
 import { styleSet } from "../../../../../commons/styles/styleSet";
+interface IProps {
+  graph: number;
+}
 
 export const Container = styled.section`
   width: 100%;
   height: 100%;
   padding: 50px 0;
+`;
+
+export const Timer = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: ${styleSet.fontSize.s6};
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -78,8 +89,10 @@ export const ProdInfo = styled.section`
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+  gap: 70px;
   > div {
     width: calc(100% / 2 - 10px);
+    height: 835px;
   }
 
   @media ${styleSet.breakePoints.mobile} {
@@ -87,6 +100,7 @@ export const ProdInfo = styled.section`
     > div {
       width: 100%;
       margin-bottom: 30px;
+      height: auto;
     }
   }
 `;
@@ -96,7 +110,7 @@ export const InfoLeft = styled.div`
   width: 48%;
   > img {
     border-radius: 10px;
-    height: 700px;
+    height: 650px;
     overflow: hidden;
     max-width: 100%;
     width: 100%;
@@ -120,19 +134,25 @@ export const H3Info = styled.h3`
 export const Company = styled.ul`
   display: flex;
   margin-top: -1px;
+  flex-wrap: wrap;
 
   li {
     width: calc(100% / 2);
-    border-block: 1px solid ${styleSet.colors.gray};
-    display: flex;
-    font-size: ${styleSet.fontSize.s9};
+    border-bottom: 1px solid ${styleSet.colors.gray};
+    font-size: 0.7rem;
     word-break: keep-all;
+    display: flex;
+    &:first-of-type,
+    :nth-of-type(2) {
+      border-top: 1px solid ${styleSet.colors.gray};
+    }
     strong {
       background: ${styleSet.colors.subcolor3};
       color: ${styleSet.colors.black};
-      padding: 10px;
+      padding: 12px;
       display: flex;
       align-items: center;
+      width: 300px;
     }
     data {
       padding: 10px;
@@ -153,7 +173,10 @@ export const Ref = styled.section``;
 export const InfoRight = styled.div`
   background: #f8f8f8;
   border-radius: 20px;
-  padding: 20px 50px 0 50px;
+  padding: 0 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .top {
     display: flex;
     justify-content: space-between;
@@ -241,7 +264,18 @@ export const Strong = styled.strong`
   font-family: ${styleSet.font.B};
   color: ${styleSet.colors.black};
   margin-bottom: 10px;
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  > p > span {
+    color: ${styleSet.colors.red};
+  }
+  span {
+    font-size: ${styleSet.fontSize.s9};
+    text-align: left;
+    font-family: ${styleSet.font.B};
+    letter-spacing: -1px;
+  }
 `;
 
 export const Text = styled.div`
@@ -315,25 +349,36 @@ export const Graph = styled.p`
   color: ${styleSet.colors.darkgray};
   position: relative;
   span {
-    background-color: ${styleSet.colors.primary};
+    background: linear-gradient(-45deg, #f46a22, #ffd480);
     height: 30px;
-    width: 30%;
+    max-width: 100%;
+    min-width: 0%;
     border-radius: 15px;
     text-align: center;
     color: ${styleSet.colors.white};
+    font-size: ${styleSet.fontSize.s9};
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     font-family: ${styleSet.font.B};
+    letter-spacing: -0.8px;
   }
 `;
 
-export const H2 = styled.h2`
-  font-size: ${styleSet.fontSize.s3};
+export const GraphPercent = styled.span`
+  width: ${(props: IProps) => {
+    return `${props.graph}%`;
+  }};
+`;
+
+export const H2 = styled.div`
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
   padding-top: 20px;
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 10px;
@@ -416,27 +461,76 @@ export const BoxBtn = styled.div`
   justify-content: space-between;
   .cart {
     background: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
+    border: 1px solid ${styleSet.colors.lightGray};
     width: 35%;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
     svg {
       color: ${styleSet.colors.red};
     }
   }
-  .buy {
-    background-color: ${styleSet.colors.subcolor4};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
+  .closed {
+    background-color: ${styleSet.colors.darkgray};
     width: 60%;
     color: ${styleSet.colors.white};
+    position: relative;
+    overflow: hidden;
+    cursor: help;
+  }
+
+  .buy {
+    background-color: ${styleSet.colors.subcolor4};
+    width: 60%;
+    color: ${styleSet.colors.white};
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -5%;
+      left: -10%;
+      width: 0;
+      height: 120%;
+      background: #f6a70a;
+      transition: all 0.3s ease;
+      transform: skewX(15deg);
+    }
+    &:hover {
+      color: ${styleSet.colors.white};
+      ::before {
+        width: 120%;
+      }
+    }
+    .emotion {
+      display: block;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+  }
+
+  button {
+    font-size: ${styleSet.fontSize.s7};
+    font-family: ${styleSet.font.B};
+    position: relative;
+    overflow: hidden;
+    height: 60px;
   }
 `;
 
-export const Randing = styled.img`
+export const Randing = styled.article`
+  width: 65%;
   margin-bottom: 30px;
+  p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;

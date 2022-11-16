@@ -2,8 +2,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { MouseEvent, useEffect, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
+import { FETCH_QUESTIONS } from "../../question/question.queries";
 import {
   CREATE_ORDER,
+  DELETE_PRODUCT,
   FETCH_IS_LIKED,
   FETCH_PRODUCT,
   LIKE_PRODUCT,
@@ -18,16 +20,27 @@ export default function ProductDetailContainer() {
   const [cart, setCart] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
   const [important, setImportant] = useState(false);
+  const [graph, setGraph] = useState(0);
 
   const [createOrder] = useMutation(CREATE_ORDER);
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
-    fetchPolicy: "cache-first",
+    fetchPolicy: "cache-and-network",
   });
-  console.log(data, "하이");
+
+  const { data: commentData } = useQuery(FETCH_QUESTIONS, {
+    fetchPolicy: "cache-first",
+    variables: { productId: router.query.useditemId },
+  });
+  console.log(data, "프로덕트");
 
   useEffect(() => {
-    setThumbnail(data?.fetchProduct.images[0]);
+    setThumbnail(
+      data?.fetchProduct.images
+        ? data?.fetchProduct.images[0]
+        : "/icon_logo.png"
+    );
   }, [data]);
 
   const [likeProduct] = useMutation(LIKE_PRODUCT, {
@@ -49,9 +62,7 @@ export default function ProductDetailContainer() {
     }
   }, [fetchIsLiked]);
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = (value: string) => {};
 
   const onClickImages = (event: any) => {
     setThumbnail(event.target.src);
@@ -84,15 +95,20 @@ export default function ProductDetailContainer() {
 
   const onClickOrder = async () => {
     try {
-      const result = await createOrder({
+      await createOrder({
         variables: {
           productId: String(router.query.useditemId),
           price: data?.fetchProduct.discountPrice * count,
           quantity: count,
         },
+        refetchQueries: [
+          {
+            query: FETCH_PRODUCT,
+            variables: { productId: router.query.useditemId },
+          },
+        ],
       });
       SuccessModal("구매가 완료되었습니다.");
-      console.log(result);
     } catch (error) {
       ErrorModal(error as string);
     }
@@ -103,6 +119,18 @@ export default function ProductDetailContainer() {
   };
   const onClickTab2 = () => {
     setImportant(false);
+  };
+
+  const onClickDelete = async () => {
+    try {
+      await deleteProduct({
+        variables: { productId: String(router.query.useditemId) },
+        refetchQueries: [{ query: DELETE_PRODUCT }],
+      });
+      SuccessModal("삭제가 완료되었습니다,");
+    } catch (error) {
+      ErrorModal(error as string);
+    }
   };
 
   return (
@@ -121,8 +149,12 @@ export default function ProductDetailContainer() {
         onClickTab={onClickTab}
         onClickTab2={onClickTab2}
         important={important}
+        commentData={commentData}
+        setGraph={setGraph}
+        graph={graph}
+        onClickDelete={onClickDelete}
       />
-      {/* <ProductDetailPresenter2
+      <ProductDetailPresenter2
         handleChange={handleChange}
         onClickCount={onClickCount}
         count={count}
@@ -136,8 +168,12 @@ export default function ProductDetailContainer() {
         onClickTab={onClickTab}
         onClickTab2={onClickTab2}
         important={important}
-      /> */}
-      {/* <ProductDetailPresenter3
+        commentData={commentData}
+        setGraph={setGraph}
+        graph={graph}
+        onClickDelete={onClickDelete}
+      />
+      <ProductDetailPresenter3
         handleChange={handleChange}
         onClickCount={onClickCount}
         count={count}
@@ -151,7 +187,11 @@ export default function ProductDetailContainer() {
         onClickTab={onClickTab}
         onClickTab2={onClickTab2}
         important={important}
-      /> */}
+        commentData={commentData}
+        setGraph={setGraph}
+        graph={graph}
+        onClickDelete={onClickDelete}
+      />
     </>
   );
 }

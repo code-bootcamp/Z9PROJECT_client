@@ -1,4 +1,7 @@
 import { MessageOutlined } from "@ant-design/icons";
+import DOMPurify from "dompurify";
+import { useRouter } from "next/router";
+import ReactPlayer from "react-player";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";
@@ -7,6 +10,8 @@ import Product01 from "../miniProduct.tsx/product01";
 import * as S from "./detail.styles2";
 
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
+  const router = useRouter();
+
   const { onClickMoveToPage } = useMoveToPage();
 
   const {
@@ -20,6 +25,8 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     important,
+    setGraph,
+    onClickDelete,
   } = P;
 
   return (
@@ -27,32 +34,40 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
       <S.Container>
         <S.Info>
           <S.InfoWrapper>
-            <S.InfoImg></S.InfoImg>
+            <S.InfoImg
+              style={{
+                backgroundImage: `url(${data?.fetchProduct.user.profileImg})`,
+              }}
+            ></S.InfoImg>
 
             <div>
               <S.Ul>
-                <li className="title">뷰티 크리에이터</li>
+                <li className="title">
+                  {data?.fetchProduct.user.mainContents} 크리에이터
+                </li>
                 <li>
-                  <S.H1>레오제이 | Leo J</S.H1>
+                  <S.H1>
+                    {data?.fetchProduct.user.nickname} |{" "}
+                    {data?.fetchProduct.user.snsName}
+                  </S.H1>
                 </li>
               </S.Ul>
 
               <S.Ul>
                 <li>유튜브 구독자 수</li>
-                <li>102K</li>
+                <li>
+                  {data?.fetchProduct.user?.followerNumber?.toLocaleString()}
+                </li>
               </S.Ul>
 
               <S.Ul>
                 <li>유튜브 컨텐츠</li>
-                <li>뷰티,메이크업,브이로그</li>
+                <li>{data?.fetchProduct.user.mainContents}</li>
               </S.Ul>
 
               <S.Ul>
                 <li>유튜브 소개글</li>
-                <li>
-                  메이크업 아티스트 레오제이 ARTIST FOREVER <br />
-                  재밌게 예쁘고 멋있어지는 방법
-                </li>
+                <li>{data?.fetchProduct.user.introduce}</li>
               </S.Ul>
             </div>
           </S.InfoWrapper>
@@ -62,7 +77,13 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           <S.RightDiv>
             <S.Wrapper>
               <S.ImgBox>
-                <S.Octagon></S.Octagon>
+                <S.Octagon
+                  style={{
+                    backgroundImage: `url(${
+                      data?.fetchProduct?.images && data?.fetchProduct.images[0]
+                    })`,
+                  }}
+                ></S.Octagon>
               </S.ImgBox>
               <S.Text>
                 <strong>[{data?.fetchProduct.quantity}개 한정]</strong>
@@ -79,17 +100,24 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               <div>
                 <S.Text2>100K</S.Text2>
                 <S.Iframe
-                  width="500"
-                  height="230"
-                  src="https://www.youtube.com/embed/LCtZIA_-nCA?rel=0&amp;autoplay=1&mute=1&amp;loop=1;"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></S.Iframe>
+                  url={data?.fetchProduct?.youtubeLink}
+                  width={500}
+                  height={230}
+                  muted={true}
+                  playing={true}
+                />
               </div>
 
               <S.ImgBox2>
-                <S.Octagon2></S.Octagon2>
+                <S.Octagon2
+                  style={{
+                    backgroundImage: `url(${
+                      !data?.fetchProduct?.images[1]
+                        ? data?.fetchProduct?.images[0]
+                        : data?.fetchProduct?.images[1]
+                    })`,
+                  }}
+                ></S.Octagon2>
               </S.ImgBox2>
             </S.Wrapper>
           </S.LeftDiv>
@@ -102,10 +130,13 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
 
           {!important && (
             <S.Ref>
-              <S.Randing
-                src="/img_detailTest.jpeg"
-                alt="레오제이 녹두팩 랜딩이미지"
-              />
+              {/* {process.browser && (
+                <S.Randing
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
+                  }}
+                ></S.Randing>
+              )} */}
               <Product01
                 onClickCount={onClickCount}
                 count={count}
@@ -114,6 +145,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
+                setGraph={setGraph}
               />
             </S.Ref>
           )}
@@ -156,8 +188,14 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
 
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
-            <button>수정</button>
-            <button>삭제</button>
+            <button
+              onClick={onClickMoveToPage(
+                `/product/${router.query.useditemId}/edit`
+              )}
+            >
+              수정
+            </button>
+            <button onClick={onClickDelete}>삭제</button>
           </S.Button>
         </S.DetailWrapper>
         <S.Comment>
