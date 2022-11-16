@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
 import { IBtnProps } from "./myPageLayout.types";
 
-
 // container
 
 export const Container = styled.div`
@@ -41,7 +40,6 @@ export const PreContainer = styled.div`
 
 export const Title = styled.h1`
   padding-bottom: 10px;
-  min-width: 182px;
   font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
 `;
@@ -115,4 +113,8 @@ export const BtnWrapper = styled.div`
 
 export const Btn = styled.button`
   font-size: ${styleSet.fontSize.s8};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-height: 40px;
+  }
 `;

@@ -74,6 +74,7 @@ export default function SalesPresenter(P: ISalesPresenterProps) {
           size="small"
           total={HistoryCount?.fetchCountOfOrderByCreatorId}
           onChange={onClickPage}
+          defaultCurrent={1}
         />
       </S.BoardBody>
     </S.Container>
