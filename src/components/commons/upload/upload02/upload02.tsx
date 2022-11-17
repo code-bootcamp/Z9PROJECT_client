@@ -4,7 +4,7 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 
 const Wrapper = styled.div`
   position: absolute;
-  left: 135px;
+  right: 155px;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-top: 20px;
