@@ -24,25 +24,6 @@ export default function QuestionPresenter(P: any) {
     close,
   } = P;
 
-export default function QuestionPresenter(P: any) {
-  const {
-    el,
-    onClickAnswer,
-    onClickAnswerModal,
-    onClickEdit,
-    onClickdelete,
-    onClickUpdate,
-    setQuestion,
-    question,
-    setClose,
-    isAnswer,
-    setIsAnswer,
-    setAnswerModal,
-    isTrue,
-    answerModal,
-    data,
-    close,
-  } = P;
   return (
     <>
       <S.User>
