@@ -21,6 +21,10 @@ const Modal = styled.section`
   gap: 20px;
   z-index: 11;
   box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
 `;
 
 const H1 = styled.h1`
@@ -105,7 +109,6 @@ export default function QuestionModal(P: any) {
   const onChangeQuestion = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setQuestion(e.target.value);
   };
-  console.log(el);
   return (
     <>
       <BgLayer></BgLayer>

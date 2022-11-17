@@ -24,23 +24,43 @@ export default function QuestionPresenter(P: any) {
     close,
   } = P;
 
+export default function QuestionPresenter(P: any) {
+  const {
+    el,
+    onClickAnswer,
+    onClickAnswerModal,
+    onClickEdit,
+    onClickdelete,
+    onClickUpdate,
+    setQuestion,
+    question,
+    setClose,
+    isAnswer,
+    setIsAnswer,
+    setAnswerModal,
+    isTrue,
+    answerModal,
+    data,
+    close,
+  } = P;
   return (
     <>
       <S.User>
         <div>
           <S.Div>
-            <img src="/img_user.jpeg" alt="유저 이미지" />
-            <S.Check>답변대기</S.Check>
+            <img src={el?.user?.profileImg} alt="유저 이미지" />
+            <S.Check>
+              {el?.status
+                .replaceAll("PROGRESS", "답변대기")
+                .replaceAll("SOLVED", "답변완료")}
+            </S.Check>
+
             <S.Contents onClick={onClickAnswer}>{el.question}</S.Contents>
             <S.UserInfo className="writer">
               {el.user?.nickname.slice(0, 8)}
             </S.UserInfo>
-            <S.UserInfo>
-              {el.createdAt
-                ?.slice(0, 10)
-                .replace("-", "년 ")
-                .replace("-", "월 ")}
-              일
+            <S.UserInfo className="created">
+              {el.createdAt?.slice(0, 10).replace("-", ".").replace("-", ".")}
             </S.UserInfo>
             <S.Answer>
               <p onClick={onClickAnswerModal}>답변</p>

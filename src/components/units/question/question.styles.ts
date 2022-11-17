@@ -53,9 +53,12 @@ export const User = styled.section`
 export const UserInfo = styled.p`
   display: flex;
   font-size: ${styleSet.fontSize.s9};
+  &.created {
+    min-width: 90px;
+  }
   &.writer {
     max-width: 110px;
-    min-width: 50px;
+    min-width: 70px;
   }
   span {
     display: block;
@@ -114,7 +117,7 @@ export const Contents = styled.p`
     min-height: 50px;
     overflow: auto;
     white-space: normal;
-    min-height: 150px;
+    min-height: 50px;
     overflow: auto;
     margin: 15px 0;
   }
