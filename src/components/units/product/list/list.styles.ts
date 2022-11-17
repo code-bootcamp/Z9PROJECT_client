@@ -115,6 +115,7 @@ export const Section = styled.section`
     transition: 0.8s;
     opacity: 1;
   }
+
   @media ${styleSet.breakePoints.mobile} {
     min-width: 100%;
   }
@@ -140,6 +141,15 @@ export const User = styled.div`
   }
 `;
 
+export const Timer = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: ${styleSet.fontSize.s6};
+    margin-right: 0 !important;
+  }
+`;
+
 export const UserName = styled.p`
   font-size: ${styleSet.fontSize.s6};
 `;
@@ -160,6 +170,9 @@ export const BgLayer = styled.div`
 export const H2 = styled.h2`
   color: ${styleSet.colors.white};
   font-size: ${styleSet.fontSize.s2};
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 `;
 
 export const ProdImg = styled.div`
@@ -222,14 +235,20 @@ export const Ul = styled.ul`
 `;
 
 export const Time = styled.li`
-  font-size: ${styleSet.fontSize.s5};
-  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s4};
+  font-family: ${styleSet.font.EB};
+  padding-top: 20px;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  @media ${styleSet.breakePoints.mobile} {
+    padding-block: 10px;
+  }
 `;
 
 export const ProdName = styled.h1`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.EB};
-  padding-bottom: 20px;
 `;
 
 export const Price = styled.p`
@@ -238,19 +257,10 @@ export const Price = styled.p`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  padding-bottom: 20px;
   span {
     text-decoration-line: line-through;
     color: ${styleSet.colors.gray};
     font-size: ${styleSet.fontSize.s8};
-  }
-`;
-
-export const New = styled.img`
-  position: absolute;
-  right: 5%;
-  top: 3%;
-
-  @media ${styleSet.breakePoints.mobile} {
-    top: 2%;
   }
 `;

@@ -4,8 +4,8 @@ import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
 
 export default function ProductListMap(P: any) {
-  const { onClickTab, tab, data, onLoadMore } = P;
-
+  const { onClickTab, tab, data, onLoadMore, onChangeSearch } = P;
+  const btnArray = ["전체", "진행예정", "진행중", "종료"];
   return (
     <>
       <S.Container>
@@ -13,20 +13,16 @@ export default function ProductListMap(P: any) {
           <S.H1>리스트</S.H1>
           <S.SearchBox tab={tab}>
             <ul>
-              <li id="1" onClick={onClickTab}>
-                전체
-              </li>
-              <li id="2" onClick={onClickTab}>
-                진행예정
-              </li>
-              <li id="3" onClick={onClickTab}>
-                진행중
-              </li>
-              <li id="4" onClick={onClickTab}>
-                종료
-              </li>
+              {btnArray.map((el: any, i: number) => (
+                <li id={String(i + 1)} onClick={onClickTab} key={i}>
+                  {el}
+                </li>
+              ))}
             </ul>
-            <Search placeholder="검색어를 입력해주세요." />
+            <Search
+              placeholder="검색어를 입력해주세요."
+              onChange={onChangeSearch}
+            />
           </S.SearchBox>
           <S.Main>
             <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
