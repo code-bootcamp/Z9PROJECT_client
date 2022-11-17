@@ -7,6 +7,7 @@ import _ from "lodash";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
+  const [view, setView] = useState<any>(false);
 
   const { data, fetchMore, refetch } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "network-only",
@@ -14,8 +15,9 @@ export default function ProductListContainer() {
   });
 
   const onClickTab = (event: any) => {
+    setTab(event?.currentTarget.id);
     if (data.fetchProductsByPages.map((el: any) => el.validFrom < new Date()))
-      setTab(event?.currentTarget.id);
+      setView();
   };
 
   const onLoadMore = () => {

@@ -1,61 +1,15 @@
 import { HeartOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useInterval } from "../../../commons/hooks/timer";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import * as S from "./list.styles";
-
-const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
-  const [result, setResult] = useState(calculator());
-  useInterval(() => {
-    const newResult = calculator();
-    if (newResult !== result) setResult(newResult);
-  }, delay);
-
-  return result;
-};
-
-const CountDownView = ({ targetISOString }: { targetISOString: any }) => {
-  const remain = useResultOfIntervalCalculator(
-    () =>
-      Math.floor(
-        ((new Date(targetISOString) as any) -
-          (new Date().setHours(new Date().getHours() + 9) as any)) /
-          1000
-      ),
-    10
-  );
-  const day = Math.floor(remain / (60 * 60 * 24));
-  const hour = Math.floor((remain % (60 * 60 * 24)) / (60 * 60));
-  const min = Math.floor((remain % (60 * 60)) / 60);
-  const sec = Math.floor(remain % 60);
-
-  return (
-    <S.Timer className="CountDownWrap">
-      {day}
-      <span>일</span>
-      {hour}
-      <span>시</span>
-      {min}
-      <span>분</span>
-      {sec}
-      <span>초</span>
-    </S.Timer>
-  );
-};
 
 export default function ProductListPresenter(P: any) {
   const { el } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
-  const targetISOString = el?.validUntil;
+  const start = new Date(el?.validFrom.slice(0, 10));
+  const today = new Date();
+  const end = new Date(el?.validUntil.slice(0, 10));
 
-  const isNotYet = useResultOfIntervalCalculator(
-    () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,
-    10
-  );
-
-  console.log(el, "ListEl");
   return (
     <>
       <S.Section onClick={onClickMoveToPage(`/product/${el.id}`)}>
@@ -70,26 +24,20 @@ export default function ProductListPresenter(P: any) {
         <S.ProdImg>
           <S.BgLayer className="bg_layer">
             <S.H2>
-              {isNotYet ? (
-                <>
-                  <CountDownView
-                    targetISOString={targetISOString}
-                  ></CountDownView>
-                  <p>
-                    {el?.validFrom
-                      .slice(0, 10)
-                      .replace("-", ".")
-                      .replace("-", ".")}{" "}
-                    ~{" "}
-                    {el?.validUntil
-                      .slice(0, 10)
-                      .replace("-", ".")
-                      .replace("-", ".")}
-                  </p>
-                </>
-              ) : (
-                "마감되었습니다"
-              )}
+              <p>
+                {/* {el?.validFrom.slice(0, 10).replace("-", ".").replace("-", ".")}{" "}
+                ~{" "}
+                {el?.validUntil
+                  .slice(0, 10)
+                  .replace("-", ".")
+                  .replace("-", ".")} */}
+
+                {today - start < 0
+                  ? "시작 예정"
+                  : end - today > 0
+                  ? "진행중입니다."
+                  : "마감입니다."}
+              </p>
             </S.H2>
           </S.BgLayer>
           <img
@@ -108,15 +56,7 @@ export default function ProductListPresenter(P: any) {
               <HeartOutlined />
               <span>100</span>
             </li>
-            <S.Time>
-              {isNotYet ? (
-                <CountDownView
-                  targetISOString={targetISOString}
-                ></CountDownView>
-              ) : (
-                "마감되었습니다"
-              )}
-            </S.Time>
+            <S.Time></S.Time>
           </S.Ul>
           <S.ProdName>
             [{el.quantity}개 한정] {el.name}
