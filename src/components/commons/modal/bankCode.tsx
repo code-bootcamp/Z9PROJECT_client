@@ -206,7 +206,9 @@ export default function BankCodeModal(P: IBankCodeModalPorps) {
 
   return (
     <>
-      <Btn onClick={onClickModal}>은행코드 선택</Btn>
+      <Btn type="button" onClick={onClickModal}>
+        은행코드 선택
+      </Btn>
       {isOpen && (
         <>
           <BgLayer></BgLayer>
@@ -218,17 +220,17 @@ export default function BankCodeModal(P: IBankCodeModalPorps) {
             <BtnWrapper>
               {listChange
                 ? bankList.map((el) => (
-                    <SubmitBtn onClick={onClickBank(el.code)}>
+                    <SubmitBtn type="button" onClick={onClickBank(el.code)}>
                       <span>{el.name}</span>
                     </SubmitBtn>
                   ))
                 : stockList.map((el) => (
-                    <SubmitBtn onClick={onClickBank(el.code)}>
+                    <SubmitBtn type="button" onClick={onClickBank(el.code)}>
                       <span>{el.name}</span>
                     </SubmitBtn>
                   ))}
             </BtnWrapper>
-            <ChangeBtn onClick={onClickListChange}>
+            <ChangeBtn type="button" onClick={onClickListChange}>
               <span>{listChange ? "증권사 목록" : "은행 목록"}</span>
             </ChangeBtn>
           </Modal>
