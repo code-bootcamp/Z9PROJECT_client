@@ -38,7 +38,7 @@ export const POINT_HISTORY = gql`
   query fetchPointHistory(
     $startDate: DateTime
     $endDate: DateTime
-    $page: Float!
+    $page: Int!
   ) {
     fetchPointHistory(startDate: $startDate, endDate: $endDate, page: $page) {
       id
