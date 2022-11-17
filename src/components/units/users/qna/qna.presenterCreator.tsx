@@ -4,12 +4,12 @@ import QuestionList from "./qna.questionList";
 import { IQnaPresenterCreatorProps } from "./qna.types";
 
 export default function QnaPresenterCreator(P: IQnaPresenterCreatorProps) {
-  const { fetchProductsByCreator, onClickPage, currentPage } = P;
+  const { fetchProductsByCreator, onClickPage, currentPage, listCount } = P;
 
   return (
     <S.Container>
       <S.SubTitle>상품 목록</S.SubTitle>
-      <span>상품을 클릭하면 질문 목록이 펼쳐집니다.</span>
+      <S.H3>상품을 클릭하면 최신 질문이 펼쳐집니다.</S.H3>
       <S.BoardBody>
         <S.BoardTh>
           <S.BDate>등록 날짜</S.BDate>
@@ -26,13 +26,13 @@ export default function QnaPresenterCreator(P: IQnaPresenterCreatorProps) {
               <span>판매 중인 상품이 없습니다.</span>
             </S.BoardLiEmpty>
           )}
+          <Pagination
+            size="small"
+            total={listCount}
+            onChange={onClickPage}
+            current={currentPage}
+          />
         </ul>
-        <Pagination
-          size="small"
-          total={50}
-          onChange={onClickPage}
-          current={currentPage}
-        />
       </S.BoardBody>
     </S.Container>
   );

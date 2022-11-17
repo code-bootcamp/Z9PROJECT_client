@@ -3,7 +3,11 @@ import { useState } from "react";
 import { FETCH_USER } from "../edit/edit.queries";
 import QnaPresenterCommon from "./qna.presenterCommon";
 import QnaPresenterCreator from "./qna.presenterCreator";
-import { FETCH_MY_QUESTIONS, FETCH_PRODUCTS_BY_CREATOR } from "./qna.queries";
+import {
+  FETCH_MY_QUESTIONS,
+  FETCH_PRODUCTS_BY_CREATOR,
+  FETCH_PRODUCT_BY_CREATOR_COUNT,
+} from "./qna.queries";
 
 export default function QnaContainer() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,12 +18,11 @@ export default function QnaContainer() {
     },
   });
   const { data: fetchMyQuestions } = useQuery(FETCH_MY_QUESTIONS);
+  const { data: listCount } = useQuery(FETCH_PRODUCT_BY_CREATOR_COUNT);
 
-  const onClickPage = (id: number) => {
-    setCurrentPage(id);
+  const onClickPage = (clickPage: number) => {
+    setCurrentPage(clickPage);
   };
-
-  console.log(fetchMyQuestions);
 
   return (
     <>
@@ -28,6 +31,7 @@ export default function QnaContainer() {
           fetchProductsByCreator={fetchProductsByCreator}
           onClickPage={onClickPage}
           currentPage={currentPage}
+          listCount={listCount?.countProductByCreator}
         />
       ) : (
         <QnaPresenterCommon fetchMyQuestions={fetchMyQuestions} />

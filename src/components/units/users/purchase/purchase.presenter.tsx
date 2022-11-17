@@ -7,9 +7,9 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
   const {
     onClickPage,
     tab,
-    setTab,
     onClickTab,
     onChangeDate,
+    currentPage,
     HistoryCount,
     purchaseHistory,
     onClickRefund,
@@ -29,7 +29,7 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
           ))}
         </S.PeriodWrapper>
         <S.SearchWrapper>
-          <RangePicker />
+          <RangePicker onChange={onChangeDate} />
           <S.SearchBtn>
             <span>조회</span>
           </S.SearchBtn>
@@ -48,9 +48,9 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
             purchaseHistory?.fetchOrdersByUserId.map((el: any, i: number) => (
               <S.BoardLi key={i}>
                 <S.BDate>{dateFormatter(el.createdAt)}</S.BDate>
-                <S.BContents>{el.product.name}</S.BContents>
+                <S.BContents>{el.product?.name}</S.BContents>
                 <S.BPrice>{PointFormatter(el.price)}</S.BPrice>
-                <S.BSeller>{el.product.user.nickname}</S.BSeller>
+                <S.BSeller>{el.product?.user?.nickname}</S.BSeller>
                 <S.BRefund>
                   {el.status === "PAID" ? (
                     <S.RefundBtn type="button" onClick={onClickRefund(el.id)}>
@@ -72,9 +72,11 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
         </ul>
         <Pagination
           size="small"
-          total={HistoryCount?.fetchCountOfOrderByUserId}
+          total={HistoryCount}
           onChange={onClickPage}
+          current={currentPage}
           defaultCurrent={1}
+          showSizeChanger={false}
         />
       </S.BoardBody>
     </S.Container>
