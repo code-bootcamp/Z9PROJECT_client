@@ -30,11 +30,22 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     handleCopyClipBoard,
     countData,
   } = P;
+<<<<<<< Updated upstream
 
   return (
     <>
       <S.Container>
         <S.Info>
+=======
+  useEffect(() => {
+    setColor(String(data?.fetchProduct.textColor));
+    setBgColor(String(data?.fetchProduct.bgColor));
+  }, []);
+  return (
+    <>
+      <S.Container>
+        <S.Info bgColor={String(bgColor)}>
+>>>>>>> Stashed changes
           <S.InfoWrapper>
             <S.InfoImg
               style={{
