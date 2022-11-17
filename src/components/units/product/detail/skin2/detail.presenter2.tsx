@@ -1,6 +1,7 @@
 import { MessageOutlined } from "@ant-design/icons";
 import DOMPurify from "dompurify";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";
@@ -11,6 +12,8 @@ import * as S from "./detail.styles2";
 
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const router = useRouter();
+  const [color, setColor] = useState<string>("");
+  const [bgColor, setBgColor] = useState<string>();
 
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -30,22 +33,14 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     handleCopyClipBoard,
     countData,
   } = P;
-<<<<<<< Updated upstream
-
-  return (
-    <>
-      <S.Container>
-        <S.Info>
-=======
   useEffect(() => {
     setColor(String(data?.fetchProduct.textColor));
-    setBgColor(String(data?.fetchProduct.bgColor));
+    setBgColor(data?.fetchProduct.bgColor);
   }, []);
   return (
     <>
       <S.Container>
         <S.Info bgColor={String(bgColor)}>
->>>>>>> Stashed changes
           <S.InfoWrapper>
             <S.InfoImg
               style={{
@@ -55,32 +50,34 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
 
             <div>
               <S.Ul>
-                <li className="title">
+                <S.Li className="title" color={color}>
                   {data?.fetchProduct.user.mainContents} 크리에이터
-                </li>
-                <li>
-                  <S.H1>
+                </S.Li>
+                <S.Li color={color}>
+                  <S.H1 color={color}>
                     {data?.fetchProduct.user.nickname} |{" "}
                     {data?.fetchProduct.user.snsName}
                   </S.H1>
-                </li>
+                </S.Li>
               </S.Ul>
 
               <S.Ul>
-                <li>유튜브 구독자 수</li>
-                <li>
+                <S.Li color={color}>유튜브 구독자 수</S.Li>
+                <S.Li color={color}>
                   {data?.fetchProduct.user?.followerNumber?.toLocaleString()}
-                </li>
+                </S.Li>
               </S.Ul>
 
               <S.Ul>
-                <li>유튜브 컨텐츠</li>
-                <li>{data?.fetchProduct.user.mainContents}</li>
+                <S.Li color={color}>유튜브 컨텐츠</S.Li>
+                <S.Li color={color}>
+                  {data?.fetchProduct.user.mainContents}
+                </S.Li>
               </S.Ul>
 
               <S.Ul>
-                <li>유튜브 소개글</li>
-                <li>{data?.fetchProduct.user.introduce}</li>
+                <S.Li color={color}>유튜브 소개글</S.Li>
+                <S.Li color={color}>{data?.fetchProduct.user.introduce}</S.Li>
               </S.Ul>
             </div>
           </S.InfoWrapper>
