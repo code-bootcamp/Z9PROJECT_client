@@ -1,9 +1,24 @@
-import { MouseEvent } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 
 export type IDetailPresenterProps = {
-  handleChange: (value: string) => void;
-  onClickCount: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleChange?: ((value: any) => void) | undefined;
+  onClickCount?: (e: MouseEvent<HTMLButtonElement>) => void;
   count: number;
-  onClickCart: () => void;
   cart: boolean;
+  data?: any;
+  discount?: number;
+  onClickLike?: (productId: any) => Promise<void>;
+  thumbnail?: any;
+  onClickImages?: any;
+  onClickAnswer?: () => void;
+  isTrue?: boolean;
+  onClickOrder: () => Promise<void>;
+  onClickTab: () => void;
+  onClickTab2: () => void;
+  important: boolean;
+  commentData: any;
+  setGraph: any;
+  graph: number;
+  onClickDelete: () => Promise<void>;
+  handleCopyClipBoard: any;
 };

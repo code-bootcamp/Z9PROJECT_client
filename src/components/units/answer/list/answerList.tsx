@@ -1,28 +1,50 @@
 import * as S from "../answer.styles";
+import AnswerWriter from "../write/answerWriter";
 
-export default function AnswerList() {
+export default function AnswerList(P: any) {
+  const { el, dom, isAnswer, setIsAnswer, setAnswerModal, isTrue } = P;
+
+  const onClickEditAnswer = () => {
+    setIsAnswer(true);
+  };
+
   return (
     <>
       <S.User>
-        <S.AnswerBox>
-          <S.Div>
-            <S.Contents>
-              이거 좋아여??이거 좋아여??이거 좋아여??이거 좋아여??이거 좋아여??
-            </S.Contents>
-            <S.Text>
-              <S.AnswerContents>
-                <span>답변</span>
-                어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여어쩌라구여
-              </S.AnswerContents>
-            </S.Text>
-            <S.Answer>
-              <S.UserInfo>Leo J</S.UserInfo>
-              <S.UserInfo>2022.11.03</S.UserInfo>
-              <button>수정</button>
-              <button>삭제</button>
-            </S.Answer>
-          </S.Div>
-        </S.AnswerBox>
+        {isTrue && (
+          <S.AnswerBox>
+            <S.Div>
+              <S.Contents>{el.question}</S.Contents>
+              <S.Text>
+                <S.AnswerContents>
+                  <span>답변</span>
+                  {dom.answer}
+                </S.AnswerContents>
+              </S.Text>
+              <S.Answer>
+                <S.UserInfo>{el.nickname}</S.UserInfo>
+                <S.UserInfo>
+                  {dom?.createdAt
+                    ?.slice(0, 10)
+                    .replace("-", "년")
+                    .replace("-", "월")}
+                  일
+                </S.UserInfo>
+                <button onClick={onClickEditAnswer}>수정</button>
+              </S.Answer>
+            </S.Div>
+          </S.AnswerBox>
+        )}
+        {isAnswer && (
+          <AnswerWriter
+            setAnswerModal={setAnswerModal}
+            questionEl={el}
+            isAnswer={true}
+            setIsAnswer={setIsAnswer}
+            dom={dom}
+            onClickEditAnswer={onClickEditAnswer}
+          />
+        )}
       </S.User>
     </>
   );
