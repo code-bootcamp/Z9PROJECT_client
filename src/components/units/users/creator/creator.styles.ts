@@ -31,6 +31,12 @@ export const SubTitle = styled.label`
   font-size: ${styleSet.fontSize.s5};
 `;
 
+export const SubTitle = styled.label`
+  align-self: flex-start;
+  font-family: ${styleSet.font.B};
+  font-size: ${styleSet.fontSize.s5};
+`;
+
 export const Form = styled.form`
   width: 100%;
 

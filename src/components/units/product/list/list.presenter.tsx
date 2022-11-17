@@ -1,5 +1,4 @@
 import { HeartOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import * as S from "./list.styles";
 
@@ -7,11 +6,13 @@ export default function ProductListPresenter(P: any) {
   const { el } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
-  console.log(el, "Dqwd");
+  const start = new Date(el?.validFrom.slice(0, 10));
+  const today = new Date();
+  const end = new Date(el?.validUntil.slice(0, 10));
+
   return (
     <>
       <S.Section onClick={onClickMoveToPage(`/product/${el.id}`)}>
-        <S.New src="/icon_new.png" alt="NEW 아이콘" />
         <S.User>
           <img
             src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
@@ -22,7 +23,22 @@ export default function ProductListPresenter(P: any) {
 
         <S.ProdImg>
           <S.BgLayer className="bg_layer">
-            <S.H2>진행예정</S.H2>
+            <S.H2>
+              <p>
+                {/* {el?.validFrom.slice(0, 10).replace("-", ".").replace("-", ".")}{" "}
+                ~{" "}
+                {el?.validUntil
+                  .slice(0, 10)
+                  .replace("-", ".")
+                  .replace("-", ".")} */}
+
+                {today - start < 0
+                  ? "시작 예정"
+                  : end - today > 0
+                  ? "진행중입니다."
+                  : "마감입니다."}
+              </p>
+            </S.H2>
           </S.BgLayer>
           <img
             className="prodImg"
@@ -40,7 +56,7 @@ export default function ProductListPresenter(P: any) {
               <HeartOutlined />
               <span>100</span>
             </li>
-            <S.Time>3일 00:43:44</S.Time>
+            <S.Time></S.Time>
           </S.Ul>
           <S.ProdName>
             [{el.quantity}개 한정] {el.name}
