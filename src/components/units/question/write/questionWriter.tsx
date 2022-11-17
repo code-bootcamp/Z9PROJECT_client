@@ -31,12 +31,15 @@ export default function QuestionWriter() {
             productId: String(router.query.useditemId),
           },
         },
-        refetchQueries: [
-          {
-            query: FETCH_QUESTIONS,
-            variables: { productId: String(router.query.useditemId) },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchQuestions: (prev) => {
+                return [data.createQuestion, ...prev];
+              },
+            },
+          });
+        },
       });
       SuccessModal("질문이 등록되었습니다.");
     } catch (error) {
