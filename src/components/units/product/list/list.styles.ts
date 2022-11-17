@@ -146,7 +146,7 @@ export const Timer = styled.div`
   align-items: center;
   span {
     font-size: ${styleSet.fontSize.s6};
-    margin-right: 0;
+    margin-right: 0 !important;
   }
 `;
 
@@ -170,6 +170,9 @@ export const BgLayer = styled.div`
 export const H2 = styled.h2`
   color: ${styleSet.colors.white};
   font-size: ${styleSet.fontSize.s2};
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 `;
 
 export const ProdImg = styled.div`

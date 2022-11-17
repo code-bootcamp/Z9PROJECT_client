@@ -14,7 +14,8 @@ export default function ProductListContainer() {
   });
 
   const onClickTab = (event: any) => {
-    setTab(event?.currentTarget.id);
+    if (data.fetchProductsByPages.map((el: any) => el.validFrom < new Date()))
+      setTab(event?.currentTarget.id);
   };
 
   const onLoadMore = () => {

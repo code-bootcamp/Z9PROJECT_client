@@ -71,9 +71,22 @@ export default function ProductListPresenter(P: any) {
           <S.BgLayer className="bg_layer">
             <S.H2>
               {isNotYet ? (
-                <CountDownView
-                  targetISOString={targetISOString}
-                ></CountDownView>
+                <>
+                  <CountDownView
+                    targetISOString={targetISOString}
+                  ></CountDownView>
+                  <p>
+                    {el?.validFrom
+                      .slice(0, 10)
+                      .replace("-", ".")
+                      .replace("-", ".")}{" "}
+                    ~{" "}
+                    {el?.validUntil
+                      .slice(0, 10)
+                      .replace("-", ".")
+                      .replace("-", ".")}
+                  </p>
+                </>
               ) : (
                 "마감되었습니다"
               )}
