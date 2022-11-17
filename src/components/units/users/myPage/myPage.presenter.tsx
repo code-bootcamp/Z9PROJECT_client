@@ -89,6 +89,7 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
             onChange={onClickPage}
             defaultCurrent={1}
             current={currentPage}
+            showSizeChanger={false}
           />
         </S.BoardBody>
       </S.HistoryWrapper>

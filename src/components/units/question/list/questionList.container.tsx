@@ -66,7 +66,6 @@ export default function QuestionContainer(P: any) {
     } catch (error) {
       ErrorModal(error as string);
     }
-
   };
 
   const onClickAnswer = () => {

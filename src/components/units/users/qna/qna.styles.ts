@@ -4,6 +4,7 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.section`
   padding: 50px 0;
   width: 100%;
+
   @media ${styleSet.breakePoints.mobile} {
     padding: 0;
   }
@@ -14,6 +15,15 @@ export const SubTitle = styled.h2`
   font-family: ${styleSet.font.B};
   @media ${styleSet.breakePoints.mobile} {
     display: none;
+  }
+`;
+
+export const H3 = styled.h3`
+  font-size: ${styleSet.fontSize.s9};
+
+  @media ${styleSet.breakePoints.mobile} {
+    padding-top: 30px;
+    text-align: center;
   }
 `;
 
@@ -118,9 +128,10 @@ export const BoardTh = styled.div`
   display: flex;
 `;
 
-export const BoardLiEmpty = styled.div`
+export const BoardLiEmpty = styled.li`
   padding: 20px;
   border-bottom: 1px solid ${styleSet.colors.gray};
+  width: 100%;
 `;
 
 export const BoardLi = styled.div`
@@ -160,4 +171,10 @@ export const BPrice = styled.span`
 
 export const QuestionWrapper = styled.div`
   width: 100%;
+`;
+
+export const EmptyText = styled.li`
+  padding: 20px;
+  width: 100%;
+  text-align: center;
 `;

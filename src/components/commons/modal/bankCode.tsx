@@ -231,7 +231,7 @@ export default function BankCodeModal(P: IBankCodeModalPorps) {
                   ))}
             </BtnWrapper>
             <ChangeBtn type="button" onClick={onClickListChange}>
-              <span>{listChange ? "증권사 목록" : "은행 목록"}</span>
+              <span>{!listChange ? "증권사 목록" : "은행 목록"}</span>
             </ChangeBtn>
           </Modal>
         </>
