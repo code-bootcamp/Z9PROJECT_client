@@ -1,23 +1,5 @@
 import { gql } from "@apollo/client";
 
-// export const FETCH_PRODUCTS = gql`
-//   query fetchProducts {
-//     fetchProducts {
-//       id
-//       name
-//       originPrice
-//       quantity
-//       discountRate
-//       discountPrice
-//       isSoldout
-//       endType
-//       images
-//       youtubeLink
-//       createdAt
-//     }
-//   }
-// `;
-
 export const FETCH_PRODUCTS_BY_PAGES = gql`
   query fetchProductsByPages($page: Int!) {
     fetchProductsByPages(page: $page) {

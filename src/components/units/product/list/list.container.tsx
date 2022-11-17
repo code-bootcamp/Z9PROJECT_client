@@ -2,12 +2,14 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import ProductListMap from "./list.map";
 import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
+import { debounce } from "lodash";
+import _ from "lodash";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
   const [length, setLength] = useState(0);
 
-  const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
+  const { data, fetchMore, refetch } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "network-only",
     variables: { page: 1 },
   });
@@ -18,14 +20,12 @@ export default function ProductListContainer() {
 
   const onLoadMore = () => {
     if (!data) return;
-    setLength(data?.fetchProductsByPages.length);
-    console.log(length);
+
     void fetchMore({
       variables: { page: Math.ceil(data?.fetchProductsByPages.length / 4) + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchProductsByPages) {
+        if (!fetchMoreResult?.fetchProductsByPages)
           return { fetchProductsByPages: [...prev.fetchProductsByPages] };
-        }
         return {
           fetchProductsByPages: [
             ...prev.fetchProductsByPages,
@@ -36,14 +36,23 @@ export default function ProductListContainer() {
     });
   };
 
+  const getDebounce = _.debounce((value) => {
+    void refetch({ page: 1 });
+  }, 700);
+
+  const onChangeSearch = (event: any) => {
+    getDebounce(event.target.value);
+  };
+
   return (
     <>
       <ProductListMap
+        onClickTab={onClickTab}
+        onLoadMore={onLoadMore}
+        onChangeSearch={onChangeSearch}
         length={length}
         tab={tab}
-        onClickTab={onClickTab}
         data={data}
-        onLoadMore={onLoadMore}
       />
     </>
   );

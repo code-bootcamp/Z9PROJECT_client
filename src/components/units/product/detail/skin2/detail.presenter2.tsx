@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";
+import { categoryContents, categoryTitle } from "../../register/atom/category";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import * as S from "./detail.styles2";
@@ -26,6 +27,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     important,
     setGraph,
     onClickDelete,
+    commentData,
     handleCopyClipBoard,
   } = P;
 
@@ -98,7 +100,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           <S.LeftDiv>
             <S.Wrapper>
               <div>
-                <S.Text2>100K</S.Text2>
+                <S.Text2>
+                  {data?.fetchProduct.user?.followerNumber?.toLocaleString()}K
+                </S.Text2>
                 <S.Iframe
                   url={data?.fetchProduct?.youtubeLink}
                   width={500}
@@ -124,8 +128,12 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
         </S.Left>
         <S.DetailWrapper>
           <S.Tab>
-            <li onClick={onClickTab2}>제품상세</li>
-            <li onClick={onClickTab}>QnA</li>
+            <li onClick={onClickTab2}>
+              <span>제품상세</span>
+            </li>
+            <li onClick={onClickTab}>
+              <span>QnA</span>
+            </li>
           </S.Tab>
 
           {!important && (
@@ -153,36 +161,26 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           <S.Important>
             <S.H3Info>필수 표기정보</S.H3Info>
             <S.Company>
-              <li>
-                <strong>품명 및 모델명</strong>
-                <data>품명 및 모델명 적거라</data>
-              </li>
-              <li>
-                <strong>
-                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
-                  따른 표시의무 화학물질에 한함)
-                </strong>
-                <data>
-                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
-                  따른 표시의무 화학물질에 한함) 적거라
-                </data>
-              </li>
-            </S.Company>
-            <S.Company>
-              <li>
-                <strong>품명 및 모델명</strong>
-                <data>품명 및 모델명 적거라</data>
-              </li>
-              <li>
-                <strong>
-                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
-                  따른 표시의무 화학물질에 한함)
-                </strong>
-                <data>
-                  제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에
-                  따른 표시의무 화학물질에 한함) 적거라
-                </data>
-              </li>
+              {categoryContents[
+                categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
+              ]?.map((el, idx) => (
+                <li>
+                  <strong>{el}</strong>
+                  <data>
+                    {data?.fetchProduct.productDetail[`option${idx + 1}`]}
+                  </data>
+                </li>
+              ))}
+              {categoryContents[
+                categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
+              ]?.length %
+                2 ==
+              1 ? (
+                <li>
+                  <strong></strong>
+                  <data></data>
+                </li>
+              ) : null}
             </S.Company>
           </S.Important>
 
@@ -198,11 +196,12 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <button onClick={onClickDelete}>삭제</button>
           </S.Button>
         </S.DetailWrapper>
+
         <S.Comment>
           <S.Wrapper3>
             <S.Count>
               <li>
-                <MessageOutlined /> 10
+                <MessageOutlined /> {commentData?.fetchQuestions.length}
               </li>
             </S.Count>
             <QuestionWriter />
@@ -212,8 +211,8 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               <li>프로필</li>
               <li>답변여부</li>
               <li>내용</li>
-              <li>작성자</li>
-              <li>등록일자</li>
+              <li className="writer">작성자</li>
+              <li className="createdAt">등록일자</li>
               <li></li>
             </S.Title>
 

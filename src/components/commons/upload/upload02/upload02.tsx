@@ -4,7 +4,7 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 
 const Wrapper = styled.div`
   position: absolute;
-  left: 135px;
+  left: ${(P: IStylesProps) => (P.isEdit ? "150px" : "310px")};
 
   @media ${styleSet.breakePoints.mobile} {
     padding-top: 20px;
@@ -33,10 +33,15 @@ const Input = styled.input`
 
 type IUpload02Props = {
   onChageProfileFile: (url: string, file: File) => void;
+  isEdit?: boolean;
+};
+
+type IStylesProps = {
+  isEdit?: boolean;
 };
 
 export default function Upload02(P: IUpload02Props) {
-  const { onChageProfileFile } = P;
+  const { onChageProfileFile, isEdit } = P;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickUpload = () => {
@@ -55,7 +60,7 @@ export default function Upload02(P: IUpload02Props) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper isEdit={isEdit}>
       <UploadBtn onClick={onClickUpload}>
         <img src="/icon_profile.png" alt="프로필 이미지 등록 아이콘" />
       </UploadBtn>

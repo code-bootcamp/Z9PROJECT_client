@@ -65,8 +65,9 @@ export const FETCH_PRODUCT = gql`
         createdAt
       }
       skin
-      color
       createdAt
+      textColor
+      bgColor
     }
   }
 `;

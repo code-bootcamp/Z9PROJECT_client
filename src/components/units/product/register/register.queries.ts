@@ -11,6 +11,7 @@ export const CREATE_PRODUCT = gql`
     ) {
       id
       name
+      skin
     }
   }
 `;
