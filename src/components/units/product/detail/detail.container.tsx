@@ -26,7 +26,7 @@ export default function ProductDetailContainer() {
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
-    fetchPolicy: "cache-and-network",
+    fetchPolicy: "cache-first",
   });
 
   const { data: commentData } = useQuery(FETCH_QUESTIONS, {

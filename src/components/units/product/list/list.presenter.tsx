@@ -32,11 +32,11 @@ export default function ProductListPresenter(P: any) {
                   .replace("-", ".")
                   .replace("-", ".")} */}
 
-                {today - start < 0
+                {/* {today - start < 0
                   ? "시작 예정"
                   : end - today > 0
                   ? "진행중입니다."
-                  : "마감입니다."}
+                  : "마감입니다."} */}
               </p>
             </S.H2>
           </S.BgLayer>

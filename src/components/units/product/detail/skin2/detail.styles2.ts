@@ -165,19 +165,25 @@ export const H3Info = styled.h3`
 export const Company = styled.ul`
   display: flex;
   margin-top: -1px;
+  flex-wrap: wrap;
 
   li {
     width: calc(100% / 2);
-    border-block: 1px solid ${styleSet.colors.gray};
-    display: flex;
-    font-size: ${styleSet.fontSize.s9};
+    border-bottom: 1px solid ${styleSet.colors.gray};
+    font-size: 0.7rem;
     word-break: keep-all;
+    display: flex;
+    &:first-of-type,
+    :nth-of-type(2) {
+      border-top: 1px solid ${styleSet.colors.gray};
+    }
     strong {
       background: ${styleSet.colors.subcolor3};
       color: ${styleSet.colors.black};
-      padding: 10px;
+      padding: 12px;
       display: flex;
       align-items: center;
+      width: 300px;
     }
     data {
       padding: 10px;
@@ -189,6 +195,12 @@ export const Company = styled.ul`
   @media ${styleSet.breakePoints.mobile} {
     > img {
       height: 300px;
+    }
+    li {
+      strong {
+        width: 150px;
+        padding: 0 10px;
+      }
     }
   }
 `;
@@ -322,11 +334,16 @@ export const Count = styled.ul`
 export const Box = styled.section``;
 
 export const H4 = styled.h4`
-  font-size: ${styleSet.fontSize.s7};
+  font-size: ${styleSet.fontSize.s6};
+  padding-top: 40px;
   font-family: ${styleSet.font.B};
-  padding: 40px 0 10px 0;
-  border-bottom: 1px solid ${styleSet.colors.gray};
+  display: none;
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: block;
+  }
 `;
+
 export const Title = styled.ul`
   font-size: ${styleSet.fontSize.s9};
   font-family: ${styleSet.font.B};
@@ -336,13 +353,19 @@ export const Title = styled.ul`
   display: flex;
   justify-content: space-between;
   text-align: center;
+  &.writer {
+    max-width: 110px;
+    min-width: 50px;
+  }
+  &.createdAt {
+  }
   li {
     &:nth-last-of-type(1) {
       max-width: 100px;
       width: 100%;
     }
     &:nth-last-of-type(4) {
-      max-width: 185px;
+      max-width: 165px;
       width: 100%;
     }
   }

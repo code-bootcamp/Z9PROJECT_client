@@ -7,7 +7,7 @@ import _ from "lodash";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
-  const [view, setView] = useState<any>(false);
+  const [length, setLength] = useState(0);
 
   const { data, fetchMore, refetch } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "network-only",
@@ -16,8 +16,6 @@ export default function ProductListContainer() {
 
   const onClickTab = (event: any) => {
     setTab(event?.currentTarget.id);
-    if (data.fetchProductsByPages.map((el: any) => el.validFrom < new Date()))
-      setView();
   };
 
   const onLoadMore = () => {
@@ -49,11 +47,12 @@ export default function ProductListContainer() {
   return (
     <>
       <ProductListMap
-        tab={tab}
         onClickTab={onClickTab}
-        data={data}
         onLoadMore={onLoadMore}
         onChangeSearch={onChangeSearch}
+        length={length}
+        tab={tab}
+        data={data}
       />
     </>
   );
