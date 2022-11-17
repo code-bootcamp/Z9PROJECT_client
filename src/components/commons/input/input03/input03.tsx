@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FieldError,
   FieldErrorsImpl,
+  FieldValues,
   Merge,
   UseFormRegisterReturn,
+  UseFormSetValue,
 } from "react-hook-form";
 import { styleSet } from "../../../../commons/styles/styleSet";
 import BankCodeModal from "../../modal/bankCode";
@@ -53,6 +55,7 @@ type IInput03Props = {
     | undefined;
   edit?: boolean;
   defaultValue?: string;
+  setValue: UseFormSetValue<FieldValues>;
 };
 
 type IInputProps = {
@@ -65,12 +68,12 @@ type IInputProps = {
 };
 
 export default function Input03(P: IInput03Props) {
-  const { type, placeholder, register, error, edit, defaultValue } = P;
+  const { type, placeholder, register, error, edit, defaultValue, setValue } =
+    P;
   const [bankCode, setBankCode] = useState<string | null>(null);
-  const inputRef = useRef<any>(null);
 
   useEffect(() => {
-    inputRef.current.value = bankCode;
+    setValue("bank", bankCode);
   }, [bankCode]);
 
   return (
@@ -82,7 +85,6 @@ export default function Input03(P: IInput03Props) {
         error={error}
         edit={edit}
         defaultValue={defaultValue}
-        ref={inputRef}
       />
       <Error className="error" error={error}>
         {error}

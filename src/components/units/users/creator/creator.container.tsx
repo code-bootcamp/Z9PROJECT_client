@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
-import { useForm, UseFormReturn } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
 import CreatorPresenter from "./creator.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@apollo/client";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   CHECK_NICKNAME,
   CREATE_CREATOR,
@@ -32,9 +32,9 @@ const schma = yup.object({
   snsChannel: yup.string().required("필수"),
   mainContents: yup.string(),
   introduce: yup.string(),
-  account: yup.string(),
+  account: yup.number().typeError("숫자만 입력").required("필수"),
   bank: yup.string(),
-  accountName: yup.string(),
+  accountName: yup.string().required("필수"),
   terms: yup.boolean().oneOf([true], "필수"),
 });
 
@@ -163,6 +163,7 @@ export default function CreatorRegisterContainer() {
           signupId: confirmId,
           createCreatorInput: {
             ...rest,
+            account: String(getValues("account")),
             isAuthedCreator: true,
             followerNumber: 10000000,
             profileImg: resultProfile.data.uploadImage.imageUrl,
