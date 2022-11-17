@@ -31,6 +31,7 @@ export const Check = styled.strong`
 `;
 
 export const User = styled.section`
+  width: 100%;
   position: relative;
   img {
     max-width: 60px;

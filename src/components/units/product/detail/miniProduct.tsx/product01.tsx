@@ -5,8 +5,49 @@ import {
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
+import { useState } from "react";
+import { useInterval } from "../../../../commons/hooks/timer";
 import * as S from "./product01.styles";
 import { IProduct01Props } from "./product01.types";
+
+const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
+  const [result, setResult] = useState(calculator());
+  useInterval(() => {
+    const newResult = calculator();
+    if (newResult !== result) setResult(newResult);
+  }, delay);
+
+  return result;
+};
+
+const CountDownView = ({ targetISOString }: { targetISOString: any }) => {
+  const remain = useResultOfIntervalCalculator(
+    () =>
+      Math.floor(
+        ((new Date(targetISOString) as any) -
+          (new Date().setHours(new Date().getHours() + 9) as any)) /
+          1000
+      ),
+    10
+  );
+  const day = Math.floor(remain / (60 * 60 * 24));
+  const hour = Math.floor((remain % (60 * 60 * 24)) / (60 * 60));
+  const min = Math.floor((remain % (60 * 60)) / 60);
+  const sec = Math.floor(remain % 60);
+
+  return (
+    <S.Timer className="CountDownWrap">
+      {day}
+      <span>일</span>
+      {hour}
+      <span>시</span>
+      {min}
+      <span>분</span>
+      {sec}
+      <span>초</span>
+    </S.Timer>
+  );
+};
 
 export default function Product01(P: IProduct01Props) {
   const {
@@ -17,11 +58,26 @@ export default function Product01(P: IProduct01Props) {
     discount,
     onClickLike,
     onClickOrder,
+    setGraph,
   } = P;
 
-  const handleChange = (value: any) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = (value: any) => {};
+
+  setGraph(
+    Math.floor(
+      ((data?.fetchProduct.originalQuantity - data?.fetchProduct.quantity) *
+        100) /
+        data?.fetchProduct.originalQuantity
+    )
+  );
+
+  const targetISOString = data?.fetchProduct.validUntil;
+  console.log(targetISOString);
+
+  const isNotYet = useResultOfIntervalCalculator(
+    () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,
+    10
+  );
   return (
     <>
       <S.InfoRight>
@@ -48,16 +104,20 @@ export default function Product01(P: IProduct01Props) {
           </ul>
           <ul>
             <li>마감수량</li>
-            <S.Close>{data?.fetchProduct.quantity} 개</S.Close>
+            <S.Close>{data?.fetchProduct.originalQuantity} 개</S.Close>
           </ul>
           <ul>
             <li>마감일정</li>
             <li>
+              {data?.fetchProduct.validFrom
+                .slice(0, 10)
+                .replace("-", ".")
+                .replace("-", ".")}{" "}
+              ~{" "}
               {data?.fetchProduct.validUntil
                 .slice(0, 10)
-                .replace("-", "년 ")
-                .replace("-", "월 ")}
-              일
+                .replace("-", ".")
+                .replace("-", ".")}
             </li>
           </ul>
           <ul>
@@ -108,7 +168,13 @@ export default function Product01(P: IProduct01Props) {
           </ul>
         </S.Text>
 
-        <S.H2>3일 00:43:33</S.H2>
+        <S.H2>
+          {isNotYet ? (
+            <CountDownView targetISOString={targetISOString}></CountDownView>
+          ) : (
+            "마감되었습니다"
+          )}
+        </S.H2>
 
         <S.H3>
           총 상품 금액{" "}
@@ -121,11 +187,17 @@ export default function Product01(P: IProduct01Props) {
           <button className="cart" onClick={onClickLike}>
             {!cart && <HeartOutlined />} {``}
             {cart && <HeartFilled />} {``}
-            관심상품
+            <span className="emotion">관심상품</span>
           </button>
-          <button className="buy" onClick={onClickOrder}>
-            바로 구매하기
-          </button>
+          {isNotYet ? (
+            <button className="buy" onClick={onClickOrder}>
+              <span className="emotion">바로 구매하기</span>
+            </button>
+          ) : (
+            <button className="closed">
+              <span className="emotion">마감</span>
+            </button>
+          )}
         </S.BoxBtn>
       </S.InfoRight>
     </>

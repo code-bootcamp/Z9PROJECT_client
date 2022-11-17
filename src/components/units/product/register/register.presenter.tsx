@@ -9,10 +9,11 @@ const EditorPage = dynamic(() => import("./atom/editor"), {
   ssr: false,
 });
 import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
+import { HexColorPicker } from "react-colorful";
 
 export default function RegisterPresenter(P: IRegisterPresenterProps) {
   const {
-    edit,
+    isEdit,
     register,
     handleSubmit,
     getValues,
@@ -29,6 +30,10 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
     onDropImg,
     watch,
     fetchProduct,
+    bgColor,
+    textColor,
+    onChangebgColor,
+    onChangeTextColor,
   } = P;
   const { RangePicker } = DatePicker;
 
@@ -36,10 +41,10 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
     <S.Container>
       <form
         onSubmit={
-          edit ? handleSubmit(onClickUpdate) : handleSubmit(onClickCreate)
+          isEdit ? handleSubmit(onClickUpdate) : handleSubmit(onClickCreate)
         }
       >
-        <S.Title>{edit ? "상품 수정 " : "상품 등록"}</S.Title>
+        <S.Title>{isEdit ? "상품 수정 " : "상품 등록"}</S.Title>
         <S.TypeWrapper>
           <S.Item>
             <S.SubTitle>상품명</S.SubTitle>
@@ -81,9 +86,8 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
             <S.SubTitle>판매 기간</S.SubTitle>
             <RangePicker
               onChange={selectDate}
-              // format={dateFormat}
               placeholder={
-                edit
+                isEdit
                   ? [
                       dateFormatter(getValues("validFrom")),
                       dateFormatter(getValues("validUntil")),
@@ -125,7 +129,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
             <Input02
               type="text"
               placeholder="예) 100"
-              register={register("quantity")}
+              register={register("originalQuantity")}
             />
           </S.Item>
           <S.Item>
@@ -180,6 +184,23 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
                 <S.RadioLabel className="radio-label">영상</S.RadioLabel>
               </S.LabelWrapper>
             </S.CheckWrapper>
+            {watch("skin") === "2" ? (
+              <S.ColorWrapper>
+                <HexColorPicker
+                  color={textColor}
+                  onChange={onChangeTextColor}
+                />
+                <S.ColorInner>
+                  <div>글자</div>
+                  <S.ColorPreview color={textColor}></S.ColorPreview>
+                </S.ColorInner>
+                <S.ColorInner>
+                  <div>배경</div>
+                  <S.ColorPreview color={bgColor}></S.ColorPreview>
+                </S.ColorInner>
+                <HexColorPicker color={bgColor} onChange={onChangebgColor} />
+              </S.ColorWrapper>
+            ) : null}
           </S.Item>
         </S.TypeWrapper>
         <S.TypeWrapper>
@@ -191,7 +212,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
             </span>
           </S.SubTitle>
           <S.CategorySelect
-            defaultValue={edit ? getValues("info.type") : "default"}
+            defaultValue={isEdit ? getValues("info.type") : "default"}
             onChange={onChangeCategory}
             options={selectCategory}
           />
@@ -248,7 +269,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
           <div>모든 항목을 기입해야 상품 등록됩니다:)</div>
         </S.BottomText>
         <S.SubmitBtn>
-          <span>{edit ? "수정하기" : "등록하기"}</span>
+          <span>{isEdit ? "수정하기" : "등록하기"}</span>
         </S.SubmitBtn>
       </form>
     </S.Container>

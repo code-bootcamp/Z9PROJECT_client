@@ -11,5 +11,5 @@ export default function ProductEditPage() {
     },
   });
 
-  return <RegisterContainer edit={true} fetchProduct={data} />;
+  return <RegisterContainer isEdit={true} fetchProduct={data} />;
 }

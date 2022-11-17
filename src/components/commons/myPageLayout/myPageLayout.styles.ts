@@ -25,7 +25,7 @@ export const Container = styled.div`
 
 export const PreContainer = styled.div`
   margin: 0 auto;
-  padding: 50px 50px 0 0;
+  padding: 50px 50px 50px 0;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,6 @@ export const PreContainer = styled.div`
 
 export const Title = styled.h1`
   padding-bottom: 10px;
-  min-width: 182px;
   font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
 `;
@@ -115,4 +114,8 @@ export const BtnWrapper = styled.div`
 
 export const Btn = styled.button`
   font-size: ${styleSet.fontSize.s8};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-height: 40px;
+  }
 `;

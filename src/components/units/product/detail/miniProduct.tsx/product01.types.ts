@@ -8,4 +8,5 @@ export type IProduct01Props = {
   discount?: number;
   onClickLike: any;
   onClickOrder: () => Promise<void>;
+  setGraph: any;
 };

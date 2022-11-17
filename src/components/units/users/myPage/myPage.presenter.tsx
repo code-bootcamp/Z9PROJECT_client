@@ -13,6 +13,7 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
     onChangeDate,
     historyCount,
     PonintHistory,
+    currentPage,
   } = P;
   const { RangePicker } = DatePicker;
   const btnArray = ["1개월", "3개월", "6개월", "12개월"];
@@ -58,15 +59,25 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
             <S.BDate>날짜</S.BDate>
             <S.BContents>내용</S.BContents>
             <S.BHistory>거래 및 충전 내역</S.BHistory>
-            <S.BBalance>잔액</S.BBalance>
           </S.BoardTh>
           <S.BoardUl>
-            {PonintHistory?.fetchPointHistory.map((el: any) => (
-              <S.BoardLi>
+            {PonintHistory?.fetchPointHistory.map((el: any, i: number) => (
+              <S.BoardLi key={i}>
                 <S.BDate>{dateFormatter(el.createdAt)}</S.BDate>
-                <S.BContents>{el.status}</S.BContents>
+                <S.BContents>
+                  {el.status === "CHARGED"
+                    ? "충전"
+                    : el.status === "USED"
+                    ? "구매"
+                    : el.status === "SOLD"
+                    ? "판매"
+                    : el.status === "REFUNDED"
+                    ? "환불지급"
+                    : el.status === "RESTORED"
+                    ? "포인트 환불"
+                    : "제품 환불"}
+                </S.BContents>
                 <S.BHistory>{PointFormatter(el.point)} P</S.BHistory>
-                <S.BBalance>{PointFormatter(100000)} P</S.BBalance>
               </S.BoardLi>
             ))}
           </S.BoardUl>
@@ -74,6 +85,8 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
             size="small"
             total={historyCount?.fetchCountOfPointHistory}
             onChange={onClickPage}
+            defaultCurrent={1}
+            current={currentPage}
           />
         </S.BoardBody>
       </S.HistoryWrapper>

@@ -17,6 +17,14 @@ export const InfoRight = styled.div`
   }
 `;
 
+export const Timer = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: ${styleSet.fontSize.s6};
+  }
+`;
+
 export const H1 = styled.h1`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};

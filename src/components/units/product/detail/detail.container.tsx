@@ -33,6 +33,7 @@ export default function ProductDetailContainer() {
     fetchPolicy: "cache-first",
     variables: { productId: router.query.useditemId },
   });
+  console.log(data, "프로덕트");
 
   useEffect(() => {
     setThumbnail(

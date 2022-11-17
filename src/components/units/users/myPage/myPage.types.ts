@@ -1,14 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
 
 export type IMyPagePresenterProps = {
-  onClickPage: (currentPage: number) => void;
-  setTab?: Dispatch<SetStateAction<string>>;
   tab: string;
-  onClickTab: (e: any) => void;
   fetchUser: any;
-  onChangeDate: (_: any, dateString: string[]) => void;
-  historyCount: IFetchCountOfPointHistory;
   PonintHistory: any;
+  currentPage: number;
+  onClickTab: (e: any) => void;
+  historyCount: IFetchCountOfPointHistory;
+  setTab?: Dispatch<SetStateAction<string>>;
+  onClickPage: (currentPage: number) => void;
+  onChangeDate: (_: any, dateString: string[]) => void;
 };
 
 type IFetchCountOfPointHistory = {

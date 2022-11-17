@@ -12,14 +12,14 @@ import { Editor } from "@toast-ui/react-editor";
 // container
 
 export type IRegisterContainerProps = {
-  edit?: boolean;
+  isEdit?: boolean;
   fetchProduct?: any;
 };
 
 export type IInputProduct = {
   name?: String;
   originPrice?: number;
-  quantity?: number;
+  originalQuantity?: number;
   discountPrice?: number;
   delivery?: String;
   option1?: String;
@@ -63,7 +63,7 @@ export type IInputDetail = {
 // presenter
 
 export type IRegisterPresenterProps = {
-  edit?: boolean;
+  isEdit?: boolean;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   getValues: UseFormGetValues<FieldValues>;
@@ -82,10 +82,14 @@ export type IRegisterPresenterProps = {
   optionEntity: (operation: string) => any;
   selectDate: (_: any, dateString: string[]) => void;
   onClickCreate: (data: any) => void;
-  onClickUpdate: () => (data: any) => Promise<void>;
+  onClickUpdate: (data: any) => void;
   onDropImg: (inputFiles: File[]) => void;
   watch: UseFormWatch<FieldValues>;
   fetchProduct: any;
+  textColor: string;
+  bgColor: string;
+  onChangebgColor: (color: string) => void;
+  onChangeTextColor: (color: string) => void;
 };
 
 export type IEditorPageProps = {

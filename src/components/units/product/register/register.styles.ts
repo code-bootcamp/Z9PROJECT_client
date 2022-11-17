@@ -277,6 +277,23 @@ export const RadioInput = styled.input`
   }
 `;
 
+export const ColorWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 30px;
+`;
+
+export const ColorInner = styled.div`
+  text-align: center;
+`;
+
+export const ColorPreview = styled.div`
+  width: 40px;
+  height: 90%;
+  border-radius: 10px;
+  background: ${(P) => (P.color ? P.color : null)};
+`;
+
 export const BottomText = styled.div`
   width: 100%;
   text-align: center;
