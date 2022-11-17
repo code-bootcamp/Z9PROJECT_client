@@ -32,6 +32,10 @@ export const globalStyles = css`
     font-family: NanumSquareRound, -apple-system, BlinkMacSystemFont, Segoe UI,
       Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
       sans-serif;
+
+    .swal2-container {
+      z-index: 100000;
+    }
   }
 
   h1,

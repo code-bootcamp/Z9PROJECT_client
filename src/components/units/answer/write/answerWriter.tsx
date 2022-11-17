@@ -60,7 +60,7 @@ export default function AnswerWriter(P: any) {
       });
       SuccessModal("답변이 수정되었습니다.");
       setAnswerModal(false);
-      setIsAnswer(false);
+      setIsAnswer((prev: any) => !prev);
     } catch (error) {
       ErrorModal(error as string);
     }
@@ -76,7 +76,7 @@ export default function AnswerWriter(P: any) {
         <S.UserBox>
           <S.Div3>
             <img src="/img_user.jpeg" alt="유저이미지" />
-            <S.UserName>{questionEl?.user.nickname}</S.UserName>
+            <S.UserName>{questionEl?.user?.nickname}</S.UserName>
           </S.Div3>
           <S.Div2>
             <S.Question>{questionEl?.question}</S.Question>

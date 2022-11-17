@@ -23,6 +23,7 @@ export default function EditorPage(P: IEditorPageProps) {
       language="ko-KR"
       initialValue={initialValue}
       plugins={[tableMergedCell, colorSyntax]}
+      autofocus={false}
     />
   );
 }

@@ -66,7 +66,6 @@ export const Item = styled.div`
 export const SubTitle = styled.label`
   font-size: ${styleSet.fontSize.s8};
   font-family: ${styleSet.font.B};
-
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -276,6 +275,23 @@ export const RadioInput = styled.input`
   :checked ~ .radio-label {
     color: rgba(0, 0, 0, 0.96);
   }
+`;
+
+export const ColorWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 30px;
+`;
+
+export const ColorInner = styled.div`
+  text-align: center;
+`;
+
+export const ColorPreview = styled.div`
+  width: 40px;
+  height: 90%;
+  border-radius: 10px;
+  background: ${(P) => (P.color ? P.color : null)};
 `;
 
 export const BottomText = styled.div`

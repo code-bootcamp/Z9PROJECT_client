@@ -52,6 +52,7 @@ export const FETCH_QUESTIONS = gql`
         nickname
         createdAt
         updatedAt
+        profileImg
         deletedAt
       }
       product {

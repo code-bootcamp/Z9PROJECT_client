@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { url } from "inspector";
+import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
@@ -22,6 +24,14 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const Randing = styled.img`
+  margin-bottom: 30px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 100%;
+  }
+`;
+
 export const DetailWrapper = styled.div`
   width: 1400px;
   margin: 0 auto;
@@ -40,8 +50,9 @@ export const Ul = styled.ul`
   li {
     &.title:after {
       content: "";
-      width: 22px;
+      width: 40px;
       height: 3px;
+      font-size: ${styleSet.fontSize.s1};
       background: ${styleSet.colors.white};
       position: absolute;
       top: -10px;
@@ -49,10 +60,10 @@ export const Ul = styled.ul`
     }
     &:first-child {
       font-family: ${styleSet.font.L};
-      font-size: ${styleSet.fontSize.s9};
+      font-size: ${styleSet.fontSize.s6};
     }
     color: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s7};
+    font-size: ${styleSet.fontSize.s5};
   }
 `;
 
@@ -65,7 +76,6 @@ export const Info = styled.section`
 `;
 
 export const InfoImg = styled.div`
-  background: url("/leoj.png") no-repeat;
   width: 500px;
   height: 500px;
   background-position: 50% 50%;
@@ -103,7 +113,7 @@ export const Right = styled.section`
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 100px;
 `;
 
 export const Left = styled.section`
@@ -197,12 +207,11 @@ export const Emoticon = styled.img`
   right: 0;
 `;
 
-export const Iframe = styled.iframe`
+export const Iframe = styled(ReactPlayer)`
   margin-top: -17%;
 `;
 
 export const Octagon = styled.div`
-  background: url("/test1.jpeg") no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   position: relative;
@@ -350,19 +359,30 @@ export const Tab = styled.ul`
   max-width: 1400px;
   height: 60px;
   display: flex;
-  border-block: 1px solid ${styleSet.colors.gray};
   justify-content: center;
-  line-height: 60px;
-  margin: 50px auto;
+  margin: 100px 0 50px 0;
+  gap: 30px;
+  align-items: center;
   li {
     cursor: pointer;
-    width: calc(100% / 2 - 10px);
+    border-block: 1px solid ${styleSet.colors.primary};
     height: 100%;
     text-align: center;
     font-size: ${styleSet.fontSize.s8};
-    color: ${styleSet.colors.darkgray};
-    &:first-of-type {
-      border-right: 1px solid ${styleSet.colors.gray};
+    color: ${styleSet.colors.primary};
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      border-block: 1px solid ${styleSet.colors.point2};
+      color: ${styleSet.colors.point2};
     }
+  }
+`;
+
+export const Important = styled.section`
+  h3 {
+    font-size: ${styleSet.fontSize.s5};
   }
 `;

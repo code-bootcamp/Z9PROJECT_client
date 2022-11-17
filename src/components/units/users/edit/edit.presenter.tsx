@@ -1,5 +1,6 @@
 import CountDown from "../../../commons/count";
 import Input01 from "../../../commons/input/input01/input01";
+import Input03 from "../../../commons/input/input03/input03";
 import ZipcodeModal from "../../../commons/modal/zipcode";
 import Upload01 from "../../../commons/upload/upload01/upload01";
 import Upload02 from "../../../commons/upload/upload02/upload02";
@@ -18,6 +19,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
     onClickUpdate,
     openTime,
     setValue,
+    onClickMore,
     onClickCertNumber,
     onClickCertConfirm,
     onClickNameConfirm,
@@ -37,7 +39,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
               <img src="/test.jpeg" alt="기본이미지" />
             )}
           </S.ProfileWrapper>
-          <Upload02 onChageProfileFile={onChageProfileFile} />
+          <Upload02 onChageProfileFile={onChageProfileFile} isEdit={true} />
         </S.UploadWrapper>
 
         <S.SubTitle className="h2">나의 정보</S.SubTitle>
@@ -115,7 +117,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
             />
           </S.InnerWrapper>
         </S.RowWrapper>
-        {fetchUser?.fetchUser.userType !== "CREATOR" ? (
+        {fetchUser?.fetchUser.userType === "CREATOR" ? (
           <>
             <S.RowWrapper className="line">
               <S.RowTitle>한줄소개</S.RowTitle>
@@ -191,15 +193,19 @@ export default function EditPresenter(P: IEditPresenterProps) {
           <S.BankWrapper>
             <Input01
               type="text"
-              placeholder="정산받을 계좌번호를 입력하세요."
+              placeholder={
+                fetchUser?.fetchUser.userType === "CREATOR"
+                  ? "정산받을 계좌번호를 입력하세요."
+                  : "인출할 계좌번호를 입력하세요."
+              }
               register={register("account")}
               edit={true}
               defaultValue={fetchUser?.fetchUser.account}
             />
             <S.BankInner>
-              <Input01
+              <Input03
                 type="text"
-                placeholder="은행을 입력하세요."
+                placeholder="인출할 은행 코드를 입력하세요."
                 register={register("bank")}
                 edit={true}
                 defaultValue={fetchUser?.fetchUser.bank}
@@ -218,6 +224,9 @@ export default function EditPresenter(P: IEditPresenterProps) {
         <S.LogInBtn>
           <span>수정완료</span>
         </S.LogInBtn>
+        <S.DeleteBtn type="button" onClick={onClickMore}>
+          탈퇴하기
+        </S.DeleteBtn>
       </S.Form>
     </S.Container>
   );

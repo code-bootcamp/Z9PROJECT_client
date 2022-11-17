@@ -6,6 +6,7 @@ import Upload02 from "../../../commons/upload/upload02/upload02";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import ZipcodeModal from "../../../commons/modal/zipcode";
 import CountDown from "../../../commons/count";
+import Input03 from "../../../commons/input/input03/input03";
 
 export default function CreatorPresenter(P: ICreatorPresenterProps) {
   const {
@@ -288,7 +289,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 type="text"
                 placeholder="정산받을 계좌번호를 입력하세요."
                 register={register("account")}
-                error={formState.errors.addressDetail?.message}
+                error={formState.errors.account?.message}
               />
             </S.Label>
             <S.Label>
@@ -299,11 +300,11 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               >
                 <path d="M942.08 860.16h-40.96v-40.96c0-17.408-13.312-30.72-30.72-30.72h-49.152c5.12-49.152 8.192-100.352 8.192-153.6s-2.048-104.448-8.192-153.6h116.736c22.528 0 40.96-18.432 40.96-40.96 0-7.168-2.048-19.456-13.312-29.696l-1.024-1.024L558.08 64.512c-26.624-22.528-65.536-22.528-93.184 0L60.416 409.6c-8.192 7.168-13.312 17.408-13.312 27.648-1.024 10.24 3.072 21.504 9.216 28.672 7.168 9.216 19.456 14.336 30.72 14.336h116.736c-5.12 47.104-8.192 96.256-9.216 153.6-1.024 46.08 1.024 94.208 7.168 153.6H153.6c-17.408 0-30.72 13.312-30.72 30.72v40.96H81.92c-17.408 0-30.72 13.312-30.72 30.72v51.2c0 17.408 13.312 30.72 30.72 30.72h860.16c17.408 0 30.72-13.312 30.72-30.72v-51.2c0-16.384-13.312-29.696-30.72-29.696zM87.04 440.32s1.024 0 1.024 1.024c0 0-1.024 0-1.024-1.024z m0 0L491.52 95.232c12.288-10.24 28.672-10.24 39.936 0L936.96 440.32H798.72c-18.432 0-43.008-1.024-73.728-3.072-51.2-3.072-122.88-7.168-212.992-7.168s-160.768 4.096-212.992 7.168c-30.72 2.048-55.296 3.072-73.728 3.072H87.04zM645.12 788.48V474.112c29.696 1.024 55.296 3.072 76.8 4.096 22.528 1.024 41.984 2.048 58.368 3.072 5.12 49.152 8.192 100.352 8.192 153.6s-3.072 104.448-8.192 153.6H645.12z m-403.456 0c-6.144-59.392-8.192-107.52-7.168-153.6 1.024-57.344 4.096-107.52 9.216-154.624 16.384-1.024 35.84-2.048 58.368-3.072s48.128-3.072 76.8-4.096V788.48H241.664zM419.84 472.064c27.648-1.024 58.368-1.024 92.16-1.024s64.512 1.024 92.16 1.024V788.48H419.84V472.064zM931.84 931.84H92.16v-30.72h40.96c17.408 0 30.72-13.312 30.72-30.72v-40.96h696.32v40.96c0 17.408 13.312 30.72 30.72 30.72h40.96v30.72z" />
               </S.Svg>
-              <Input01
+              <Input03
                 type="text"
-                placeholder="정산받을 계좌 은행을 입력하세요. 예) 우리은행"
+                placeholder="정산할 은행 코드를 입력하세요."
                 register={register("bank")}
-                error={formState.errors.addressDetail?.message}
+                error={formState.errors.bank?.message}
               />
             </S.Label>
             <S.Label>
@@ -317,9 +318,9 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               </S.Svg>
               <Input01
                 type="text"
-                placeholder="예금주 실명을 입력하세요."
+                placeholder="예금주명을 입력하세요."
                 register={register("accountName")}
-                error={formState.errors.addressDetail?.message}
+                error={formState.errors.accountName?.message}
               />
             </S.Label>
           </S.CountWrapper>

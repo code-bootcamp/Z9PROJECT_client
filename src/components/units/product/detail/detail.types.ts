@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 
 export type IDetailPresenterProps = {
   handleChange?: ((value: any) => void) | undefined;
@@ -12,4 +12,13 @@ export type IDetailPresenterProps = {
   onClickImages?: any;
   onClickAnswer?: () => void;
   isTrue?: boolean;
+  onClickOrder: () => Promise<void>;
+  onClickTab: () => void;
+  onClickTab2: () => void;
+  important: boolean;
+  commentData: any;
+  setGraph: any;
+  graph: number;
+  onClickDelete: () => Promise<void>;
+  handleCopyClipBoard: any;
 };

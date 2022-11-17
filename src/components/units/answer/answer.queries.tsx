@@ -12,10 +12,12 @@ export const CREATE_ANSWER = gql`
       id
       answer
       createdAt
+      updatedAt
       question {
         id
         question
         createdAt
+        updatedAt
       }
     }
   }
@@ -31,6 +33,7 @@ export const FETCH_LOGIN_USER_ANSWER = gql`
         id
         question
         createdAt
+        updatedAt
         status
       }
     }
@@ -46,10 +49,12 @@ export const UPDATE_ANSWER = gql`
       id
       answer
       createdAt
+      updatedAt
       question {
         id
         question
         createdAt
+        updatedAt
       }
     }
   }

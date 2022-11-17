@@ -151,6 +151,7 @@ export const UpoloadWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  position: relative;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
