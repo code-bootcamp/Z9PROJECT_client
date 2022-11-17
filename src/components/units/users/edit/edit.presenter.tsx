@@ -209,6 +209,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
                 register={register("bank")}
                 edit={true}
                 defaultValue={fetchUser?.fetchUser.bank}
+                setValue={setValue}
               />
               <Input01
                 type="text"
