@@ -4,7 +4,7 @@ export const FETCH_ORDER_BY_CREATOR = gql`
   query fetchOrdersByCreatorId(
     $startDate: DateTime
     $endDate: DateTime
-    $page: Float!
+    $page: Int!
   ) {
     fetchOrdersByCreatorId(
       startDate: $startDate
