@@ -49,7 +49,7 @@ export default function LogInContainer() {
       sessionStorage.setItem("accessToken", accessToken);
       router.push("/users/mypage");
     } catch (error) {
-      ErrorModal(error);
+      ErrorModal(error as string);
     }
   };
 

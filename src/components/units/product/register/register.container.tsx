@@ -1,207 +1,235 @@
-import { BaseOptionType, DefaultOptionType } from "antd/lib/select";
-import { useRef, useState } from "react";
+import { schema, updateSchema } from "./atom/schema";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import RegisterPresenter from "./register.presenter";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation, useQuery } from "@apollo/client";
+import { categoryContents, categoryTitle } from "./atom/category";
+import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
+import {
+  CREATE_PRODUCT,
+  FETCH_USER,
+  UPDATE_PRODUCT,
+  UPLOAD_IMAGES,
+} from "./register.queries";
+import { useRouter } from "next/router";
+import { IRegisterContainerProps } from "./register.types";
 
-export default function RegisterContainer() {
-  const { register, handleSubmit, formState, setValue, getValues } = useForm({
-    mode: "onChange",
-  });
-  const [category, setCategory] = useState<string[]>([""]);
+export default function RegisterContainer(P: IRegisterContainerProps) {
+  const { isEdit, fetchProduct } = P;
+  const { register, handleSubmit, setValue, getValues, watch, formState } =
+    useForm({
+      resolver: yupResolver(isEdit ? updateSchema : schema),
+      mode: "onChange",
+    });
+
+  let optionLength: string[] = [];
+  const router = useRouter();
   const [option, setOption] = useState(0);
-  const contentsRef = useRef<any>();
+  const [imgFiles, setImgFiles] = useState<File[]>();
+  const [category, setCategory] = useState<string[]>([""]);
+  const [textColor, setTextColor] = useState<string>("#ffffff");
+  const [bgColor, setBgColor] = useState<string>("#f46a22");
+  const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
+  const [uploadImages] = useMutation(UPLOAD_IMAGES);
+  const contentsRef = useRef<any>(null);
+  const nameRef = useRef<any>(null);
+  const { data: fetchUser } = useQuery(FETCH_USER);
 
-  const OptionPlus = () => {
-    if (option === 4) return;
-    setOption((prev) => prev + 1);
-    console.log(option);
+  useEffect(() => {
+    setValue("name", fetchProduct?.fetchProduct.name);
+    setValue("option1", fetchProduct?.fetchProduct.option1);
+    setValue("option2", fetchProduct?.fetchProduct.option2);
+    setValue("option3", fetchProduct?.fetchProduct.option3);
+    setValue("option4", fetchProduct?.fetchProduct.option4);
+    setValue("option5", fetchProduct?.fetchProduct.option5);
+    setValue("validFrom", fetchProduct?.fetchProduct.validFrom);
+    setValue("validUntil", fetchProduct?.fetchProduct.validUntil);
+    setValue("originPrice", fetchProduct?.fetchProduct.originPrice);
+    setValue("discountPrice", fetchProduct?.fetchProduct.discountPrice);
+    setValue("originalQuantity", fetchProduct?.fetchProduct.originalQuantity);
+    setValue("youtubeLink", fetchProduct?.fetchProduct.youtubeLink);
+    setValue("content", fetchProduct?.fetchProduct.content);
+    setValue("skin", String(fetchProduct?.fetchProduct.skin));
+    setValue("info.type", fetchProduct?.fetchProduct.productDetail.type);
+    setValue("info.option1", fetchProduct?.fetchProduct.productDetail.option1);
+    setValue("info.option2", fetchProduct?.fetchProduct.productDetail.option2);
+    setValue("info.option3", fetchProduct?.fetchProduct.productDetail.option3);
+    setValue("info.option4", fetchProduct?.fetchProduct.productDetail.option4);
+    setValue("info.option5", fetchProduct?.fetchProduct.productDetail.option5);
+    setValue("info.option6", fetchProduct?.fetchProduct.productDetail.option6);
+    setValue("info.option7", fetchProduct?.fetchProduct.productDetail.option7);
+    setValue("info.option8", fetchProduct?.fetchProduct.productDetail.option8);
+    setValue("info.option9", fetchProduct?.fetchProduct.productDetail.option9);
+    setValue(
+      "info.option10",
+      fetchProduct?.fetchProduct.productDetail.option10
+    );
+    setValue(
+      "info.option11",
+      fetchProduct?.fetchProduct.productDetail.option11
+    );
+    setValue(
+      "info.option12",
+      fetchProduct?.fetchProduct.productDetail.option12
+    );
+    setValue(
+      "info.option13",
+      fetchProduct?.fetchProduct.productDetail.option13
+    );
+    setValue(
+      "info.option14",
+      fetchProduct?.fetchProduct.productDetail.option14
+    );
+    setValue("shopName", fetchProduct?.fetchProduct.shopName);
+    setValue("ceo", fetchProduct?.fetchProduct.ceo);
+    setValue("brn", fetchProduct?.fetchProduct.brn);
+    setValue("mobn", fetchProduct?.fetchProduct.mobn);
+    onChangeCategory(fetchProduct?.fetchProduct.productDetail.type);
+
+    if (fetchProduct) {
+      new Array(5)
+        .fill(1)
+        .map((el, i) =>
+          getValues(`option${i + 1}`) !== null ? optionLength.push(el) : null
+        );
+      setOption(optionLength.length - 1);
+    }
+  }, [fetchProduct]);
+
+  const selectDate = (_: any, dateString: string[]) => {
+    setValue("validFrom", dateString[0]);
+    setValue("validUntil", dateString[1]);
   };
-  const OptionMinus = () => {
-    if (option === 0) return;
-    setOption((prev) => prev - 1);
-    console.log(option);
+
+  const optionEntity = (operation: string) => () => {
+    if (operation === "plus") {
+      if (option === 4) return;
+      setOption((prev) => prev + 1);
+    }
+    if (operation === "minus") {
+      if (option === 0) return;
+      setOption((prev) => prev - 1);
+    }
+  };
+
+  const onChangeTextColor = (color: string) => {
+    setTextColor(color);
+    setValue("textColor", color);
+  };
+
+  const onChangebgColor = (color: string) => {
+    setBgColor(color);
+    setValue("bgColor", color);
   };
 
   const onChangeContents = () => {
     const text = contentsRef?.current?.getInstance().getHTML();
-    setValue("contents", text === "<p><br><p>" ? "" : text);
+    setValue("content", text === "<p><br><p>" ? "" : text);
   };
 
-  const onChangeCategory = (
-    value: unknown,
-    option:
-      | BaseOptionType
-      | DefaultOptionType
-      | (BaseOptionType | DefaultOptionType)[]
-  ) => {
-    switch (value) {
-      case "smallAppliance":
-        setCategory([
-          "품명 및 모델명",
-          "KC 인증 필 유무",
-          "정격전압 및 소비전력",
-          "출시년월",
-          "제조자(수입자)",
-          "제조국",
-          "크기",
-          "무게",
-          "주요 사양",
-          "품질보증기준",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "etc":
-        setCategory([
-          "품명 및 모델명",
-          "인증/허가 사항",
-          "제조국(원산지)",
-          "제조자(수입자)",
-          "소비자상담 관련 전화번호",
-        ]);
-        break;
-      case "videoAppliance":
-        setCategory([
-          "품명 및 모델명",
-          "KC 인증 필 유무",
-          "정격전압 및 소비전력",
-          "에너지소비효율등급",
-          "출시년월",
-          "제조자(수입자)",
-          "제조국",
-          "크기",
-          "무게",
-          "화면 사양",
-          "품질보증기준",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "car":
-        setCategory([
-          "품명 및 모델명",
-          "동일모델 출시년월",
-          "KC 인증 필 유무 (자동차관리법에 따른 자기인증 대상 자동차부품에 한함)",
-          "제조자(수입자)",
-          "제조국",
-          "크기",
-          "적용차종",
-          "제품사용으로 인한 위험 및 유의사항(연료절감장치에 한함)",
-          "품질보증기준",
-          "검사합격증 번호 (대기환경보전법에 따른 첨가제·촉매제에 한함)",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "bag":
-        setCategory([
-          "종류",
-          "소재",
-          "색상",
-          "크기",
-          "제조자(수입자)",
-          "제조국",
-          "취급시 주의사항",
-          "품질보증기준",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "chemistry":
-        setCategory([
-          "품명 및 모델명",
-          "용도(표백제의 경우 계열을 함께표시) 및 제형",
-          "제조연월 및 유통기한(해당 없는 제품 생략 가능)",
-          "중량, 용량, 매수",
-          "효과, 효능(승인대상 제품에 한함)",
-          "수입자(수입제품에 한함), 제조국 및 제조사",
-          "어린이보호포장 대상제품 유무",
-          "제품에 사용된 화학물질 명칭(주요물질, 보존제 등 관련 고시에 따른 표시의무 화학물질에 한함)",
-          "사용상 주의사항",
-          "안전기준 적합확인 신고번호(자가검사번호) 또는 안전확인대상 생활화학제품 승인번호",
-          "소비자상담 관련 전화번호",
-        ]);
-        break;
-      case "electronic":
-        setCategory([
-          "품명 및 모델명",
-          "KC 인증 필 유무",
-          "정격전압 및 소비전력",
-          "에너지소비효율등급",
-          "출시년월",
-          "제조자(수입자)",
-          "제조국",
-          "크기",
-          "품질보증기준",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "optics":
-        setCategory([
-          "품명 및 모델명",
-          "KC 인증 필 유무",
-          "출시년월",
-          "제조자(수입자)",
-          "제조국",
-          "크기",
-          "무게",
-          "주요 사양",
-          "품질보증기준",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "sports":
-        setCategory([
-          "품명 및 모델명",
-          "크기, 중량",
-          "색상",
-          "재질",
-          "제품 구성",
-          "출시년월",
-          "제조자(수입자)",
-          "제조국",
-          "상품별 세부 사양",
-          "품질보증기준",
-          "A/S 책임자와 전화번호",
-        ]);
-        break;
-      case "etcPeriod":
-        setCategory([
-          "품명 및 모델명",
-          "인증사항",
-          "제조연월일, 유통기한 또는 품질유지기한",
-          "제조국(원산지)",
-          "제조자(수입자)",
-          "소비자상담 관련 전화번호",
-        ]);
-        break;
-      case "biocidal":
-        setCategory([
-          "제품명 및 제품유형",
-          "중량 또는 용량 및 표준사용량",
-          "효과, 효능",
-          "사용대상자 및 사용범위",
-          "수입자(수입제품에 한함), 제조국 및 제조사",
-          "어린이보호포장 대상제품 유무",
-          "살생물물질, 나노물질, 기타 화학물질(유해화학물질 또는 중점관리물질)의 명칭",
-          "제품 유해성, 위해성 표시",
-          "사용방법 및 사용상 주의사항",
-          "승인번호",
-          "소비자상담 관련 전화번호",
-        ]);
-        break;
+  const onDropImg = (inputImgs: File[]) => {
+    setImgFiles(inputImgs);
+  };
+
+  const onChangeCategory = (value: unknown) => {
+    categoryTitle.forEach((el, i) =>
+      el === value ? setCategory(categoryContents[i]) : null
+    );
+    setValue("info.type", value);
+  };
+
+  const onClickCreate = async (data: any) => {
+    const { info, ...rest } = data;
+
+    if (!imgFiles) {
+      ErrorModal("상품 이미지는 필수 입니다.");
+      return;
+    }
+
+    try {
+      const resultImgs = await uploadImages({
+        variables: {
+          images: imgFiles,
+        },
+      });
+      const imgUrl = resultImgs.data.uploadImages.map((el: any) => el.imageUrl);
+
+      const result = await createProduct({
+        variables: {
+          createProductInput: {
+            ...rest,
+            endType: "TOTAL_QTY",
+            userId: String(fetchUser.id),
+            images: imgUrl,
+          },
+          createProductDetailInput: {
+            ...info,
+          },
+        },
+      });
+      SuccessModal("상품 등록 완료!");
+      router.push(`/product/${result.data?.createProduct.id}`);
+    } catch (error) {
+      if (error instanceof Error) ErrorModal(error.message);
     }
   };
 
+  const onClickUpdate = async (data: any) => {
+    console.log("aaaa");
+    const { info, ...rest } = data;
+    try {
+      let imgUrl = "";
+      if (imgFiles) {
+        const resultImgs = await uploadImages({
+          variables: {
+            images: imgFiles,
+          },
+        });
+        imgUrl = resultImgs.data.uploadImages.map((el: any) => el.imageUrl);
+      } else {
+        imgUrl = fetchProduct?.fetchProduct.images;
+      }
+
+      const result = await updateProduct({
+        variables: {
+          productId: String(router.query.useditemId),
+          updateProductInput: { ...rest, images: imgUrl },
+          updateProductDetailInput: { ...info },
+        },
+      });
+      SuccessModal("상품 수정 완료!");
+      router.push(`/product/${result.data?.updateProduct.id}`);
+    } catch (error) {
+      if (error instanceof Error) ErrorModal(error.message);
+    }
+  };
+  console.log(formState.errors);
+
   return (
     <RegisterPresenter
+      isEdit={isEdit}
       register={register}
       handleSubmit={handleSubmit}
-      formState={formState}
       getValues={getValues}
-      onChangeCategory={onChangeCategory}
       category={category}
-      contentsRef={contentsRef}
-      onChangeContents={onChangeContents}
+      nameRef={nameRef}
       option={option}
-      OptionPlus={OptionPlus}
-      OptionMinus={OptionMinus}
+      bgColor={bgColor}
+      textColor={textColor}
+      onChangebgColor={onChangebgColor}
+      onChangeTextColor={onChangeTextColor}
+      onDropImg={onDropImg}
+      selectDate={selectDate}
+      contentsRef={contentsRef}
+      optionEntity={optionEntity}
+      onClickCreate={onClickCreate}
+      onClickUpdate={onClickUpdate}
+      onChangeCategory={onChangeCategory}
+      onChangeContents={onChangeContents}
+      watch={watch}
+      fetchProduct={fetchProduct}
     />
   );
 }

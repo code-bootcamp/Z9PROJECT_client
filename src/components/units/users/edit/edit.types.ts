@@ -3,15 +3,37 @@ import {
   FormState,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 
 export type IEditPresenterProps = {
   register: UseFormRegister<FieldValues>;
-  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  openTime: boolean;
+  fetchUser: any;
   formState: FormState<FieldValues>;
-  certifiFetchUrl: File | undefined;
-  onChangeCertifiFile: (file: File) => void;
-  onChageProfileFile: (url: string, file: File) => void;
+  handleSubmit: UseFormHandleSubmit<FieldValues>;
+  onClickUpdate: (data: any) => void;
   profilePreview: string;
-  profileFetchUrl: File | undefined;
+  onClickMore: () => void;
+  onClickCertNumber: () => Promise<void>;
+  onClickCertConfirm: () => Promise<void>;
+  onClickNameConfirm: () => Promise<void>;
+  onChageProfileFile: (url: string, file: File) => void;
+  onChangeCertifiFile: (file: File) => void;
+};
+
+export type IChangeInput = {
+  nickname?: string;
+  phoneNumber?: string;
+  zipcode?: string;
+  address?: string;
+  addressDetail?: string;
+  introduce?: string;
+  mainContents?: string;
+  snsChannel?: string;
+  snsName?: string;
+  account?: string;
+  accountName?: string;
+  bank?: string;
 };
