@@ -72,6 +72,7 @@ export const BoardTopWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
