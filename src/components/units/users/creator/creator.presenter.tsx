@@ -302,7 +302,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               </S.Svg>
               <Input03
                 type="text"
-                placeholder="정산 은행 코드를 입력하세요."
+                placeholder="정산할 은행 코드를 입력하세요."
                 register={register("bank")}
                 error={formState.errors.bank?.message}
               />
@@ -318,7 +318,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               </S.Svg>
               <Input01
                 type="text"
-                placeholder="예금주 실명을 입력하세요."
+                placeholder="예금주명을 입력하세요."
                 register={register("accountName")}
                 error={formState.errors.accountName?.message}
               />

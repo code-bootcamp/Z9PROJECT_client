@@ -39,6 +39,7 @@ export const UploadWrapper = styled.div`
   align-items: flex-end;
   position: relative;
   margin-bottom: 30px;
+  position: relative;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-left: 0;

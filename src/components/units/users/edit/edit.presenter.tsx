@@ -1,5 +1,6 @@
 import CountDown from "../../../commons/count";
 import Input01 from "../../../commons/input/input01/input01";
+import Input03 from "../../../commons/input/input03/input03";
 import ZipcodeModal from "../../../commons/modal/zipcode";
 import Upload01 from "../../../commons/upload/upload01/upload01";
 import Upload02 from "../../../commons/upload/upload02/upload02";
@@ -38,7 +39,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
               <img src="/test.jpeg" alt="기본이미지" />
             )}
           </S.ProfileWrapper>
-          <Upload02 onChageProfileFile={onChageProfileFile} />
+          <Upload02 onChageProfileFile={onChageProfileFile} isEdit={true} />
         </S.UploadWrapper>
 
         <S.SubTitle className="h2">나의 정보</S.SubTitle>
@@ -202,9 +203,9 @@ export default function EditPresenter(P: IEditPresenterProps) {
               defaultValue={fetchUser?.fetchUser.account}
             />
             <S.BankInner>
-              <Input01
+              <Input03
                 type="text"
-                placeholder="은행을 입력하세요."
+                placeholder="인출할 은행 코드를 입력하세요."
                 register={register("bank")}
                 edit={true}
                 defaultValue={fetchUser?.fetchUser.bank}
