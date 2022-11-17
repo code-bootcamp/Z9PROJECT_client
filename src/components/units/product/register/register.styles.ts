@@ -66,7 +66,6 @@ export const Item = styled.div`
 export const SubTitle = styled.label`
   font-size: ${styleSet.fontSize.s8};
   font-family: ${styleSet.font.B};
-
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
