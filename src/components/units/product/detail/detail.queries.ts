@@ -117,3 +117,9 @@ export const DELETE_PRODUCT = gql`
     deleteProduct(productId: $productId)
   }
 `;
+
+export const FETCH_COUNT_OF_QUESTIONS = gql`
+  query fetchCountOfQuestions($productId: String!) {
+    fetchCountOfQuestions(productId: $productId)
+  }
+`;
