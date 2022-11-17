@@ -9,7 +9,7 @@ import {
 } from "./sales.queries";
 
 export default function SalesContainer() {
-  const [tab, setTab] = useState("1");
+  const [tab, setTab] = useState("0");
   const [currentPage, setCurrentPage] = useState(1);
   const [date, setDate] = useState<Date[] | undefined[]>([
     undefined,
@@ -72,7 +72,8 @@ export default function SalesContainer() {
         onClickPage={onClickPage}
         onChangeDate={onChangeDate}
         sellHistory={sellHistory}
-        HistoryCount={HistoryCount}
+        currentPage={currentPage}
+        HistoryCount={HistoryCount?.fetchCountOfOrderByCreatorId}
         onClickAccept={onClickAccept}
       />
     </MyPageLayoutContainer>

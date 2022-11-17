@@ -6,10 +6,10 @@ import { ISalesPresenterProps } from "./sales.types";
 export default function SalesPresenter(P: ISalesPresenterProps) {
   const {
     tab,
-    setTab,
     onClickTab,
     sellHistory,
     HistoryCount,
+    currentPage,
     onClickPage,
     onChangeDate,
     onClickAccept,
@@ -72,9 +72,11 @@ export default function SalesPresenter(P: ISalesPresenterProps) {
         </ul>
         <Pagination
           size="small"
-          total={HistoryCount?.fetchCountOfOrderByCreatorId}
+          total={HistoryCount}
           onChange={onClickPage}
+          current={currentPage}
           defaultCurrent={1}
+          showSizeChanger={false}
         />
       </S.BoardBody>
     </S.Container>

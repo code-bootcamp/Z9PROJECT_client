@@ -4,7 +4,7 @@ export const FETCH_ORDER_BY_USER = gql`
   query fetchOrdersByUserId(
     $startDate: DateTime
     $endDate: DateTime
-    $page: Float!
+    $page: Int!
   ) {
     fetchOrdersByUserId(startDate: $startDate, endDate: $endDate, page: $page) {
       id

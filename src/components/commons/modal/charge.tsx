@@ -1,7 +1,6 @@
 import { DollarOutlined } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";

@@ -16,7 +16,7 @@ export default function AnswerWriter(P: any) {
   const [answer, setAnswer] = useState("");
 
   const onClickClose = () => {
-    setAnswerModal(false);
+    setIsAnswer(false);
   };
   const onChangeAnswer = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(e.target.value);
@@ -41,7 +41,7 @@ export default function AnswerWriter(P: any) {
       SuccessModal("답변이 등록되었습니다.");
       setAnswerModal(false);
     } catch (error) {
-      ErrorModal(error as string);
+      ErrorModal("이미 답변이 존재합니다.");
     }
     setAnswer("");
   };
@@ -65,6 +65,7 @@ export default function AnswerWriter(P: any) {
       ErrorModal(error as string);
     }
   };
+
   return (
     <>
       <S.BgLayer></S.BgLayer>
@@ -75,7 +76,14 @@ export default function AnswerWriter(P: any) {
         </S.H1>
         <S.UserBox>
           <S.Div3>
-            <img src="/img_user.jpeg" alt="유저이미지" />
+            <img
+              src={
+                questionEl?.user?.profileImg
+                  ? questionEl?.user?.profileImg
+                  : "/icon_logo.png"
+              }
+              alt="유저이미지"
+            />
             <S.UserName>{questionEl?.user?.nickname}</S.UserName>
           </S.Div3>
           <S.Div2>
