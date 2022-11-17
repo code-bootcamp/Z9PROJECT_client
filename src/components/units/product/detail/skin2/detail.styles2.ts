@@ -243,7 +243,6 @@ export const Octagon = styled.div`
 `;
 
 export const Octagon2 = styled.div`
-  background: url("/test2.jpg") no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   position: relative;
