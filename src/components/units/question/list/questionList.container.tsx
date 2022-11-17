@@ -15,7 +15,6 @@ export default function QuestionContainer(P: any) {
   const router = useRouter();
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
-
   const [question, setQuestion] = useState("");
   const [close, setClose] = useState(false);
   const [isTrue, setIsTrue] = useState(false);
@@ -58,7 +57,7 @@ export default function QuestionContainer(P: any) {
         refetchQueries: [
           {
             query: FETCH_QUESTIONS,
-            variables: { productId: String(router.query.useditemId) },
+            variables: { productId: String(router.query.useditemId), page: 1 },
           },
         ],
       });
@@ -66,7 +65,6 @@ export default function QuestionContainer(P: any) {
     } catch (error) {
       ErrorModal(error as string);
     }
-
   };
 
   const onClickAnswer = () => {

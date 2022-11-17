@@ -77,6 +77,7 @@ export default function QuestionPresenter(P: any) {
               setAnswerModal={setAnswerModal}
               questionEl={el}
               isAnswer={false}
+              setIsAnswer={setIsAnswer}
             />
           )}
         </div>
