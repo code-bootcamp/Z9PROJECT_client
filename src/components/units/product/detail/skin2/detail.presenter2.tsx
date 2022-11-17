@@ -12,8 +12,8 @@ import * as S from "./detail.styles2";
 
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const router = useRouter();
-  const [color, setColor] = useState("");
-  const [bgColor, setBgColor] = useState("");
+  const [color, setColor] = useState<string>("");
+  const [bgColor, setBgColor] = useState<string>();
 
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -34,13 +34,13 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     countData,
   } = P;
   useEffect(() => {
-    setColor(data?.fetchProduct.textColor);
+    setColor(String(data?.fetchProduct.textColor));
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
   return (
     <>
       <S.Container>
-        <S.Info bgColor={bgColor}>
+        <S.Info bgColor={String(bgColor)}>
           <S.InfoWrapper>
             <S.InfoImg
               style={{
