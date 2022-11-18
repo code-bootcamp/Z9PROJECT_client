@@ -1,5 +1,4 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroller";
 import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
 
@@ -24,15 +23,9 @@ export default function ProductListMap(P: any) {
           <S.Main>
             <InfiniteScroll
               className="infinite-scroll"
-              dataLength={length}
-              loader={
-                <S.Scroll>
-                  <LoadingOutlined />
-                </S.Scroll>
-              }
-              endMessage={<h1>로드 할 상품이 없습니다.</h1>}
-              next={onLoadMore}
+              loadMore={onLoadMore}
               hasMore={true}
+              pageStart={0}
             >
               {data?.fetchProductsByPages.map((el: any) => (
                 <ProductListPresenter key={el.id} el={el} tab={tab} />

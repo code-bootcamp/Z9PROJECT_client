@@ -35,7 +35,7 @@ export default function ProductListContainer() {
       },
     });
   };
-  console.log(length, "length");
+  console.log(data);
   return (
     <>
       <ProductListMap
