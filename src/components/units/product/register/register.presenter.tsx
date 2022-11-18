@@ -1,3 +1,5 @@
+import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
+import { HexColorPicker } from "react-colorful";
 import { DatePicker } from "antd";
 import * as S from "./register.styles";
 import ImgDropzone from "./atom/dropzone";
@@ -5,11 +7,9 @@ import { selectCategory } from "./atom/category";
 import { IRegisterPresenterProps } from "./register.types";
 import Input02 from "../../../commons/input/input02/input02";
 import dynamic from "next/dynamic";
-const EditorPage = dynamic(() => import("./atom/editor"), {
+const EditorPage = dynamic(async () => await import("./atom/editor"), {
   ssr: false,
 });
-import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
-import { HexColorPicker } from "react-colorful";
 
 export default function RegisterPresenter(P: IRegisterPresenterProps) {
   const {
@@ -219,7 +219,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
           <S.CategoryWrapper>
             {category.map((el, i) => (
               <S.SubWrapper key={i}>
-                <S.CategoryTitle>{el ? el : "카테고리"}</S.CategoryTitle>{" "}
+                <S.CategoryTitle>{el || "카테고리"}</S.CategoryTitle>{" "}
                 <Input02
                   type="text"
                   placeholder=""

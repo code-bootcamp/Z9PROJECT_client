@@ -111,14 +111,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     appleStart9.href = "/pwa/splash/apple-launch-1668x2224.png";
     appleStart9.media =
       "(device-width: 1668px) and (device-height: 2224px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)";
-    document.head.appendChild(appleStart9);
+    document.head.appendChild(appleStart11);
 
     const appleStart12 = document.createElement("link");
     appleStart9.rel = "apple-touch-startup-image";
     appleStart9.href = "/pwa/splash/apple-launch-2048x2732.png";
     appleStart9.media =
       "(device-width: 2048px) and (device-height: 2732px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)";
-    document.head.appendChild(appleStart9);
+    document.head.appendChild(appleStart12);
   }, []);
 
   return (

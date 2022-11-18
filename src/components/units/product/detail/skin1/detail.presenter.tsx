@@ -15,7 +15,7 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-const ViewerPage = dynamic(() => import("../atom/viewer"), {
+const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });
 
@@ -36,7 +36,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickOrder,
     onClickTab,
     onClickTab2,
-    important,
     setGraph,
     graph,
     onClickDelete,
@@ -244,7 +243,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail?.type)
               ]?.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <strong>{el}</strong>
                   <data>
                     {data?.fetchProduct.productDetail[`option${idx + 1}`]}
@@ -254,7 +253,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail?.type)
               ]?.length %
-                2 ==
+                2 ===
               1 ? (
                 <li>
                   <strong></strong>
@@ -268,7 +267,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
-                `/product/${router.query.useditemId}/edit`
+                `/product/${String(router.query.useditemId)}/edit`
               )}
             >
               수정
