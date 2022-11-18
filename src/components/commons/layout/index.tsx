@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { Fragment } from "react";
 import FooterPage from "./footer";
 import HeaderPage from "./header";
 
@@ -11,10 +12,10 @@ export default function Layout(P: { children: any }) {
   const { children } = P;
 
   return (
-    <>
+    <Fragment>
       {!hiddenLayout && <HeaderPage />}
       <div>{children}</div>
       {!hiddenLayout && <FooterPage />}
-    </>
+    </Fragment>
   );
 }
