@@ -15,7 +15,7 @@ export default function ProductListPresenter(P: any) {
   return (
     <>
       {tab === "1" ? (
-        <S.Section onClick={onClickMoveToPage(`/product/${el.id}`)}>
+        <S.Section onClick={onClickMoveToPage(`/product/${String(el.id)}`)}>
           <S.User>
             <img
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
@@ -78,7 +78,7 @@ export default function ProductListPresenter(P: any) {
       ) : null}
 
       {tab === "2" && start > Date.now() ? (
-        <S.Section onClick={onClickMoveToPage(`/product/${el.id}`)}>
+        <S.Section onClick={onClickMoveToPage(`/product/${String(el.id)}`)}>
           <S.User>
             <img
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
@@ -141,7 +141,7 @@ export default function ProductListPresenter(P: any) {
       ) : null}
 
       {tab === "3" && start < Date.now() && Date.now() < end ? (
-        <S.Section onClick={onClickMoveToPage(`/product/${el.id}`)}>
+        <S.Section onClick={onClickMoveToPage(`/product/${String(el.id)}`)}>
           <S.User>
             <img
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
@@ -203,7 +203,7 @@ export default function ProductListPresenter(P: any) {
         </S.Section>
       ) : null}
       {tab === "4" && Date.now() > end ? (
-        <S.Section onClick={onClickMoveToPage(`/product/${el.id}`)}>
+        <S.Section onClick={onClickMoveToPage(`/product/${String(el.id)}`)}>
           <S.User>
             <img
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}

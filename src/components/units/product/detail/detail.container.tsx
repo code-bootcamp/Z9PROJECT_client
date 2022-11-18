@@ -4,11 +4,11 @@ import { MouseEvent, useEffect, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
   CREATE_ORDER,
-  DELETE_PRODUCT,
-  FETCH_COUNT_OF_QUESTIONS,
   FETCH_IS_LIKED,
+  DELETE_PRODUCT,
   FETCH_PRODUCT,
   LIKE_PRODUCT,
+  FETCH_COUNT_OF_QUESTIONS,
 } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
@@ -138,7 +138,7 @@ export default function ProductDetailContainer() {
   const handleCopyClipBoard = async () => {
     try {
       await navigator.clipboard.writeText(
-        `https://zero9.shop/${data?.fetchProduct.id}`
+        `https://zero9.shop/product/${String(data?.fetchProduct.id)}`
       );
       SuccessModal("클립보드에 링크가 복사되었습니다.");
     } catch (error) {

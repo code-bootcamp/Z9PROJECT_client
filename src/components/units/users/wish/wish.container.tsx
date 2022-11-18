@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MyPageLayoutContainer from "../../../commons/myPageLayout/myPageLayout.container";
 import WishPresenter from "./wish.presenter";
 import { FETCH_ALL_LIKES } from "./wish.queries";
 
 export default function WishContainer() {
-  const { data: fetchAllLikes, fetchMore } = useQuery(FETCH_ALL_LIKES);
+  const { data: fetchAllLikes } = useQuery(FETCH_ALL_LIKES);
   const [morePage, setMorePage] = useState(8);
   const [presentArray, setPresentArray] = useState<any>([]);
 
@@ -16,7 +16,7 @@ export default function WishContainer() {
 
   const likeLength = fetchAllLikes?.fetchAllLikes.length;
   const totalPage = likeLength / 8 === 0 ? 1 : Math.ceil(likeLength / 8);
-  let presentPage = morePage / 8;
+  const presentPage = morePage / 8;
 
   const onClickMore = () => {
     const presentNumber = morePage + 8;

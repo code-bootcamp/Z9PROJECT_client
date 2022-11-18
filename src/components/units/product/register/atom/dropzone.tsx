@@ -50,7 +50,7 @@ export default function ImgDropzone(P: IImgDropzoneProps) {
   const { onDropImg, fetchImg } = P;
   const [preview, setPreview] = useState<string[]>([]);
 
-  const onDrop = (acceptedFiles: Array<File>) => {
+  const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 4 || preview.length + acceptedFiles.length > 4) {
       ErrorModal("이미지는 최대 4장까지 가능합니다.");
       return;
