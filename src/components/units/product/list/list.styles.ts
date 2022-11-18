@@ -25,32 +25,35 @@ export const SearchBox: any = styled.div`
   ul {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     position: relative;
 
     li {
       font-size: ${styleSet.fontSize.s7};
       font-family: ${styleSet.font.B};
       text-align: center;
-      max-width: 110px;
+      width: 110px;
       cursor: pointer;
+      background-color: ${styleSet.colors.black};
+      color: ${styleSet.colors.white};
+      padding: 10px 20px;
+      border-radius: 10px;
       &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
-        background-color: ${styleSet.colors.black};
+        background-color: ${styleSet.colors.primary};
         color: ${styleSet.colors.white};
-        padding: 5px 20px;
-        border-radius: 10px;
       }
     }
   }
   @media ${styleSet.breakePoints.mobile} {
     ul {
-      gap: 0px;
-      min-width: 350px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
     li {
       font-size: ${styleSet.fontSize.s9} !important;
-      width: 80px;
-      height: 30px;
+      width: 110px;
+      height: 40px;
       display: flex;
       align-items: center;
       padding: 0 !important;
@@ -59,8 +62,6 @@ export const SearchBox: any = styled.div`
       white-space: nowrap;
       word-break: keep-all;
       &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
-        width: 80px;
-        height: 30px;
         border-radius: 10px !important;
       }
     }
@@ -83,6 +84,11 @@ export const Wrapper = styled.div`
   max-width: 1460px;
   margin: 0 auto;
   padding: 0 30px;
+`;
+
+export const Scroll = styled.h1`
+  display: block;
+  margin: 0 auto;
 `;
 
 export const Main = styled.main`
@@ -224,6 +230,9 @@ export const Ul = styled.ul`
 export const Time = styled.li`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
+  span {
+    margin-right: 0;
+  }
 `;
 
 export const ProdName = styled.h1`
