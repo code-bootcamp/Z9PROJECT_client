@@ -138,7 +138,7 @@ export default function ProductDetailContainer() {
   const handleCopyClipBoard = async () => {
     try {
       await navigator.clipboard.writeText(
-        `https://zero9.brian-hong.tech/product/${data?.fetchProduct.id}`
+        `https://zero9.shop/${data?.fetchProduct.id}`
       );
       SuccessModal("클립보드에 링크가 복사되었습니다.");
     } catch (error) {
