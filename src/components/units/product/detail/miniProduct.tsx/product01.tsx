@@ -4,6 +4,7 @@ import {
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
 import * as S from "./product01.styles";
 import { IProduct01Props } from "./product01.types";
 
@@ -28,6 +29,13 @@ export default function Product01(P: IProduct01Props) {
         data?.fetchProduct.originalQuantity
     )
   );
+
+  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
+  const today = Number(new Date());
+  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const status = today < start ? "start" : today < end ? "ing" : "end";
+  const time =
+    status === "end" ? 0 : status === "start" ? start - today : end - today;
 
   return (
     <>
@@ -122,7 +130,7 @@ export default function Product01(P: IProduct01Props) {
         <S.H2></S.H2>
 
         <S.H3>
-          총 상품 금액{" "}
+          총 상품 금액
           <strong>
             {(data?.fetchProduct.discountPrice * count).toLocaleString()}원
           </strong>
@@ -134,9 +142,28 @@ export default function Product01(P: IProduct01Props) {
             {cart && <HeartFilled />} {``}
             <span className="emotion">관심상품</span>
           </button>
-          <button className="buy" onClick={onClickOrder}>
-            <span className="emotion">바로 구매하기</span>
-          </button>
+
+          {time > 0 ? (
+            status === "ing" ? (
+              <>
+                <button className="buy" onClick={onClickOrder}>
+                  <span className="emotion">바로 구매하기</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="buy" style={{ background: "#999" }}>
+                  <span className="emotion">미진행</span>
+                </button>
+              </>
+            )
+          ) : (
+            <>
+              <button className="buy" style={{ background: "#999" }}>
+                <span className="emotion">마감</span>
+              </button>
+            </>
+          )}
         </S.BoxBtn>
       </S.InfoRight>
     </>
