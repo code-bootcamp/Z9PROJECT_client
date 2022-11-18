@@ -2,10 +2,10 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { MouseEvent, useEffect, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import { FETCH_QUESTIONS } from "../../question/question.queries";
 import {
   CREATE_ORDER,
   DELETE_PRODUCT,
+  FETCH_COUNT_OF_QUESTIONS,
   FETCH_IS_LIKED,
   FETCH_PRODUCT,
   LIKE_PRODUCT,
@@ -24,15 +24,17 @@ export default function ProductDetailContainer() {
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
+
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
     fetchPolicy: "cache-first",
   });
 
-  const { data: commentData } = useQuery(FETCH_QUESTIONS, {
+  const { data: countData } = useQuery(FETCH_COUNT_OF_QUESTIONS, {
     fetchPolicy: "cache-first",
-    variables: { productId: router.query.useditemId },
+    variables: { productId: String(router.query.useditemId) },
   });
+
   console.log(data, "프로덕트");
 
   useEffect(() => {
@@ -161,11 +163,11 @@ export default function ProductDetailContainer() {
           onClickTab={onClickTab}
           onClickTab2={onClickTab2}
           important={important}
-          commentData={commentData}
           setGraph={setGraph}
           graph={graph}
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
+          countData={countData}
         />
       )}
       {data?.fetchProduct.skin === 2 && (
@@ -183,11 +185,11 @@ export default function ProductDetailContainer() {
           onClickTab={onClickTab}
           onClickTab2={onClickTab2}
           important={important}
-          commentData={commentData}
           setGraph={setGraph}
           graph={graph}
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
+          countData={countData}
         />
       )}
 
@@ -206,11 +208,11 @@ export default function ProductDetailContainer() {
           onClickTab={onClickTab}
           onClickTab2={onClickTab2}
           important={important}
-          commentData={commentData}
           setGraph={setGraph}
           graph={graph}
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
+          countData={countData}
         />
       )}
     </>

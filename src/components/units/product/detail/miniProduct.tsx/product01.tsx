@@ -72,7 +72,6 @@ export default function Product01(P: IProduct01Props) {
   );
 
   const targetISOString = data?.fetchProduct.validUntil;
-  console.log(targetISOString);
 
   const isNotYet = useResultOfIntervalCalculator(
     () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,

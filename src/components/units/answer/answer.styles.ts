@@ -237,9 +237,12 @@ export const UserBox = styled.section`
 `;
 export const Div3 = styled.div`
   width: 25%;
-  img {
-    max-height: 80px;
-    max-width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > img {
+    max-height: 100px
+    max-width: 100px
   }
 `;
 

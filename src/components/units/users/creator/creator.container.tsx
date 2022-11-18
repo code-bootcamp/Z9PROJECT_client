@@ -33,7 +33,7 @@ const schma = yup.object({
   mainContents: yup.string(),
   introduce: yup.string(),
   account: yup.number().typeError("숫자만 입력").required("필수"),
-  bank: yup.string(),
+  bank: yup.string().required("필수"),
   accountName: yup.string().required("필수"),
   terms: yup.boolean().oneOf([true], "필수"),
 });
@@ -145,7 +145,8 @@ export default function CreatorRegisterContainer() {
 
   const onClickSignUp = async (data: any) => {
     const { keyNumber, passwordConfirm, terms, ...rest } = data;
-
+    if (!certFile) ErrorModal("인증 파일은 필수 입니다.");
+    if (!profileFile) ErrorModal("프로필 이미지는 필수 입니다.");
     try {
       const resultCert = await uploadImage({
         variables: {
