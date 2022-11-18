@@ -16,9 +16,9 @@ export type IDetailPresenterProps = {
   onClickTab: () => void;
   onClickTab2: () => void;
   important: boolean;
-  commentData: any;
   setGraph: any;
   graph: number;
   onClickDelete: () => Promise<void>;
   handleCopyClipBoard: any;
+  countData: any;
 };

@@ -6,11 +6,8 @@ export type ISalesPresenterProps = {
   onClickTab: (event: any) => void;
   setTab: Dispatch<SetStateAction<string>>;
   onClickPage: (currentPage: number) => void;
-  HistoryCount: IfetchCountOfOrderByCreatorId;
+  currentPage: number;
+  HistoryCount: number;
   onChangeDate: (_: any, dateString: string[]) => void;
   onClickAccept: (id: number) => any;
-};
-
-type IfetchCountOfOrderByCreatorId = {
-  fetchCountOfOrderByCreatorId: number;
 };

@@ -9,7 +9,7 @@ import {
 } from "./mypage.queries";
 
 export default function MyPageContainer() {
-  const [tab, setTab] = useState("1");
+  const [tab, setTab] = useState("0");
   const [currentPage, setCurrentPage] = useState(1);
   const [date, setDate] = useState<Date[] | undefined[]>([
     undefined,
@@ -30,8 +30,8 @@ export default function MyPageContainer() {
     },
   });
 
-  const onClickPage = (currentPage: number) => {
-    setCurrentPage(currentPage);
+  const onClickPage = (clickPage: number) => {
+    setCurrentPage(clickPage);
   };
 
   const onChangeDate = (date: any) => {

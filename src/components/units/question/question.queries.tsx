@@ -38,8 +38,8 @@ export const CREATE_QUESTION = gql`
 `;
 
 export const FETCH_QUESTIONS = gql`
-  query fetchQuestions($productId: String!) {
-    fetchQuestions(productId: $productId) {
+  query fetchQuestions($productId: String!, $page: Int!) {
+    fetchQuestions(productId: $productId, page: $page) {
       id
       question
       status

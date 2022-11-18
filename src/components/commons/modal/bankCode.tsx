@@ -141,7 +141,7 @@ type IBankCodeModalPorps = {
 export default function BankCodeModal(P: IBankCodeModalPorps) {
   const { setBankCode } = P;
   const [isOpen, setIsOpen] = useState(false);
-  const [listChange, setListChange] = useState(false);
+  const [listChange, setListChange] = useState(true);
   const bankList = [
     { name: "KB국민은행", code: "004" },
     { name: "SC제일은행", code: "023" },
@@ -215,7 +215,8 @@ export default function BankCodeModal(P: IBankCodeModalPorps) {
           <Modal>
             <Close onClick={onClickModal} />
             <H1>
-              <BankOutlined /> 은행 선택{" "}
+              <BankOutlined />{" "}
+              {listChange ? "은행코드 선택" : "증권사코드 선택"}
             </H1>
             <BtnWrapper>
               {listChange

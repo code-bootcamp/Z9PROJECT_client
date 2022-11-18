@@ -232,6 +232,7 @@ export default function UserPresenter(P: IUserPresenterProps) {
                 placeholder="환불받을 은행 코드를 입력하세요."
                 register={register("bank")}
                 error={formState.errors.bank?.message}
+                setValue={setValue}
               />
             </S.Label>
             <S.Label>
