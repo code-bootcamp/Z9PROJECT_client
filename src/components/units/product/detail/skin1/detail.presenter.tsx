@@ -15,6 +15,7 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
 const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });
