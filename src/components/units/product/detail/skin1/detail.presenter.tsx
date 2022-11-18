@@ -51,6 +51,13 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     )
   );
 
+  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
+  const today = Number(new Date());
+  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const status = today < start ? "start" : today < end ? "ing" : "end";
+  const time =
+    status === "end" ? 0 : status === "start" ? start - today : end - today;
+
   return (
     <>
       <S.Container>
@@ -180,7 +187,9 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </S.Persent>
               </S.Text>
 
-              <S.H2></S.H2>
+              <S.H2 className="timer">
+                <TimerDetail data={data} status={status} />
+              </S.H2>
 
               <S.H3>
                 총 상품 금액
@@ -197,9 +206,27 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <span className="emotion">관심상품</span>
                 </button>
 
-                <button className="buy" onClick={onClickOrder}>
-                  <span className="emotion">바로 구매하기</span>
-                </button>
+                {time > 0 ? (
+                  status === "ing" ? (
+                    <>
+                      <button className="buy" onClick={onClickOrder}>
+                        <span className="emotion">바로 구매하기</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="buy" style={{ background: "#999" }}>
+                        <span className="emotion">미진행</span>
+                      </button>
+                    </>
+                  )
+                ) : (
+                  <>
+                    <button className="buy" style={{ background: "#999" }}>
+                      <span className="emotion">마감</span>
+                    </button>
+                  </>
+                )}
               </S.BoxBtn>
             </S.InfoRight>
           </S.ProdInfo>
@@ -213,29 +240,31 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </li>
           </S.Tab>
 
-          {/* {!important && ( */}
-          <S.Ref>
-            <S.Randing>
-              {data?.fetchProduct.content ? (
-                <ViewerPage
-                  initialValue={DOMPurify.sanitize(data?.fetchProduct.content)}
-                />
-              ) : (
-                <div>loadding...</div>
-              )}
-            </S.Randing>
-            <Product01
-              onClickCount={onClickCount}
-              count={count}
-              cart={cart}
-              data={data}
-              discount={discount}
-              onClickLike={onClickLike}
-              onClickOrder={onClickOrder}
-              setGraph={setGraph}
-            />
-          </S.Ref>
-          {/* )} */}
+          {!important && (
+            <S.Ref>
+              <S.Randing>
+                {data?.fetchProduct.content ? (
+                  <ViewerPage
+                    initialValue={DOMPurify.sanitize(
+                      data?.fetchProduct.content
+                    )}
+                  />
+                ) : (
+                  <div>loadding...</div>
+                )}
+              </S.Randing>
+              <Product01
+                onClickCount={onClickCount}
+                count={count}
+                cart={cart}
+                data={data}
+                discount={discount}
+                onClickLike={onClickLike}
+                onClickOrder={onClickOrder}
+                setGraph={setGraph}
+              />
+            </S.Ref>
+          )}
 
           <S.Important>
             <S.H3Info>필수 표기정보</S.H3Info>
