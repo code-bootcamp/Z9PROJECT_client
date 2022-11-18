@@ -15,6 +15,7 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
 import { useState } from "react";
 import { useInterval } from "../../../../commons/hooks/timer";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
 
 const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
   const [result, setResult] = useState(calculator());
