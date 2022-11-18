@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { MouseEvent } from "react";
 
 export type IDetailPresenterProps = {
   handleChange?: ((value: any) => void) | undefined;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { DollarOutlined } from "@ant-design/icons";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { styleSet } from "../../../commons/styles/styleSet";

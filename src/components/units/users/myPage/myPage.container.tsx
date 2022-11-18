@@ -51,7 +51,7 @@ export default function MyPageContainer() {
     setDate([startDate, endDate]);
   };
 
-  const onClickSearch = () => {};
+  // const onClickSearch = () => {};
 
   return (
     <MyPageLayoutContainer>

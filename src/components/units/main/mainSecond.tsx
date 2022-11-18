@@ -11,7 +11,7 @@ import { IMainPresenterProps } from "./main.types";
 export default function MainSecond(P: IMainPresenterProps) {
   const { handleLeftClick, handleRightClick, setSwiperRef } = P;
 
-  const [ref, inView] = useInView({
+  const [ref] = useInView({
     threshold: 0,
   });
 

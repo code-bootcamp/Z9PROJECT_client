@@ -2,11 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import {
-  CREATE_QUESTION,
-  FETCH_QUESTIONS,
-  FETCH_USER,
-} from "../question.queries";
+import { CREATE_QUESTION, FETCH_USER } from "../question.queries";
 import * as S from "../question.styles";
 
 export default function QuestionWriter() {

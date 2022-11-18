@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { url } from "inspector";
 import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
 interface IStylesProps {
@@ -43,7 +42,7 @@ export const DetailWrapper = styled.div`
 
 export const H1 = styled.h1`
   color: ${(props: any) => {
-    return `${props.color}`;
+    return `${String(props.color)}`;
   }};
   font-size: ${styleSet.fontSize.s2};
 `;
@@ -57,7 +56,7 @@ export const Li = styled.li`
   font-family: ${styleSet.font.L};
 
   color: ${(props: any) => {
-    return `${props.color}`;
+    return `${String(props.color)}`;
   }};
   font-size: ${styleSet.fontSize.s4};
   &:first-child {
@@ -70,7 +69,7 @@ export const Info = styled.section`
   width: 100%;
   height: 100vh;
   background: ${(props: IStylesProps) => {
-    return `${props.bgColor}`;
+    return `${String(props.bgColor)}`;
   }};
   align-items: center;
   display: flex;

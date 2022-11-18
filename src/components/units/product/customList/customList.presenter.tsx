@@ -3,7 +3,6 @@ import {
   SearchOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
-import Link from "next/link";
 import * as S from "./customList.styles";
 
 export default function CustomListPresenter() {
