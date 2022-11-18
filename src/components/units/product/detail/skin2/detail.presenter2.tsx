@@ -1,5 +1,6 @@
 import { MessageOutlined } from "@ant-design/icons";
 import DOMPurify from "dompurify";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
@@ -9,6 +10,9 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import * as S from "./detail.styles2";
+const ViewerPage = dynamic(() => import("../atom/viewer"), {
+  ssr: false,
+});
 
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const router = useRouter();
@@ -146,13 +150,17 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
 
           {!important && (
             <S.Ref>
-              {/* {process.browser && (
-                <S.Randing
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
-                  }}
-                ></S.Randing>
-              )} */}
+              <S.Randing>
+                {data?.fetchProduct.content ? (
+                  <ViewerPage
+                    initialValue={DOMPurify.sanitize(
+                      data?.fetchProduct.content
+                    )}
+                  />
+                ) : (
+                  <div>loadding...</div>
+                )}
+              </S.Randing>
               <Product01
                 onClickCount={onClickCount}
                 count={count}
