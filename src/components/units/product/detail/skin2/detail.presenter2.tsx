@@ -1,5 +1,6 @@
 import { MessageOutlined } from "@ant-design/icons";
 import DOMPurify from "dompurify";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
@@ -9,11 +10,14 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import * as S from "./detail.styles2";
+const ViewerPage = dynamic(() => import("../atom/viewer"), {
+  ssr: false,
+});
 
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const router = useRouter();
-  const [color, setColor] = useState("");
-  const [bgColor, setBgColor] = useState("");
+  const [color, setColor] = useState<string>("");
+  const [bgColor, setBgColor] = useState<string>();
 
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -34,13 +38,13 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     countData,
   } = P;
   useEffect(() => {
-    setColor(data?.fetchProduct.textColor);
+    setColor(String(data?.fetchProduct.textColor));
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
   return (
     <>
       <S.Container>
-        <S.Info bgColor={bgColor}>
+        <S.Info bgColor={String(bgColor)}>
           <S.InfoWrapper>
             <S.InfoImg
               style={{
@@ -146,13 +150,17 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
 
           {!important && (
             <S.Ref>
-              {/* {process.browser && (
-                <S.Randing
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
-                  }}
-                ></S.Randing>
-              )} */}
+              <S.Randing>
+                {data?.fetchProduct.content ? (
+                  <ViewerPage
+                    initialValue={DOMPurify.sanitize(
+                      data?.fetchProduct.content
+                    )}
+                  />
+                ) : (
+                  <div>loadding...</div>
+                )}
+              </S.Randing>
               <Product01
                 onClickCount={onClickCount}
                 count={count}

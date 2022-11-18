@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import { url } from "inspector";
 import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
-
+interface IStylesProps {
+  bgColor?: string;
+}
 export const Container = styled.section`
   width: 100%;
   height: 100%;
@@ -67,7 +69,7 @@ export const Li = styled.li`
 export const Info = styled.section`
   width: 100%;
   height: 100vh;
-  background: ${(props: any) => {
+  background: ${(props: IStylesProps) => {
     return `${props.bgColor}`;
   }};
   align-items: center;

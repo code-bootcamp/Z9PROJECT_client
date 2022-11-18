@@ -16,6 +16,10 @@ import * as DOMPurify from "dompurify";
 import { useState } from "react";
 import { useInterval } from "../../../../commons/hooks/timer";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+const ViewerPage = dynamic(() => import("../atom/viewer"), {
+  ssr: false,
+});
 
 const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
   const [result, setResult] = useState(calculator());
@@ -278,13 +282,15 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
 
           {/* {!important && ( */}
           <S.Ref>
-            {/* {process.browser && (
-                <S.Randing
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
-                  }}
-                ></S.Randing>
-              )} */}
+            <S.Randing>
+              {data?.fetchProduct.content ? (
+                <ViewerPage
+                  initialValue={DOMPurify.sanitize(data?.fetchProduct.content)}
+                />
+              ) : (
+                <div>loadding...</div>
+              )}
+            </S.Randing>
             <Product01
               onClickCount={onClickCount}
               count={count}
