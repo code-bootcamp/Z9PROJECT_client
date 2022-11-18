@@ -225,29 +225,31 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </li>
           </S.Tab>
 
-          {/* {/* {!important && ( */}
-          <S.Ref>
-            <S.Randing>
-              {data?.fetchProduct.content ? (
-                <ViewerPage
-                  initialValue={DOMPurify.sanitize(data?.fetchProduct.content)}
-                />
-              ) : (
-                <div>loadding...</div>
-              )}
-            </S.Randing>
-            <Product01
-              onClickCount={onClickCount}
-              count={count}
-              cart={cart}
-              data={data}
-              discount={discount}
-              onClickLike={onClickLike}
-              onClickOrder={onClickOrder}
-              setGraph={setGraph}
-            />
-          </S.Ref>
-          {/* )} */}
+          {!important && (
+            <S.Ref>
+              <S.Randing>
+                {data?.fetchProduct.content ? (
+                  <ViewerPage
+                    initialValue={DOMPurify.sanitize(
+                      data?.fetchProduct.content
+                    )}
+                  />
+                ) : (
+                  <div>loadding...</div>
+                )}
+              </S.Randing>
+              <Product01
+                onClickCount={onClickCount}
+                count={count}
+                cart={cart}
+                data={data}
+                discount={discount}
+                onClickLike={onClickLike}
+                onClickOrder={onClickOrder}
+                setGraph={setGraph}
+              />
+            </S.Ref>
+          )}
 
           <S.Important>
             <S.H3Info>필수 표기정보</S.H3Info>

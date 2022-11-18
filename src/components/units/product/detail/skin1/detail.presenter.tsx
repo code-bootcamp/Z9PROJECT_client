@@ -15,6 +15,8 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
+
 const ViewerPage = dynamic(() => import("../atom/viewer"), {
   ssr: false,
 });
@@ -51,6 +53,13 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
         data?.fetchProduct.originalQuantity
     )
   );
+
+  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
+  const today = Number(new Date());
+  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const status = today < start ? "start" : today < end ? "ing" : "end";
+  const time =
+    status === "end" ? 0 : status === "start" ? start - today : end - today;
 
   return (
     <>
@@ -181,7 +190,9 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </S.Persent>
               </S.Text>
 
-              <S.H2></S.H2>
+              <S.H2 className="timer">
+                <TimerDetail data={data} status={status} />
+              </S.H2>
 
               <S.H3>
                 총 상품 금액
@@ -198,9 +209,27 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <span className="emotion">관심상품</span>
                 </button>
 
-                <button className="buy" onClick={onClickOrder}>
-                  <span className="emotion">바로 구매하기</span>
-                </button>
+                {time > 0 ? (
+                  status === "ing" ? (
+                    <>
+                      <button className="buy" onClick={onClickOrder}>
+                        <span className="emotion">바로 구매하기</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="buy" style={{ background: "#999" }}>
+                        <span className="emotion">미진행</span>
+                      </button>
+                    </>
+                  )
+                ) : (
+                  <>
+                    <button className="buy" style={{ background: "#999" }}>
+                      <span className="emotion">마감</span>
+                    </button>
+                  </>
+                )}
               </S.BoxBtn>
             </S.InfoRight>
           </S.ProdInfo>
