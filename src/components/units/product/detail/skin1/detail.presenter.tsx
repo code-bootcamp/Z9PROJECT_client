@@ -13,52 +13,11 @@ import QuestionWriter from "../../../question/write/questionWriter";
 import QuestionMap from "../../../question/list/questionList.map";
 import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
-import { useState } from "react";
-import { useInterval } from "../../../../commons/hooks/timer";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 const ViewerPage = dynamic(() => import("../atom/viewer"), {
   ssr: false,
 });
-
-const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
-  const [result, setResult] = useState(calculator());
-  useInterval(() => {
-    const newResult = calculator();
-    if (newResult !== result) setResult(newResult);
-  }, delay);
-
-  return result;
-};
-
-const CountDownView = ({ targetISOString }: { targetISOString: any }) => {
-  const remain = useResultOfIntervalCalculator(
-    () =>
-      Math.floor(
-        ((new Date(targetISOString) as any) -
-          (new Date().setHours(new Date().getHours() + 9) as any)) /
-          1000
-      ),
-    10
-  );
-  const day = Math.floor(remain / (60 * 60 * 24));
-  const hour = Math.floor((remain % (60 * 60 * 24)) / (60 * 60));
-  const min = Math.floor((remain % (60 * 60)) / 60);
-  const sec = Math.floor(remain % 60);
-
-  return (
-    <S.Timer className="CountDownWrap">
-      {day}
-      <span>일</span>
-      {hour}
-      <span>시</span>
-      {min}
-      <span>분</span>
-      {sec}
-      <span>초</span>
-    </S.Timer>
-  );
-};
 
 export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   const router = useRouter();
@@ -91,13 +50,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
         100) /
         data?.fetchProduct.originalQuantity
     )
-  );
-
-  const targetISOString = data?.fetchProduct.validUntil;
-
-  const isNotYet = useResultOfIntervalCalculator(
-    () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,
-    10
   );
 
   return (
@@ -229,15 +181,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </S.Persent>
               </S.Text>
 
-              <S.H2>
-                {isNotYet ? (
-                  <CountDownView
-                    targetISOString={targetISOString}
-                  ></CountDownView>
-                ) : (
-                  "마감되었습니다"
-                )}
-              </S.H2>
+              <S.H2></S.H2>
 
               <S.H3>
                 총 상품 금액
@@ -254,19 +198,9 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   <span className="emotion">관심상품</span>
                 </button>
 
-                {isNotYet ? (
-                  <button className="buy" onClick={onClickOrder}>
-                    <span className="emotion">바로 구매하기</span>
-                  </button>
-                ) : !isNotYet ? (
-                  <button className="closed">
-                    <span className="emotion">마감</span>
-                  </button>
-                ) : (
-                  <button className="closed">
-                    <span className="emotion">시작예정</span>
-                  </button>
-                )}
+                <button className="buy" onClick={onClickOrder}>
+                  <span className="emotion">바로 구매하기</span>
+                </button>
               </S.BoxBtn>
             </S.InfoRight>
           </S.ProdInfo>
