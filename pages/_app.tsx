@@ -113,6 +113,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       "(device-width: 1668px) and (device-height: 2224px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)";
     document.head.appendChild(appleStart11);
 
+
     const appleStart12 = document.createElement("link");
     appleStart9.rel = "apple-touch-startup-image";
     appleStart9.href = "/pwa/splash/apple-launch-2048x2732.png";
