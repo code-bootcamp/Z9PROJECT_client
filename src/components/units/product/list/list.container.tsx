@@ -5,7 +5,6 @@ import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
-  const [length, setLength] = useState(0);
 
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "network-only",
@@ -35,13 +34,11 @@ export default function ProductListContainer() {
       },
     });
   };
-  console.log(data);
   return (
     <>
       <ProductListMap
         onClickTab={onClickTab}
         onLoadMore={onLoadMore}
-        length={length}
         tab={tab}
         data={data}
       />
