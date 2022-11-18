@@ -28,9 +28,9 @@ const schma = yup.object({
   address: yup.string().required("필수"),
   addressDetail: yup.string(),
   nickname: yup.string().required("필수"),
-  account: yup.string(),
-  bank: yup.string(),
-  accountName: yup.string(),
+  account: yup.string().typeError("숫자만 입력").required("필수"),
+  bank: yup.string().required("필수"),
+  accountName: yup.string().required("필수"),
   terms: yup.boolean().oneOf([true], "필수"),
 });
 
@@ -136,7 +136,7 @@ export default function UserRegisterContainer() {
 
   const onClickSignUp = async (data: any) => {
     const { keyNumber, passwordConfirm, terms, ...rest } = data;
-
+    if (!profileFile) ErrorModal("프로필 이미지는 필수 입니다.");
     try {
       const resultProfile = await uploadImage({
         variables: {
