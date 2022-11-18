@@ -53,14 +53,14 @@ export default function PurchaseContainer() {
 
   const onClickRefund = (id: number) => () => {
     console.log(id);
-    cancelOrderRequest({
+    void cancelOrderRequest({
       variables: {
         orderId: String(id),
       },
     });
   };
 
-  const onClickSearch = () => {};
+  // const onClickSearch = () => {};
 
   return (
     <PurchasePresenter

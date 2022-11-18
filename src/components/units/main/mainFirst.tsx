@@ -3,7 +3,7 @@ import HeaderPage from "../../commons/layout/header";
 import * as S from "./main.styles";
 
 export default function MainFirst() {
-  const [ref, inView] = useInView({
+  const [ref] = useInView({
     threshold: 0,
   });
 

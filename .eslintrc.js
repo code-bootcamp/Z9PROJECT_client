@@ -17,7 +17,7 @@ module.exports = {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/triple-slash-reference": "off",
-    "@typescript-eslint/consistent-type-definitions": ["type"],
-    "@typescript-eslint/prefer-nullish-coalescing": ["true", "true", "true"],
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
   },
 };

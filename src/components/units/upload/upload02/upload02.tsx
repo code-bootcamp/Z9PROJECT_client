@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 
 const Wrapper = styled.div`
   position: relative;
@@ -28,7 +28,7 @@ type IUpload02Props = {
 };
 
 export default function Upload02(P: IUpload02Props) {
-  const { onChageProfileFile, profileFetchUrl } = P;
+  const { onChageProfileFile } = P;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickUpload = () => {
