@@ -121,3 +121,15 @@ export const FETCH_ORDER_BY_CREATOR = gql`
     }
   }
 `;
+
+export const FETCH_COUNT_OF_QUESTIONS = gql`
+  query fetchCountOfQuestions($productId: String!) {
+    fetchCountOfQuestions(productId: $productId)
+  }
+`;
+
+export const FETCH_PRODUCT_BY_CREATOR_COUNT = gql`
+  query countProductByCreator {
+    countProductByCreator
+  }
+`;
