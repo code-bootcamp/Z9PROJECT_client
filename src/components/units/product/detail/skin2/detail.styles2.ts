@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import { url } from "inspector";
 import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
-
+interface IStylesProps {
+  bgColor?: string;
+}
 export const Container = styled.section`
   width: 100%;
   height: 100%;
@@ -40,37 +42,36 @@ export const DetailWrapper = styled.div`
 `;
 
 export const H1 = styled.h1`
-  color: ${styleSet.colors.white};
+  color: ${(props: any) => {
+    return `${props.color}`;
+  }};
   font-size: ${styleSet.fontSize.s2};
 `;
 
 export const Ul = styled.ul`
   margin-bottom: 30px;
   position: relative;
-  li {
-    &.title:after {
-      content: "";
-      width: 40px;
-      height: 3px;
-      font-size: ${styleSet.fontSize.s1};
-      background: ${styleSet.colors.white};
-      position: absolute;
-      top: -10px;
-      left: 0;
-    }
-    &:first-child {
-      font-family: ${styleSet.font.L};
-      font-size: ${styleSet.fontSize.s6};
-    }
-    color: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s5};
+`;
+
+export const Li = styled.li`
+  font-family: ${styleSet.font.L};
+
+  color: ${(props: any) => {
+    return `${props.color}`;
+  }};
+  font-size: ${styleSet.fontSize.s4};
+  &:first-child {
+    font-family: ${styleSet.font.B};
+    font-size: ${styleSet.fontSize.s3};
   }
 `;
 
 export const Info = styled.section`
   width: 100%;
   height: 100vh;
-  background: ${styleSet.colors.primary};
+  background: ${(props: IStylesProps) => {
+    return `${props.bgColor}`;
+  }};
   align-items: center;
   display: flex;
 `;
@@ -243,7 +244,6 @@ export const Octagon = styled.div`
 `;
 
 export const Octagon2 = styled.div`
-  background: url("/test2.jpg") no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   position: relative;

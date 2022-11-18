@@ -75,11 +75,11 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     important,
-    commentData,
     setGraph,
     graph,
     onClickDelete,
     handleCopyClipBoard,
+    countData,
   } = P;
 
   setGraph(
@@ -348,7 +348,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
           <S.Wrapper3>
             <S.Count>
               <li>
-                <MessageOutlined /> {commentData?.fetchQuestions.length}
+                <MessageOutlined /> {countData?.fetchCountOfQuestions}
               </li>
             </S.Count>
             <QuestionWriter />

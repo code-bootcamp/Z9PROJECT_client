@@ -74,11 +74,11 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     important,
-    commentData,
     setGraph,
     graph,
     onClickDelete,
     handleCopyClipBoard,
+    countData,
   } = P;
 
   setGraph(
@@ -302,7 +302,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             <S.H3Info>필수 표기정보</S.H3Info>
             <S.Company>
               {categoryContents[
-                categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
+                categoryTitle.indexOf(data?.fetchProduct.productDetail?.type)
               ]?.map((el, idx) => (
                 <li>
                   <strong>{el}</strong>
@@ -312,7 +312,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </li>
               ))}
               {categoryContents[
-                categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
+                categoryTitle.indexOf(data?.fetchProduct.productDetail?.type)
               ]?.length %
                 2 ==
               1 ? (
@@ -341,7 +341,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
           <S.Wrapper3>
             <S.Count>
               <li>
-                <MessageOutlined /> {commentData?.fetchQuestions.length}
+                <MessageOutlined /> {countData?.fetchCountOfQuestions}
               </li>
             </S.Count>
             <QuestionWriter />
