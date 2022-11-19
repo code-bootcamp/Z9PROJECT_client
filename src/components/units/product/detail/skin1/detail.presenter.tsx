@@ -16,8 +16,7 @@ import * as DOMPurify from "dompurify";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import TimerDetail from "../../../../commons/hooks/timerDetail";
-
-const ViewerPage = dynamic(() => import("../atom/viewer"), {
+const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });
 
@@ -38,12 +37,13 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickOrder,
     onClickTab,
     onClickTab2,
-    important,
     setGraph,
+    important,
     graph,
     onClickDelete,
     handleCopyClipBoard,
     countData,
+    onLoadPage,
   } = P;
 
   setGraph(
@@ -54,16 +54,16 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     )
   );
 
-  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
-  const today = Number(new Date());
-  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const start = new Date(data?.fetchProduct.validFrom.slice(0, 10)) as any;
+  const today = new Date() as any;
+  const end = new Date(data?.fetchProduct.validUntil.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
 
   return (
     <>
-      <S.Container>
+      <S.Container onLoad={onLoadPage}>
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>
@@ -239,7 +239,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 
@@ -275,7 +275,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail?.type)
               ]?.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <strong>{el}</strong>
                   <data>
                     {data?.fetchProduct.productDetail[`option${idx + 1}`]}
@@ -285,7 +285,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail?.type)
               ]?.length %
-                2 ==
+                2 ===
               1 ? (
                 <li>
                   <strong></strong>
@@ -299,7 +299,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
-                `/product/${router.query.useditemId}/edit`
+                `/product/${String(router.query.useditemId)}/edit`
               )}
             >
               수정

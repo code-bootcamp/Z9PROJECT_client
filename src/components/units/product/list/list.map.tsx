@@ -1,4 +1,6 @@
+import { useQuery } from "@apollo/client";
 import ProductListPresenter from "./list.presenter";
+import { FETCH_PRODUCT_VIEW_COUNT, FETCH_LIKE_COUNT } from "./list.queries";
 import * as S from "./list.styles";
 
 export default function ProductListMap(P: any) {
@@ -21,9 +23,25 @@ export default function ProductListMap(P: any) {
           </S.SearchBox>
           <S.Main>
             <div>
-              {data?.fetchProductsByPages.map((el: any) => (
-                <ProductListPresenter key={el.id} el={el} tab={tab} />
-              ))}
+              {data?.fetchProductsByPages.map((el: any) => {
+                const { data: viewData } = useQuery(FETCH_PRODUCT_VIEW_COUNT, {
+                  fetchPolicy: "cache-first",
+                  variables: { productId: String(el.id) },
+                });
+                const { data: likeData } = useQuery(FETCH_LIKE_COUNT, {
+                  fetchPolicy: "cache-first",
+                  variables: { productId: String(el.id) },
+                });
+                return (
+                  <ProductListPresenter
+                    key={el.id}
+                    el={el}
+                    viewData={viewData}
+                    likeData={likeData}
+                    tab={tab}
+                  />
+                );
+              })}
             </div>
             <S.Button onClick={onLoadMore}>
               <span>더보기</span>

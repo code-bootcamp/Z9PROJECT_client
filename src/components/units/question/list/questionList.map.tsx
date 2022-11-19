@@ -12,7 +12,7 @@ export default function QuestionMap() {
 
   const { data } = useQuery(FETCH_QUESTIONS, {
     fetchPolicy: "network-only",
-    variables: { productId: String(router.query.useditemId), page: page },
+    variables: { productId: String(router.query.useditemId), page },
   });
 
   const { data: countData } = useQuery(FETCH_COUNT_OF_QUESTIONS, {

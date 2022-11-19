@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const schema = yup.object({
-  name: yup.string().required("필수"),
+  name: yup.string().required("필수").max(20, "최대 20자까지 가능합니다."),
   option1: yup.string(),
   option2: yup.string(),
   option3: yup.string(),

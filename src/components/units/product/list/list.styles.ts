@@ -276,9 +276,13 @@ export const Time = styled.li`
 `;
 
 export const ProdName = styled.h1`
-  font-size: ${styleSet.fontSize.s5};
+  font-size: ${styleSet.fontSize.s6};
   font-family: ${styleSet.font.EB};
   padding-bottom: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 620px;
 `;
 
 export const Price = styled.p`
@@ -287,10 +291,13 @@ export const Price = styled.p`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   span {
     text-decoration-line: line-through;
-    color: ${styleSet.colors.gray};
+    color: ${styleSet.colors.red};
     font-size: ${styleSet.fontSize.s8};
+
+    font-family: ${styleSet.font.B};
   }
 `;
 
