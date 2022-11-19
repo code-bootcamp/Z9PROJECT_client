@@ -41,6 +41,7 @@ export default function TimerDetail(P: any) {
     font-size: ${styleSet.fontSize.s6};
     font-family: ${styleSet.font.B};
   `;
+
   return (
     <>
       {time > 0 ? (

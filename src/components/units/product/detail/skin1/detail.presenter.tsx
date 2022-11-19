@@ -57,6 +57,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   const start = new Date(data?.fetchProduct.validFrom.slice(0, 10)) as any;
   const today = new Date() as any;
   const end = new Date(data?.fetchProduct.validUntil.slice(0, 10)) as any;
+
   const status = today < start ? "start" : today < end ? "ing" : "end";
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
