@@ -38,6 +38,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     setGraph,
+    important,
     graph,
     onClickDelete,
     handleCopyClipBoard,
