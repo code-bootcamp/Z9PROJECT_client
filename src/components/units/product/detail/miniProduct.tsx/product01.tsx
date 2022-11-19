@@ -4,7 +4,6 @@ import {
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import TimerDetail from "../../../../commons/hooks/timerDetail";
 import * as S from "./product01.styles";
 import { IProduct01Props } from "./product01.types";
 
