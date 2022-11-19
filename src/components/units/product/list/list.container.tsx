@@ -1,21 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { ErrorModal } from "../../../commons/modal/modal";
 import ProductListMap from "./list.map";
-import { FETCH_LIKE_COUNT, FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
+import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
 
 export default function ProductListContainer() {
-  const router = useRouter();
   const [tab, setTab] = useState<any>("1");
 
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "network-only",
     variables: { page: 1 },
-  });
-
-  const { data: likeData } = useQuery(FETCH_LIKE_COUNT, {
-    variables: { productId: String(router.query.useditemId) },
   });
 
   const onClickTab = (event: any) => {
@@ -52,7 +46,6 @@ export default function ProductListContainer() {
         onLoadMore={onLoadMore}
         tab={tab}
         data={data}
-        likeData={likeData}
       />
     </>
   );

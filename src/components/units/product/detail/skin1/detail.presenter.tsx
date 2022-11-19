@@ -43,6 +43,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickDelete,
     handleCopyClipBoard,
     countData,
+    onLoadPage,
   } = P;
 
   setGraph(
@@ -62,7 +63,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
 
   return (
     <>
-      <S.Container>
+      <S.Container onLoad={onLoadPage}>
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>

@@ -43,6 +43,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickDelete,
     handleCopyClipBoard,
     countData,
+    onLoadPage,
   } = P;
 
   setGraph(
@@ -74,7 +75,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>
-              <img src={thumbnail} alt="상품이미지" />
+              <img onLoad={onLoadPage} src={thumbnail} alt="상품이미지" />
               <S.ul>
                 {data?.fetchProduct.images?.map((el: string) => (
                   <li key={el}>
@@ -302,7 +303,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </S.Company>
           </S.Important>
 
-          <S.Button>
+          <S.Button onLoad={onLoadPage}>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
@@ -332,7 +333,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <li className="createdAt">등록일자</li>
               <li></li>
             </S.Title>
-
             <S.Box>
               <QuestionMap />
             </S.Box>

@@ -4,7 +4,7 @@ import * as S from "./list.styles";
 import Timer from "../../../commons/hooks/timer";
 
 export default function ProductListPresenter(P: any) {
-  const { el, tab, likeData } = P;
+  const { el, tab, viewData, likeData } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
   const start = new Date(el?.validFrom.slice(0, 10)) as any;
@@ -12,7 +12,6 @@ export default function ProductListPresenter(P: any) {
   const end = new Date(el?.validUntil.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
 
-  console.log(likeData, "likeData");
   return (
     <>
       {tab === "1" ? (
@@ -59,9 +58,9 @@ export default function ProductListPresenter(P: any) {
             <S.Ul>
               <li>
                 <S.View />
-                <span>100</span>
+                <span>{viewData?.fetchProductViewCount}</span>
                 <HeartOutlined />
-                <span>100</span>
+                <span>{likeData?.fetchLikeCount}</span>
               </li>
               <S.Time className="timer">
                 <Timer el={el} status={status} />
@@ -85,7 +84,7 @@ export default function ProductListPresenter(P: any) {
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
               alt="크리에이터 이미지"
             />
-            <S.UserName>{el.user?.snsName}</S.UserName>
+            <S.UserName>{el.user?.nickname}</S.UserName>
           </S.User>
 
           <S.ProdImg>
@@ -122,9 +121,9 @@ export default function ProductListPresenter(P: any) {
             <S.Ul>
               <li>
                 <S.View />
-                <span>100</span>
+                <span>{viewData?.fetchProductViewCount}</span>
                 <HeartOutlined />
-                <span>100</span>
+                <span>{likeData?.fetchLikeCount}</span>
               </li>
               <S.Time className="timer">
                 <Timer el={el} status={status} />
@@ -148,7 +147,7 @@ export default function ProductListPresenter(P: any) {
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
               alt="크리에이터 이미지"
             />
-            <S.UserName>{el.user?.snsName}</S.UserName>
+            <S.UserName>{el.user?.nickname}</S.UserName>
           </S.User>
 
           <S.ProdImg>
@@ -185,9 +184,9 @@ export default function ProductListPresenter(P: any) {
             <S.Ul>
               <li>
                 <S.View />
-                <span>100</span>
+                <span>{viewData?.fetchProductViewCount}</span>
                 <HeartOutlined />
-                <span>100</span>
+                <span>{likeData?.fetchLikeCount}</span>
               </li>
               <S.Time className="timer">
                 <Timer el={el} status={status} />
@@ -210,7 +209,7 @@ export default function ProductListPresenter(P: any) {
               src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
               alt="크리에이터 이미지"
             />
-            <S.UserName>{el.user?.snsName}</S.UserName>
+            <S.UserName>{el.user?.nickname}</S.UserName>
           </S.User>
 
           <S.ProdImg>
@@ -247,9 +246,9 @@ export default function ProductListPresenter(P: any) {
             <S.Ul>
               <li>
                 <S.View />
-                <span>100</span>
+                <span>{viewData?.fetchProductViewCount}</span>
                 <HeartOutlined />
-                <span>100</span>
+                <span>{likeData?.fetchLikeCount}</span>
               </li>
               <S.Time className="timer">
                 <Timer el={el} status={status} />
