@@ -37,3 +37,9 @@ export const FETCH_PRODUCTS_BY_PAGES = gql`
     }
   }
 `;
+
+export const FETCH_LIKE_COUNT = gql`
+  query fetchLikeCount($productId: String!) {
+    fetchLikeCount(productId: $productId)
+  }
+`;

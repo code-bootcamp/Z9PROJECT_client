@@ -130,6 +130,7 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
               type="text"
               placeholder="예) 100"
               register={register("originalQuantity")}
+              // disabled={true}
             />
           </S.Item>
           <S.Item>

@@ -146,7 +146,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 

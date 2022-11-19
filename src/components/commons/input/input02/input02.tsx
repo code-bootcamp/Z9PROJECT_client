@@ -47,6 +47,7 @@ type IInput02Props = {
     | undefined;
   edit?: boolean;
   ref?: MutableRefObject<any>;
+  disabled?: boolean;
 };
 
 type IInputProps = {
@@ -59,7 +60,7 @@ type IInputProps = {
 };
 
 export default function Input02(P: IInput02Props) {
-  const { type, placeholder, register, error, edit } = P;
+  const { type, placeholder, register, error, edit, disabled } = P;
 
   return (
     <Wrapper>
@@ -69,6 +70,7 @@ export default function Input02(P: IInput02Props) {
         {...register}
         error={error}
         edit={edit}
+        disabled={disabled ? true : false}
       />
       <Error className="error" error={error}>
         {error}

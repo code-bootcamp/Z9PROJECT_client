@@ -2,7 +2,7 @@ import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
 
 export default function ProductListMap(P: any) {
-  const { onClickTab, tab, data, onLoadMore } = P;
+  const { onClickTab, tab, data, onLoadMore, likeData } = P;
   const btnArray = ["전체", "진행예정", "진행중", "종료"];
 
   return (
@@ -22,7 +22,12 @@ export default function ProductListMap(P: any) {
           <S.Main>
             <div>
               {data?.fetchProductsByPages.map((el: any) => (
-                <ProductListPresenter key={el.id} el={el} tab={tab} />
+                <ProductListPresenter
+                  key={el.id}
+                  el={el}
+                  tab={tab}
+                  likeData={likeData}
+                />
               ))}
             </div>
             <S.Button onClick={onLoadMore}>

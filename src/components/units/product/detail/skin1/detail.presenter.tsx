@@ -53,9 +53,9 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     )
   );
 
-  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
-  const today = Number(new Date());
-  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const start = new Date(data?.fetchProduct.validFrom.slice(0, 10)) as any;
+  const today = new Date() as any;
+  const end = new Date(data?.fetchProduct.validUntil.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
@@ -238,7 +238,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 
