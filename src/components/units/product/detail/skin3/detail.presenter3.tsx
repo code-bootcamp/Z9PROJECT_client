@@ -15,6 +15,7 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
 const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });
@@ -214,9 +215,28 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   {cart && <HeartFilled />} {``}
                   <span className="emotion">관심상품</span>
                 </button>
-                <button className="buy" onClick={onClickOrder}>
-                  <span className="emotion">바로 구매하기</span>
-                </button>
+
+                {time > 0 ? (
+                  status === "ing" ? (
+                    <>
+                      <button className="buy" onClick={onClickOrder}>
+                        <span className="emotion">바로 구매하기</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="buy" style={{ background: "#999" }}>
+                        <span className="emotion">미진행</span>
+                      </button>
+                    </>
+                  )
+                ) : (
+                  <>
+                    <button className="buy" style={{ background: "#999" }}>
+                      <span className="emotion">마감</span>
+                    </button>
+                  </>
+                )}
               </S.BoxBtn>
             </S.InfoRight>
           </S.ProdInfo>
