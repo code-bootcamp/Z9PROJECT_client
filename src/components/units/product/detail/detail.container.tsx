@@ -9,6 +9,7 @@ import {
   FETCH_PRODUCT,
   LIKE_PRODUCT,
   FETCH_COUNT_OF_QUESTIONS,
+  ADD_PRODUCT_VIEW_COUNT,
 } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
@@ -24,6 +25,7 @@ export default function ProductDetailContainer() {
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
+  const [addProductViewCount] = useMutation(ADD_PRODUCT_VIEW_COUNT);
 
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
@@ -34,8 +36,6 @@ export default function ProductDetailContainer() {
     fetchPolicy: "cache-first",
     variables: { productId: String(router.query.useditemId) },
   });
-
-  console.log(data, "프로덕트");
 
   useEffect(() => {
     setThumbnail(
@@ -146,10 +146,17 @@ export default function ProductDetailContainer() {
     }
   };
 
+  const onLoadPage = () => {
+    void addProductViewCount({
+      variables: { productId: String(router.query.useditemId) },
+    });
+  };
+
   return (
     <>
       {data?.fetchProduct.skin === 1 && (
         <ProductDetailPresenter
+          onLoadPage={onLoadPage}
           handleChange={handleChange}
           onClickCount={onClickCount}
           count={count}
@@ -172,6 +179,7 @@ export default function ProductDetailContainer() {
       )}
       {data?.fetchProduct.skin === 2 && (
         <ProductDetailPresenter2
+          onLoadPage={onLoadPage}
           handleChange={handleChange}
           onClickCount={onClickCount}
           count={count}
@@ -195,6 +203,7 @@ export default function ProductDetailContainer() {
 
       {data?.fetchProduct.skin === 3 && (
         <ProductDetailPresenter3
+          onLoadPage={onLoadPage}
           handleChange={handleChange}
           onClickCount={onClickCount}
           count={count}

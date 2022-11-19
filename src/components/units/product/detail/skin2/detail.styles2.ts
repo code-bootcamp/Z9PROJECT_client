@@ -183,7 +183,8 @@ export const Company = styled.ul`
       padding: 12px;
       display: flex;
       align-items: center;
-      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
     }
     data {
       padding: 10px;

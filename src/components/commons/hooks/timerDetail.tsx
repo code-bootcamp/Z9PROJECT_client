@@ -9,9 +9,10 @@ export default function TimerDetail(P: any) {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
-  const today = Number(new Date());
-  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const start = new Date(data?.fetchProduct.validFrom.slice(0, 10)) as any;
+  const today = new Date() as any;
+  const end = new Date(data?.fetchProduct.validUntil.slice(0, 10)) as any;
+
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
 
@@ -36,6 +37,11 @@ export default function TimerDetail(P: any) {
       color: ${styleSet.colors.red};
     }
   `;
+  const Span = styled.span`
+    font-size: ${styleSet.fontSize.s6};
+    font-family: ${styleSet.font.B};
+  `;
+
   return (
     <>
       {time > 0 ? (
@@ -45,13 +51,13 @@ export default function TimerDetail(P: any) {
               <span>남은시간</span> &nbsp;
             </H1>
             {days}
-            <span>일</span>
+            <Span>일</Span>
             {hours}
-            <span>시</span>
+            <Span>시</Span>
             {minutes}
-            <span>분</span>
+            <Span>분</Span>
             {seconds}
-            <span>초</span>
+            <Span>초</Span>
           </>
         ) : (
           <>
@@ -59,13 +65,13 @@ export default function TimerDetail(P: any) {
               <span>시작까지</span> &nbsp;{" "}
             </H1>
             {days}
-            <span>일</span>
+            <Span>일</Span>
             {hours}
-            <span>시</span>
+            <Span>시</Span>
             {minutes}
-            <span>분</span>
+            <Span>분</Span>
             {seconds}
-            <span>초</span>
+            <Span>초</Span>
           </>
         )
       ) : (

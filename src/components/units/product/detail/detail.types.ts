@@ -21,4 +21,5 @@ export type IDetailPresenterProps = {
   onClickDelete: () => Promise<void>;
   handleCopyClipBoard: any;
   countData: any;
+  onLoadPage: () => void;
 };

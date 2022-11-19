@@ -6,16 +6,16 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import * as S from "./detail.styles3";
+import * as S from "../skin1/detail.styles";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import QuestionWriter from "../../../question/write/questionWriter";
 import QuestionMap from "../../../question/list/questionList.map";
 import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
-import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
 const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });
@@ -43,6 +43,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickDelete,
     handleCopyClipBoard,
     countData,
+    onLoadPage,
   } = P;
 
   setGraph(
@@ -53,24 +54,28 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     )
   );
 
+  const start = new Date(data?.fetchProduct.validFrom.slice(0, 10)) as any;
+  const today = new Date() as any;
+  const end = new Date(data?.fetchProduct.validUntil.slice(0, 10)) as any;
+  const status = today < start ? "start" : today < end ? "ing" : "end";
+  const time =
+    status === "end" ? 0 : status === "start" ? start - today : end - today;
+
   return (
     <>
       <S.Container>
         <S.Info>
-          <ReactPlayer
+          <S.Player
             url={data?.fetchProduct?.youtubeLink}
-            width={1400}
-            height={800}
             muted={true}
             playing={true}
-            style={{ margin: "0 auto" }}
           />
         </S.Info>
 
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>
-              <img src={thumbnail} alt="상품이미지" />
+              <img onLoad={onLoadPage} src={thumbnail} alt="상품이미지" />
               <S.ul>
                 {data?.fetchProduct.images?.map((el: string) => (
                   <li key={el}>
@@ -193,7 +198,9 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 </S.Persent>
               </S.Text>
 
-              <S.H2></S.H2>
+              <S.H2>
+                <TimerDetail data={data} status={status} />
+              </S.H2>
 
               <S.H3>
                 총 상품 금액
@@ -209,9 +216,28 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   {cart && <HeartFilled />} {``}
                   <span className="emotion">관심상품</span>
                 </button>
-                <button className="buy" onClick={onClickOrder}>
-                  <span className="emotion">바로 구매하기</span>
-                </button>
+
+                {time > 0 ? (
+                  status === "ing" ? (
+                    <>
+                      <button className="buy" onClick={onClickOrder}>
+                        <span className="emotion">바로 구매하기</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="buy" style={{ background: "#999" }}>
+                        <span className="emotion">미진행</span>
+                      </button>
+                    </>
+                  )
+                ) : (
+                  <>
+                    <button className="buy" style={{ background: "#999" }}>
+                      <span className="emotion">마감</span>
+                    </button>
+                  </>
+                )}
               </S.BoxBtn>
             </S.InfoRight>
           </S.ProdInfo>
@@ -221,7 +247,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 
@@ -277,7 +303,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </S.Company>
           </S.Important>
 
-          <S.Button>
+          <S.Button onLoad={onLoadPage}>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
@@ -307,7 +333,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <li className="createdAt">등록일자</li>
               <li></li>
             </S.Title>
-
             <S.Box>
               <QuestionMap />
             </S.Box>
