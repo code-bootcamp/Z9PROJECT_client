@@ -371,7 +371,7 @@ export const ProductText = styled.div`
       position: absolute;
       bottom: 10px;
       left: 0;
-      width: 350px;
+      width: 100%;
       height: 25px;
       background: #e6f7ff;
       z-index: -1;
