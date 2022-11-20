@@ -54,14 +54,14 @@ export default function SalesContainer() {
 
   const onClickAccept = (id: number) => () => {
     console.log(id);
-    cancelOrderAccept({
+    void cancelOrderAccept({
       variables: {
         orderId: String(id),
       },
     });
   };
 
-  const onClickSearch = () => {};
+  // const onClickSearch = () => {};
 
   return (
     <MyPageLayoutContainer>

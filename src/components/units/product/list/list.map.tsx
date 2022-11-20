@@ -1,9 +1,8 @@
-import InfiniteScroll from "react-infinite-scroller";
 import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
 
 export default function ProductListMap(P: any) {
-  const { onClickTab, tab, data, onLoadMore, length } = P;
+  const { onClickTab, tab, data, onLoadMore } = P;
   const btnArray = ["전체", "진행예정", "진행중", "종료"];
 
   return (
@@ -21,16 +20,14 @@ export default function ProductListMap(P: any) {
             </ul>
           </S.SearchBox>
           <S.Main>
-            <InfiniteScroll
-              className="infinite-scroll"
-              loadMore={onLoadMore}
-              hasMore={true}
-              pageStart={0}
-            >
-              {data?.fetchProductsByPages.map((el: any) => (
-                <ProductListPresenter key={el.id} el={el} tab={tab} />
-              ))}
-            </InfiniteScroll>
+            <div>
+              {data?.fetchProductsByPages.map((el: any) => {
+                return <ProductListPresenter key={el.id} el={el} tab={tab} />;
+              })}
+            </div>
+            <S.Button onClick={onLoadMore}>
+              <span>더보기</span>
+            </S.Button>
           </S.Main>
         </S.Wrapper>
       </S.Container>

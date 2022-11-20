@@ -1,6 +1,6 @@
 import { CloseCircleOutlined, EditOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
 
 const Modal = styled.section`

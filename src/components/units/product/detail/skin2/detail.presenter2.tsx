@@ -10,7 +10,7 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import * as S from "./detail.styles2";
-const ViewerPage = dynamic(() => import("../atom/viewer"), {
+const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });
 
@@ -32,15 +32,17 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     important,
-    setGraph,
     onClickDelete,
-    handleCopyClipBoard,
     countData,
+    onLoadPage,
   } = P;
+
   useEffect(() => {
     setColor(String(data?.fetchProduct.textColor));
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
+
+  console.log(data);
   return (
     <>
       <S.Container>
@@ -48,7 +50,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           <S.InfoWrapper>
             <S.InfoImg
               style={{
-                backgroundImage: `url(${data?.fetchProduct.user.profileImg})`,
+                backgroundImage: `url(${String(
+                  data?.fetchProduct.user.profileImg
+                )})`,
               }}
             ></S.InfoImg>
 
@@ -92,9 +96,11 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <S.Wrapper>
               <S.ImgBox>
                 <S.Octagon
+                  onLoad={onLoadPage}
                   style={{
                     backgroundImage: `url(${
-                      data?.fetchProduct?.images && data?.fetchProduct.images[0]
+                      String(data?.fetchProduct?.images) &&
+                      String(data?.fetchProduct?.images[0])
                     })`,
                   }}
                 ></S.Octagon>
@@ -128,9 +134,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 <S.Octagon2
                   style={{
                     backgroundImage: `url(${
-                      !data?.fetchProduct?.images[1]
-                        ? data?.fetchProduct?.images[0]
-                        : data?.fetchProduct?.images[1]
+                      !String(data?.fetchProduct?.images[1])
+                        ? String(data?.fetchProduct?.images[0])
+                        : String(data?.fetchProduct?.images[1])
                     })`,
                   }}
                 ></S.Octagon2>
@@ -144,7 +150,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 
@@ -169,7 +175,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
-                setGraph={setGraph}
               />
             </S.Ref>
           )}
@@ -180,7 +185,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
               ]?.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <strong>{el}</strong>
                   <data>
                     {data?.fetchProduct.productDetail[`option${idx + 1}`]}
@@ -190,7 +195,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
               ]?.length %
-                2 ==
+                2 ===
               1 ? (
                 <li>
                   <strong></strong>
@@ -204,7 +209,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
-                `/product/${router.query.useditemId}/edit`
+                `/product/${String(router.query.useditemId)}/edit`
               )}
             >
               수정
