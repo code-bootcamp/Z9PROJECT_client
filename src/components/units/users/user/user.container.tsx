@@ -158,7 +158,6 @@ export default function UserRegisterContainer() {
       );
       void router.push("/users/login");
     } catch (error) {
-      console.log(error);
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
