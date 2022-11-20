@@ -26,8 +26,39 @@ export const FETCH_PRODUCTS_BY_CREATORS = gql`
       ceo
       brn
       mobn
-      productDetail
-      user
+      productDetail {
+        id
+        type
+        option1
+        option2
+        option3
+        option4
+        option5
+        option6
+        option7
+        option8
+        option9
+        option10
+        option11
+        option12
+        option13
+        option14
+      }
+      user {
+        id
+        userType
+        nickname
+        phoneNumber
+        profileImg
+        creatorAuthImg
+        isAuthedCreator
+        snsName
+        snsChannel
+        followerNumber
+        mainContents
+        introduce
+        createdAt
+      }
       skin
       textColor
       bgColor

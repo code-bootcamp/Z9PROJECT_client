@@ -4,6 +4,8 @@ import {
   YoutubeOutlined,
 } from "@ant-design/icons";
 import * as S from "./customList.styles";
+import "animate.css";
+import CreatorsModal from "../../../commons/modal/creatorsModal";
 
 export default function CustomListPresenter(P: any) {
   const {
@@ -13,17 +15,24 @@ export default function CustomListPresenter(P: any) {
     onClickTab,
     tab,
     optionalData,
+    onLoadMore,
+    onClickList,
+    list,
+    setList,
   } = P;
 
   const thisiscomponent = (el: any) => {
     return (
       <S.ImgBox key={el.id}>
+        {list && <CreatorsModal el={el} setList={setList} />}
         <S.Octagon
           style={{
             backgroundImage: `url(${String(el.creatorAuthImg)})`,
           }}
         >
-          <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
+          <S.BgLayer className="bg_layer" onClick={onClickList}>
+            해당 크리에이터 상품 보러가기
+          </S.BgLayer>
         </S.Octagon>
         <S.Name>
           {el.nickname ? el.nickname : el.snsName}
@@ -58,7 +67,11 @@ export default function CustomListPresenter(P: any) {
               <S.Link>Go Go</S.Link>
             </S.ContentRanding>
           </S.Square>
-          <img src="/icon_megaphone.png" alt="메가폰 아이콘" />
+          <img
+            src="/icon_megaphone.png"
+            alt="메가폰 아이콘"
+            className="animate__animated animate__backInRight"
+          />
           <S.SkewBg></S.SkewBg>
 
           <S.Text className="pc">
@@ -126,14 +139,15 @@ export default function CustomListPresenter(P: any) {
                 )
               : tab === "default"
               ? allCreatorData?.fetchCreators?.map((el: any) => {
-                  console.log("지금은 디폴트 데이터");
                   return thisiscomponent(el);
                 })
               : optionalData?.fetchCreatorsBySnsType?.map((el: any) => {
-                  console.log("지금은 옵션 데이터");
                   return thisiscomponent(el);
                 })}
           </S.ImgWrapper>
+          <S.Button onClick={onLoadMore}>
+            <span>더보기</span>
+          </S.Button>
         </S.Bottom>
       </S.Container>
     </>

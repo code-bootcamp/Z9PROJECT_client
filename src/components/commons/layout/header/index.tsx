@@ -61,7 +61,7 @@ export default function HeaderPage() {
             <li onClick={onClickMoveToPage("/list/list")}>리스트</li>
             <li
               onClick={onClickMoveToPage("/list/customList")}
-            >{`Who's Best`}</li>
+            >{`Z9 Creators`}</li>
           </S.Ul>
           <S.Ul>
             {!accessToken && (
@@ -131,7 +131,7 @@ export default function HeaderPage() {
                 )}
                 <li onClick={onClickMobileToPage("/list/list")}>리스트</li>
                 <li onClick={onClickMobileToPage("/list/customList")}>
-                  {`Who's Best`}
+                  {`Z9 Creators`}
                 </li>
                 {accessToken && <li onClick={onClickMore}>로그아웃</li>}
               </ul>

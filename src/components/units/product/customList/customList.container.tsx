@@ -10,18 +10,17 @@ import CustomListPresenter from "./customList.presenter";
 export default function CustomListContainer() {
   const [input, setInput] = useState("");
   const [tab, setTab] = useState("default");
-
-  // const { data: creatorData } = useQuery(FETCH_PRODUCTS_BY_CREATORS, {
-  //   fetchPolicy: "cache-first",
-  //   variables: { userId: String(), page: 1 },
-  // });
+  const [list, setList] = useState(false);
 
   const { data: searchData } = useQuery(SEARCH_CREATORS, {
     fetchPolicy: "cache-first",
     variables: { word: String(input) },
   });
 
-  const { data: allCreatorData } = useQuery(FETCH_CREATORS);
+  const { data: allCreatorData, fetchMore } = useQuery(FETCH_CREATORS, {
+    fetchPolicy: "cache-first",
+    variables: { page: 1 },
+  });
 
   const { data: optionalData } = useQuery(FETCH_CREATORS_BY_SNS, {
     variables: { snsType: String(tab === "youtube" ? "YOUTUBE" : "INSTAGRAM") },
@@ -36,7 +35,30 @@ export default function CustomListContainer() {
     setTab(event?.currentTarget.id);
     console.log(tab);
   };
-  // console.log(allCreatorData);
+
+  const onLoadMore = () => {
+    if (!allCreatorData) return;
+
+    void fetchMore({
+      variables: {
+        page: Math.ceil(allCreatorData?.fetchCreators.length / 3) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchCreators)
+          return { fetchCreators: [...prev.fetchCreators] };
+        return {
+          fetchCreators: [
+            ...prev.fetchCreators,
+            ...fetchMoreResult.fetchCreators,
+          ],
+        };
+      },
+    });
+  };
+
+  const onClickList = () => {
+    setList(true);
+  };
   return (
     <>
       <CustomListPresenter
@@ -45,7 +67,11 @@ export default function CustomListContainer() {
         allCreatorData={allCreatorData}
         onClickTab={onClickTab}
         tab={tab}
+        list={list}
+        setList={setList}
         optionalData={optionalData}
+        onLoadMore={onLoadMore}
+        onClickList={onClickList}
       />
     </>
   );
