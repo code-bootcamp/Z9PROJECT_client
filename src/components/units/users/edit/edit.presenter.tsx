@@ -173,10 +173,10 @@ export default function EditPresenter(P: IEditPresenterProps) {
                   <Input01
                     type="text"
                     placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
-                    register={register("snsName")}
+                    register={register("snsId")}
                     edit={true}
-                    error={formState.errors.snsName?.message}
-                    defaultValue={fetchUser?.fetchUser.snsName}
+                    error={formState.errors.snsId?.message}
+                    defaultValue={fetchUser?.fetchUser.snsId}
                   />
                 </S.SnsLabelInner>
                 <Upload01
