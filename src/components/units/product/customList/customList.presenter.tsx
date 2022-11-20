@@ -16,9 +16,11 @@ export default function CustomListPresenter() {
             <S.Animantion></S.Animantion>
             <S.ContentRanding>
               <S.H2>
-                내가 좋아하는 <strong>크리에이터</strong>를 검색해보세요 !
+                Zero9에 있는 <strong>크리에이터</strong>를 검색해보세요 !
               </S.H2>
-              <S.Contents>크리에이터들의 판매목록을 조회해보세요!</S.Contents>
+              <S.Contents>
+                크리에이터들의 판매목록을 확인하실 수 있습니다.
+              </S.Contents>
               <S.Link>Go Go</S.Link>
             </S.ContentRanding>
           </S.Square>

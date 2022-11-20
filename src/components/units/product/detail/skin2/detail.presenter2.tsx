@@ -32,14 +32,17 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     important,
-    setGraph,
     onClickDelete,
     countData,
+    onLoadPage,
   } = P;
+
   useEffect(() => {
     setColor(String(data?.fetchProduct.textColor));
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
+
+  console.log(data);
   return (
     <>
       <S.Container>
@@ -93,10 +96,11 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <S.Wrapper>
               <S.ImgBox>
                 <S.Octagon
+                  onLoad={onLoadPage}
                   style={{
                     backgroundImage: `url(${
                       String(data?.fetchProduct?.images) &&
-                      String(data?.fetchProduct.images[0])
+                      String(data?.fetchProduct?.images[0])
                     })`,
                   }}
                 ></S.Octagon>
@@ -163,6 +167,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                   <div>loadding...</div>
                 )}
               </S.Randing>
+
               <Product01
                 onClickCount={onClickCount}
                 count={count}
@@ -171,7 +176,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
-                setGraph={setGraph}
               />
             </S.Ref>
           )}

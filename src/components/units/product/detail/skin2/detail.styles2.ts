@@ -78,6 +78,7 @@ export const Info = styled.section`
 export const InfoImg = styled.div`
   width: 500px;
   height: 500px;
+  width: 100%;
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 50%;

@@ -2,10 +2,21 @@ import { HeartOutlined } from "@ant-design/icons";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import * as S from "./list.styles";
 import Timer from "../../../commons/hooks/timer";
+import { FETCH_LIKE_COUNT, FETCH_PRODUCT_VIEW_COUNT } from "./list.queries";
+import { useQuery } from "@apollo/client";
 
 export default function ProductListPresenter(P: any) {
-  const { el, tab, viewData, likeData } = P;
+  const { el, tab } = P;
   const { onClickMoveToPage } = useMoveToPage();
+
+  const { data: viewData } = useQuery(FETCH_PRODUCT_VIEW_COUNT, {
+    fetchPolicy: "cache-first",
+    variables: { productId: String(el.id) },
+  });
+  const { data: likeData } = useQuery(FETCH_LIKE_COUNT, {
+    fetchPolicy: "cache-first",
+    variables: { productId: String(el.id) },
+  });
 
   const start = new Date(el?.validFrom.slice(0, 10)) as any;
   const today = new Date() as any;
