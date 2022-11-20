@@ -45,6 +45,84 @@ export default function ProductDetailContainer() {
     );
   }, [data]);
 
+  let option: any[] = [];
+
+  if (data?.fetchProduct?.option1 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+    ];
+  if (data?.fetchProduct?.option2 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+    ];
+  if (data?.fetchProduct?.option3 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+    ];
+  if (data?.fetchProduct?.option4 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+      {
+        value: data?.fetchProduct?.option4,
+        label: data?.fetchProduct?.option4,
+      },
+    ];
+  if (data?.fetchProduct?.option5 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+      {
+        value: data?.fetchProduct?.option4,
+        label: data?.fetchProduct?.option4,
+      },
+      {
+        value: data?.fetchProduct?.option5,
+        label: data?.fetchProduct?.option5,
+      },
+    ];
+
   const [likeProduct] = useMutation(LIKE_PRODUCT, {
     refetchQueries: [
       {
@@ -175,6 +253,7 @@ export default function ProductDetailContainer() {
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
+          option={option}
         />
       )}
       {data?.fetchProduct.skin === 2 && (
@@ -222,6 +301,7 @@ export default function ProductDetailContainer() {
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
+          option={option}
         />
       )}
     </>

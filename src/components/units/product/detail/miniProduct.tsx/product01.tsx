@@ -26,6 +26,83 @@ export default function Product01(P: IProduct01Props) {
   const status = today < start ? "start" : today < end ? "ing" : "end";
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
+  let option: any[] = [];
+
+  if (data?.fetchProduct?.option1 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+    ];
+  if (data?.fetchProduct?.option2 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+    ];
+  if (data?.fetchProduct?.option3 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+    ];
+  if (data?.fetchProduct?.option4 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+      {
+        value: data?.fetchProduct?.option4,
+        label: data?.fetchProduct?.option4,
+      },
+    ];
+  if (data?.fetchProduct?.option5 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+      {
+        value: data?.fetchProduct?.option4,
+        label: data?.fetchProduct?.option4,
+      },
+      {
+        value: data?.fetchProduct?.option5,
+        label: data?.fetchProduct?.option5,
+      },
+    ];
 
   return (
     <>
@@ -83,38 +160,19 @@ export default function Product01(P: IProduct01Props) {
               </S.Choose>
             </li>
           </ul>
-          <ul>
-            <li>옵션</li>
-            <li>
-              <S.MySelect
-                defaultValue="옵션을 선택해주세요."
-                style={{ width: 120 }}
-                onChange={handleChange}
-                options={[
-                  {
-                    value: data?.fetchProduct?.option1,
-                    label: data?.fetchProduct?.option1,
-                  },
-                  {
-                    value: data?.fetchProduct?.option2,
-                    label: data?.fetchProduct?.option2,
-                  },
-                  {
-                    value: data?.fetchProduct?.option3,
-                    label: data?.fetchProduct?.option3,
-                  },
-                  {
-                    value: data?.fetchProduct?.option4,
-                    label: data?.fetchProduct?.option4,
-                  },
-                  {
-                    value: data?.fetchProduct?.option5,
-                    label: data?.fetchProduct?.option5,
-                  },
-                ]}
-              />
-            </li>
-          </ul>
+          {data?.fetchProduct?.option1 && (
+            <ul>
+              <li>옵션</li>
+              <li>
+                <S.MySelect
+                  defaultValue="옵션을 선택해주세요."
+                  style={{ width: 120 }}
+                  onChange={handleChange}
+                  options={option}
+                />
+              </li>
+            </ul>
+          )}
         </S.Text>
 
         <S.H2></S.H2>

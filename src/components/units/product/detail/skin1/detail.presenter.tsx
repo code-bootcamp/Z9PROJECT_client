@@ -44,6 +44,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     handleCopyClipBoard,
     countData,
     onLoadPage,
+    option,
   } = P;
 
   setGraph(
@@ -144,37 +145,18 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                     </S.Choose>
                   </li>
                 </ul>
-                <ul>
-                  <li>옵션</li>
-                  <li>
-                    <S.MySelect
-                      defaultValue="옵션을 선택해주세요."
-                      onChange={handleChange}
-                      options={[
-                        {
-                          value: data?.fetchProduct?.option1,
-                          label: data?.fetchProduct?.option1,
-                        },
-                        {
-                          value: data?.fetchProduct?.option2,
-                          label: data?.fetchProduct?.option2,
-                        },
-                        {
-                          value: data?.fetchProduct?.option3,
-                          label: data?.fetchProduct?.option3,
-                        },
-                        {
-                          value: data?.fetchProduct?.option4,
-                          label: data?.fetchProduct?.option4,
-                        },
-                        {
-                          value: data?.fetchProduct?.option5,
-                          label: data?.fetchProduct?.option5,
-                        },
-                      ]}
-                    />
-                  </li>
-                </ul>
+                {data?.fetchProduct?.option1 && (
+                  <ul>
+                    <li>옵션</li>
+                    <li>
+                      <S.MySelect
+                        defaultValue="옵션을 선택해주세요."
+                        onChange={handleChange}
+                        options={option}
+                      />
+                    </li>
+                  </ul>
+                )}
                 <S.Strong>
                   <p>
                     진행현황 <span>({graph}%)</span>
