@@ -7,7 +7,7 @@ export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
 
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-first",
     variables: { page: 1 },
   });
 
@@ -34,7 +34,6 @@ export default function ProductListContainer() {
       },
     });
   };
-  console.log(data);
   return (
     <>
       <ProductListMap

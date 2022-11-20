@@ -167,6 +167,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                   <div>loadding...</div>
                 )}
               </S.Randing>
+
               <Product01
                 onClickCount={onClickCount}
                 count={count}
