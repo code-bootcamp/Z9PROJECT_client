@@ -22,4 +22,5 @@ export type IDetailPresenterProps = {
   handleCopyClipBoard: any;
   countData: any;
   onLoadPage: () => void;
+  option?: any[];
 };

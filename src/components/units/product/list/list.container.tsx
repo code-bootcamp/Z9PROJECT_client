@@ -8,7 +8,7 @@ export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
 
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-first",
     variables: { page: 1 },
   });
 
@@ -39,6 +39,7 @@ export default function ProductListContainer() {
       ErrorModal("불러올 게시물이 존재하지 않습니다.");
     }
   };
+
   return (
     <>
       <ProductListMap
