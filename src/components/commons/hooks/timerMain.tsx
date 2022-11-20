@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import { styleSet } from "../../../commons/styles/styleSet";
 
 export default function Timer(P: any) {
   const { el, status } = P;
@@ -28,14 +26,6 @@ export default function Timer(P: any) {
     return () => clearInterval(interval);
   }, [today]);
 
-  const H1 = styled.h1`
-    display: flex;
-    align-items: center;
-    span {
-      font-size: ${styleSet.fontSize.s6};
-      color: ${styleSet.colors.red};
-    }
-  `;
   return (
     <>
       {time > 0 ? (

@@ -7,7 +7,7 @@ import "swiper/swiper.min.css";
 import "swiper/css/navigation";
 import "animate.css";
 import { IMainPresenterProps } from "./main.types";
-import Timer from "../../commons/hooks/ttimerMain";
+import Timer from "../../commons/hooks/timerMain";
 
 export default function MainSecond(P: IMainPresenterProps) {
   const { handleLeftClick, handleRightClick, setSwiperRef, data } = P;
