@@ -70,7 +70,7 @@ export default function Input02(P: IInput02Props) {
         {...register}
         error={error}
         edit={edit}
-        disabled={disabled ? true : false}
+        disabled={disabled}
       />
       <Error className="error" error={error}>
         {error}
