@@ -30,10 +30,11 @@ const Svg = styled.svg`
 
 type IUpload01Props = {
   onChangeCertifiFile: (file: File) => void;
+  defaultImg?: string;
 };
 
 export default function Upload01(P: IUpload01Props) {
-  const { onChangeCertifiFile } = P;
+  const { onChangeCertifiFile, defaultImg } = P;
   const inputRef = useRef<HTMLInputElement>(null);
   const [creatorCertifiImg, setCreatorCerifiImg] = useState("");
 
@@ -51,9 +52,9 @@ export default function Upload01(P: IUpload01Props) {
     <Wrapper>
       <UploadBtn onClick={onClickUpload}>
         <span>
-          {creatorCertifiImg
-            ? creatorCertifiImg
-            : "크리에이터 인증 이미지를 업로드 해주세요"}
+          {defaultImg
+            ? "인증완료"
+            : creatorCertifiImg || "크리에이터 인증 이미지를 업로드 해주세요"}
         </span>
         <Svg
           viewBox="0 0 1024 1024"

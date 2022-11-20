@@ -26,6 +26,7 @@ export const BoardTopWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
@@ -34,19 +35,29 @@ export const BoardTopWrapper = styled.div`
   }
 `;
 
-export const PeriodWrapper = styled.div`
+export const PeriodWrapper: any = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  li {
+    &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
+      border: 1px solid ${styleSet.colors.primary};
+      color: ${styleSet.colors.primary};
+    }
+  }
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
   }
 `;
 
-export const PeriodBtn = styled.button`
+export const PeriodBtn = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   width: 72px;
   height: 48px;
   border-radius: 10px;
@@ -92,6 +103,10 @@ export const SearchWrapper = styled.div`
     }
   }
 
+  .ant-picker-active-bar {
+    background: ${styleSet.colors.primary};
+  }
+
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
   }
@@ -101,9 +116,36 @@ export const SearchBtn = styled.button`
   width: 72px;
   height: 48px;
   border-radius: 10px;
-  background: ${styleSet.colors.gray};
+  background: ${styleSet.colors.primary};
   font-size: ${styleSet.fontSize.s8};
   color: ${styleSet.colors.white};
+  position: relative;
+  overflow: hidden;
+
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 
   @media ${styleSet.breakePoints.mobile} {
     width: 30%;
@@ -141,23 +183,22 @@ export const BoardBody = styled.div`
 export const BoardTh = styled.div`
   padding: 20px 0;
   width: 100%;
-  background: ${styleSet.colors.lightGray};
+  background: #f7f7f7;
   border-top: 2px solid ${styleSet.colors.subcolor1};
   font-size: ${styleSet.fontSize.s7};
-
   display: flex;
 `;
 
-export const BoardUl = styled.div`
-  border-top: 2px solid ${styleSet.colors.lightGray};
+export const BoardLiEmpty = styled.div`
+  padding: 20px;
+  border-bottom: 1px solid ${styleSet.colors.gray};
 `;
 
 export const BoardLi = styled.div`
   padding: 20px 0;
   width: 100%;
   border-bottom: 1px solid ${styleSet.colors.gray};
-  font-size: ${styleSet.fontSize.s7};
-
+  font-size: ${styleSet.fontSize.s8};
   display: flex;
 `;
 
@@ -191,11 +232,37 @@ export const BRefund = styled.span`
 `;
 
 export const RefundBtn = styled.button`
-  width: 50%;
   height: 100%;
-  padding: 0 10px;
   color: ${styleSet.colors.white};
-  font-size: ${styleSet.fontSize.s8};
+  font-size: ${styleSet.fontSize.s9};
   border-radius: 10px;
-  background: ${styleSet.colors.primary};
+  background: ${styleSet.colors.red};
+  padding: 2px 10px;
+  position: relative;
+  overflow: hidden;
+
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor2};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 `;

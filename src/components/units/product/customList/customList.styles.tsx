@@ -1,4 +1,3 @@
-import { YoutubeOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
@@ -311,6 +310,7 @@ export const Bottom = styled.section`
     width: 100%;
     .mobile {
       display: block;
+      height: min-content;
     }
   }
 `;

@@ -30,6 +30,13 @@ export const Container = styled.header`
   }
 `;
 
+export const Span = styled.span`
+  strong {
+    text-decoration-line: underline;
+    text-underline-position: under;
+  }
+`;
+
 export const P = styled.p`
   width: 40px;
   height: 3px;
@@ -92,6 +99,14 @@ export const Hamburger = styled.div`
   }
 `;
 
+export const Mobile = styled.li`
+  cursor: pointer;
+  strong {
+    text-decoration-line: underline;
+    text-underline-position: under;
+  }
+`;
+
 export const Footer = styled.footer`
   width: 100%;
   height: 250px;
@@ -147,13 +162,12 @@ export const Ul2 = styled.ul`
   width: 150px;
   height: 150px;
   background: ${styleSet.colors.white};
-  border: 1px solid ${styleSet.colors.gray};
-
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px #ccc;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
   position: absolute;
   top: 60px;
   right: -5px;
@@ -163,8 +177,8 @@ export const Ul2 = styled.ul`
     width: 15px;
     height: 15px;
     background: ${styleSet.colors.white};
-    border-right: 1px solid ${styleSet.colors.gray};
-    border-bottom: 1px solid ${styleSet.colors.gray};
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
     position: absolute;
     transform: rotate(-135deg);
     top: -8px;
@@ -175,7 +189,18 @@ export const Ul2 = styled.ul`
     width: 100%;
     text-align: center;
     font-family: ${styleSet.font.L};
-    font-size: ${styleSet.fontSize.s7};
+    font-size: ${styleSet.fontSize.s8};
+    color: ${styleSet.colors.black};
+
+    &:nth-last-of-type(1) {
+      border-top: 1px solid ${styleSet.colors.lightGray};
+      padding-top: 5px;
+    }
+    &:hover {
+      color: ${styleSet.colors.primary};
+      font-family: ${styleSet.font.B};
+    }
+
     span {
       font-size: ${styleSet.fontSize.s8};
       padding: 0;
@@ -185,15 +210,41 @@ export const Ul2 = styled.ul`
 `;
 
 export const LiPoint = styled.li`
-  margin-bottom: 10px;
   padding-bottom: 5px;
   width: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-bottom: 1px solid ${styleSet.colors.lightGray};
+  border-bottom: 1px solid ${styleSet.colors.gray};
   span {
     padding: 0;
+    font-family: ${styleSet.font.B};
+    color: ${styleSet.colors.black};
+    strong {
+      font-family: ${styleSet.font.B};
+      font-size: ${styleSet.fontSize.s8};
+    }
+  }
+  &:hover {
+    background: none;
+  }
+`;
+export const LiPointM = styled.li`
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    div {
+      font-family: ${styleSet.font.L};
+      color: ${styleSet.colors.black};
+    }
+  }
+
+  span {
+    padding: 0;
+    font-family: ${styleSet.font.B};
+    color: ${styleSet.colors.black};
+    font-size: ${styleSet.fontSize.s7};
     strong {
       font-family: ${styleSet.font.B};
       font-size: ${styleSet.fontSize.s10};

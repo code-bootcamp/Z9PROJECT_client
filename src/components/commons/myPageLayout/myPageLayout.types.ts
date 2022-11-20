@@ -1,9 +1,13 @@
 export type IMyPageLayoutPresenterProps = {
   nowUrl: string;
-
-  onClickLogout: () => void;
+  onClickMore: () => void;
+  fetchUser: any;
 };
 
 export type IBtnProps = {
   nowUrl: string;
+};
+
+export type IMyPageLayoutProps = {
+  children: JSX.Element;
 };

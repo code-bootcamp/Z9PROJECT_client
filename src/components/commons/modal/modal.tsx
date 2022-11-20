@@ -1,17 +1,15 @@
 import Swal from "sweetalert2";
 
-export function SuccessModal(SuccessMessge: any) {
-  Swal.fire({
+export function SuccessModal(SuccessMessge: string) {
+  void Swal.fire({
     icon: "success",
     title: SuccessMessge,
-    timer: 1500,
   });
 }
 
-export function ErrorModal(ErrorMessage: any) {
-  Swal.fire({
+export function ErrorModal(ErrorMessage: string) {
+  void Swal.fire({
     icon: "error",
     title: ErrorMessage,
-    timer: 1500,
   });
 }

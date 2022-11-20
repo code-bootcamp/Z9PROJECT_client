@@ -6,14 +6,14 @@ export const Container = styled.section`
   width: 100%;
   height: 100%;
   background-color: #f4f5f9;
-  padding-block: 100px;
+  padding-bottom: 100px;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 30px;
   }
 `;
 
-export const SearchBox = styled.div`
+export const SearchBox: any = styled.div`
   display: flex;
   justify-content: space-between;
   .ant-input-affix-wrapper {
@@ -25,32 +25,35 @@ export const SearchBox = styled.div`
   ul {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     position: relative;
 
     li {
       font-size: ${styleSet.fontSize.s7};
       font-family: ${styleSet.font.B};
       text-align: center;
-      max-width: 110px;
+      width: 110px;
       cursor: pointer;
+      background-color: ${styleSet.colors.black};
+      color: ${styleSet.colors.white};
+      padding: 10px 20px;
+      border-radius: 10px;
       &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
-        background-color: ${styleSet.colors.black};
+        background-color: ${styleSet.colors.primary};
         color: ${styleSet.colors.white};
-        padding: 5px 20px;
-        border-radius: 10px;
       }
     }
   }
   @media ${styleSet.breakePoints.mobile} {
     ul {
-      gap: 0px;
-      min-width: 350px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
     li {
       font-size: ${styleSet.fontSize.s9} !important;
-      width: 80px;
-      height: 30px;
+      width: 110px;
+      height: 40px;
       display: flex;
       align-items: center;
       padding: 0 !important;
@@ -59,8 +62,6 @@ export const SearchBox = styled.div`
       white-space: nowrap;
       word-break: keep-all;
       &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
-        width: 80px;
-        height: 30px;
         border-radius: 10px !important;
       }
     }
@@ -85,16 +86,65 @@ export const Wrapper = styled.div`
   padding: 0 30px;
 `;
 
+export const Scroll = styled.h1`
+  display: block;
+  margin: 0 auto;
+`;
+export const Button = styled.button`
+  width: 50%;
+  height: 60px;
+  font-size: ${styleSet.fontSize.s7};
+  border: 1px solid ${styleSet.colors.primary};
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative;
+  left: 50%;
+  background-color: ${styleSet.colors.primary};
+  transform: translateX(-50%);
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: ${styleSet.colors.white};
+    ::before {
+      width: 120%;
+    }
+    span {
+      color: ${styleSet.colors.white};
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    color: ${styleSet.colors.white};
+  }
+`;
+
 export const Main = styled.main`
   margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 60px;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 60px;
+  }
 
   @media ${styleSet.breakePoints.mobile} {
-    flex-direction: column;
+    .infinite-scroll {
+      flex-direction: column;
+    }
   }
 `;
 
@@ -168,6 +218,12 @@ export const ProdImg = styled.div`
   justify-content: center;
   img {
     width: 100%;
+    width: 700px;
+  }
+  @media ${styleSet.breakePoints.mobile} {
+    img {
+      width: -webkit-fill-available;
+    }
   }
 `;
 
@@ -214,12 +270,19 @@ export const Ul = styled.ul`
 export const Time = styled.li`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
+  span {
+    margin-right: 0;
+  }
 `;
 
 export const ProdName = styled.h1`
-  font-size: ${styleSet.fontSize.s5};
+  font-size: ${styleSet.fontSize.s6};
   font-family: ${styleSet.font.EB};
   padding-bottom: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 620px;
 `;
 
 export const Price = styled.p`
@@ -228,10 +291,13 @@ export const Price = styled.p`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   span {
     text-decoration-line: line-through;
-    color: ${styleSet.colors.gray};
+    color: ${styleSet.colors.red};
     font-size: ${styleSet.fontSize.s8};
+
+    font-family: ${styleSet.font.B};
   }
 `;
 

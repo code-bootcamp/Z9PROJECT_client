@@ -1,45 +1,73 @@
 import {
-  BellOutlined,
   HeartFilled,
   HeartOutlined,
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { IDetailPresenterProps } from "../detail.types";
 import * as S from "./product01.styles";
+import { IProduct01Props } from "./product01.types";
 
-export default function Product01(P: IDetailPresenterProps) {
-  const { onClickCount, count, cart, onClickCart } = P;
+export default function Product01(P: IProduct01Props) {
+  const {
+    onClickCount,
+    count,
+    cart,
+    data,
+    discount,
+    onClickLike,
+    onClickOrder,
+  } = P;
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = (value: any) => {};
+
+  const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
+  const today = Number(new Date());
+  const end = Number(new Date(data?.fetchProduct.validUntil.slice(0, 10)));
+  const status = today < start ? "start" : today < end ? "ing" : "end";
+  const time =
+    status === "end" ? 0 : status === "start" ? start - today : end - today;
+
   return (
     <>
       <S.InfoRight>
-        <S.H1>[300개 한정]애플 에어팟 3세대</S.H1>
+        <S.H1>
+          [{data?.fetchProduct.quantity}개 한정]{data?.fetchProduct.name}
+        </S.H1>
         <S.Text>
           <ul>
             <li>시중 판매가</li>
-            <S.Price>1,000,000원</S.Price>
+            <S.Price>
+              {data?.fetchProduct.originPrice?.toLocaleString()}원
+            </S.Price>
           </ul>
           <ul>
             <li>할인판매가</li>
             <S.PriceSale>
-              <strong>30%</strong>700,000원
+              <strong>{discount}%</strong>
+              {data?.fetchProduct.discountPrice?.toLocaleString()}원
             </S.PriceSale>
           </ul>
           <ul>
             <li>배송방법</li>
-            <li>한진택배/무료배송</li>
+            <li>{data?.fetchProduct.delivery}</li>
           </ul>
           <ul>
-            <li>마감금액</li>
-            <S.Close>50,000,000원</S.Close>
+            <li>마감수량</li>
+            <S.Close>{data?.fetchProduct.originalQuantity} 개</S.Close>
           </ul>
           <ul>
             <li>마감일정</li>
-            <li>2022년 11월 11일(금요일)</li>
+            <li>
+              {data?.fetchProduct.validFrom
+                .slice(0, 10)
+                .replace("-", ".")
+                .replace("-", ".")}{" "}
+              ~{" "}
+              {data?.fetchProduct.validUntil
+                .slice(0, 10)
+                .replace("-", ".")
+                .replace("-", ".")}
+            </li>
           </ul>
           <ul>
             <li>수량선택</li>
@@ -64,21 +92,24 @@ export default function Product01(P: IDetailPresenterProps) {
                 onChange={handleChange}
                 options={[
                   {
-                    value: "S 사이즈",
-                    label: "S 사이즈",
+                    value: data?.fetchProduct?.option1,
+                    label: data?.fetchProduct?.option1,
                   },
                   {
-                    value: "M 사이즈",
-                    label: "M 사이즈",
+                    value: data?.fetchProduct?.option2,
+                    label: data?.fetchProduct?.option2,
                   },
                   {
-                    value: "L 사이즈",
-                    label: "L 사이즈",
+                    value: data?.fetchProduct?.option3,
+                    label: data?.fetchProduct?.option3,
                   },
                   {
-                    value: "disabled",
-                    disabled: true,
-                    label: "Disabled",
+                    value: data?.fetchProduct?.option4,
+                    label: data?.fetchProduct?.option4,
+                  },
+                  {
+                    value: data?.fetchProduct?.option5,
+                    label: data?.fetchProduct?.option5,
                   },
                 ]}
               />
@@ -86,19 +117,43 @@ export default function Product01(P: IDetailPresenterProps) {
           </ul>
         </S.Text>
 
-        <S.H2>3일 00:43:33</S.H2>
+        <S.H2></S.H2>
 
         <S.H3>
-          총 상품 금액 <strong>700,000원</strong>
+          총 상품 금액
+          <strong>
+            {(data?.fetchProduct.discountPrice * count).toLocaleString()}원
+          </strong>
         </S.H3>
 
         <S.BoxBtn>
-          <button className="cart" onClick={onClickCart}>
+          <button className="cart" onClick={onClickLike}>
             {!cart && <HeartOutlined />} {``}
             {cart && <HeartFilled />} {``}
-            관심상품
+            <span className="emotion">관심상품</span>
           </button>
-          <button className="buy">바로 구매하기</button>
+
+          {time > 0 ? (
+            status === "ing" ? (
+              <>
+                <button className="buy" onClick={onClickOrder}>
+                  <span className="emotion">바로 구매하기</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="buy" style={{ background: "#999" }}>
+                  <span className="emotion">미진행</span>
+                </button>
+              </>
+            )
+          ) : (
+            <>
+              <button className="buy" style={{ background: "#999" }}>
+                <span className="emotion">마감</span>
+              </button>
+            </>
+          )}
         </S.BoxBtn>
       </S.InfoRight>
     </>

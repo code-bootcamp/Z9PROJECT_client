@@ -1,28 +1,27 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
 const Wrapper = styled.div`
-  position: relative;
+  position: absolute;
+  left: ${(P: IStylesProps) => (P.isEdit ? "150px" : "310px")};
 
   @media ${styleSet.breakePoints.mobile} {
     padding-top: 20px;
-    width: 100%;
+    left: 57%;
+    bottom: 0;
   }
 `;
 
 const UploadBtn = styled.div`
-  padding: 23px;
-  width: 200px;
-  height: 70px;
-  color: gray;
-  background: #ffffff;
-  border: 1px solid #cccccc;
-  text-align: center;
   cursor: pointer;
+  background: ${styleSet.colors.white};
+  border: 1px solid ${styleSet.colors.darkgray};
+  padding: 10px;
+  border-radius: 50%;
 
   @media ${styleSet.breakePoints.mobile} {
-    width: 100%;
+    width: 50px;
     height: 50px;
     line-height: 0px;
   }
@@ -34,10 +33,15 @@ const Input = styled.input`
 
 type IUpload02Props = {
   onChageProfileFile: (url: string, file: File) => void;
+  isEdit?: boolean;
+};
+
+type IStylesProps = {
+  isEdit?: boolean;
 };
 
 export default function Upload02(P: IUpload02Props) {
-  const { onChageProfileFile } = P;
+  const { onChageProfileFile, isEdit } = P;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickUpload = () => {
@@ -56,9 +60,9 @@ export default function Upload02(P: IUpload02Props) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper isEdit={isEdit}>
       <UploadBtn onClick={onClickUpload}>
-        <span>프로필 사진 등록</span>
+        <img src="/icon_profile.png" alt="프로필 이미지 등록 아이콘" />
       </UploadBtn>
       <Input type="file" ref={inputRef} onChange={onChangeFile} />
     </Wrapper>

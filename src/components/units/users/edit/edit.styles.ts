@@ -5,7 +5,6 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 export const Container = styled.section`
   padding: 50px 0;
   width: 100%;
-
   @media ${styleSet.breakePoints.mobile} {
     padding: 0;
   }
@@ -14,7 +13,11 @@ export const Container = styled.section`
 export const SubTitle = styled.h2`
   font-size: ${styleSet.fontSize.s5};
   font-family: ${styleSet.font.B};
-  
+  &.h2 {
+    border-top: 1px solid #eee;
+    padding-block: 20px;
+  }
+
   @media ${styleSet.breakePoints.mobile} {
     display: none;
   }
@@ -26,16 +29,17 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 40px;
+  gap: 20px;
+
+  position: relative;
 `;
 
 export const UploadWrapper = styled.div`
-  padding-left: 200px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   align-items: flex-end;
-  gap: 40px;
+  position: relative;
+  margin-bottom: 30px;
+  position: relative;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-left: 0;
@@ -46,9 +50,10 @@ export const UploadWrapper = styled.div`
 
 export const ProfileWrapper = styled.div`
   img {
-    width: 205px;
-    height: 205px;
-
+    width: 100%;
+    aspect-ratio: 1/1;
+    max-width: 205px;
+    max-height: 205px;
     background: url("/users/user/img_id.svg");
     border: 1px solid #cccccc;
     border-radius: 100px;
@@ -61,15 +66,29 @@ export const RowWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px dashed ${styleSet.colors.gray};
+  padding-top: 30px;
+  margin-top: 10px;
+  &:nth-of-type(2) {
+    border-top: none;
+  }
+
+  &.line {
+    align-items: flex-start;
+  }
 `;
 
 export const RowTitle = styled.span`
   min-width: 200px;
   font-size: ${styleSet.fontSize.s8};
   font-family: ${styleSet.font.B};
+
+  @media ${styleSet.breakePoints.mobile} {
+    min-width: 100px;
+  }
 `;
 
-export const AddressWrapper = styled.div`
+export const InnerWrapper = styled.div`
   width: 100%;
 
   display: flex;
@@ -104,27 +123,40 @@ export const Introduce = styled.textarea`
 export const ZipcodeBtn = styled.button`
   width: 150px;
   height: 60px;
-  color: white;
   background: ${styleSet.colors.subcolor2};
   border-radius: 10px;
-`;
+  color: ${styleSet.colors.white};
+  position: relative;
+  overflow: hidden;
 
-export const InfoWrapper = styled.div`
-  padding: 40px;
-  width: 100%;
-  border-radius: 10px;
-  background: ${styleSet.colors.lightGray};
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 `;
 
 export const SnsLabel = styled.label`
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -157,6 +189,12 @@ export const SnsCheckWrapper = styled.div`
   width: 100%;
   display: flex;
   gap: 2rem;
+
+  &.radio {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
 `;
 
 export const LabelWrapper = styled.label`
@@ -254,11 +292,38 @@ export const RadioInput = styled.input`
 `;
 
 export const LogInBtn = styled.button`
-  width: 100%;
+  width: 200px;
+  margin: 20px auto;
   height: 60px;
   font-size: ${styleSet.fontSize.s7};
-  color: ${styleSet.colors.white};
-  background-color: ${styleSet.colors.primary};
+  border: 2px solid ${styleSet.colors.primary};
+  position: relative;
+  color: ${styleSet.colors.primary};
+  overflow: hidden;
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.primary};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: #fff;
+    ::before {
+      width: 120%;
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 `;
 
 export const BankWrapper = styled.div`
@@ -273,4 +338,26 @@ export const BankInner = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+`;
+
+export const Btn1 = styled.button`
+  width: 150px;
+  height: 60px;
+  color: white;
+  background: ${styleSet.colors.subcolor2};
+  border-radius: 10px;
+`;
+
+export const Btn2 = styled.button`
+  width: 150px;
+  height: 60px;
+  color: white;
+  background: ${styleSet.colors.subcolor1};
+  border-radius: 10px;
+`;
+
+export const DeleteBtn = styled.button`
+  position: absolute;
+  right: 0;
+  bottom: 60px;
 `;

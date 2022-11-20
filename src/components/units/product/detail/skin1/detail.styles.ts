@@ -1,12 +1,53 @@
 import styled from "@emotion/styled";
 import { Select } from "antd";
+import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
+interface IProps {
+  graph: number;
+}
+
+export const Info = styled.section`
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  & div {
+    width: 1400px !important;
+    height: 800px !important;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    margin-bottom: 30px;
+    height: -webkit-fill-available;
+    & div {
+      width: 600px !important;
+      height: 350px !important;
+    }
+  }
+`;
+
+export const Player = styled(ReactPlayer)`
+  width: 1400px;
+  height: 800px;
+  margin: 0 auto;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 600px;
+    height: -webkit-fill-available;
+  }
+`;
 
 export const Container = styled.section`
   width: 100%;
   height: 100%;
   padding: 50px 0;
-  position: relative;
+`;
+
+export const Timer = styled.div`
+  display: flex;
+  align-items: center;
+  span {
+    font-size: ${styleSet.fontSize.s6};
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -24,13 +65,21 @@ export const H5 = styled.h5`
   font-family: ${styleSet.font.B};
   font-size: ${styleSet.fontSize.s2};
   padding-bottom: 30px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    &.mobile {
+      display: none;
+    }
+  }
 `;
+
 export const Button = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  padding-top: 30px;
+  padding-top: 40px;
   border-top: 1px solid ${styleSet.colors.gray};
+  margin-top: 50px;
   button {
     color: ${styleSet.colors.point1};
     background: ${styleSet.colors.white};
@@ -71,14 +120,18 @@ export const ProdInfo = styled.section`
   display: flex;
   justify-content: space-between;
   margin-bottom: 50px;
+  gap: 70px;
   > div {
     width: calc(100% / 2 - 10px);
+    height: 835px;
   }
+
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
     > div {
       width: 100%;
       margin-bottom: 30px;
+      height: auto;
     }
   }
 `;
@@ -87,17 +140,89 @@ export const InfoLeft = styled.div`
   text-align: center;
   width: 48%;
   > img {
-    border-radius: 20px;
-    max-height: 750px;
+    border-radius: 10px;
+    height: 650px;
     overflow: hidden;
     max-width: 100%;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      aspect-ratio: 1/1;
+      width: 100%;
+      height: min-content;
+    }
   }
 `;
+
+export const H3Info = styled.h3`
+  font-family: ${styleSet.font.B};
+  padding-bottom: 10px;
+`;
+
+export const Company = styled.ul`
+  display: flex;
+  margin-top: -1px;
+  flex-wrap: wrap;
+
+  li {
+    width: calc(100% / 2);
+    border-bottom: 1px solid ${styleSet.colors.gray};
+    font-size: 0.7rem;
+    word-break: keep-all;
+    display: flex;
+    &:first-of-type,
+    :nth-of-type(2) {
+      border-top: 1px solid ${styleSet.colors.gray};
+    }
+    strong {
+      background: ${styleSet.colors.subcolor3};
+      color: ${styleSet.colors.black};
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      min-width: 300px;
+      max-width: 300px;
+    }
+    data {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    > img {
+      height: 300px;
+    }
+    li {
+      strong {
+        padding: 0 10px;
+        min-width: 50%;
+        max-width: 50%;
+      }
+      data {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        width: 135px;
+        overflow: auto;
+      }
+    }
+  }
+`;
+
+export const Ref = styled.section``;
 
 export const InfoRight = styled.div`
   background: #f8f8f8;
   border-radius: 20px;
-  padding: 50px;
+  padding: 0 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   .top {
     display: flex;
     justify-content: space-between;
@@ -128,6 +253,7 @@ export const Bell = styled.li`
   font-size: ${styleSet.fontSize.s8} !important;
   padding: 5px 10px;
   color: ${styleSet.colors.white};
+  white-space: nowrap;
   border-radius: 10px;
   img {
     margin-left: 5px;
@@ -150,30 +276,34 @@ export const ul = styled.ul`
   display: flex;
   justify-content: space-between;
   li {
-    border-radius: 10px;
     text-align: center;
     overflow: hidden;
+    border-radius: 10px;
     width: calc(100% / 3 - 10px);
     cursor: pointer;
-    border: 2px solid ${styleSet.colors.tp};
+    border: 1px solid ${styleSet.colors.subcolor3};
     &:hover {
-      border: 2px solid ${styleSet.colors.primary};
+      border: 1px solid ${styleSet.colors.primary};
     }
     img {
+      border-radius: 10px;
       width: 100%;
       height: 100%;
+      aspect-ratio: 1/1;
     }
   }
 `;
 
 export const H1 = styled.h1`
-  font-size: ${styleSet.fontSize.s3};
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.B};
   padding-block: 20px;
+  white-space: nowrap;
 
   @media ${styleSet.breakePoints.mobile} {
-    font-size: ${styleSet.fontSize.s6};
+    font-size: ${styleSet.fontSize.s4};
     padding-block: 10px;
+    white-space: inherit;
   }
 `;
 
@@ -182,10 +312,17 @@ export const Strong = styled.strong`
   font-family: ${styleSet.font.B};
   color: ${styleSet.colors.black};
   margin-bottom: 10px;
-  display: block;
-
-  @media ${styleSet.breakePoints.mobile} {
-    font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  > p > span {
+    color: ${styleSet.colors.red};
+  }
+  span {
+    font-size: ${styleSet.fontSize.s9};
+    text-align: left;
+    font-family: ${styleSet.font.B};
+    letter-spacing: -1px;
   }
 `;
 
@@ -195,7 +332,7 @@ export const Text = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     li {
       font-size: ${styleSet.fontSize.s8};
       font-family: ${styleSet.font.B};
@@ -207,7 +344,7 @@ export const Text = styled.div`
       padding-bottom: 10px;
       li {
         white-space: nowrap;
-        font-size: 0.7rem;
+        font-size: ${styleSet.fontSize.s6};
       }
     }
   }
@@ -238,25 +375,14 @@ export const Close = styled.li`
 `;
 
 export const MySelect = styled(Select)`
-  max-width: 250px !important;
-
-  @media ${styleSet.breakePoints.mobile} {
-    font-size: 0.5rem;
-    min-width: 120px;
-  }
+  width: 250px;
 `;
 
 export const Persent = styled.ul`
   li {
     color: ${styleSet.colors.darkgray};
     font-family: ${styleSet.font.L};
-    font-size: 0.8rem !important;
-  }
-
-  @media ${styleSet.breakePoints.mobile} {
-    li {
-      font-size: 0.5rem !important;
-    }
+    font-size: 0.8rem;
   }
 `;
 
@@ -271,55 +397,65 @@ export const Graph = styled.p`
   color: ${styleSet.colors.darkgray};
   position: relative;
   span {
-    background-color: ${styleSet.colors.primary};
+    background: linear-gradient(-45deg, #f46a22, #ffd480);
     height: 30px;
-    width: 30%;
+    max-width: 100%;
+    min-width: 0%;
     border-radius: 15px;
     text-align: center;
     color: ${styleSet.colors.white};
+    font-size: ${styleSet.fontSize.s9};
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     font-family: ${styleSet.font.B};
-  }
-
-  @media ${styleSet.breakePoints.mobile} {
-    span {
-      font-size: 0.5rem;
-    }
+    letter-spacing: -0.8px;
   }
 `;
 
-export const H2 = styled.h2`
-  font-size: ${styleSet.fontSize.s3};
+export const GraphPercent = styled.span`
+  width: ${(props: IProps) => {
+    return `${props.graph}%`;
+  }};
+`;
+
+export const H2 = styled.div`
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.EB};
-  padding-block: 20px;
+  padding-top: 20px;
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
   @media ${styleSet.breakePoints.mobile} {
-    font-size: ${styleSet.fontSize.s7};
     padding-block: 10px;
   }
 `;
 
 export const Tab = styled.ul`
-  width: 100%;
+  max-width: 1400px;
   height: 60px;
   display: flex;
-  border-block: 1px solid ${styleSet.colors.gray};
   justify-content: center;
-  line-height: 60px;
-  margin-bottom: 50px;
+  margin: 100px 0 50px 0;
+  gap: 30px;
+  align-items: center;
   li {
     cursor: pointer;
-    width: calc(100% / 2 - 10px);
+    border-block: 1px solid ${styleSet.colors.primary};
     height: 100%;
     text-align: center;
     font-size: ${styleSet.fontSize.s8};
-    color: ${styleSet.colors.darkgray};
-    &:first-of-type {
-      border-right: 1px solid ${styleSet.colors.gray};
+    color: ${styleSet.colors.primary};
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      border-block: 1px solid ${styleSet.colors.point2};
+      color: ${styleSet.colors.point2};
     }
   }
 `;
@@ -345,90 +481,105 @@ export const Choose = styled.p`
   }
 
   @media ${styleSet.breakePoints.mobile} {
-    width: 50px;
-    #qtyMinus {
-      font-size: 0.6rem;
-      width: 15px;
-      height: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #qtyPlus {
-      font-size: 0.6rem;
-      width: 15px;
-      height: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    width: 80px;
   }
 `;
 
 export const H3 = styled.h3`
   font-size: ${styleSet.fontSize.s6};
-  padding-top: 10px;
+  padding-block: 5%;
   font-family: ${styleSet.font.B};
-  padding-block: 20px;
+  padding-bottom: 10px;
   text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
   strong {
-    font-size: ${styleSet.fontSize.s7};
+    font-size: ${styleSet.fontSize.s5};
     color: ${styleSet.colors.primary};
     font-family: ${styleSet.font.EB};
   }
 
   @media ${styleSet.breakePoints.mobile} {
     padding: 0 0 15px 0;
-    font-size: ${styleSet.fontSize.s7};
-    strong {
-      font-size: ${styleSet.fontSize.s8};
-    }
   }
 `;
 
 export const BoxBtn = styled.div`
   display: flex;
   justify-content: space-between;
-
   .cart {
     background: ${styleSet.colors.white};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
+    border: 1px solid ${styleSet.colors.lightGray};
     width: 35%;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
     svg {
       color: ${styleSet.colors.red};
     }
   }
-  .buy {
-    background-color: ${styleSet.colors.subcolor4};
-    font-size: ${styleSet.fontSize.s7};
-    font-family: ${styleSet.font.B};
-    height: 60px;
+  .closed {
+    background-color: ${styleSet.colors.darkgray};
     width: 60%;
     color: ${styleSet.colors.white};
+    position: relative;
+    overflow: hidden;
+    cursor: help;
   }
 
-  @media ${styleSet.breakePoints.mobile} {
-    .cart {
-      font-size: ${styleSet.fontSize.s9};
-      width: 40%;
-      height: 40px;
+  .buy {
+    background-color: ${styleSet.colors.subcolor4};
+    width: 60%;
+    color: ${styleSet.colors.white};
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -5%;
+      left: -10%;
+      width: 0;
+      height: 120%;
+      background: #f6a70a;
+      transition: all 0.3s ease;
+      transform: skewX(15deg);
     }
-    .buy {
-      font-size: ${styleSet.fontSize.s9};
-      width: 55%;
-      height: 40px;
+    &:hover {
+      color: ${styleSet.colors.white};
+      ::before {
+        width: 120%;
+      }
     }
+    .emotion {
+      display: block;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+  }
+
+  button {
+    font-size: ${styleSet.fontSize.s7};
+    font-family: ${styleSet.font.B};
+    position: relative;
+    overflow: hidden;
+    height: 60px;
   }
 `;
 
-export const Randing = styled.img`
+export const Randing = styled.article`
+  width: 65%;
   margin-bottom: 30px;
+  p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
@@ -438,7 +589,7 @@ export const Randing = styled.img`
 export const Reset = styled.img`
   cursor: pointer;
   position: fixed;
-  right: 10%;
+  right: 15%;
   bottom: 5%;
 `;
 
@@ -462,13 +613,19 @@ export const Title = styled.ul`
   display: flex;
   justify-content: space-between;
   text-align: center;
+  &.writer {
+    max-width: 110px;
+    min-width: 50px;
+  }
+  &.createdAt {
+  }
   li {
     &:nth-last-of-type(1) {
       max-width: 100px;
       width: 100%;
     }
     &:nth-last-of-type(4) {
-      max-width: 185px;
+      max-width: 165px;
       width: 100%;
     }
   }
@@ -485,7 +642,7 @@ export const Wrapper3 = styled.div`
   max-width: 1460px;
   margin: 0 auto;
   background: ${styleSet.colors.white};
-  padding: 30px;
+  padding: 0 30px 30px 30px;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
@@ -520,15 +677,13 @@ export const UserInfo = styled.p`
 
 export const Comment = styled.section`
   border-radius: 15px;
-  padding-block: 30px;
-  margin-top: 30px;
 `;
 
 export const Count = styled.ul`
   display: flex;
   gap: 15px;
-  border-bottom: 1px solid #000;
-  padding-block: 20px;
+  border-bottom: 1px solid ${styleSet.colors.black};
+  padding-bottom: 20px;
   li {
     font-size: ${styleSet.fontSize.s8};
     color: ${styleSet.colors.darkgray};
@@ -536,3 +691,9 @@ export const Count = styled.ul`
 `;
 
 export const Box = styled.section``;
+
+export const Important = styled.section`
+  h3 {
+    font-size: ${styleSet.fontSize.s5};
+  }
+`;

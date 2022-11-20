@@ -27,7 +27,7 @@ export default function LogInContainer() {
     mode: "onChange",
   });
   const router = useRouter();
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {}, []);
 
@@ -47,9 +47,9 @@ export default function LogInContainer() {
 
       setAccessToken(accessToken);
       sessionStorage.setItem("accessToken", accessToken);
-      router.push("/users/mypage");
+      void router.push("/users/mypage");
     } catch (error) {
-      ErrorModal(error);
+      ErrorModal(error as string);
     }
   };
 

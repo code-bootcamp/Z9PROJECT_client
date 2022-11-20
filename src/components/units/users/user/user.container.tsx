@@ -28,9 +28,9 @@ const schma = yup.object({
   address: yup.string().required("필수"),
   addressDetail: yup.string(),
   nickname: yup.string().required("필수"),
-  account: yup.string(),
-  bank: yup.string(),
-  accountName: yup.string(),
+  account: yup.string().typeError("숫자만 입력").required("필수"),
+  bank: yup.string().required("필수"),
+  accountName: yup.string().required("필수"),
   terms: yup.boolean().oneOf([true], "필수"),
 });
 
@@ -86,7 +86,7 @@ export default function UserRegisterContainer() {
         }, 180000);
         console.log(result.data.postSmsToken.message);
       } catch (error) {
-        ErrorModal(error);
+        ErrorModal(error as string);
       }
     } else {
       ErrorModal("이미 인증번도 받기를 누르셨습니다. 핸드폰을 확인바랍니다.");
@@ -107,7 +107,7 @@ export default function UserRegisterContainer() {
         SuccessModal("인증 성공");
       }
     } catch (error) {
-      ErrorModal(error);
+      ErrorModal(error as string);
     }
   };
 
@@ -136,7 +136,7 @@ export default function UserRegisterContainer() {
 
   const onClickSignUp = async (data: any) => {
     const { keyNumber, passwordConfirm, terms, ...rest } = data;
-
+    if (!profileFile) ErrorModal("프로필 이미지는 필수 입니다.");
     try {
       const resultProfile = await uploadImage({
         variables: {
@@ -153,8 +153,10 @@ export default function UserRegisterContainer() {
           },
         },
       });
-      SuccessModal(`${result.data.createUser.nickname}님 가입을 환영합니다.`);
-      router.push("/users/login");
+      SuccessModal(
+        `${String(result.data.createUser.nickname)}님 가입을 환영합니다.`
+      );
+      void router.push("/users/login");
     } catch (error) {
       console.log(error);
       if (error instanceof Error) ErrorModal(error.message);
