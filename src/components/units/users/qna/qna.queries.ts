@@ -11,8 +11,8 @@ export const FETCH_USER = gql`
 `;
 
 export const FETCH_PRODUCTS_BY_CREATOR = gql`
-  query fetchProductsByCreator($page: Int!) {
-    fetchProductsByCreator(page: $page) {
+  query fetchProductsByCreator($page: Int!, $userId: String!) {
+    fetchProductsByCreator(page: $page, userId: $userId) {
       id
       name
       discountPrice
@@ -119,17 +119,5 @@ export const FETCH_ORDER_BY_CREATOR = gql`
         }
       }
     }
-  }
-`;
-
-export const FETCH_COUNT_OF_QUESTIONS = gql`
-  query fetchCountOfQuestions($productId: String!) {
-    fetchCountOfQuestions(productId: $productId)
-  }
-`;
-
-export const FETCH_PRODUCT_BY_CREATOR_COUNT = gql`
-  query countProductByCreator {
-    countProductByCreator
   }
 `;

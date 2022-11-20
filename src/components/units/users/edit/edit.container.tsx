@@ -51,7 +51,7 @@ export default function EditContainer() {
   const [deleteUser] = useMutation(DELETE_USER);
   const { data: fetchUser } = useQuery(FETCH_USER);
   const router = useRouter();
-
+  console.log(fetchUser?.fetchUser?.snsName);
   useEffect(() => {
     setValue("snsChannel", fetchUser?.fetchUser.snsChannel);
   }, [fetchUser?.fetchUser.snsChannel]);
