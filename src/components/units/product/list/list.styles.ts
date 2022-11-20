@@ -90,10 +90,50 @@ export const Scroll = styled.h1`
   display: block;
   margin: 0 auto;
 `;
+export const Button = styled.button`
+  width: 50%;
+  height: 60px;
+  font-size: ${styleSet.fontSize.s7};
+  border: 1px solid ${styleSet.colors.primary};
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative;
+  left: 50%;
+  background-color: ${styleSet.colors.primary};
+  transform: translateX(-50%);
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: ${styleSet.colors.white};
+    ::before {
+      width: 120%;
+    }
+    span {
+      color: ${styleSet.colors.white};
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    color: ${styleSet.colors.white};
+  }
+`;
 
 export const Main = styled.main`
   margin-top: 50px;
-  .infinite-scroll {
+  & > div {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -236,9 +276,13 @@ export const Time = styled.li`
 `;
 
 export const ProdName = styled.h1`
-  font-size: ${styleSet.fontSize.s5};
+  font-size: ${styleSet.fontSize.s6};
   font-family: ${styleSet.font.EB};
   padding-bottom: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 620px;
 `;
 
 export const Price = styled.p`
@@ -247,10 +291,13 @@ export const Price = styled.p`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   span {
     text-decoration-line: line-through;
-    color: ${styleSet.colors.gray};
+    color: ${styleSet.colors.red};
     font-size: ${styleSet.fontSize.s8};
+
+    font-family: ${styleSet.font.B};
   }
 `;
 

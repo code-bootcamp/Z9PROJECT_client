@@ -136,12 +136,9 @@ export default function EditContainer() {
   };
 
   const onClickUpdate = async (data: any) => {
-    const { keyNumber, ...rest } = data;
-    console.log(data);
-
     try {
-      let profileUrl,
-        certUrl = "";
+      let profileUrl = "";
+      let certUrl = "";
       if (profileFile) {
         const resultProfile = await uploadImage({
           variables: {
@@ -202,7 +199,7 @@ export default function EditContainer() {
         changeInput.accountName = getValues("accountName");
       }
 
-      const result = await updateUser({
+      await updateUser({
         variables: {
           userId: fetchUser?.fetchUser.id,
           updateUserInput: {
@@ -219,7 +216,7 @@ export default function EditContainer() {
   };
 
   const onClickMore = () => {
-    Swal.fire({
+    void Swal.fire({
       title: "회원을 탈퇴하시겠습니까?",
       icon: "warning",
       showCancelButton: true,
@@ -229,7 +226,7 @@ export default function EditContainer() {
       cancelButtonText: "취소",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteUser();
+        void deleteUser();
         sessionStorage.removeItem("accessToken");
         router.reload();
       }

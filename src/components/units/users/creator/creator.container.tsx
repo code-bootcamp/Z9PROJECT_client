@@ -173,9 +173,9 @@ export default function CreatorRegisterContainer() {
         },
       });
       SuccessModal(
-        `${result.data.createCreator.nickname}님 가입을 환영합니다.`
+        `${String(result.data.createCreator.nickname)}님 가입을 환영합니다.`
       );
-      router.push("/users/login");
+      void router.push("/users/login");
     } catch (error) {
       console.log(error);
       if (error instanceof Error) ErrorModal(error.message);

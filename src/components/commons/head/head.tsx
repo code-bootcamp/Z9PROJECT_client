@@ -19,6 +19,19 @@ export default function HeadLoad(P: any) {
     script[1].src = "https://cdn.iamport.kr/js/iamport.payment-1.2.0.js";
     script[1].type = "text/javascript";
     script.map((el) => document.head.appendChild(el));
+
+    const title = document.createElement("title");
+    title.innerText = "크리에이터의 공동구매, Z9";
+    document.head.appendChild(title);
+
+    const favicon = document.createElement("link");
+    favicon.href = "/favicon.ico";
+    document.head.appendChild(favicon);
+
+    const description = document.createElement("meta");
+    description.content = "크리에이터의 공동구매, Z9";
+    description.name = "description";
+    document.head.appendChild(description);
   }, []);
   return <>{children}</>;
 }

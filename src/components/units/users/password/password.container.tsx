@@ -2,9 +2,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import PasswordPresenter from "./password.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import { FETCH_USER, UPDATE_PASSWORD } from "./password.queries";
+import { UPDATE_PASSWORD } from "./password.queries";
 
 const schema = yup.object({
   password: yup.string().required("필수"),
@@ -15,7 +15,6 @@ const schema = yup.object({
 });
 
 export default function PasswordContainer() {
-  const { data: fetchUser } = useQuery(FETCH_USER);
   const [updatePassword] = useMutation(UPDATE_PASSWORD);
   const { register, handleSubmit, formState, setValue } = useForm({
     resolver: yupResolver(schema),
@@ -30,7 +29,7 @@ export default function PasswordContainer() {
         },
       });
       SuccessModal(
-        `${result.data.updatePassword.nickname}님 비밀번호 변경 완료!`
+        `${String(result.data.updatePassword.nickname)}님 비밀번호 변경 완료!`
       );
       setValue("password", "");
       setValue("passwordConfirm", "");

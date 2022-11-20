@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
 const Wrapper = styled.div`

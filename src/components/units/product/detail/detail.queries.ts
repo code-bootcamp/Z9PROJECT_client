@@ -123,3 +123,9 @@ export const FETCH_COUNT_OF_QUESTIONS = gql`
     fetchCountOfQuestions(productId: $productId)
   }
 `;
+
+export const ADD_PRODUCT_VIEW_COUNT = gql`
+  mutation addProductViewCount($productId: String!) {
+    addProductViewCount(productId: $productId)
+  }
+`;
