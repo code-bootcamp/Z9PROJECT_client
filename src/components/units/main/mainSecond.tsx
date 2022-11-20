@@ -7,9 +7,10 @@ import "swiper/swiper.min.css";
 import "swiper/css/navigation";
 import "animate.css";
 import { IMainPresenterProps } from "./main.types";
+import Timer from "../../commons/hooks/ttimerMain";
 
 export default function MainSecond(P: IMainPresenterProps) {
-  const { handleLeftClick, handleRightClick, setSwiperRef } = P;
+  const { handleLeftClick, handleRightClick, setSwiperRef, data } = P;
 
   const [ref] = useInView({
     threshold: 0,
@@ -43,62 +44,31 @@ export default function MainSecond(P: IMainPresenterProps) {
             onSwiper={setSwiperRef}
             modules={[Autoplay, Pagination, Navigation]}
           >
-            <SwiperSlide className="swiperSlide">
-              <S.Sale>30%</S.Sale>
-              <S.ProductImg>
-                <img src="/test.jpeg" alt="최근 상품 이미지" />
-              </S.ProductImg>
-              <S.ProductText>
-                <S.H2>
-                  남은시간 {``}
-                  <ClockCircleOutlined />
-                </S.H2>
-                <time>3일 00:43:23</time>
-                <S.ProductName>
-                  [300개 한정] 애플 에어팟 맥스 실버
-                </S.ProductName>
-                <S.PriceSale>1,000,000원</S.PriceSale>
-                <S.Price>700,000원</S.Price>
-              </S.ProductText>
-            </SwiperSlide>
-
-            <SwiperSlide className="swiperSlide">
-              <S.Sale>30%</S.Sale>
-              <S.ProductImg>
-                <img src="/test.jpeg" alt="최근 상품 이미지" />
-              </S.ProductImg>
-              <S.ProductText>
-                <S.H2>
-                  남은시간 {``}
-                  <ClockCircleOutlined />
-                </S.H2>
-                <time>3일 00:43:23</time>
-                <S.ProductName>
-                  [300개 한정] 애플 에어팟 맥스 실버
-                </S.ProductName>
-                <S.PriceSale>1,000,000원</S.PriceSale>
-                <S.Price>700,000원</S.Price>
-              </S.ProductText>
-            </SwiperSlide>
-
-            <SwiperSlide className="swiperSlide">
-              <S.Sale>30%</S.Sale>
-              <S.ProductImg>
-                <img src="/test.jpeg" alt="최근 상품 이미지" />
-              </S.ProductImg>
-              <S.ProductText>
-                <S.H2>
-                  남은시간 {``}
-                  <ClockCircleOutlined />
-                </S.H2>
-                <time>3일 00:43:23</time>
-                <S.ProductName>
-                  [300개 한정] 애플 에어팟 맥스 실버
-                </S.ProductName>
-                <S.PriceSale>1,000,000원</S.PriceSale>
-                <S.Price>700,000원</S.Price>
-              </S.ProductText>
-            </SwiperSlide>
+            {data?.fetchProductsByPages.map((el: any) => (
+              <SwiperSlide className="swiperSlide" key={el.id}>
+                <S.Sale>{el?.discountRate}%</S.Sale>
+                <S.ProductImg>
+                  <img
+                    src={el.images ? el.images[0] : "/icon_logo.png"}
+                    alt="상품 이미지"
+                  />
+                </S.ProductImg>
+                <S.ProductText>
+                  <S.H2>
+                    남은시간 {``}
+                    <ClockCircleOutlined />
+                  </S.H2>
+                  <time>
+                    <Timer el={el} status={status} />
+                  </time>
+                  <S.ProductName>
+                    [{el.quantity}개 한정] {el.name}
+                  </S.ProductName>
+                  <S.PriceSale>{el.originPrice.toLocaleString()}원</S.PriceSale>
+                  <S.Price>{el.discountPrice.toLocaleString()}원</S.Price>
+                </S.ProductText>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </S.Product>
         <S.Right onClick={handleRightClick} />
