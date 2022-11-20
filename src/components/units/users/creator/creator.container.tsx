@@ -1,5 +1,6 @@
-import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
+import { schema } from "./atom/schema";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import CreatorPresenter from "./creator.presenter";
@@ -13,35 +14,11 @@ import {
   UPLOAD_IMAGE,
 } from "./creator.queries";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import { useRouter } from "next/router";
-
-const schma = yup.object({
-  email: yup.string().email("이메일 형식 확인").required("필수"),
-  password: yup.string().required("필수"),
-  passwordConfirm: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "비밀번호가 같지 않습니다.")
-    .required("필수"),
-  phoneNumber: yup.string().required("필수"),
-  keyNumber: yup.string().required("필수"),
-  zipcode: yup.string().required("필수"),
-  address: yup.string().required("필수"),
-  addressDetail: yup.string(),
-  nickname: yup.string().required("필수"),
-  snsName: yup.string().required("필수"),
-  snsChannel: yup.string().required("필수"),
-  mainContents: yup.string(),
-  introduce: yup.string(),
-  account: yup.number().typeError("숫자만 입력").required("필수"),
-  bank: yup.string().required("필수"),
-  accountName: yup.string().required("필수"),
-  terms: yup.boolean().oneOf([true], "필수"),
-});
 
 export default function CreatorRegisterContainer() {
   const { register, handleSubmit, formState, watch, setValue, getValues } =
     useForm({
-      resolver: yupResolver(schma),
+      resolver: yupResolver(schema),
       mode: "onChange",
     });
   const router = useRouter();
@@ -177,7 +154,6 @@ export default function CreatorRegisterContainer() {
       );
       void router.push("/users/login");
     } catch (error) {
-      console.log(error);
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
