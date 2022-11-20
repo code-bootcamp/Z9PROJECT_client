@@ -7,7 +7,7 @@ import "swiper/swiper.min.css";
 import "swiper/css/navigation";
 import "animate.css";
 import { IMainPresenterProps } from "./main.types";
-import Timer from "../../commons/hooks/ttimerMain";
+import Timer from "../../commons/hooks/timerMain";
 import { useMoveToPage } from "../../commons/hooks/useMoveToPage";
 import FooterPage from "../../commons/layout/footer";
 
@@ -22,7 +22,7 @@ export default function MainSecond(P: IMainPresenterProps) {
   return (
     <>
       <S.FullPage ref={ref}>
-        <S.Message1 src="/img_intro.webp" alt="일러스트 이미지" />
+        <S.Message1 src="/img_intro.png" alt="일러스트 이미지" />
         <S.Message2 src="/img_intro2.png" alt="일러스트 이미지" />
         <S.Message3 src="/icon_emoticon.png" alt="일러스트 이미지" />
         <S.Message4 src="/icon_like.png" alt="일러스트 이미지" />
