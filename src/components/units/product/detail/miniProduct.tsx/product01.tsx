@@ -16,18 +16,9 @@ export default function Product01(P: IProduct01Props) {
     discount,
     onClickLike,
     onClickOrder,
-    setGraph,
   } = P;
 
   const handleChange = (value: any) => {};
-
-  setGraph(
-    Math.floor(
-      ((data?.fetchProduct.originalQuantity - data?.fetchProduct.quantity) *
-        100) /
-        data?.fetchProduct.originalQuantity
-    )
-  );
 
   const start = Number(new Date(data?.fetchProduct.validFrom.slice(0, 10)));
   const today = Number(new Date());

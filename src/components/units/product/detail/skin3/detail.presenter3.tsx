@@ -272,7 +272,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
-                setGraph={setGraph}
               />
             </S.Ref>
           )}

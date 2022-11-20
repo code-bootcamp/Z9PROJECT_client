@@ -68,7 +68,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>
-              <img src={thumbnail} alt="상품이미지" />
+              <img src={thumbnail} alt="상품이미지" onLoad={onLoadPage} />
               <S.ul>
                 {data?.fetchProduct.images?.map((el: string) => (
                   <li key={el}>
@@ -265,7 +265,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
-                setGraph={setGraph}
               />
             </S.Ref>
           )}
