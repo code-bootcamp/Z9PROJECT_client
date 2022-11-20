@@ -68,7 +68,7 @@ export const P = styled.p`
 export const Hamburger = styled.div`
   background: ${styleSet.colors.white};
   min-width: 100%;
-  height: 100vh;
+  height: 100cm;
   position: absolute;
   top: 100px;
   right: ${(props: ILayoutStylesProps) => (props.hamburger ? "0%" : "100%")};

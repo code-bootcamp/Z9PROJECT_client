@@ -153,8 +153,10 @@ export default function UserRegisterContainer() {
           },
         },
       });
-      SuccessModal(`${result.data.createUser.nickname}님 가입을 환영합니다.`);
-      router.push("/users/login");
+      SuccessModal(
+        `${String(result.data.createUser.nickname)}님 가입을 환영합니다.`
+      );
+      void router.push("/users/login");
     } catch (error) {
       console.log(error);
       if (error instanceof Error) ErrorModal(error.message);

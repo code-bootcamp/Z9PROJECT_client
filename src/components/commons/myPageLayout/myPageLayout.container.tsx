@@ -17,7 +17,7 @@ export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
   const { data: fetchUser } = useQuery(FETCH_USER);
 
   const onClickMore = () => {
-    Swal.fire({
+    void Swal.fire({
       title: "로그아웃 하시겠습니까?",
       icon: "warning",
       showCancelButton: true,
@@ -33,7 +33,7 @@ export default function MyPageLayoutContainer(P: IMyPageLayoutProps) {
   };
 
   const onClickLogout = () => {
-    logout();
+    void logout();
     sessionStorage.removeItem("accessToken");
     router.reload();
   };
