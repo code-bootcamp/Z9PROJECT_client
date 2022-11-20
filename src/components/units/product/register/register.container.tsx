@@ -23,7 +23,7 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
       mode: "onChange",
     });
 
-  let optionLength: string[] = [];
+  const optionLength: string[] = [];
   const router = useRouter();
   const [option, setOption] = useState(0);
   const [imgFiles, setImgFiles] = useState<File[]>();
@@ -170,7 +170,7 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
         },
       });
       SuccessModal("상품 등록 완료!");
-      router.push(`/product/${result.data?.createProduct.id}`);
+      void router.push(`/product/${String(result.data?.createProduct.id)}`);
     } catch (error) {
       if (error instanceof Error) ErrorModal(error.message);
     }
@@ -200,7 +200,7 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
         },
       });
       SuccessModal("상품 수정 완료!");
-      router.push(`/product/${result.data?.updateProduct.id}`);
+      void router.push(`/product/${String(result.data?.updateProduct.id)}`);
     } catch (error) {
       if (error instanceof Error) ErrorModal(error.message);
     }

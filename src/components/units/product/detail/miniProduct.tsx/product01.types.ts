@@ -8,5 +8,4 @@ export type IProduct01Props = {
   discount?: number;
   onClickLike: any;
   onClickOrder: any;
-  setGraph: any;
 };

@@ -54,9 +54,7 @@ export default function Upload01(P: IUpload01Props) {
         <span>
           {defaultImg
             ? "인증완료"
-            : creatorCertifiImg
-            ? creatorCertifiImg
-            : "크리에이터 인증 이미지를 업로드 해주세요"}
+            : creatorCertifiImg || "크리에이터 인증 이미지를 업로드 해주세요"}
         </span>
         <Svg
           viewBox="0 0 1024 1024"

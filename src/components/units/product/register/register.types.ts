@@ -72,7 +72,7 @@ export type IRegisterPresenterProps = {
     option:
       | BaseOptionType
       | DefaultOptionType
-      | (BaseOptionType | DefaultOptionType)[]
+      | Array<BaseOptionType | DefaultOptionType>
   ) => void;
   category: string[];
   contentsRef: MutableRefObject<any>;

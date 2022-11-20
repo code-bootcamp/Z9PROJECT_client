@@ -21,6 +21,7 @@ export const FETCH_PRODUCT = gql`
       option3
       option4
       option5
+      originalQuantity
       youtubeLink
       shopName
       ceo
@@ -51,7 +52,8 @@ export const FETCH_PRODUCT = gql`
         nickname
       }
       skin
-      color
+      bgColor
+      textColor
       createdAt
       updatedAt
       deletedAt

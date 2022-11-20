@@ -4,11 +4,12 @@ import { MouseEvent, useEffect, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
   CREATE_ORDER,
-  DELETE_PRODUCT,
-  FETCH_COUNT_OF_QUESTIONS,
   FETCH_IS_LIKED,
+  DELETE_PRODUCT,
   FETCH_PRODUCT,
   LIKE_PRODUCT,
+  FETCH_COUNT_OF_QUESTIONS,
+  ADD_PRODUCT_VIEW_COUNT,
 } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
@@ -24,6 +25,7 @@ export default function ProductDetailContainer() {
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
+  const [addProductViewCount] = useMutation(ADD_PRODUCT_VIEW_COUNT);
 
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
@@ -35,8 +37,6 @@ export default function ProductDetailContainer() {
     variables: { productId: String(router.query.useditemId) },
   });
 
-  console.log(data, "프로덕트");
-
   useEffect(() => {
     setThumbnail(
       data?.fetchProduct.images
@@ -44,6 +44,84 @@ export default function ProductDetailContainer() {
         : "/icon_logo.png"
     );
   }, [data]);
+
+  let option: any[] = [];
+
+  if (data?.fetchProduct?.option1 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+    ];
+  if (data?.fetchProduct?.option2 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+    ];
+  if (data?.fetchProduct?.option3 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+    ];
+  if (data?.fetchProduct?.option4 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+      {
+        value: data?.fetchProduct?.option4,
+        label: data?.fetchProduct?.option4,
+      },
+    ];
+  if (data?.fetchProduct?.option5 !== null)
+    option = [
+      {
+        value: data?.fetchProduct?.option1,
+        label: data?.fetchProduct?.option1,
+      },
+      {
+        value: data?.fetchProduct?.option2,
+        label: data?.fetchProduct?.option2,
+      },
+      {
+        value: data?.fetchProduct?.option3,
+        label: data?.fetchProduct?.option3,
+      },
+      {
+        value: data?.fetchProduct?.option4,
+        label: data?.fetchProduct?.option4,
+      },
+      {
+        value: data?.fetchProduct?.option5,
+        label: data?.fetchProduct?.option5,
+      },
+    ];
 
   const [likeProduct] = useMutation(LIKE_PRODUCT, {
     refetchQueries: [
@@ -138,7 +216,7 @@ export default function ProductDetailContainer() {
   const handleCopyClipBoard = async () => {
     try {
       await navigator.clipboard.writeText(
-        `https://zero9.brian-hong.tech/product/${data?.fetchProduct.id}`
+        `https://zero9.shop/product/${String(data?.fetchProduct.id)}`
       );
       SuccessModal("클립보드에 링크가 복사되었습니다.");
     } catch (error) {
@@ -146,10 +224,17 @@ export default function ProductDetailContainer() {
     }
   };
 
+  const onLoadPage = () => {
+    void addProductViewCount({
+      variables: { productId: String(router.query.useditemId) },
+    });
+  };
+
   return (
     <>
       {data?.fetchProduct.skin === 1 && (
         <ProductDetailPresenter
+          onLoadPage={onLoadPage}
           handleChange={handleChange}
           onClickCount={onClickCount}
           count={count}
@@ -168,10 +253,12 @@ export default function ProductDetailContainer() {
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
+          option={option}
         />
       )}
       {data?.fetchProduct.skin === 2 && (
         <ProductDetailPresenter2
+          onLoadPage={onLoadPage}
           handleChange={handleChange}
           onClickCount={onClickCount}
           count={count}
@@ -195,6 +282,7 @@ export default function ProductDetailContainer() {
 
       {data?.fetchProduct.skin === 3 && (
         <ProductDetailPresenter3
+          onLoadPage={onLoadPage}
           handleChange={handleChange}
           onClickCount={onClickCount}
           count={count}
@@ -213,6 +301,7 @@ export default function ProductDetailContainer() {
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
+          option={option}
         />
       )}
     </>

@@ -13,7 +13,7 @@ import { styleSet } from "../../../../commons/styles/styleSet";
 
 export default function HeaderPage() {
   const { onClickMoveToPage, onClickMobileToPage } = useMoveToPage();
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [accessToken] = useRecoilState(accessTokenState);
   const [hamburger, setHamburger] = useRecoilState(hamburgerState);
   const [openPop, isOpenPop] = useState(false);
   const [logout] = useMutation(LOGOUT);
@@ -28,7 +28,7 @@ export default function HeaderPage() {
   };
 
   const onClickMore = () => {
-    Swal.fire({
+    void Swal.fire({
       title: "로그아웃 하시겠습니까?",
       icon: "warning",
       showCancelButton: true,
@@ -38,7 +38,7 @@ export default function HeaderPage() {
       cancelButtonText: "취소",
     }).then((result) => {
       if (result.isConfirmed) {
-        logout();
+        void logout();
         sessionStorage.removeItem("accessToken");
         router.reload();
       }
@@ -59,7 +59,9 @@ export default function HeaderPage() {
               </li>
             )}
             <li onClick={onClickMoveToPage("/list/list")}>리스트</li>
-            <li onClick={onClickMoveToPage("/list/customList")}>Who's Best</li>
+            <li
+              onClick={onClickMoveToPage("/list/customList")}
+            >{`Who's Best`}</li>
           </S.Ul>
           <S.Ul>
             {!accessToken && (
@@ -112,7 +114,7 @@ export default function HeaderPage() {
                 )}
                 {accessToken && (
                   <>
-                    <S.Mobile>
+                    <S.Mobile onClick={onClickMobileToPage("/users/mypage")}>
                       <strong>{fetchUser?.fetchUser.nickname} </strong>님
                       환영합니다.
                     </S.Mobile>
@@ -129,7 +131,7 @@ export default function HeaderPage() {
                 )}
                 <li onClick={onClickMobileToPage("/list/list")}>리스트</li>
                 <li onClick={onClickMobileToPage("/list/customList")}>
-                  Who's Best
+                  {`Who's Best`}
                 </li>
                 {accessToken && <li onClick={onClickMore}>로그아웃</li>}
               </ul>
