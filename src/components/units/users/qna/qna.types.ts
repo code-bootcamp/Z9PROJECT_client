@@ -2,6 +2,7 @@ export type IQnaPresenterCreatorProps = {
   fetchProductsByCreator: any;
   onClickPage: (id: number) => void;
   currentPage: number;
+  listCount: number;
 };
 
 export type IQuestionListProps = {

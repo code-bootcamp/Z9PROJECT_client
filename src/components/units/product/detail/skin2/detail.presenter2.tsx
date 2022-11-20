@@ -1,6 +1,8 @@
 import { MessageOutlined } from "@ant-design/icons";
 import DOMPurify from "dompurify";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";
@@ -8,9 +10,14 @@ import { categoryContents, categoryTitle } from "../../register/atom/category";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import * as S from "./detail.styles2";
+const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
+  ssr: false,
+});
 
 export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
   const router = useRouter();
+  const [color, setColor] = useState<string>("");
+  const [bgColor, setBgColor] = useState<string>();
 
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -25,51 +32,60 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     onClickTab,
     onClickTab2,
     important,
-    setGraph,
     onClickDelete,
-    commentData,
-    handleCopyClipBoard,
+    countData,
+    onLoadPage,
   } = P;
 
+  useEffect(() => {
+    setColor(String(data?.fetchProduct.textColor));
+    setBgColor(data?.fetchProduct.bgColor);
+  }, []);
+
+  console.log(data);
   return (
     <>
       <S.Container>
-        <S.Info>
+        <S.Info bgColor={String(bgColor)}>
           <S.InfoWrapper>
             <S.InfoImg
               style={{
-                backgroundImage: `url(${data?.fetchProduct.user.profileImg})`,
+                backgroundImage: `url(${String(
+                  data?.fetchProduct.user.profileImg
+                )})`,
               }}
             ></S.InfoImg>
 
             <div>
               <S.Ul>
-                <li className="title">
+                <S.Li className="title" color={color}>
                   {data?.fetchProduct.user.mainContents} 크리에이터
-                </li>
-                <li>
-                  <S.H1>
+                </S.Li>
+                <S.Li color={color}>
+                  <S.H1 color={color}>
                     {data?.fetchProduct.user.nickname} |{" "}
                     {data?.fetchProduct.user.snsName}
                   </S.H1>
-                </li>
+                </S.Li>
               </S.Ul>
 
               <S.Ul>
-                <li>유튜브 구독자 수</li>
-                <li>
+                <S.Li color={color}>유튜브 구독자 수</S.Li>
+                <S.Li color={color}>
                   {data?.fetchProduct.user?.followerNumber?.toLocaleString()}
-                </li>
+                </S.Li>
               </S.Ul>
 
               <S.Ul>
-                <li>유튜브 컨텐츠</li>
-                <li>{data?.fetchProduct.user.mainContents}</li>
+                <S.Li color={color}>유튜브 컨텐츠</S.Li>
+                <S.Li color={color}>
+                  {data?.fetchProduct.user.mainContents}
+                </S.Li>
               </S.Ul>
 
               <S.Ul>
-                <li>유튜브 소개글</li>
-                <li>{data?.fetchProduct.user.introduce}</li>
+                <S.Li color={color}>유튜브 소개글</S.Li>
+                <S.Li color={color}>{data?.fetchProduct.user.introduce}</S.Li>
               </S.Ul>
             </div>
           </S.InfoWrapper>
@@ -80,9 +96,11 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <S.Wrapper>
               <S.ImgBox>
                 <S.Octagon
+                  onLoad={onLoadPage}
                   style={{
                     backgroundImage: `url(${
-                      data?.fetchProduct?.images && data?.fetchProduct.images[0]
+                      String(data?.fetchProduct?.images) &&
+                      String(data?.fetchProduct?.images[0])
                     })`,
                   }}
                 ></S.Octagon>
@@ -116,9 +134,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 <S.Octagon2
                   style={{
                     backgroundImage: `url(${
-                      !data?.fetchProduct?.images[1]
-                        ? data?.fetchProduct?.images[0]
-                        : data?.fetchProduct?.images[1]
+                      !String(data?.fetchProduct?.images[1])
+                        ? String(data?.fetchProduct?.images[0])
+                        : String(data?.fetchProduct?.images[1])
                     })`,
                   }}
                 ></S.Octagon2>
@@ -132,19 +150,24 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 
           {!important && (
             <S.Ref>
-              {/* {process.browser && (
-                <S.Randing
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
-                  }}
-                ></S.Randing>
-              )} */}
+              <S.Randing>
+                {data?.fetchProduct.content ? (
+                  <ViewerPage
+                    initialValue={DOMPurify.sanitize(
+                      data?.fetchProduct.content
+                    )}
+                  />
+                ) : (
+                  <div>loadding...</div>
+                )}
+              </S.Randing>
+
               <Product01
                 onClickCount={onClickCount}
                 count={count}
@@ -153,7 +176,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 discount={discount}
                 onClickLike={onClickLike}
                 onClickOrder={onClickOrder}
-                setGraph={setGraph}
               />
             </S.Ref>
           )}
@@ -164,7 +186,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
               ]?.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <strong>{el}</strong>
                   <data>
                     {data?.fetchProduct.productDetail[`option${idx + 1}`]}
@@ -174,7 +196,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
               ]?.length %
-                2 ==
+                2 ===
               1 ? (
                 <li>
                   <strong></strong>
@@ -188,7 +210,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
-                `/product/${router.query.useditemId}/edit`
+                `/product/${String(router.query.useditemId)}/edit`
               )}
             >
               수정
@@ -201,7 +223,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
           <S.Wrapper3>
             <S.Count>
               <li>
-                <MessageOutlined /> {commentData?.fetchQuestions.length}
+                <MessageOutlined /> {countData?.fetchCountOfQuestions}
               </li>
             </S.Count>
             <QuestionWriter />

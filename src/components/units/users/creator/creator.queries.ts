@@ -12,7 +12,6 @@ export const CREATE_CREATOR = gql`
       id
       nickname
       userType
-      mainContents
     }
   }
 `;

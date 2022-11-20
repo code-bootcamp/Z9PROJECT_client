@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
 import { BankOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
@@ -141,7 +141,7 @@ type IBankCodeModalPorps = {
 export default function BankCodeModal(P: IBankCodeModalPorps) {
   const { setBankCode } = P;
   const [isOpen, setIsOpen] = useState(false);
-  const [listChange, setListChange] = useState(false);
+  const [listChange, setListChange] = useState(true);
   const bankList = [
     { name: "KB국민은행", code: "004" },
     { name: "SC제일은행", code: "023" },
@@ -215,17 +215,26 @@ export default function BankCodeModal(P: IBankCodeModalPorps) {
           <Modal>
             <Close onClick={onClickModal} />
             <H1>
-              <BankOutlined /> 은행 선택{" "}
+              <BankOutlined />{" "}
+              {listChange ? "은행코드 선택" : "증권사코드 선택"}
             </H1>
             <BtnWrapper>
               {listChange
-                ? bankList.map((el) => (
-                    <SubmitBtn type="button" onClick={onClickBank(el.code)}>
+                ? bankList.map((el, i) => (
+                    <SubmitBtn
+                      key={i}
+                      type="button"
+                      onClick={onClickBank(el.code)}
+                    >
                       <span>{el.name}</span>
                     </SubmitBtn>
                   ))
-                : stockList.map((el) => (
-                    <SubmitBtn type="button" onClick={onClickBank(el.code)}>
+                : stockList.map((el, i) => (
+                    <SubmitBtn
+                      key={i}
+                      type="button"
+                      onClick={onClickBank(el.code)}
+                    >
                       <span>{el.name}</span>
                     </SubmitBtn>
                   ))}

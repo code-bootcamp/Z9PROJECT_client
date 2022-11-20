@@ -8,7 +8,7 @@ import {
 } from "./purchase.queries";
 
 export default function PurchaseContainer() {
-  const [tab, setTab] = useState("1");
+  const [tab, setTab] = useState("0");
   const [currentPage, setCurrentPage] = useState(1);
   const [date, setDate] = useState<Date[] | undefined[]>([
     undefined,
@@ -30,8 +30,8 @@ export default function PurchaseContainer() {
     },
   });
 
-  const onClickPage = (currentPage: number) => {
-    setCurrentPage(currentPage);
+  const onClickPage = (clickPage: number) => {
+    setCurrentPage(clickPage);
   };
 
   const onChangeDate = (date: any) => {
@@ -53,14 +53,14 @@ export default function PurchaseContainer() {
 
   const onClickRefund = (id: number) => () => {
     console.log(id);
-    cancelOrderRequest({
+    void cancelOrderRequest({
       variables: {
         orderId: String(id),
       },
     });
   };
 
-  const onClickSearch = () => {};
+  // const onClickSearch = () => {};
 
   return (
     <PurchasePresenter
@@ -69,7 +69,8 @@ export default function PurchaseContainer() {
       onClickTab={onClickTab}
       onClickPage={onClickPage}
       onChangeDate={onChangeDate}
-      HistoryCount={HistoryCount}
+      currentPage={currentPage}
+      HistoryCount={HistoryCount?.fetchCountOfOrderByUserId}
       onClickRefund={onClickRefund}
       purchaseHistory={purchaseHistory}
     />

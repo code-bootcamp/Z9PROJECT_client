@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
-import { useForm, UseFormReturn } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
 import CreatorPresenter from "./creator.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@apollo/client";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   CHECK_NICKNAME,
   CREATE_CREATOR,
@@ -32,9 +32,9 @@ const schma = yup.object({
   snsChannel: yup.string().required("필수"),
   mainContents: yup.string(),
   introduce: yup.string(),
-  account: yup.string(),
-  bank: yup.string(),
-  accountName: yup.string(),
+  account: yup.number().typeError("숫자만 입력").required("필수"),
+  bank: yup.string().required("필수"),
+  accountName: yup.string().required("필수"),
   terms: yup.boolean().oneOf([true], "필수"),
 });
 
@@ -145,7 +145,8 @@ export default function CreatorRegisterContainer() {
 
   const onClickSignUp = async (data: any) => {
     const { keyNumber, passwordConfirm, terms, ...rest } = data;
-
+    if (!certFile) ErrorModal("인증 파일은 필수 입니다.");
+    if (!profileFile) ErrorModal("프로필 이미지는 필수 입니다.");
     try {
       const resultCert = await uploadImage({
         variables: {
@@ -163,6 +164,7 @@ export default function CreatorRegisterContainer() {
           signupId: confirmId,
           createCreatorInput: {
             ...rest,
+            account: String(getValues("account")),
             isAuthedCreator: true,
             followerNumber: 10000000,
             profileImg: resultProfile.data.uploadImage.imageUrl,
@@ -171,9 +173,9 @@ export default function CreatorRegisterContainer() {
         },
       });
       SuccessModal(
-        `${result.data.createCreator.nickname}님 가입을 환영합니다.`
+        `${String(result.data.createCreator.nickname)}님 가입을 환영합니다.`
       );
-      router.push("/users/login");
+      void router.push("/users/login");
     } catch (error) {
       console.log(error);
       if (error instanceof Error) ErrorModal(error.message);

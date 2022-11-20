@@ -1,7 +1,6 @@
 import { DollarOutlined } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
@@ -181,7 +180,7 @@ export default function ChargeModal() {
       },
       function (rsp: any) {
         if (rsp.success) {
-          const result = createPayment({
+          void createPayment({
             variables: {
               impUid: rsp.imp_uid,
               amount: rsp.paid_amount,

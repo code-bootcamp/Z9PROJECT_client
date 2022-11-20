@@ -1,16 +1,14 @@
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import { ErrorModal } from "../../../commons/modal/modal";
 import ProductListMap from "./list.map";
 import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
-import { debounce } from "lodash";
-import _ from "lodash";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
-  const [length, setLength] = useState(0);
 
-  const { data, fetchMore, refetch } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
-    fetchPolicy: "network-only",
+  const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
+    fetchPolicy: "cache-first",
     variables: { page: 1 },
   });
 
@@ -21,27 +19,25 @@ export default function ProductListContainer() {
   const onLoadMore = () => {
     if (!data) return;
 
-    void fetchMore({
-      variables: { page: Math.ceil(data?.fetchProductsByPages.length / 4) + 1 },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchProductsByPages)
-          return { fetchProductsByPages: [...prev.fetchProductsByPages] };
-        return {
-          fetchProductsByPages: [
-            ...prev.fetchProductsByPages,
-            ...fetchMoreResult.fetchProductsByPages,
-          ],
-        };
-      },
-    });
-  };
-
-  const getDebounce = _.debounce((value) => {
-    void refetch({ page: 1 });
-  }, 700);
-
-  const onChangeSearch = (event: any) => {
-    getDebounce(event.target.value);
+    try {
+      void fetchMore({
+        variables: {
+          page: Math.ceil(data?.fetchProductsByPages.length / 4) + 1,
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult?.fetchProductsByPages)
+            return { fetchProductsByPages: [...prev.fetchProductsByPages] };
+          return {
+            fetchProductsByPages: [
+              ...prev.fetchProductsByPages,
+              ...fetchMoreResult.fetchProductsByPages,
+            ],
+          };
+        },
+      });
+    } catch (error) {
+      ErrorModal("불러올 게시물이 존재하지 않습니다.");
+    }
   };
 
   return (
@@ -49,8 +45,6 @@ export default function ProductListContainer() {
       <ProductListMap
         onClickTab={onClickTab}
         onLoadMore={onLoadMore}
-        onChangeSearch={onChangeSearch}
-        length={length}
         tab={tab}
         data={data}
       />

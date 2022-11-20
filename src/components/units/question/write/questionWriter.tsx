@@ -2,11 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import {
-  CREATE_QUESTION,
-  FETCH_QUESTIONS,
-  FETCH_USER,
-} from "../question.queries";
+import { CREATE_QUESTION, FETCH_USER } from "../question.queries";
 import * as S from "../question.styles";
 
 export default function QuestionWriter() {
@@ -31,12 +27,15 @@ export default function QuestionWriter() {
             productId: String(router.query.useditemId),
           },
         },
-        refetchQueries: [
-          {
-            query: FETCH_QUESTIONS,
-            variables: { productId: String(router.query.useditemId) },
-          },
-        ],
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchQuestions: (prev) => {
+                return [data.createQuestion, ...prev];
+              },
+            },
+          });
+        },
       });
       SuccessModal("질문이 등록되었습니다.");
     } catch (error) {

@@ -1,4 +1,3 @@
-import { YoutubeOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
