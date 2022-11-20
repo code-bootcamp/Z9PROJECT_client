@@ -6,7 +6,39 @@ import {
 import * as S from "./customList.styles";
 
 export default function CustomListPresenter(P: any) {
-  const { onChangeInput } = P;
+  const {
+    onChangeInput,
+    searchData,
+    allCreatorData,
+    onClickTab,
+    tab,
+    optionalData,
+  } = P;
+
+  const thisiscomponent = (el: any) => {
+    return (
+      <S.ImgBox key={el.id}>
+        <S.Octagon
+          style={{
+            backgroundImage: `url(${String(el.creatorAuthImg)})`,
+          }}
+        >
+          <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
+        </S.Octagon>
+        <S.Name>
+          {el.nickname ? el.nickname : el.snsName}
+          <span>
+            {el.snsChannel === "YOUTUBE" ? (
+              <YoutubeOutlined />
+            ) : (
+              <InstagramOutlined />
+            )}{" "}
+            {el?.followerNumber}
+          </span>
+        </S.Name>
+      </S.ImgBox>
+    );
+  };
 
   return (
     <>
@@ -39,10 +71,14 @@ export default function CustomListPresenter(P: any) {
 
             <S.Ul>
               <li>
-                <YoutubeOutlined />
-                유튜브
-                <InstagramOutlined />
-                인스타그램
+                <span id="youtube" onClick={onClickTab}>
+                  <YoutubeOutlined />
+                  유튜브
+                </span>
+                <span id="insta" onClick={onClickTab}>
+                  <InstagramOutlined />
+                  인스타그램
+                </span>
               </li>
               <li>
                 <S.Input
@@ -84,137 +120,19 @@ export default function CustomListPresenter(P: any) {
           </S.Text>
 
           <S.ImgWrapper>
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
+            {searchData?.searchCreators !== null
+              ? searchData?.searchCreators?.map((el: any) =>
+                  thisiscomponent(el)
+                )
+              : tab === "default"
+              ? allCreatorData?.fetchCreators?.map((el: any) => {
+                  console.log("지금은 디폴트 데이터");
+                  return thisiscomponent(el);
+                })
+              : optionalData?.fetchCreatorsBySnsType?.map((el: any) => {
+                  console.log("지금은 옵션 데이터");
+                  return thisiscomponent(el);
+                })}
           </S.ImgWrapper>
         </S.Bottom>
       </S.Container>

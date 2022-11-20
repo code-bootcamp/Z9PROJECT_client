@@ -35,6 +35,7 @@ export const Top = styled.section`
   }
   @media ${styleSet.breakePoints.mobile} {
     width: 600px;
+    height: 100vh;
     & > img {
       display: none;
     }
@@ -85,6 +86,7 @@ export const Square = styled.div`
     width: 600px;
     height: 500px;
     left: 50%;
+    top: 50%;
   }
 `;
 
@@ -150,14 +152,14 @@ export const Link = styled.a`
   word-break: keep-all;
   display: inline-block;
   padding: 10px 22px;
-  border: 2px solid ${styleSet.colors.black};
-  color: ${styleSet.colors.black};
+  border: 2px solid ${styleSet.colors.aftercolor};
+  color: ${styleSet.colors.aftercolor};
   border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
   transition: 0.5s;
 
   @media ${styleSet.breakePoints.mobile} {
     font-size: ${styleSet.fontSize.s9};
-    color: ${styleSet.colors.black};
+    color: ${styleSet.colors.aftercolor};
   }
 `;
 
@@ -289,11 +291,18 @@ export const Ul = styled.div`
   li {
     color: ${styleSet.colors.white};
     font-family: ${styleSet.font.B};
-    font-size: ${styleSet.fontSize.s6};
+    font-size: ${styleSet.fontSize.s3};
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     cursor: pointer;
+
+    span {
+      margin-right: 5px;
+      &:hover {
+        color: ${styleSet.colors.point2};
+      }
+    }
   }
 
   @media ${styleSet.breakePoints.mobile} {
@@ -363,7 +372,6 @@ export const Name = styled.p`
 `;
 
 export const Octagon = styled.div`
-  background: url("/reoj.jpeg") no-repeat;
   background-position: 50% 50%;
   position: relative;
   background-size: contain;
