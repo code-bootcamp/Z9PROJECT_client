@@ -1,32 +1,19 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_CREATORS = gql`
-  query fetchCreators($usersId: [String!]!) {
-    fetchCreators(usersId: $usersId) {
+export const FETCH_USER = gql`
+  query fetchUser {
+    fetchUser {
       id
-      email
+    }
+  }
+`;
+
+export const SEARCH_CREATORS = gql`
+  query searchCreators($word: String = "") {
+    searchCreators(word: $word) {
+      id
       userType
       nickname
-      phoneNumber
-      zipcode
-      address
-      addressDetail
-      profileImg
-      creatorAuthImg
-      isAuthedCreator
-      snsId
-      snsName
-      snsChannel
-      followerNumber
-      mainContents
-      introduce
-      bank
-      account
-      accountName
-      point
-      createdAt
-      updatedAt
-      deletedAt
     }
   }
 `;

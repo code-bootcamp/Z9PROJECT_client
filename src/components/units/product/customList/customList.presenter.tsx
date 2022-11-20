@@ -5,7 +5,9 @@ import {
 } from "@ant-design/icons";
 import * as S from "./customList.styles";
 
-export default function CustomListPresenter() {
+export default function CustomListPresenter(P: any) {
+  const { onChangeInput } = P;
+
   return (
     <>
       <S.Container>
@@ -43,7 +45,11 @@ export default function CustomListPresenter() {
                 인스타그램
               </li>
               <li>
-                <S.Input type="text" placeholder="크리에이터 검색" />
+                <S.Input
+                  type="text"
+                  placeholder="크리에이터 검색"
+                  onChange={onChangeInput}
+                />
                 <S.Search>
                   <SearchOutlined />
                 </S.Search>

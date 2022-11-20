@@ -226,6 +226,11 @@ export const Input = styled.input`
   height: 40px;
   border: none;
   font-size: ${styleSet.fontSize.s9};
+  width: 300px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: auto;
+  }
 `;
 
 export const H1 = styled.div`
@@ -300,7 +305,7 @@ export const Ul = styled.div`
 
 export const Bottom = styled.section`
   background: linear-gradient(rgb(0 0 0), rgb(0 0 0 / 70%));
-  padding: 300px 0 30px 0;
+  padding: 0 0 30px 0;
   position: relative;
   .mobile {
     display: none;
@@ -308,6 +313,8 @@ export const Bottom = styled.section`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
+    padding: 300px 0 30px 0;
+
     .mobile {
       display: block;
       height: min-content;
@@ -360,8 +367,8 @@ export const Octagon = styled.div`
   background-position: 50% 50%;
   position: relative;
   background-size: contain;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   margin: 30px 0;
   clip-path: polygon(
     30% 0%,

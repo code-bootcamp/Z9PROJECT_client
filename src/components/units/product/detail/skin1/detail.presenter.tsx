@@ -64,7 +64,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
 
   return (
     <>
-      <S.Container onLoad={onLoadPage}>
+      <S.Container>
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>

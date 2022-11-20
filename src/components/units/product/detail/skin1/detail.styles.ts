@@ -274,7 +274,8 @@ export const Bell = styled.li`
 export const ul = styled.ul`
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 5px;
   li {
     text-align: center;
     overflow: hidden;
