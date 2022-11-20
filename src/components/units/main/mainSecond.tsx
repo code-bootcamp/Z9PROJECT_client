@@ -8,9 +8,12 @@ import "swiper/css/navigation";
 import "animate.css";
 import { IMainPresenterProps } from "./main.types";
 import Timer from "../../commons/hooks/timerMain";
+import { useMoveToPage } from "../../commons/hooks/useMoveToPage";
+import FooterPage from "../../commons/layout/footer";
 
 export default function MainSecond(P: IMainPresenterProps) {
   const { handleLeftClick, handleRightClick, setSwiperRef, data } = P;
+  const { onClickMoveToPage } = useMoveToPage();
 
   const [ref] = useInView({
     threshold: 0,
@@ -45,7 +48,12 @@ export default function MainSecond(P: IMainPresenterProps) {
             modules={[Autoplay, Pagination, Navigation]}
           >
             {data?.fetchProductsByPages.map((el: any) => (
-              <SwiperSlide className="swiperSlide" key={el.id}>
+              <SwiperSlide
+                className="swiperSlide"
+                key={el.id}
+                onClick={onClickMoveToPage(`/product/${String(el.id)}`)}
+                style={{ cursor: " pointer " }}
+              >
                 <S.Sale>{el?.discountRate}%</S.Sale>
                 <S.ProductImg>
                   <img
@@ -59,7 +67,7 @@ export default function MainSecond(P: IMainPresenterProps) {
                     <ClockCircleOutlined />
                   </S.H2>
                   <time>
-                    <Timer el={el} status={status} />
+                    <Timer el={el} />
                   </time>
                   <S.ProductName>
                     [{el.quantity}개 한정] {el.name}
@@ -73,6 +81,9 @@ export default function MainSecond(P: IMainPresenterProps) {
         </S.Product>
         <S.Right onClick={handleRightClick} />
       </S.FullPage>
+      <S.Mobile>
+        <FooterPage />
+      </S.Mobile>
     </>
   );
 }
