@@ -35,6 +35,7 @@ export const Top = styled.section`
   }
   @media ${styleSet.breakePoints.mobile} {
     width: 600px;
+    height: 100vh;
     & > img {
       display: none;
     }
@@ -85,6 +86,7 @@ export const Square = styled.div`
     width: 600px;
     height: 500px;
     left: 50%;
+    top: 50%;
   }
 `;
 
@@ -150,14 +152,14 @@ export const Link = styled.a`
   word-break: keep-all;
   display: inline-block;
   padding: 10px 22px;
-  border: 2px solid ${styleSet.colors.black};
-  color: ${styleSet.colors.black};
+  border: 2px solid ${styleSet.colors.aftercolor};
+  color: ${styleSet.colors.aftercolor};
   border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
   transition: 0.5s;
 
   @media ${styleSet.breakePoints.mobile} {
     font-size: ${styleSet.fontSize.s9};
-    color: ${styleSet.colors.black};
+    color: ${styleSet.colors.aftercolor};
   }
 `;
 
@@ -211,7 +213,7 @@ export const Text = styled.div`
   z-index: 99;
 
   @media ${styleSet.breakePoints.mobile} {
-    left: 5%;
+    left: 1%;
     top: 4%;
   }
 `;
@@ -226,6 +228,11 @@ export const Input = styled.input`
   height: 40px;
   border: none;
   font-size: ${styleSet.fontSize.s9};
+  width: 300px;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: auto;
+  }
 `;
 
 export const H1 = styled.div`
@@ -284,23 +291,36 @@ export const Ul = styled.div`
   li {
     color: ${styleSet.colors.white};
     font-family: ${styleSet.font.B};
-    font-size: ${styleSet.fontSize.s6};
+    font-size: ${styleSet.fontSize.s3};
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     cursor: pointer;
+
+    span {
+      margin-right: 5px;
+      span {
+        margin: 0;
+      }
+      &:hover {
+        color: ${styleSet.colors.point2};
+      }
+    }
   }
 
   @media ${styleSet.breakePoints.mobile} {
+    padding: 0 10px;
     li {
       white-space: nowrap;
+      font-size: ${styleSet.fontSize.s5};
+      gap: 10px;
     }
   }
 `;
 
 export const Bottom = styled.section`
   background: linear-gradient(rgb(0 0 0), rgb(0 0 0 / 70%));
-  padding: 300px 0 30px 0;
+  padding: 0 0 30px 0;
   position: relative;
   .mobile {
     display: none;
@@ -308,9 +328,12 @@ export const Bottom = styled.section`
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
+    padding: 300px 0 30px 0;
+
     .mobile {
       display: block;
       height: min-content;
+      width: 99%;
     }
   }
 `;
@@ -356,12 +379,11 @@ export const Name = styled.p`
 `;
 
 export const Octagon = styled.div`
-  background: url("/reoj.jpeg") no-repeat;
   background-position: 50% 50%;
   position: relative;
   background-size: contain;
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   margin: 30px 0;
   clip-path: polygon(
     30% 0%,
@@ -398,5 +420,46 @@ export const SkewBg = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     display: none;
+  }
+`;
+
+export const Button = styled.button`
+  width: 50%;
+  height: 60px;
+  font-size: ${styleSet.fontSize.s7};
+  border: 1px solid ${styleSet.colors.primary};
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative;
+  left: 50%;
+  background-color: ${styleSet.colors.primary};
+  transform: translateX(-50%);
+  &&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -5%;
+    left: -10%;
+    width: 0;
+    height: 120%;
+    background: ${styleSet.colors.aftercolor};
+    transition: all 0.3s ease;
+    transform: skewX(15deg);
+  }
+  &&:hover {
+    color: ${styleSet.colors.white};
+    ::before {
+      width: 120%;
+    }
+    span {
+      color: ${styleSet.colors.white};
+    }
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    color: ${styleSet.colors.white};
   }
 `;

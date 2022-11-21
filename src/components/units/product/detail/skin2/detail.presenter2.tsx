@@ -42,7 +42,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
 
-  console.log(data);
   return (
     <>
       <S.Container>
@@ -109,19 +108,29 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
                 <strong>[{data?.fetchProduct.quantity}개 한정]</strong>
                 {data?.fetchProduct.name}
               </S.Text>
-              <S.Like src="/icon_like.png" alt="좋아요 아이콘" />
-              <S.Emoticon src="/icon_emoticon.png" alt="하트 이모티콘 아이콘" />
+              <S.Like
+                onLoad={onLoadPage}
+                src="/icon_like.png"
+                alt="좋아요 아이콘"
+                className="mobile"
+              />
+              <S.Emoticon
+                src="/icon_emoticon.png"
+                alt="하트 이모티콘 아이콘"
+                className="mobile"
+              />
             </S.Wrapper>
           </S.RightDiv>
         </S.Right>
         <S.Left>
           <S.LeftDiv>
             <S.Wrapper>
-              <div>
+              <div className="youtube">
                 <S.Text2>
                   {data?.fetchProduct.user?.followerNumber?.toLocaleString()}K
                 </S.Text2>
                 <S.Iframe
+                  className="youtube"
                   url={data?.fetchProduct?.youtubeLink}
                   width={500}
                   height={230}

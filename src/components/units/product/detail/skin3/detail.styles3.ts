@@ -180,6 +180,20 @@ export const Company = styled.ul`
     > img {
       height: 300px;
     }
+    li {
+      strong {
+        padding: 0 10px;
+        min-width: 50%;
+        max-width: 50%;
+      }
+      data {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        width: 135px;
+        overflow: auto;
+      }
+    }
   }
 `;
 

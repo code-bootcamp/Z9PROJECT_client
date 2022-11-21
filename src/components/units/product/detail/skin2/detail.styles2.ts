@@ -18,14 +18,26 @@ export const Reset = styled.img`
 `;
 
 export const Wrapper = styled.div`
-  width: 1100px;
+  max-width: 1300px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & > .youtube {
+    margin-right: 200px;
+  }
+  @media ${styleSet.breakePoints.mobile} {
+    flex-direction: row-reverse;
+    .mobile {
+      display: none;
+    }
+    & > .youtube {
+      display: none;
+    }
+  }
 `;
 
-export const Randing = styled.img`
+export const Randing = styled.article`
   margin-bottom: 30px;
 
   @media ${styleSet.breakePoints.mobile} {
@@ -34,10 +46,10 @@ export const Randing = styled.img`
 `;
 
 export const DetailWrapper = styled.div`
-  width: 1400px;
+  max-width: 1460px;
   margin: 0 auto;
   position: relative;
-  padding-top: 50px;
+  padding: 50px 30px 0 30px;
 `;
 
 export const H1 = styled.h1`
@@ -50,6 +62,17 @@ export const H1 = styled.h1`
 export const Ul = styled.ul`
   margin-bottom: 30px;
   position: relative;
+
+  @media ${styleSet.breakePoints.mobile} {
+    margin-bottom: 15px;
+    li {
+      font-size: ${styleSet.fontSize.s6};
+      &:first-child {
+        font-family: ${styleSet.font.B};
+        font-size: ${styleSet.fontSize.s6};
+      }
+    }
+  }
 `;
 
 export const Li = styled.li`
@@ -68,11 +91,16 @@ export const Li = styled.li`
 export const Info = styled.section`
   width: 100%;
   height: 100vh;
+  padding: 0 40px;
   background: ${(props: IStylesProps) => {
     return `${String(props.bgColor)}`;
   }};
   align-items: center;
   display: flex;
+
+  @media ${styleSet.breakePoints.mobile} {
+    height: auto;
+  }
 `;
 
 export const InfoImg = styled.div`
@@ -83,6 +111,12 @@ export const InfoImg = styled.div`
   background-size: cover;
   border-radius: 50%;
   margin-right: 20%;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 300px;
+    height: 300px;
+    margin: 30px 0 0 0;
+  }
 `;
 
 export const InfoWrapper = styled.div`
@@ -90,6 +124,11 @@ export const InfoWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
+
+  @media ${styleSet.breakePoints.mobile} {
+    flex-direction: column;
+    gap: 50px;
+  }
 `;
 
 export const RightDiv = styled.div`
@@ -143,12 +182,19 @@ export const ImgBox2 = styled.div`
 `;
 
 export const Text = styled.p`
-  margin-right: 1%;
+  margin-left: 200px;
   strong {
   }
   color: ${styleSet.colors.darkgray};
   font-size: ${styleSet.fontSize.s3};
   font-family: ${styleSet.font.B};
+
+  @media ${styleSet.breakePoints.mobile} {
+    margin: 0;
+    padding-left: 20px;
+    font-size: ${styleSet.fontSize.s4};
+    word-break: break-all;
+  }
 `;
 export const Text2 = styled.p`
   margin-left: 5%;
@@ -200,13 +246,20 @@ export const Company = styled.ul`
     }
     li {
       strong {
-        width: 150px;
         padding: 0 10px;
+        min-width: 50%;
+        max-width: 50%;
+      }
+      data {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        width: 135px;
+        overflow: auto;
       }
     }
   }
 `;
-
 export const Ref = styled.section``;
 
 export const Like = styled.img`
@@ -242,6 +295,10 @@ export const Octagon = styled.div`
     0% 70%,
     0% 30%
   );
+
+  @media ${styleSet.breakePoints.mobile} {
+    clip-path: none;
+  }
 `;
 
 export const Octagon2 = styled.div`
@@ -262,6 +319,10 @@ export const Octagon2 = styled.div`
     0% 70%,
     0% 30%
   );
+  @media ${styleSet.breakePoints.mobile} {
+    clip-path: none;
+    width: 100%;
+  }
 `;
 
 export const Button = styled.div`

@@ -4,8 +4,20 @@ import {
   YoutubeOutlined,
 } from "@ant-design/icons";
 import * as S from "./customList.styles";
+import "animate.css";
+import ComponentPage from "./customList.components";
 
-export default function CustomListPresenter() {
+export default function CustomListPresenter(P: any) {
+  const {
+    onChangeInput,
+    searchData,
+    allCreatorData,
+    onClickTab,
+    tab,
+    optionalData,
+    onLoadMore,
+  } = P;
+
   return (
     <>
       <S.Container>
@@ -24,7 +36,11 @@ export default function CustomListPresenter() {
               <S.Link>Go Go</S.Link>
             </S.ContentRanding>
           </S.Square>
-          <img src="/icon_megaphone.png" alt="메가폰 아이콘" />
+          <img
+            src="/icon_megaphone.png"
+            alt="메가폰 아이콘"
+            className="animate__animated animate__backInRight"
+          />
           <S.SkewBg></S.SkewBg>
 
           <S.Text className="pc">
@@ -37,13 +53,21 @@ export default function CustomListPresenter() {
 
             <S.Ul>
               <li>
-                <YoutubeOutlined />
-                유튜브
-                <InstagramOutlined />
-                인스타그램
+                <span id="youtube" onClick={onClickTab}>
+                  <YoutubeOutlined />
+                  유튜브
+                </span>
+                <span id="insta" onClick={onClickTab}>
+                  <InstagramOutlined />
+                  인스타그램
+                </span>
               </li>
               <li>
-                <S.Input type="text" placeholder="크리에이터 검색" />
+                <S.Input
+                  type="text"
+                  placeholder="크리에이터 검색"
+                  onChange={onChangeInput}
+                />
                 <S.Search>
                   <SearchOutlined />
                 </S.Search>
@@ -78,138 +102,21 @@ export default function CustomListPresenter() {
           </S.Text>
 
           <S.ImgWrapper>
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
-
-            <S.ImgBox>
-              <S.Octagon>
-                <S.BgLayer className="bg_layer">누적 판매상품 0개</S.BgLayer>
-              </S.Octagon>
-              <S.Name>
-                레오제이
-                <span>
-                  <YoutubeOutlined /> 102K
-                </span>
-              </S.Name>
-            </S.ImgBox>
+            {searchData?.searchCreators !== null
+              ? searchData?.searchCreators?.map((el: any) => (
+                  <ComponentPage el={el} key={el.id} />
+                ))
+              : tab === "default"
+              ? allCreatorData?.fetchCreators?.map((el: any) => {
+                  return <ComponentPage el={el} key={el.id} />;
+                })
+              : optionalData?.fetchCreatorsBySnsType?.map((el: any) => {
+                  return <ComponentPage el={el} key={el.id} />;
+                })}
           </S.ImgWrapper>
+          <S.Button onClick={onLoadMore}>
+            <span>더보기</span>
+          </S.Button>
         </S.Bottom>
       </S.Container>
     </>

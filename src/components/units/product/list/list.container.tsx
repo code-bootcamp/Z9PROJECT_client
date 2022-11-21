@@ -19,25 +19,21 @@ export default function ProductListContainer() {
   const onLoadMore = () => {
     if (!data) return;
 
-    try {
-      void fetchMore({
-        variables: {
-          page: Math.ceil(data?.fetchProductsByPages.length / 4) + 1,
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult?.fetchProductsByPages)
-            return { fetchProductsByPages: [...prev.fetchProductsByPages] };
-          return {
-            fetchProductsByPages: [
-              ...prev.fetchProductsByPages,
-              ...fetchMoreResult.fetchProductsByPages,
-            ],
-          };
-        },
-      });
-    } catch (error) {
-      ErrorModal("불러올 게시물이 존재하지 않습니다.");
-    }
+    void fetchMore({
+      variables: {
+        page: Math.ceil(data?.fetchProductsByPages.length / 4) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult?.fetchProductsByPages)
+          return { fetchProductsByPages: [...prev.fetchProductsByPages] };
+        return {
+          fetchProductsByPages: [
+            ...prev.fetchProductsByPages,
+            ...fetchMoreResult.fetchProductsByPages,
+          ],
+        };
+      },
+    });
   };
 
   return (
