@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   CloseCircleOutlined,
   EyeOutlined,
@@ -7,7 +6,7 @@ import {
 import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
 import { useMoveToPage } from "../hooks/useMoveToPage";
-import Timer from "../hooks/timer";
+import Timer from "../hooks/timerList";
 import { useQuery } from "@apollo/client";
 import { FETCH_PRODUCTS_BY_CREATORS } from "../../units/product/customList/cudtomList.queries";
 import {
@@ -16,13 +15,14 @@ import {
 } from "../../units/product/list/list.queries";
 
 const Container = styled.section`
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 1000px;
   background-color: #f4f5f9;
   padding-bottom: 100px;
   position: fixed;
+  overflow: auto;
   z-index: 99;
-  left: 0;
+  right: 0;
   top: 0%;
 
   @media ${styleSet.breakePoints.mobile} {
@@ -30,66 +30,11 @@ const Container = styled.section`
   }
 `;
 
-const SearchBox: any = styled.div`
-  display: flex;
-  justify-content: space-between;
-  .ant-input-affix-wrapper {
-    width: 30%;
-    border-radius: 5px;
-    height: 40px;
-  }
-
-  ul {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    position: relative;
-
-    li {
-      font-size: ${styleSet.fontSize.s7};
-      font-family: ${styleSet.font.B};
-      text-align: center;
-      width: 110px;
-      cursor: pointer;
-      background-color: ${styleSet.colors.black};
-      color: ${styleSet.colors.white};
-      padding: 10px 20px;
-      border-radius: 10px;
-      &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
-        background-color: ${styleSet.colors.primary};
-        color: ${styleSet.colors.white};
-      }
-    }
-  }
-  @media ${styleSet.breakePoints.mobile} {
-    ul {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-    li {
-      font-size: ${styleSet.fontSize.s9} !important;
-      width: 110px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      padding: 0 !important;
-      display: flex;
-      justify-content: center;
-      white-space: nowrap;
-      word-break: keep-all;
-      &:nth-of-type(${(props: any) => (props.tab ? props.tab : 1)}) {
-        border-radius: 10px !important;
-      }
-    }
-  }
-`;
-
 const H1 = styled.h1`
   font-size: ${styleSet.fontSize.s1};
   font-family: ${styleSet.font.B};
   text-align: center;
-  padding-block: 50px;
+  padding-top: 50px;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 10px;
@@ -98,60 +43,19 @@ const H1 = styled.h1`
 `;
 
 const Wrapper = styled.div`
-  max-width: 1460px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 30px;
-`;
-
-const Button = styled.button`
-  width: 50%;
-  height: 60px;
-  font-size: ${styleSet.fontSize.s7};
-  border: 1px solid ${styleSet.colors.primary};
-  margin-top: 50px;
-  overflow: hidden;
-  position: relative;
-  left: 30%;
-  background-color: ${styleSet.colors.primary};
-  transform: translateX(-50%);
-  &&::before {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: -5%;
-    left: -10%;
-    width: 0;
-    height: 120%;
-    background: ${styleSet.colors.aftercolor};
-    transition: all 0.3s ease;
-    transform: skewX(15deg);
-  }
-  &&:hover {
-    color: ${styleSet.colors.white};
-    ::before {
-      width: 120%;
-    }
-    span {
-      color: ${styleSet.colors.white};
-    }
-  }
-  span {
-    display: block;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s ease;
-    color: ${styleSet.colors.white};
-  }
 `;
 
 const Main = styled.main`
   margin-top: 50px;
   & > div {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 60px;
+    align-items: flex-end;
   }
 
   @media ${styleSet.breakePoints.mobile} {
@@ -163,7 +67,7 @@ const Main = styled.main`
 
 const Section = styled.section`
   cursor: pointer;
-  max-width: calc(50% - 30px);
+  max-width: 100%;
   max-height: 800px;
   overflow: hidden;
   position: relative;
@@ -324,56 +228,32 @@ const Price = styled.p`
 `;
 
 export default function CreatorsModal(P: any) {
-  const { el, setModal } = P;
-  const [tab, setTab] = useState<any>("1");
+  const { el, setModal, dom } = P;
   const { onClickMoveToPage } = useMoveToPage();
-  const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_CREATORS, {
+  const { data } = useQuery(FETCH_PRODUCTS_BY_CREATORS, {
     fetchPolicy: "cache-first",
     variables: { userId: String(el.id), page: 1 },
   });
 
   const { data: viewData } = useQuery(FETCH_PRODUCT_VIEW_COUNT, {
     fetchPolicy: "cache-first",
-    variables: { productId: String(el.id) },
+    variables: { productId: String(dom?.id) },
   });
   const { data: likeData } = useQuery(FETCH_LIKE_COUNT, {
     fetchPolicy: "cache-first",
-    variables: { productId: String(el.id) },
+    variables: { productId: String(dom?.id) },
   });
-
-  const btnArray = ["전체", "진행예정", "진행중", "종료"];
 
   const start = new Date(el?.validFrom?.slice(0, 10)) as any;
   const today = new Date() as any;
   const end = new Date(el?.validUntil?.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
 
-  const onClickTab = (event: any) => {
-    setTab(event?.currentTarget.id);
-  };
   const onClickClose = () => {
     setModal((prev: any) => !prev);
   };
 
-  const onLoadMore = () => {
-    if (!data) return;
-
-    void fetchMore({
-      variables: {
-        page: Math.ceil(data?.fetchProductsByCreator.length / 4) + 1,
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult?.fetchProductsByCreator)
-          return { fetchProductsByCreator: [...prev.fetchProductsByCreator] };
-        return {
-          fetchProductsByCreator: [
-            ...prev.fetchProductsByCreator,
-            ...fetchMoreResult.fetchProductsByCreator,
-          ],
-        };
-      },
-    });
-  };
+  console.log(el, dom);
 
   return (
     <>
@@ -381,15 +261,6 @@ export default function CreatorsModal(P: any) {
         <Close onClick={onClickClose} />
         <Wrapper>
           <H1>Z9 Creators List</H1>
-          <SearchBox tab={tab}>
-            <ul>
-              {btnArray.map((el: any, i: number) => (
-                <li id={String(i + 1)} onClick={onClickTab} key={i}>
-                  {el}
-                </li>
-              ))}
-            </ul>
-          </SearchBox>
           <Main>
             <div>
               {data?.fetchProductsByCreator?.map((el: any) => (
@@ -463,9 +334,6 @@ export default function CreatorsModal(P: any) {
                 </Section>
               ))}
             </div>
-            <Button onClick={onLoadMore}>
-              <span>더보기</span>
-            </Button>
           </Main>
         </Wrapper>
       </Container>

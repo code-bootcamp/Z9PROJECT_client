@@ -22,14 +22,14 @@ export default function ProductListPresenter(P: any) {
   const today = new Date() as any;
   const end = new Date(el?.validUntil.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
-
+  console.log(el);
   return (
     <>
       {tab === "1" ? (
         <S.Section onClick={onClickMoveToPage(`/product/${String(el.id)}`)}>
           <S.User>
             <img
-              src={el.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
+              src={el?.user.profileImg ? el.user.profileImg : "/icon_logo.png"}
               alt="크리에이터 이미지"
             />
             <S.UserName>{el.user?.nickname}</S.UserName>
