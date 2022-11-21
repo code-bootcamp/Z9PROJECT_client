@@ -23,7 +23,7 @@ const Container = styled.section`
   position: absolute;
   z-index: 99;
   left: 0;
-  top: 0;
+  top: 0%;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 30px;
@@ -292,6 +292,7 @@ const ProdName = styled.h1`
   font-size: ${styleSet.fontSize.s6};
   font-family: ${styleSet.font.EB};
   padding-bottom: 20px;
+  text-align: left;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

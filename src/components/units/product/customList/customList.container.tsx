@@ -10,7 +10,6 @@ import CustomListPresenter from "./customList.presenter";
 export default function CustomListContainer() {
   const [input, setInput] = useState("");
   const [tab, setTab] = useState("default");
-  const [list, setList] = useState(false);
 
   const { data: searchData } = useQuery(SEARCH_CREATORS, {
     fetchPolicy: "cache-first",
@@ -56,9 +55,6 @@ export default function CustomListContainer() {
     });
   };
 
-  const onClickList = () => {
-    setList(true);
-  };
   return (
     <>
       <CustomListPresenter
@@ -67,11 +63,8 @@ export default function CustomListContainer() {
         allCreatorData={allCreatorData}
         onClickTab={onClickTab}
         tab={tab}
-        list={list}
-        setList={setList}
         optionalData={optionalData}
         onLoadMore={onLoadMore}
-        onClickList={onClickList}
       />
     </>
   );

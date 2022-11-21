@@ -5,7 +5,7 @@ import {
 } from "@ant-design/icons";
 import * as S from "./customList.styles";
 import "animate.css";
-import CreatorsModal from "../../../commons/modal/creatorsModal";
+import ComponentPage from "./customList.components";
 
 export default function CustomListPresenter(P: any) {
   const {
@@ -16,38 +16,7 @@ export default function CustomListPresenter(P: any) {
     tab,
     optionalData,
     onLoadMore,
-    onClickList,
-    list,
-    setList,
   } = P;
-
-  const thisiscomponent = (el: any) => {
-    return (
-      <S.ImgBox key={el.id}>
-        {list && <CreatorsModal el={el} setList={setList} />}
-        <S.Octagon
-          style={{
-            backgroundImage: `url(${String(el.creatorAuthImg)})`,
-          }}
-        >
-          <S.BgLayer className="bg_layer" onClick={onClickList}>
-            해당 크리에이터 상품 보러가기
-          </S.BgLayer>
-        </S.Octagon>
-        <S.Name>
-          {el.nickname ? el.nickname : el.snsName}
-          <span>
-            {el.snsChannel === "YOUTUBE" ? (
-              <YoutubeOutlined />
-            ) : (
-              <InstagramOutlined />
-            )}{" "}
-            {el?.followerNumber}
-          </span>
-        </S.Name>
-      </S.ImgBox>
-    );
-  };
 
   return (
     <>
@@ -134,15 +103,15 @@ export default function CustomListPresenter(P: any) {
 
           <S.ImgWrapper>
             {searchData?.searchCreators !== null
-              ? searchData?.searchCreators?.map((el: any) =>
-                  thisiscomponent(el)
-                )
+              ? searchData?.searchCreators?.map((el: any) => (
+                  <ComponentPage el={el} key={el.id} />
+                ))
               : tab === "default"
               ? allCreatorData?.fetchCreators?.map((el: any) => {
-                  return thisiscomponent(el);
+                  return <ComponentPage el={el} key={el.id} />;
                 })
               : optionalData?.fetchCreatorsBySnsType?.map((el: any) => {
-                  return thisiscomponent(el);
+                  return <ComponentPage el={el} key={el.id} />;
                 })}
           </S.ImgWrapper>
           <S.Button onClick={onLoadMore}>

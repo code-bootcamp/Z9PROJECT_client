@@ -9,6 +9,7 @@ export const FETCH_PRODUCTS_BY_CREATORS = gql`
       quantity
       originalQuantity
       discountPrice
+      discountRate
       isSoldout
       delivery
       endType
