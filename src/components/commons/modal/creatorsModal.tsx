@@ -228,7 +228,7 @@ const Price = styled.p`
 `;
 
 export default function CreatorsModal(P: any) {
-  const { el, setModal, dom } = P;
+  const { el, setModal, dom, pageData } = P;
   const { onClickMoveToPage } = useMoveToPage();
   const { data } = useQuery(FETCH_PRODUCTS_BY_CREATORS, {
     fetchPolicy: "cache-first",
@@ -244,17 +244,14 @@ export default function CreatorsModal(P: any) {
     variables: { productId: String(dom?.id) },
   });
 
-  const start = new Date(el?.validFrom?.slice(0, 10)) as any;
+  const start = new Date(dom?.validFrom?.slice(0, 10)) as any;
   const today = new Date() as any;
-  const end = new Date(el?.validUntil?.slice(0, 10)) as any;
+  const end = new Date(dom?.validUntil?.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
 
   const onClickClose = () => {
     setModal((prev: any) => !prev);
   };
-
-  console.log(el, dom);
-
   return (
     <>
       <Container>
@@ -285,12 +282,12 @@ export default function CreatorsModal(P: any) {
                     <BgLayer className="bg_layer">
                       <H2>
                         <p>
-                          {el?.validFrom
+                          {pageData?.fetchProductsByPages.validFrom
                             ?.slice(0, 10)
                             .replace("-", ".")
                             .replace("-", ".")}
                           ~
-                          {el?.validUntil
+                          {pageData?.fetchProductsByPages.validUntil
                             ?.slice(0, 10)
                             .replace("-", ".")
                             .replace("-", ".")}
@@ -320,7 +317,7 @@ export default function CreatorsModal(P: any) {
                         <span>{likeData?.fetchLikeCount}</span>
                       </li>
                       <Time className="timer">
-                        <Timer el={el} status={status} />
+                        <Timer dom={dom} status={status} />
                       </Time>
                     </Ul>
                     <ProdName>

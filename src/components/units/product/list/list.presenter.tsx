@@ -22,7 +22,6 @@ export default function ProductListPresenter(P: any) {
   const today = new Date() as any;
   const end = new Date(el?.validUntil.slice(0, 10)) as any;
   const status = today < start ? "start" : today < end ? "ing" : "end";
-  console.log(el);
   return (
     <>
       {tab === "1" ? (

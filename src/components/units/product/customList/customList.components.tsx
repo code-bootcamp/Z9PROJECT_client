@@ -13,14 +13,13 @@ export default function ComponentPage(P: any) {
     setModal((prev) => !prev);
   };
 
-  const { data } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
+  const { data: pageData } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "cache-first",
     variables: { page: 1 },
   });
-
   return (
     <S.ImgBox key={el.id}>
-      {data?.fetchProductsByPages.map(
+      {pageData?.fetchProductsByPages.map(
         (dom: any) =>
           modal && (
             <>
@@ -29,6 +28,7 @@ export default function ComponentPage(P: any) {
                 el={el}
                 setModal={setModal}
                 key={el.id}
+                pageData={pageData}
               />
             </>
           )

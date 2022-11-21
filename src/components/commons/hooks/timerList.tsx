@@ -3,15 +3,15 @@ import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
 
 export default function Timer(P: any) {
-  const { el, status } = P;
+  const { dom, status } = P;
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const start = new Date(el?.validFrom?.slice(0, 10)) as any;
+  const start = new Date(dom?.validFrom?.slice(0, 10)) as any;
   const today = new Date() as any;
-  const end = new Date(el?.validUntil?.slice(0, 10)) as any;
+  const end = new Date(dom?.validUntil?.slice(0, 10)) as any;
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
 
