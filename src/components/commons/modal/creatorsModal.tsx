@@ -376,9 +376,6 @@ export default function CreatorsModal(P: any) {
     });
   };
 
-  console.timeLog(
-    data?.fetchProductsByCreator?.map((dom) => dom.user.id === el.id)
-  );
   return (
     <>
       <Container>
