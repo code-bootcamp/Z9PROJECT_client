@@ -26,6 +26,7 @@ export default function HeadLoad(P: any) {
 
     const favicon = document.createElement("link");
     favicon.href = "/favicon.ico";
+    favicon.rel = "favicon";
     document.head.appendChild(favicon);
 
     const description = document.createElement("meta");

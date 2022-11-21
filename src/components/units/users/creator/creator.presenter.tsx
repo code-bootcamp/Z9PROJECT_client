@@ -219,8 +219,8 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
               <Input01
                 type="text"
                 placeholder="인스타그램 이름 또는 유튜브 채널명을 입력하세요."
-                register={register("snsName")}
-                error={formState.errors.snsName?.message}
+                register={register("snsId")}
+                error={formState.errors.snsId?.message}
               />
             </S.SnsLabelInner>
             <S.SnsLabelInner>

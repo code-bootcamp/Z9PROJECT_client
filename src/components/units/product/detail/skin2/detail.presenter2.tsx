@@ -95,6 +95,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
             <S.Wrapper>
               <S.ImgBox>
                 <S.Octagon
+                  onLoad={onLoadPage}
                   style={{
                     backgroundImage: `url(${
                       String(data?.fetchProduct?.images) &&

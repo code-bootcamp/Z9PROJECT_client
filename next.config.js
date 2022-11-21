@@ -3,15 +3,20 @@ const withPWA = require("next-pwa")({
   dest: "public",
   register: true,
   skipWaiting: true,
+<<<<<<< HEAD
   // disable: process.env.NODE_ENV == "development",
 });
 // import withPlugins from "next-compose-plugins";
+=======
+});
+>>>>>>> develop
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   trailingSlash: true,
 };
+<<<<<<< HEAD
 
 // module.exports = nextConfig;
 // module.exports = withPlugins(
@@ -28,4 +33,9 @@ const nextConfig = {
 //   ],
 //   nextConfig
 // );
+=======
+
+module.exports = nextConfig;
+
+>>>>>>> develop
 module.exports = withPWA();

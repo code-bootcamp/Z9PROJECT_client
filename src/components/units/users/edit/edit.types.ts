@@ -32,7 +32,7 @@ export type IChangeInput = {
   introduce?: string;
   mainContents?: string;
   snsChannel?: string;
-  snsName?: string;
+  snsId?: string;
   account?: string;
   accountName?: string;
   bank?: string;

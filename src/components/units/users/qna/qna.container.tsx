@@ -15,11 +15,13 @@ export default function QnaContainer() {
   const { data: fetchProductsByCreator } = useQuery(FETCH_PRODUCTS_BY_CREATOR, {
     variables: {
       page: currentPage,
+      userId: String(fetchUser?.fetchUser.id),
     },
   });
   const { data: fetchMyQuestions } = useQuery(FETCH_MY_QUESTIONS);
   const { data: listCount } = useQuery(FETCH_PRODUCT_BY_CREATOR_COUNT);
 
+  console.log(fetchProductsByCreator);
   const onClickPage = (clickPage: number) => {
     setCurrentPage(clickPage);
   };
