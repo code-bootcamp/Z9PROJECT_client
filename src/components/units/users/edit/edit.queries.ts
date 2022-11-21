@@ -15,6 +15,7 @@ export const FETCH_USER = gql`
       creatorAuthImg
       isAuthedCreator
       snsName
+      snsId
       snsChannel
       followerNumber
       mainContents
@@ -39,6 +40,7 @@ export const UPDATE_USER = gql`
       profileImg
       creatorAuthImg
       snsName
+      snsId
       snsChannel
       mainContents
       introduce

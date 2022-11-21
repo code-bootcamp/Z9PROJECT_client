@@ -11,8 +11,8 @@ export const FETCH_USER = gql`
 `;
 
 export const FETCH_PRODUCTS_BY_CREATOR = gql`
-  query fetchProductsByCreator($page: Int!) {
-    fetchProductsByCreator(page: $page) {
+  query fetchProductsByCreator($page: Int!, $userId: String!) {
+    fetchProductsByCreator(page: $page, userId: $userId) {
       id
       name
       discountPrice

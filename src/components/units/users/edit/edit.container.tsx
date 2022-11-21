@@ -27,7 +27,7 @@ const schema = yup.object({
   zipcode: yup.string(),
   address: yup.string(),
   addressDetail: yup.string(),
-  snsName: yup.string(),
+  snsId: yup.string(),
   snsChannel: yup.string(),
   mainContents: yup.string(),
   introduce: yup.string(),
@@ -186,8 +186,8 @@ export default function EditContainer() {
       if (watch("snsChannel")) {
         changeInput.snsChannel = getValues("snsChannel");
       }
-      if (watch("snsName")) {
-        changeInput.snsName = getValues("snsName");
+      if (watch("snsId")) {
+        changeInput.snsId = getValues("snsId");
       }
       if (watch("bank")) {
         changeInput.bank = getValues("bank");
