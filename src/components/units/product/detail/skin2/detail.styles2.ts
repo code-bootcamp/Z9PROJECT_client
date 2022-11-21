@@ -40,6 +40,13 @@ export const Wrapper = styled.div`
 export const Randing = styled.article`
   margin-bottom: 30px;
 
+  .toastui-editor-contents h2 {
+    width: 65%;
+  }
+  .toastui-editor-contents p {
+    width: 65%;
+  }
+
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
   }
@@ -62,9 +69,11 @@ export const H1 = styled.h1`
 export const Ul = styled.ul`
   margin-bottom: 30px;
   position: relative;
+  width: 750px;
 
   @media ${styleSet.breakePoints.mobile} {
     margin-bottom: 15px;
+    width: auto;
     li {
       font-size: ${styleSet.fontSize.s6};
       &:first-child {
@@ -81,7 +90,7 @@ export const Li = styled.li`
   color: ${(props: any) => {
     return `${String(props.color)}`;
   }};
-  font-size: ${styleSet.fontSize.s4};
+  font-size: ${styleSet.fontSize.s6};
   &:first-child {
     font-family: ${styleSet.font.B};
     font-size: ${styleSet.fontSize.s3};
@@ -106,11 +115,9 @@ export const Info = styled.section`
 export const InfoImg = styled.div`
   width: 500px;
   height: 500px;
-  width: 100%;
   background-position: 50% 50%;
   background-size: cover;
   border-radius: 50%;
-  margin-right: 20%;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 300px;
@@ -124,7 +131,7 @@ export const InfoWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-
+  gap: 100px;
   @media ${styleSet.breakePoints.mobile} {
     flex-direction: column;
     gap: 50px;

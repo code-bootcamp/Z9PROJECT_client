@@ -41,7 +41,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     setColor(String(data?.fetchProduct.textColor));
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
-
+  console.log(data);
   return (
     <>
       <S.Container>
@@ -69,7 +69,9 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
               </S.Ul>
 
               <S.Ul>
-                <S.Li color={color}>유튜브 구독자 수</S.Li>
+                <S.Li color={color}>
+                  {data?.fetchProduct.user?.snsChannel} 팔로워
+                </S.Li>
                 <S.Li color={color}>
                   {data?.fetchProduct.user?.followerNumber?.toLocaleString()}
                 </S.Li>
