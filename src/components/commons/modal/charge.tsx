@@ -158,7 +158,7 @@ export default function ChargeModal() {
     setPrice(price);
   };
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setPrice(String(e.target.value));
+    setPrice(Number(e.target.value));
     setActive(true);
   };
   const onClickCharge = () => {
@@ -170,14 +170,10 @@ export default function ChargeModal() {
         // param
         pg: "html5_inicis",
         pay_method: "card",
-        // merchant_uid: "ORD20180131-0000011",
         name: "Z9 포인트 충전",
         amount: price,
-        buyer_email: "",
+        // buyer_email: fetchUser?.fetchUser.email,
         buyer_name: fetchUser?.fetchUser.nickname,
-        // buyer_tel: fetchUser?.fetchUser.phoneNumber,
-        // buyer_addr: fetchUser?.fetchUser.address,
-        // buyer_postcode: fetchUser?.fetchUser.zipcode,
       },
       function (rsp: any) {
         if (rsp.success) {
