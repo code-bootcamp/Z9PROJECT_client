@@ -155,9 +155,9 @@ export default function ChargeModal() {
     inputRef.current.value = price;
     TogglePrice();
     onChangeInput();
-    setPrice(price);
   };
   const onChangeInput = () => {
+    setPrice(price);
     setActive(true);
   };
   const onClickCharge = () => {
@@ -213,6 +213,7 @@ export default function ChargeModal() {
               placeholder="포인트 선택"
               onClick={TogglePrice}
               ref={inputRef}
+              onChange={onChangeInput}
             />
             <ArrowDown src="/users/myPage/img_arrow.png" />
             {isPriceOpen && (
