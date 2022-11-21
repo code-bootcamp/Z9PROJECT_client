@@ -6,56 +6,19 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import * as S from "./detail.styles3";
+import * as S from "../skin1/detail.styles";
 import { IDetailPresenterProps } from "../detail.types";
 import Product01 from "../miniProduct.tsx/product01";
 import QuestionWriter from "../../../question/write/questionWriter";
 import QuestionMap from "../../../question/list/questionList.map";
 import { categoryContents, categoryTitle } from "../../register/atom/category";
 import * as DOMPurify from "dompurify";
-import { useState } from "react";
-import { useInterval } from "../../../../commons/hooks/timer";
-import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
-
-const useResultOfIntervalCalculator = (calculator: any, delay: any) => {
-  const [result, setResult] = useState(calculator());
-  useInterval(() => {
-    const newResult = calculator();
-    if (newResult !== result) setResult(newResult);
-  }, delay);
-
-  return result;
-};
-
-const CountDownView = ({ targetISOString }: { targetISOString: any }) => {
-  const remain = useResultOfIntervalCalculator(
-    () =>
-      Math.floor(
-        ((new Date(targetISOString) as any) -
-          (new Date().setHours(new Date().getHours() + 9) as any)) /
-          1000
-      ),
-    10
-  );
-  const day = Math.floor(remain / (60 * 60 * 24));
-  const hour = Math.floor((remain % (60 * 60 * 24)) / (60 * 60));
-  const min = Math.floor((remain % (60 * 60)) / 60);
-  const sec = Math.floor(remain % 60);
-
-  return (
-    <S.Timer className="CountDownWrap">
-      {day}
-      <span>일</span>
-      {hour}
-      <span>시</span>
-      {min}
-      <span>분</span>
-      {sec}
-      <span>초</span>
-    </S.Timer>
-  );
-};
+import dynamic from "next/dynamic";
+import TimerDetail from "../../../../commons/hooks/timerDetail";
+const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
+  ssr: false,
+});
 
 export default function ProductDetailPresenter(P: IDetailPresenterProps) {
   const router = useRouter();
@@ -74,12 +37,14 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     onClickOrder,
     onClickTab,
     onClickTab2,
-    important,
-    commentData,
     setGraph,
+    important,
     graph,
     onClickDelete,
     handleCopyClipBoard,
+    countData,
+    onLoadPage,
+    option,
   } = P;
 
   setGraph(
@@ -90,31 +55,28 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
     )
   );
 
-  const targetISOString = data?.fetchProduct.validUntil;
-  console.log(targetISOString);
+  const start = new Date(data?.fetchProduct.validFrom.slice(0, 10)) as any;
+  const today = new Date() as any;
+  const end = new Date(data?.fetchProduct.validUntil.slice(0, 10)) as any;
+  const status = today < start ? "start" : today < end ? "ing" : "end";
+  const time =
+    status === "end" ? 0 : status === "start" ? start - today : end - today;
 
-  const isNotYet = useResultOfIntervalCalculator(
-    () => (new Date(targetISOString) as any) - (new Date() as any) - 9 > 0,
-    10
-  );
   return (
     <>
       <S.Container>
         <S.Info>
-          <ReactPlayer
+          <S.Player
             url={data?.fetchProduct?.youtubeLink}
-            width={1400}
-            height={800}
             muted={true}
             playing={true}
-            style={{ margin: "0 auto" }}
           />
         </S.Info>
 
         <S.Wrapper>
           <S.ProdInfo>
             <S.InfoLeft>
-              <img src={thumbnail} alt="상품이미지" />
+              <img onLoad={onLoadPage} src={thumbnail} alt="상품이미지" />
               <S.ul>
                 {data?.fetchProduct.images?.map((el: string) => (
                   <li key={el}>
@@ -190,37 +152,18 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                     </S.Choose>
                   </li>
                 </ul>
-                <ul>
-                  <li>옵션</li>
-                  <li>
-                    <S.MySelect
-                      defaultValue="옵션을 선택해주세요."
-                      onChange={handleChange}
-                      options={[
-                        {
-                          value: data?.fetchProduct?.option1,
-                          label: data?.fetchProduct?.option1,
-                        },
-                        {
-                          value: data?.fetchProduct?.option2,
-                          label: data?.fetchProduct?.option2,
-                        },
-                        {
-                          value: data?.fetchProduct?.option3,
-                          label: data?.fetchProduct?.option3,
-                        },
-                        {
-                          value: data?.fetchProduct?.option4,
-                          label: data?.fetchProduct?.option4,
-                        },
-                        {
-                          value: data?.fetchProduct?.option5,
-                          label: data?.fetchProduct?.option5,
-                        },
-                      ]}
-                    />
-                  </li>
-                </ul>
+                {data?.fetchProduct?.option1 && (
+                  <ul>
+                    <li>옵션</li>
+                    <li>
+                      <S.MySelect
+                        defaultValue="옵션을 선택해주세요."
+                        onChange={handleChange}
+                        options={option}
+                      />
+                    </li>
+                  </ul>
+                )}
                 <S.Strong>
                   <p>
                     진행현황 <span>({graph}%)</span>
@@ -238,13 +181,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               </S.Text>
 
               <S.H2>
-                {isNotYet ? (
-                  <CountDownView
-                    targetISOString={targetISOString}
-                  ></CountDownView>
-                ) : (
-                  "마감되었습니다"
-                )}
+                <TimerDetail data={data} status={status} />
               </S.H2>
 
               <S.H3>
@@ -261,14 +198,27 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                   {cart && <HeartFilled />} {``}
                   <span className="emotion">관심상품</span>
                 </button>
-                {isNotYet ? (
-                  <button className="buy" onClick={onClickOrder}>
-                    <span className="emotion">바로 구매하기</span>
-                  </button>
+
+                {time > 0 ? (
+                  status === "ing" ? (
+                    <>
+                      <button className="buy" onClick={onClickOrder}>
+                        <span className="emotion">바로 구매하기</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="buy" style={{ background: "#999" }}>
+                        <span className="emotion">미진행</span>
+                      </button>
+                    </>
+                  )
                 ) : (
-                  <button className="closed">
-                    <span className="emotion">마감</span>
-                  </button>
+                  <>
+                    <button className="buy" style={{ background: "#999" }}>
+                      <span className="emotion">마감</span>
+                    </button>
+                  </>
                 )}
               </S.BoxBtn>
             </S.InfoRight>
@@ -279,31 +229,34 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <span>제품상세</span>
             </li>
             <li onClick={onClickTab}>
-              <span>QnA</span>
+              <span>구매정보 & QnA</span>
             </li>
           </S.Tab>
 
-          {/* {/* {!important && ( */}
-          <S.Ref>
-            {/* {process.browser && (
-                <S.Randing
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(data?.fetchProduct.content),
-                  }}
-                ></S.Randing>
-              )}  */}
-            <Product01
-              onClickCount={onClickCount}
-              count={count}
-              cart={cart}
-              data={data}
-              discount={discount}
-              onClickLike={onClickLike}
-              onClickOrder={onClickOrder}
-              setGraph={setGraph}
-            />
-          </S.Ref>
-          {/* )} */}
+          {!important && (
+            <S.Ref>
+              <S.Randing>
+                {data?.fetchProduct.content ? (
+                  <ViewerPage
+                    initialValue={DOMPurify.sanitize(
+                      data?.fetchProduct.content
+                    )}
+                  />
+                ) : (
+                  <div>loadding...</div>
+                )}
+              </S.Randing>
+              <Product01
+                onClickCount={onClickCount}
+                count={count}
+                cart={cart}
+                data={data}
+                discount={discount}
+                onClickLike={onClickLike}
+                onClickOrder={onClickOrder}
+              />
+            </S.Ref>
+          )}
 
           <S.Important>
             <S.H3Info>필수 표기정보</S.H3Info>
@@ -311,7 +264,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
               ]?.map((el, idx) => (
-                <li>
+                <li key={idx}>
                   <strong>{el}</strong>
                   <data>
                     {data?.fetchProduct.productDetail[`option${idx + 1}`]}
@@ -321,7 +274,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               {categoryContents[
                 categoryTitle.indexOf(data?.fetchProduct.productDetail.type)
               ]?.length %
-                2 ==
+                2 ===
               1 ? (
                 <li>
                   <strong></strong>
@@ -331,11 +284,11 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
             </S.Company>
           </S.Important>
 
-          <S.Button>
+          <S.Button onLoad={onLoadPage}>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
             <button
               onClick={onClickMoveToPage(
-                `/product/${router.query.useditemId}/edit`
+                `/product/${String(router.query.useditemId)}/edit`
               )}
             >
               수정
@@ -348,7 +301,7 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
           <S.Wrapper3>
             <S.Count>
               <li>
-                <MessageOutlined /> {commentData?.fetchQuestions.length}
+                <MessageOutlined /> {countData?.fetchCountOfQuestions}
               </li>
             </S.Count>
             <QuestionWriter />
@@ -361,7 +314,6 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
               <li className="createdAt">등록일자</li>
               <li></li>
             </S.Title>
-
             <S.Box>
               <QuestionMap />
             </S.Box>

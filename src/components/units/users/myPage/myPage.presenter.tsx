@@ -3,6 +3,7 @@ import { DatePicker, Pagination } from "antd";
 import * as S from "./myPage.styles";
 import { IMyPagePresenterProps } from "./myPage.types";
 import ChargeModal from "../../../commons/modal/charge";
+import WithdrawalModal from "../../../commons/modal/withdrawal";
 
 export default function MyPagePresenter(P: IMyPagePresenterProps) {
   const {
@@ -32,6 +33,7 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
           <div>적절한 구입은 삶에 큰 도움이 됩니다.</div>
         </div>
         <S.Charge>
+          <WithdrawalModal />
           <ChargeModal />
         </S.Charge>
       </S.PointWrapper>
@@ -72,7 +74,7 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
                     : el.status === "SOLD"
                     ? "판매"
                     : el.status === "REFUNDED"
-                    ? "환불지급"
+                    ? "인출"
                     : el.status === "RESTORED"
                     ? "포인트 환불"
                     : "제품 환불"}
@@ -87,6 +89,7 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
             onChange={onClickPage}
             defaultCurrent={1}
             current={currentPage}
+            showSizeChanger={false}
           />
         </S.BoardBody>
       </S.HistoryWrapper>

@@ -4,7 +4,7 @@ import MainFirst from "./mainFirst";
 import MainSecond from "./mainSecond";
 
 export default function MainPresenter(P: IMainPresenterProps) {
-  const { handleLeftClick, handleRightClick, setSwiperRef } = P;
+  const { handleLeftClick, handleRightClick, setSwiperRef, data } = P;
 
   return (
     <>
@@ -14,6 +14,7 @@ export default function MainPresenter(P: IMainPresenterProps) {
           handleLeftClick={handleLeftClick}
           handleRightClick={handleRightClick}
           setSwiperRef={setSwiperRef}
+          data={data}
         />
       </S.Container>
     </>

@@ -1,10 +1,11 @@
-import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
-import { useForm, UseFormReturn } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
+import { schema } from "./atom/schema";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client";
 import CreatorPresenter from "./creator.presenter";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMutation } from "@apollo/client";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   CHECK_NICKNAME,
   CREATE_CREATOR,
@@ -13,35 +14,11 @@ import {
   UPLOAD_IMAGE,
 } from "./creator.queries";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import { useRouter } from "next/router";
-
-const schma = yup.object({
-  email: yup.string().email("이메일 형식 확인").required("필수"),
-  password: yup.string().required("필수"),
-  passwordConfirm: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "비밀번호가 같지 않습니다.")
-    .required("필수"),
-  phoneNumber: yup.string().required("필수"),
-  keyNumber: yup.string().required("필수"),
-  zipcode: yup.string().required("필수"),
-  address: yup.string().required("필수"),
-  addressDetail: yup.string(),
-  nickname: yup.string().required("필수"),
-  snsName: yup.string().required("필수"),
-  snsChannel: yup.string().required("필수"),
-  mainContents: yup.string(),
-  introduce: yup.string(),
-  account: yup.string(),
-  bank: yup.string(),
-  accountName: yup.string(),
-  terms: yup.boolean().oneOf([true], "필수"),
-});
 
 export default function CreatorRegisterContainer() {
   const { register, handleSubmit, formState, watch, setValue, getValues } =
     useForm({
-      resolver: yupResolver(schma),
+      resolver: yupResolver(schema),
       mode: "onChange",
     });
   const router = useRouter();
@@ -145,7 +122,8 @@ export default function CreatorRegisterContainer() {
 
   const onClickSignUp = async (data: any) => {
     const { keyNumber, passwordConfirm, terms, ...rest } = data;
-
+    if (!certFile) ErrorModal("인증 파일은 필수 입니다.");
+    if (!profileFile) ErrorModal("프로필 이미지는 필수 입니다.");
     try {
       const resultCert = await uploadImage({
         variables: {
@@ -163,6 +141,7 @@ export default function CreatorRegisterContainer() {
           signupId: confirmId,
           createCreatorInput: {
             ...rest,
+            account: String(getValues("account")),
             isAuthedCreator: true,
             followerNumber: 10000000,
             profileImg: resultProfile.data.uploadImage.imageUrl,
@@ -171,11 +150,10 @@ export default function CreatorRegisterContainer() {
         },
       });
       SuccessModal(
-        `${result.data.createCreator.nickname}님 가입을 환영합니다.`
+        `${String(result.data.createCreator.nickname)}님 가입을 환영합니다.`
       );
-      router.push("/users/login");
+      void router.push("/users/login");
     } catch (error) {
-      console.log(error);
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
