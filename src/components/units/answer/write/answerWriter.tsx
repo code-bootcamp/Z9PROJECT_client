@@ -17,7 +17,9 @@ export default function AnswerWriter(P: any) {
 
   const onClickClose = () => {
     setIsAnswer(false);
+    setAnswerModal(false);
   };
+  console.log(isAnswer);
   const onChangeAnswer = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setAnswer(e.target.value);
   };
