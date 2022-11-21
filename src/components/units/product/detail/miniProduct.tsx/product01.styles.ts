@@ -32,6 +32,7 @@ export const H1 = styled.h1`
   letter-spacing: -1.4px;
   border-bottom: 1px solid #eee;
   margin-bottom: 10px;
+  word-break: break-all;
 `;
 
 export const Text = styled.div`

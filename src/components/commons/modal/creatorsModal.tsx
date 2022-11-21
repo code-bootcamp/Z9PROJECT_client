@@ -20,7 +20,7 @@ const Container = styled.section`
   height: 100%;
   background-color: #f4f5f9;
   padding-bottom: 100px;
-  position: absolute;
+  position: fixed;
   z-index: 99;
   left: 0;
   top: 0%;
@@ -324,7 +324,7 @@ const Price = styled.p`
 `;
 
 export default function CreatorsModal(P: any) {
-  const { el, setList } = P;
+  const { el, setModal } = P;
   const [tab, setTab] = useState<any>("1");
   const { onClickMoveToPage } = useMoveToPage();
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_CREATORS, {
@@ -351,9 +351,8 @@ export default function CreatorsModal(P: any) {
   const onClickTab = (event: any) => {
     setTab(event?.currentTarget.id);
   };
-
   const onClickClose = () => {
-    setList(false);
+    setModal((prev: any) => !prev);
   };
 
   const onLoadMore = () => {
@@ -376,15 +375,12 @@ export default function CreatorsModal(P: any) {
     });
   };
 
-  console.timeLog(
-    data?.fetchProductsByCreator?.map((dom) => dom.user.id === el.id)
-  );
   return (
     <>
       <Container>
         <Close onClick={onClickClose} />
         <Wrapper>
-          <H1>리스트</H1>
+          <H1>Z9 Creators List</H1>
           <SearchBox tab={tab}>
             <ul>
               {btnArray.map((el: any, i: number) => (

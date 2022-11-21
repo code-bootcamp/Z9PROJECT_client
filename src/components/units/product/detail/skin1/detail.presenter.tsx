@@ -145,7 +145,18 @@ export default function ProductDetailPresenter(P: IDetailPresenterProps) {
                     </S.Choose>
                   </li>
                 </ul>
-                {data?.fetchProduct?.option1 && (
+                {data?.fetchProduct?.option1 ? (
+                  <ul>
+                    <li>옵션</li>
+                    <li>
+                      <S.MySelect
+                        defaultValue="옵션을 선택해주세요."
+                        onChange={handleChange}
+                        options={option}
+                      />
+                    </li>
+                  </ul>
+                ) : (
                   <ul>
                     <li>옵션</li>
                     <li>

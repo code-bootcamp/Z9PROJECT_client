@@ -123,7 +123,7 @@ export const ProdInfo = styled.section`
   gap: 70px;
   > div {
     width: calc(100% / 2 - 10px);
-    height: 835px;
+    height: 900px;
   }
 
   @media ${styleSet.breakePoints.mobile} {
@@ -299,7 +299,9 @@ export const H1 = styled.h1`
   font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.B};
   padding-block: 20px;
-  white-space: nowrap;
+  min-height: 115px;
+  max-height: 115px;
+  overflow: hidden;
 
   @media ${styleSet.breakePoints.mobile} {
     font-size: ${styleSet.fontSize.s4};
