@@ -1,5 +1,5 @@
 import { BaseOptionType, DefaultOptionType } from "antd/lib/select";
-import { LegacyRef, MutableRefObject } from "react";
+import { MutableRefObject } from "react";
 import {
   FieldValues,
   UseFormGetValues,
@@ -7,7 +7,6 @@ import {
   UseFormRegister,
   UseFormWatch,
 } from "react-hook-form";
-import { Editor } from "@toast-ui/react-editor";
 
 // container
 
@@ -93,7 +92,7 @@ export type IRegisterPresenterProps = {
 };
 
 export type IEditorPageProps = {
-  contentsRef: LegacyRef<Editor> | undefined;
+  contentsRef: MutableRefObject<any> | undefined;
   onChangeContents: (text: any) => void;
   initialValue?: string | undefined;
 };

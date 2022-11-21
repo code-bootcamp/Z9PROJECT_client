@@ -16,6 +16,15 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
+export const UPLOAD_IMAGE = gql`
+  mutation uploadImage($image: Upload!) {
+    uploadImage(image: $image) {
+      id
+      imageUrl
+    }
+  }
+`;
+
 export const UPLOAD_IMAGES = gql`
   mutation uploadImages($images: [Upload!]!) {
     uploadImages(images: $images) {

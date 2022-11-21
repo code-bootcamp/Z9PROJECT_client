@@ -36,7 +36,6 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
     onChangeTextColor,
   } = P;
   const { RangePicker } = DatePicker;
-
   return (
     <S.Container>
       <form
@@ -153,11 +152,21 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
           <S.Item>
             <S.SubTitle>상세 설명</S.SubTitle>
             <div style={{ width: "100%" }}>
-              <EditorPage
-                contentsRef={contentsRef}
-                onChangeContents={onChangeContents}
-                initialValue={fetchProduct?.fetchProduct.content}
-              />
+              {fetchProduct?.fetchProduct.content ? (
+                <EditorPage
+                  contentsRef={contentsRef}
+                  onChangeContents={onChangeContents}
+                  initialValue={fetchProduct?.fetchProduct.content}
+                />
+              ) : isEdit ? (
+                <div>loadding...</div>
+              ) : (
+                <EditorPage
+                  contentsRef={contentsRef}
+                  onChangeContents={onChangeContents}
+                  initialValue={fetchProduct?.fetchProduct.content}
+                />
+              )}
             </div>
           </S.Item>
           <S.Item>
