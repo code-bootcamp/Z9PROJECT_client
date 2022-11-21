@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
-import { ErrorModal } from "../../../commons/modal/modal";
 import ProductListMap from "./list.map";
 import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
 

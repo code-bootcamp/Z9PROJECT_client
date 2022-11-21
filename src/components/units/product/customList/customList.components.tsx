@@ -1,14 +1,22 @@
 import { InstagramOutlined, YoutubeOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import CreatorsModal from "../../../commons/modal/creatorsModal";
 import * as S from "./customList.styles";
 
 export default function ComponentPage(P: any) {
-  const { el, onClickList } = P;
+  const { el } = P;
+
+  const [modal, setModal] = useState(false);
+
+  const onCLickModal = () => {
+    setModal((prev) => !prev);
+  };
+  console.log(modal);
   return (
     <S.ImgBox key={el.id}>
-      {/* <CreatorsModal el={el} /> */}
+      {modal && <CreatorsModal el={el} setModal={setModal} />}
       <S.Octagon
-        onClick={onClickList}
+        onClick={onCLickModal}
         style={{
           backgroundImage: `url(${String(el.creatorAuthImg)})`,
         }}
