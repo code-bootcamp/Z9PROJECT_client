@@ -5,7 +5,6 @@ import * as S from "./customList.styles";
 
 export default function ComponentPage(P: any) {
   const { el } = P;
-
   const [modal, setModal] = useState(false);
 
   const onCLickModal = () => {
