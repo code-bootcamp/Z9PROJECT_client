@@ -1,9 +1,40 @@
 import styled from "@emotion/styled";
 import { Select } from "antd";
+import ReactPlayer from "react-player";
 import { styleSet } from "../../../../../commons/styles/styleSet";
 interface IProps {
   graph: number;
 }
+
+export const Info = styled.section`
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  & div {
+    width: 1400px !important;
+    height: 800px !important;
+  }
+
+  @media ${styleSet.breakePoints.mobile} {
+    margin-bottom: 30px;
+    height: -webkit-fill-available;
+    & div {
+      width: 600px !important;
+      height: 350px !important;
+    }
+  }
+`;
+
+export const Player = styled(ReactPlayer)`
+  width: 1400px;
+  height: 800px;
+  margin: 0 auto;
+
+  @media ${styleSet.breakePoints.mobile} {
+    width: 600px;
+    height: -webkit-fill-available;
+  }
+`;
 
 export const Container = styled.section`
   width: 100%;
@@ -152,7 +183,8 @@ export const Company = styled.ul`
       padding: 12px;
       display: flex;
       align-items: center;
-      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
     }
     data {
       padding: 10px;
@@ -167,8 +199,16 @@ export const Company = styled.ul`
     }
     li {
       strong {
-        width: 150px;
         padding: 0 10px;
+        min-width: 50%;
+        max-width: 50%;
+      }
+      data {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        width: 135px;
+        overflow: auto;
       }
     }
   }
@@ -255,13 +295,15 @@ export const ul = styled.ul`
 `;
 
 export const H1 = styled.h1`
-  font-size: ${styleSet.fontSize.s3};
+  font-size: ${styleSet.fontSize.s4};
   font-family: ${styleSet.font.B};
   padding-block: 20px;
+  white-space: nowrap;
 
   @media ${styleSet.breakePoints.mobile} {
-    font-size: ${styleSet.fontSize.s3};
+    font-size: ${styleSet.fontSize.s4};
     padding-block: 10px;
+    white-space: inherit;
   }
 `;
 
@@ -385,6 +427,7 @@ export const H2 = styled.div`
   text-align: right;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 
   @media ${styleSet.breakePoints.mobile} {
     padding-block: 10px;

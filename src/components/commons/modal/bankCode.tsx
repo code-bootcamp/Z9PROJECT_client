@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
 import { BankOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
@@ -220,13 +220,21 @@ export default function BankCodeModal(P: IBankCodeModalPorps) {
             </H1>
             <BtnWrapper>
               {listChange
-                ? bankList.map((el) => (
-                    <SubmitBtn type="button" onClick={onClickBank(el.code)}>
+                ? bankList.map((el, i) => (
+                    <SubmitBtn
+                      key={i}
+                      type="button"
+                      onClick={onClickBank(el.code)}
+                    >
                       <span>{el.name}</span>
                     </SubmitBtn>
                   ))
-                : stockList.map((el) => (
-                    <SubmitBtn type="button" onClick={onClickBank(el.code)}>
+                : stockList.map((el, i) => (
+                    <SubmitBtn
+                      key={i}
+                      type="button"
+                      onClick={onClickBank(el.code)}
+                    >
                       <span>{el.name}</span>
                     </SubmitBtn>
                   ))}

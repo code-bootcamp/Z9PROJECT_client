@@ -180,7 +180,7 @@ export default function ChargeModal() {
       },
       function (rsp: any) {
         if (rsp.success) {
-          const result = createPayment({
+          void createPayment({
             variables: {
               impUid: rsp.imp_uid,
               amount: rsp.paid_amount,

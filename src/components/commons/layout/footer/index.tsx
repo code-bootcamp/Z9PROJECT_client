@@ -33,10 +33,18 @@ export default function FooterPage() {
             </S.Bottom>
 
             <S.Section>
-              <a href="https://www.instagram.com/" target="_blank">
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img src="/icon_insta.svg" alt="인스타그램 로고" />
               </a>
-              <a href="https://www.youtube.com/" target="_blank">
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img src="/icon_youtube.svg" alt="유튜브 로고" />
               </a>
             </S.Section>

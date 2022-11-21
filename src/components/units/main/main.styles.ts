@@ -2,6 +2,13 @@ import { LeftCircleFilled, RightCircleFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { styleSet } from "../../../commons/styles/styleSet";
 
+export const Mobile = styled.section`
+  display: none;
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: block;
+  }
+`;
 export const Container = styled.section`
   width: 100%;
   height: 100vh;
@@ -161,6 +168,10 @@ export const FlexWrap = styled.div`
   width: 100%;
   display: flex;
   align-items: flex-end;
+
+  @media ${styleSet.breakePoints.mobile} {
+    display: none;
+  }
 `;
 
 export const Div = styled.div`
@@ -287,6 +298,7 @@ export const Product = styled.section`
     padding: 20px;
     bottom: 38%;
     position: relative;
+    display: none;
   }
 `;
 
@@ -371,7 +383,7 @@ export const ProductText = styled.div`
       position: absolute;
       bottom: 10px;
       left: 0;
-      width: 350px;
+      width: 100%;
       height: 25px;
       background: #e6f7ff;
       z-index: -1;

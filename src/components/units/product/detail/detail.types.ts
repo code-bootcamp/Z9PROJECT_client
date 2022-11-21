@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { MouseEvent } from "react";
 
 export type IDetailPresenterProps = {
   handleChange?: ((value: any) => void) | undefined;
@@ -21,4 +21,6 @@ export type IDetailPresenterProps = {
   onClickDelete: () => Promise<void>;
   handleCopyClipBoard: any;
   countData: any;
+  onLoadPage: () => void;
+  option?: any[];
 };
