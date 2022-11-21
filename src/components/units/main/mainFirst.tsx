@@ -27,6 +27,7 @@ export default function MainFirst() {
               </S.H1>
             </div>
           </S.LeftSection>
+
           <S.RightSection>
             <S.Main>
               <S.Img

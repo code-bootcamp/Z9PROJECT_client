@@ -57,7 +57,7 @@ export const LeftSection = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 50px 0 300px;
+  padding: 0 50px 0 200px;
 
   @media ${styleSet.breakePoints.mobile} {
     width: 100%;
@@ -217,12 +217,13 @@ export const Message1 = styled.img`
   @media ${styleSet.breakePoints.mobile} {
     top: -43%;
     width: 200px;
+    display: none;
   }
 `;
 export const Message2 = styled.img`
   position: absolute;
   left: 30%;
-  top: 17%;
+  top: 25%;
 
   @media ${styleSet.breakePoints.mobile} {
     top: 10%;
@@ -245,7 +246,7 @@ export const Message3 = styled.img`
 export const Message4 = styled.img`
   position: absolute;
   left: 47%;
-  top: 15%;
+  top: 22%;
 
   @media ${styleSet.breakePoints.mobile} {
     top: 10%;
