@@ -61,7 +61,6 @@ export const Textarea = styled.div`
   textarea {
     resize: none;
     font-size: ${styleSet.fontSize.s9};
-    font-family: Pretendard, "Malgun Gothic";
     padding: 15px;
     border: none;
     width: 100%;
@@ -95,11 +94,11 @@ export const Text = styled.div`
 `;
 
 export const Contents = styled.p`
-  font-family: Pretendard, "Malgun Gothic";
   font-size: ${styleSet.fontSize.s8};
   border-bottom: 1px solid ${styleSet.colors.gray};
   display: block;
   width: 100%;
+  text-align: left;
   padding: 10px 0;
 
   @media ${styleSet.breakePoints.mobile} {
