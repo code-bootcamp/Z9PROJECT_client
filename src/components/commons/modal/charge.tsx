@@ -2,7 +2,7 @@ import { DollarOutlined } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { styleSet } from "../../../commons/styles/styleSet";
 import { PriceFormatter } from "../../../commons/utils";
 import { CREATE_PAYMENT } from "../../units/users/myPage/mypage.queries";
@@ -154,10 +154,11 @@ export default function ChargeModal() {
   const onClickPrice = (price: number) => () => {
     inputRef.current.value = price;
     TogglePrice();
-    onChangeInput();
+    setActive(true);
     setPrice(price);
   };
-  const onChangeInput = () => {
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setPrice(Number(e.target.value));
     setActive(true);
   };
   const onClickCharge = () => {
@@ -169,14 +170,10 @@ export default function ChargeModal() {
         // param
         pg: "html5_inicis",
         pay_method: "card",
-        // merchant_uid: "ORD20180131-0000011",
         name: "Z9 포인트 충전",
         amount: price,
-        buyer_email: "",
+        // buyer_email: fetchUser?.fetchUser.email,
         buyer_name: fetchUser?.fetchUser.nickname,
-        // buyer_tel: fetchUser?.fetchUser.phoneNumber,
-        // buyer_addr: fetchUser?.fetchUser.address,
-        // buyer_postcode: fetchUser?.fetchUser.zipcode,
       },
       function (rsp: any) {
         if (rsp.success) {
@@ -213,6 +210,7 @@ export default function ChargeModal() {
               placeholder="포인트 선택"
               onClick={TogglePrice}
               ref={inputRef}
+              onChange={onChangeInput}
             />
             <ArrowDown src="/users/myPage/img_arrow.png" />
             {isPriceOpen && (
