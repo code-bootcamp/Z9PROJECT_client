@@ -41,7 +41,6 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     setColor(String(data?.fetchProduct.textColor));
     setBgColor(data?.fetchProduct.bgColor);
   }, []);
-  console.log(data);
   return (
     <>
       <S.Container>

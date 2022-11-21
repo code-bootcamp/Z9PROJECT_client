@@ -32,7 +32,6 @@ export default function CustomListContainer() {
 
   const onClickTab = (event: any) => {
     setTab(event?.currentTarget.id);
-    console.log(tab);
   };
 
   const onLoadMore = () => {

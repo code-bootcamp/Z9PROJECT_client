@@ -232,6 +232,7 @@ export const Input = styled.input`
 
   @media ${styleSet.breakePoints.mobile} {
     width: auto;
+    width: 150px;
   }
 `;
 
@@ -310,6 +311,8 @@ export const Ul = styled.div`
 
   @media ${styleSet.breakePoints.mobile} {
     padding: 0 10px;
+    gap: 0;
+    width: 550px;
     li {
       white-space: nowrap;
       font-size: ${styleSet.fontSize.s5};

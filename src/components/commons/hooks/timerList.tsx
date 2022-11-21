@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { styleSet } from "../../../commons/styles/styleSet";
 
 export default function Timer(P: any) {
-  const { el, status } = P;
+  const { dom, status } = P;
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const start = new Date(el?.validFrom.slice(0, 10)) as any;
+  const start = new Date(dom?.validFrom?.slice(0, 10)) as any;
   const today = new Date() as any;
-  const end = new Date(el?.validUntil.slice(0, 10)) as any;
+  const end = new Date(dom?.validUntil?.slice(0, 10)) as any;
   const time =
     status === "end" ? 0 : status === "start" ? start - today : end - today;
 
@@ -26,11 +28,22 @@ export default function Timer(P: any) {
     return () => clearInterval(interval);
   }, [today]);
 
+  const H1 = styled.h1`
+    display: flex;
+    align-items: center;
+    span {
+      font-size: ${styleSet.fontSize.s6};
+      color: ${styleSet.colors.red};
+    }
+  `;
   return (
     <>
       {time > 0 ? (
         status === "ing" ? (
           <>
+            <H1>
+              <span>남은시간</span> &nbsp;
+            </H1>
             {days}
             <span>일</span>
             {hours}
@@ -42,6 +55,9 @@ export default function Timer(P: any) {
           </>
         ) : (
           <>
+            <H1>
+              <span>시작까지</span> &nbsp;{" "}
+            </H1>
             {days}
             <span>일</span>
             {hours}
