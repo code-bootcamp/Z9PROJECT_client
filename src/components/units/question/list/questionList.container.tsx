@@ -6,6 +6,7 @@ import { FETCH_LOGIN_USER_ANSWER } from "../../answer/answer.queries";
 import {
   DELETE_QUESTION,
   FETCH_QUESTIONS,
+  FETCH_USER,
   UPDATE_QUESTION,
 } from "../question.queries";
 import QuestionPresenter from "./questionList.presenter";
@@ -20,7 +21,7 @@ export default function QuestionContainer(P: any) {
   const [isTrue, setIsTrue] = useState(false);
   const [answerModal, setAnswerModal] = useState(false);
   const [isAnswer, setIsAnswer] = useState(false);
-
+  const { data: userData } = useQuery(FETCH_USER);
   const { data } = useQuery(FETCH_LOGIN_USER_ANSWER, {
     fetchPolicy: "cache-first",
     variables: { questionId: String(el.id) },
@@ -75,6 +76,7 @@ export default function QuestionContainer(P: any) {
     setAnswerModal(true);
     setIsAnswer(false);
   };
+
   return (
     <>
       <QuestionPresenter
@@ -94,6 +96,7 @@ export default function QuestionContainer(P: any) {
         setClose={setClose}
         data={data}
         close={close}
+        userData={userData}
       />
     </>
   );

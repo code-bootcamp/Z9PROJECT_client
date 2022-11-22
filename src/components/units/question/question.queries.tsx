@@ -57,6 +57,9 @@ export const FETCH_QUESTIONS = gql`
       }
       product {
         id
+        user {
+          id
+        }
       }
     }
   }
@@ -83,13 +86,6 @@ export const UPDATE_QUESTION = gql`
       id
       question
       createdAt
-      # user {
-      #   id
-      #   email
-      #   userType
-      #   nickname
-      #   createdAt
-      # }
     }
   }
 `;

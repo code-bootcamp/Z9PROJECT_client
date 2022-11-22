@@ -27,7 +27,6 @@ export default function QuestionList(P: IQuestionListProps) {
   const onClickPage = (currentPage: number) => {
     setCurrentPage(currentPage);
   };
-  console.log(item.id.slice(-4), questionsCount?.fetchCountOfQuestions);
 
   return (
     <>

@@ -265,7 +265,6 @@ export default function CreatorsModal(P: any) {
                   onClick={onClickMoveToPage(`/product/${String(el.id)}`)}
                   key={el.id}
                 >
-                  {console.log(el)}
                   <User>
                     <img
                       src={

@@ -52,7 +52,6 @@ export default function PurchaseContainer() {
   };
 
   const onClickRefund = (id: number) => () => {
-    console.log(id);
     void cancelOrderRequest({
       variables: {
         orderId: String(id),

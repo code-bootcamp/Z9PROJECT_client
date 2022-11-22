@@ -9,7 +9,6 @@ export default function MainContainer() {
   const { data } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     variables: { page: 1 },
   });
-  console.log(data);
 
   const handleLeftClick = useCallback(() => {
     if (!swiperRef) return;
