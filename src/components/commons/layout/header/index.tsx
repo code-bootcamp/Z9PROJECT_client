@@ -78,7 +78,14 @@ export default function HeaderPage() {
                   <strong>{fetchUser?.fetchUser.nickname}</strong> 님
                   환영합니다.
                 </S.Span>
-                <img src="/icon_user.svg" alt="로그인 유도 아이콘" />
+                <S.Prifile
+                  src={
+                    fetchUser?.fetchUser.profileImg
+                      ? fetchUser?.fetchUser.profileImg
+                      : "/icon_user.svg"
+                  }
+                  alt="로그인 유도 아이콘"
+                />
                 {openPop && (
                   <S.Ul2>
                     <S.LiPoint>

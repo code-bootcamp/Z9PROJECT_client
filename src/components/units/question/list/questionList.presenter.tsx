@@ -3,8 +3,9 @@ import AnswerList from "../../answer/list/answerList";
 import AnswerWriter from "../../answer/write/answerWriter";
 
 import * as S from "../question.styles";
+import { IQuestionPresenterProps } from "../question.types";
 
-export default function QuestionPresenter(P: any) {
+export default function QuestionPresenter(P: IQuestionPresenterProps) {
   const {
     el,
     onClickAnswer,
@@ -22,6 +23,7 @@ export default function QuestionPresenter(P: any) {
     answerModal,
     data,
     close,
+    userData,
   } = P;
 
   return (
@@ -44,7 +46,9 @@ export default function QuestionPresenter(P: any) {
               {el.createdAt?.slice(0, 10).replace("-", ".").replace("-", ".")}
             </S.UserInfo>
             <S.Answer>
-              <p onClick={onClickAnswerModal}>답변</p>
+              {userData?.fetchUser.userType === "CREATOR" && (
+                <p onClick={onClickAnswerModal}>답변</p>
+              )}
               <p id={el.id} onClick={onClickEdit}>
                 수정
               </p>

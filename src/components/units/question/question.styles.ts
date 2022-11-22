@@ -90,7 +90,6 @@ export const Textarea = styled.div`
   textarea {
     resize: none;
     font-size: ${styleSet.fontSize.s9};
-    font-family: Pretendard, "Malgun Gothic";
     padding: 15px;
     border: none;
     width: 100%;
@@ -103,7 +102,6 @@ export const Textarea = styled.div`
 `;
 
 export const Contents = styled.p`
-  font-family: Pretendard, "Malgun Gothic";
   font-size: ${styleSet.fontSize.s9};
   flex-direction: column;
   cursor: pointer;

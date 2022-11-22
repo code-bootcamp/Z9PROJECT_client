@@ -148,7 +148,6 @@ export default function WithdrawalModal() {
   }, [watch("amount")]);
 
   const onClickWithdrawal = async (data: any) => {
-    console.log(data);
     try {
       const result = await requestPointRefund({
         variables: {
@@ -162,7 +161,6 @@ export default function WithdrawalModal() {
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
-  console.log(formState.errors);
 
   return (
     <>

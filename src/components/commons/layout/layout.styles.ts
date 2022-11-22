@@ -30,6 +30,13 @@ export const Container = styled.header`
   }
 `;
 
+export const Prifile = styled.img`
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 10px;
+`;
+
 export const Span = styled.span`
   strong {
     text-decoration-line: underline;

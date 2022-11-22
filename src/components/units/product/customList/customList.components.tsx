@@ -1,6 +1,8 @@
 import { InstagramOutlined, YoutubeOutlined } from "@ant-design/icons";
+import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import CreatorsModal from "../../../commons/modal/creatorsModal";
+import { FETCH_PRODUCTS_BY_PAGES } from "../list/list.queries";
 import * as S from "./customList.styles";
 
 export default function ComponentPage(P: any) {
@@ -10,10 +12,27 @@ export default function ComponentPage(P: any) {
   const onCLickModal = () => {
     setModal((prev) => !prev);
   };
-  console.log(modal);
+
+  const { data: pageData } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
+    fetchPolicy: "cache-first",
+    variables: { page: 1 },
+  });
   return (
     <S.ImgBox key={el.id}>
-      {modal && <CreatorsModal el={el} setModal={setModal} />}
+      {pageData?.fetchProductsByPages.map(
+        (dom: any) =>
+          modal && (
+            <>
+              <CreatorsModal
+                dom={dom}
+                el={el}
+                setModal={setModal}
+                key={el.id}
+                pageData={pageData}
+              />
+            </>
+          )
+      )}
       <S.Octagon
         onClick={onCLickModal}
         style={{

@@ -14,14 +14,15 @@ import {
 } from "./register.queries";
 import { useRouter } from "next/router";
 import { IRegisterContainerProps } from "./register.types";
+import UseAuth from "../../../commons/hooks/useAuth";
 
 export default function RegisterContainer(P: IRegisterContainerProps) {
   const { isEdit, fetchProduct } = P;
-  const { register, handleSubmit, setValue, getValues, watch, formState } =
-    useForm({
-      resolver: yupResolver(isEdit ? updateSchema : schema),
-      mode: "onChange",
-    });
+  UseAuth();
+  const { register, handleSubmit, setValue, getValues, watch } = useForm({
+    resolver: yupResolver(isEdit ? updateSchema : schema),
+    mode: "onChange",
+  });
 
   const optionLength: string[] = [];
   const router = useRouter();
@@ -177,7 +178,6 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
   };
 
   const onClickUpdate = async (data: any) => {
-    console.log("aaaa");
     const { info, ...rest } = data;
     try {
       let imgUrl = "";
@@ -205,7 +205,6 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
-  console.log(formState.errors);
 
   return (
     <RegisterPresenter

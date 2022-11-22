@@ -21,7 +21,6 @@ export default function QnaContainer() {
   const { data: fetchMyQuestions } = useQuery(FETCH_MY_QUESTIONS);
   const { data: listCount } = useQuery(FETCH_PRODUCT_BY_CREATOR_COUNT);
 
-  console.log(fetchProductsByCreator);
   const onClickPage = (clickPage: number) => {
     setCurrentPage(clickPage);
   };

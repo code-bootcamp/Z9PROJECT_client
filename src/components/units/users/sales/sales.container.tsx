@@ -53,7 +53,6 @@ export default function SalesContainer() {
   };
 
   const onClickAccept = (id: number) => () => {
-    console.log(id);
     void cancelOrderAccept({
       variables: {
         orderId: String(id),

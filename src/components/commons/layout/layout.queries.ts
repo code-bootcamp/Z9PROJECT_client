@@ -7,6 +7,7 @@ export const FETCH_USER = gql`
       userType
       nickname
       point
+      profileImg
     }
   }
 `;

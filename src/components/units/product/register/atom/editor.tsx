@@ -24,7 +24,6 @@ export default function EditorPage(P: IEditorPageProps) {
         .getInstance()
         .addHook("addImageBlobHook", (blob: Blob | File, callback: any) => {
           (async () => {
-            console.log(blob);
             const result = await uploadImage({
               variables: {
                 image: blob,
