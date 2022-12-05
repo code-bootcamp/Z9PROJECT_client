@@ -23,4 +23,5 @@ export type IDetailPresenterProps = {
   countData: any;
   onLoadPage: () => void;
   option?: any[];
+  fetchUser?: any;
 };

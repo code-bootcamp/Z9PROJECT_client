@@ -35,6 +35,7 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
     onClickDelete,
     countData,
     onLoadPage,
+    fetchUser,
   } = P;
 
   useEffect(() => {
@@ -218,14 +219,18 @@ export default function ProductDetailPresenter2(P: IDetailPresenterProps) {
 
           <S.Button>
             <button onClick={onClickMoveToPage("/list/list")}>목록으로</button>
-            <button
-              onClick={onClickMoveToPage(
-                `/product/${String(router.query.useditemId)}/edit`
-              )}
-            >
-              수정
-            </button>
-            <button onClick={onClickDelete}>삭제</button>
+            {data?.fetchProduct.user.id === fetchUser?.fetchUser.id ? (
+              <>
+                <button
+                  onClick={onClickMoveToPage(
+                    `/product/${String(router.query.useditemId)}/edit`
+                  )}
+                >
+                  수정
+                </button>
+                <button onClick={onClickDelete}>삭제</button>
+              </>
+            ) : null}
           </S.Button>
         </S.DetailWrapper>
 

@@ -10,6 +10,7 @@ import {
   LIKE_PRODUCT,
   FETCH_COUNT_OF_QUESTIONS,
   ADD_PRODUCT_VIEW_COUNT,
+  FETCH_USER,
 } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
@@ -22,6 +23,8 @@ export default function ProductDetailContainer() {
   const [thumbnail, setThumbnail] = useState("");
   const [important, setImportant] = useState(false);
   const [graph, setGraph] = useState(0);
+  const [fetchOption, setFetchOption] = useState<any>([{}]);
+  const [option, setOption] = useState<any>([{}]);
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
@@ -31,83 +34,27 @@ export default function ProductDetailContainer() {
     variables: { productId: String(router.query.useditemId) },
     fetchPolicy: "cache-first",
   });
-
   const { data: countData } = useQuery(FETCH_COUNT_OF_QUESTIONS, {
     fetchPolicy: "cache-first",
     variables: { productId: String(router.query.useditemId) },
   });
+  const { data: fetchUser } = useQuery(FETCH_USER);
 
   useEffect(() => {
+    if (data === null || data === undefined) return;
     setThumbnail(
       data?.fetchProduct.images
         ? data?.fetchProduct.images[0]
         : "/icon_logo.png"
     );
-  }, [data]);
-
-  let option: any[] = [];
-
-  if (data?.fetchProduct?.option1 !== null)
-    option = [
+    setFetchOption([
       {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-    ];
-  if (data?.fetchProduct?.option2 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
+        value: data?.fetchProduct.option1,
+        label: data?.fetchProduct.option1,
       },
       {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
-      },
-    ];
-  if (data?.fetchProduct?.option3 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-      {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
-      },
-      {
-        value: data?.fetchProduct?.option3,
-        label: data?.fetchProduct?.option3,
-      },
-    ];
-  if (data?.fetchProduct?.option4 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-      {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
-      },
-      {
-        value: data?.fetchProduct?.option3,
-        label: data?.fetchProduct?.option3,
-      },
-      {
-        value: data?.fetchProduct?.option4,
-        label: data?.fetchProduct?.option4,
-      },
-    ];
-  if (data?.fetchProduct?.option5 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-      {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
+        value: data?.fetchProduct.option2,
+        label: data?.fetchProduct.option2,
       },
       {
         value: data?.fetchProduct?.option3,
@@ -121,7 +68,15 @@ export default function ProductDetailContainer() {
         value: data?.fetchProduct?.option5,
         label: data?.fetchProduct?.option5,
       },
-    ];
+    ]);
+  }, [data]);
+  useEffect(() => {
+    const temp: any = [];
+    fetchOption.forEach((el: any) => {
+      if (el.value !== null) temp.push(el);
+    });
+    setOption(temp);
+  }, [fetchOption]);
 
   const [likeProduct] = useMutation(LIKE_PRODUCT, {
     refetchQueries: [
@@ -254,6 +209,7 @@ export default function ProductDetailContainer() {
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
           option={option}
+          fetchUser={fetchUser}
         />
       )}
       {data?.fetchProduct.skin === 2 && (
@@ -277,6 +233,7 @@ export default function ProductDetailContainer() {
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
+          fetchUser={fetchUser}
         />
       )}
 
@@ -302,6 +259,7 @@ export default function ProductDetailContainer() {
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
           option={option}
+          fetchUser={fetchUser}
         />
       )}
     </>

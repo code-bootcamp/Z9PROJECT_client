@@ -7,6 +7,7 @@ import { selectCategory } from "./atom/category";
 import { IRegisterPresenterProps } from "./register.types";
 import Input02 from "../../../commons/input/input02/input02";
 import dynamic from "next/dynamic";
+import UseCreator from "../../../commons/hooks/useCreator";
 const EditorPage = dynamic(async () => await import("./atom/editor"), {
   ssr: false,
 });
@@ -36,6 +37,8 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
     onChangeTextColor,
   } = P;
   const { RangePicker } = DatePicker;
+  UseCreator();
+
   return (
     <S.Container>
       <form
