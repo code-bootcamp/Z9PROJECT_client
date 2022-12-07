@@ -1,18 +1,18 @@
-import { dateFormatter, PointFormatter } from "../../../../commons/utils";
-import { DatePicker, Pagination } from "antd";
 import * as S from "./purchase.styles";
+import { DatePicker, Pagination } from "antd";
 import { IPurchasePresenterProps } from "./purchase.types";
+import { dateFormatter, PointFormatter } from "../../../../commons/utils";
 
 export default function PurchasePresenter(P: IPurchasePresenterProps) {
   const {
-    onClickPage,
     tab,
     onClickTab,
-    onChangeDate,
+    onClickPage,
     currentPage,
     HistoryCount,
-    purchaseHistory,
+    onChangeDate,
     onClickRefund,
+    purchaseHistory,
   } = P;
   const { RangePicker } = DatePicker;
   const btnArray = ["1개월", "3개월", "6개월", "12개월"];
@@ -72,10 +72,10 @@ export default function PurchasePresenter(P: IPurchasePresenterProps) {
         </ul>
         <Pagination
           size="small"
-          total={HistoryCount}
-          onChange={onClickPage}
-          current={currentPage}
           defaultCurrent={1}
+          total={HistoryCount}
+          current={currentPage}
+          onChange={onClickPage}
           showSizeChanger={false}
         />
       </S.BoardBody>

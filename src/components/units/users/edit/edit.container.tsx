@@ -1,9 +1,14 @@
-import * as yup from "yup";
+import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
+import { schema } from "./atom/schema";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import EditPresenter from "./edit.presenter";
+import ChangeInput from "./atom/changeInput";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQuery } from "@apollo/client";
+import { styleSet } from "../../../../commons/styles/styleSet";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
   CHECK_NICKNAME,
@@ -14,48 +19,26 @@ import {
   UPDATE_USER,
   UPLOAD_IMAGE,
 } from "./edit.queries";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { IChangeInput } from "./edit.types";
-import Swal from "sweetalert2";
-import { styleSet } from "../../../../commons/styles/styleSet";
-import { useRouter } from "next/router";
-
-const schema = yup.object({
-  nickname: yup.string(),
-  phoneNumber: yup.string(),
-  keyNumber: yup.string(),
-  zipcode: yup.string(),
-  address: yup.string(),
-  addressDetail: yup.string(),
-  snsId: yup.string(),
-  snsChannel: yup.string(),
-  mainContents: yup.string(),
-  introduce: yup.string(),
-  account: yup.string(),
-  bank: yup.string(),
-  accountName: yup.string(),
-});
 
 export default function EditContainer() {
+  const router = useRouter();
+  const [certFile, setCertFile] = useState<File>();
+  const [profileFile, setProfileFile] = useState<File>();
+  const [openTime, setOpenTime] = useState<boolean>(false);
+  const [profilePreview, setProfilePreview] = useState<string>("");
+  const [updateUser] = useMutation(UPDATE_USER);
+  const [deleteUser] = useMutation(DELETE_USER);
+  const [uploadImage] = useMutation(UPLOAD_IMAGE);
+  const [postSmsToken] = useMutation(POST_SMS_TOKEN);
+  const [checkNickname] = useMutation(CHECK_NICKNAME);
+  const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
+  const { data: fetchUser } = useQuery(FETCH_USER);
   const { register, handleSubmit, formState, setValue, getValues, watch } =
     useForm({ resolver: yupResolver(schema) });
-  const [certFile, setCertFile] = useState<File>();
-  const [profilePreview, setProfilePreview] = useState("");
-  const [profileFile, setProfileFile] = useState<File>();
-  const [updateUser] = useMutation(UPDATE_USER);
-  const [openTime, setOpenTime] = useState(false);
-  const [postSmsToken] = useMutation(POST_SMS_TOKEN);
-  const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
-  const [checkNickname] = useMutation(CHECK_NICKNAME);
-  const [uploadImage] = useMutation(UPLOAD_IMAGE);
-  const [deleteUser] = useMutation(DELETE_USER);
-  const { data: fetchUser } = useQuery(FETCH_USER);
-  const router = useRouter();
 
   useEffect(() => {
     setValue("snsChannel", fetchUser?.fetchUser.snsChannel);
   }, [fetchUser?.fetchUser.snsChannel]);
-
   useEffect(() => {
     if (
       watch("phoneNumber").length === 11 &&
@@ -72,7 +55,6 @@ export default function EditContainer() {
   const onChangeCertifiFile = (file: File) => {
     setCertFile(file);
   };
-
   const onChageProfileFile = (url: string, file: File) => {
     setProfilePreview(url);
     setProfileFile(file);
@@ -98,7 +80,6 @@ export default function EditContainer() {
       ErrorModal("이미 인증번호 받기를 누르셨습니다. 핸드폰을 확인바랍니다.");
     }
   };
-
   const onClickCertConfirm = async () => {
     try {
       const result = await patchSmsToken({
@@ -116,7 +97,6 @@ export default function EditContainer() {
       ErrorModal(error as string);
     }
   };
-
   const onClickNameConfirm = async () => {
     try {
       const result = await checkNickname({
@@ -125,17 +105,14 @@ export default function EditContainer() {
         },
       });
 
-      if (result.data.checkNickname) {
-        ErrorModal("이미 사용중인 닉네임입니다.");
-      } else {
-        SuccessModal("사용 가능한 닉네임입니다.");
-      }
+      result.data.checkNickname
+        ? ErrorModal("이미 사용중인 닉네임입니다.")
+        : SuccessModal("사용 가능한 닉네임입니다.");
     } catch (error) {
       if (error instanceof Error) ErrorModal(error.message);
     }
   };
-
-  const onClickUpdate = async (data: any) => {
+  const onClickUpdate = async () => {
     try {
       let profileUrl = "";
       let certUrl = "";
@@ -161,43 +138,7 @@ export default function EditContainer() {
         certUrl = fetchUser?.fetchUser.profileImg;
       }
 
-      const changeInput: IChangeInput = {};
-      if (watch("nickname")) {
-        changeInput.nickname = getValues("nickname");
-      }
-      if (watch("phoneNumber")) {
-        changeInput.phoneNumber = getValues("phoneNumber");
-      }
-      if (watch("zipcode")) {
-        changeInput.zipcode = getValues("zipcode");
-      }
-      if (watch("address")) {
-        changeInput.address = getValues("address");
-      }
-      if (watch("addressDetail")) {
-        changeInput.addressDetail = getValues("addressDetail");
-      }
-      if (watch("introduce")) {
-        changeInput.introduce = getValues("introduce");
-      }
-      if (watch("mainContents")) {
-        changeInput.mainContents = getValues("mainContents");
-      }
-      if (watch("snsChannel")) {
-        changeInput.snsChannel = getValues("snsChannel");
-      }
-      if (watch("snsId")) {
-        changeInput.snsId = getValues("snsId");
-      }
-      if (watch("bank")) {
-        changeInput.bank = getValues("bank");
-      }
-      if (watch("account")) {
-        changeInput.account = getValues("account");
-      }
-      if (watch("accountName")) {
-        changeInput.accountName = getValues("accountName");
-      }
+      const { changeInput } = ChangeInput({ watch, getValues });
 
       await updateUser({
         variables: {

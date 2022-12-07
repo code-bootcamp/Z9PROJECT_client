@@ -1,7 +1,7 @@
-import * as S from "./wish.styles";
-import { PriceFormatter } from "../../../../commons/utils";
-import { IWishPresenterProps } from "./wish.types";
 import Link from "next/link";
+import * as S from "./wish.styles";
+import { IWishPresenterProps } from "./wish.types";
+import { PriceFormatter } from "../../../../commons/utils";
 
 export default function WishPresenter(P: IWishPresenterProps) {
   const { onClickMore, totalPage, presentPage, presentArray } = P;

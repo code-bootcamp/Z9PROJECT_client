@@ -1,6 +1,6 @@
-import Input01 from "../../../commons/input/input01/input01";
 import * as S from "./password.styles";
 import { IPasswordPresenterProps } from "./password.types";
+import Input01 from "../../../commons/input/input01/input01";
 
 export default function PasswordPresenter(P: IPasswordPresenterProps) {
   const { register, handleSubmit, formState, onClickUpdate } = P;

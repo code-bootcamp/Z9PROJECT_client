@@ -1,28 +1,28 @@
+import * as S from "./edit.styles";
 import CountDown from "../../../commons/count";
+import { IEditPresenterProps } from "./edit.types";
+import ZipcodeModal from "../../../commons/modal/zipcode";
 import Input01 from "../../../commons/input/input01/input01";
 import Input03 from "../../../commons/input/input03/input03";
-import ZipcodeModal from "../../../commons/modal/zipcode";
 import Upload01 from "../../../commons/upload/upload01/upload01";
 import Upload02 from "../../../commons/upload/upload02/upload02";
-import * as S from "./edit.styles";
-import { IEditPresenterProps } from "./edit.types";
 
 export default function EditPresenter(P: IEditPresenterProps) {
   const {
     register,
-    handleSubmit,
-    formState,
-    onChangeCertifiFile,
-    onChageProfileFile,
-    profilePreview,
-    fetchUser,
-    onClickUpdate,
     openTime,
     setValue,
+    formState,
+    fetchUser,
     onClickMore,
+    handleSubmit,
+    onClickUpdate,
+    profilePreview,
     onClickCertNumber,
     onClickCertConfirm,
     onClickNameConfirm,
+    onChageProfileFile,
+    onChangeCertifiFile,
   } = P;
 
   return (

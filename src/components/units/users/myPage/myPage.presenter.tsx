@@ -1,9 +1,9 @@
-import { dateFormatter, PointFormatter } from "../../../../commons/utils";
-import { DatePicker, Pagination } from "antd";
 import * as S from "./myPage.styles";
+import { DatePicker, Pagination } from "antd";
 import { IMyPagePresenterProps } from "./myPage.types";
 import ChargeModal from "../../../commons/modal/charge";
 import WithdrawalModal from "../../../commons/modal/withdrawal";
+import { dateFormatter, PointFormatter } from "../../../../commons/utils";
 
 export default function MyPagePresenter(P: IMyPagePresenterProps) {
   const {

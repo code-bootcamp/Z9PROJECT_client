@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import PasswordPresenter from "./password.presenter";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@apollo/client";
-import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
+import PasswordPresenter from "./password.presenter";
 import { UPDATE_PASSWORD } from "./password.queries";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 
 const schema = yup.object({
   password: yup.string().required("필수"),
@@ -41,8 +41,8 @@ export default function PasswordContainer() {
   return (
     <PasswordPresenter
       register={register}
-      handleSubmit={handleSubmit}
       formState={formState}
+      handleSubmit={handleSubmit}
       onClickUpdate={onClickUpdate}
     />
   );

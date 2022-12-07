@@ -1,7 +1,7 @@
-import { dateFormatter, PointFormatter } from "../../../../commons/utils";
-import { DatePicker, Pagination } from "antd";
 import * as S from "./sales.styles";
+import { DatePicker, Pagination } from "antd";
 import { ISalesPresenterProps } from "./sales.types";
+import { dateFormatter, PointFormatter } from "../../../../commons/utils";
 
 export default function SalesPresenter(P: ISalesPresenterProps) {
   const {
@@ -72,10 +72,10 @@ export default function SalesPresenter(P: ISalesPresenterProps) {
         </ul>
         <Pagination
           size="small"
-          total={HistoryCount}
-          onChange={onClickPage}
-          current={currentPage}
           defaultCurrent={1}
+          total={HistoryCount}
+          current={currentPage}
+          onChange={onClickPage}
           showSizeChanger={false}
         />
       </S.BoardBody>

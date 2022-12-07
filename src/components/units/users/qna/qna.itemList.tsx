@@ -8,7 +8,6 @@ export default function QnaItemList() {
       page: 1,
     },
   });
-  console.log(fetchOrdersByCreatorId?.fetchOrdersByCreatorId);
 
   return (
     <>

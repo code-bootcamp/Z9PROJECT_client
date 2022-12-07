@@ -9,14 +9,13 @@ import {
 } from "./sales.queries";
 
 export default function SalesContainer() {
-  const [tab, setTab] = useState("0");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [tab, setTab] = useState<string>("0");
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [date, setDate] = useState<Date[] | undefined[]>([
     undefined,
     undefined,
   ]);
   const [cancelOrderAccept] = useMutation(CANCEL_ORDER_ACCEPT);
-
   const { data: sellHistory } = useQuery(FETCH_ORDER_BY_CREATOR, {
     variables: {
       startDate: date[0],
@@ -34,11 +33,9 @@ export default function SalesContainer() {
   const onClickPage = (currentPage: number) => {
     setCurrentPage(currentPage);
   };
-
   const onChangeDate = (date: any) => {
     setDate([date[0]._d, date[1]._d]);
   };
-
   const onClickTab = (e: any) => {
     setTab(e?.currentTarget.id);
     const regex = /[^0-9]/g;
@@ -51,7 +48,6 @@ export default function SalesContainer() {
     const startDate = new Date(year, month - gap, day);
     setDate([startDate, endDate]);
   };
-
   const onClickAccept = (id: number) => () => {
     void cancelOrderAccept({
       variables: {
@@ -60,20 +56,18 @@ export default function SalesContainer() {
     });
   };
 
-  // const onClickSearch = () => {};
-
   return (
     <MyPageLayoutContainer>
       <SalesPresenter
         tab={tab}
         setTab={setTab}
         onClickTab={onClickTab}
-        onClickPage={onClickPage}
-        onChangeDate={onChangeDate}
         sellHistory={sellHistory}
+        onClickPage={onClickPage}
         currentPage={currentPage}
-        HistoryCount={HistoryCount?.fetchCountOfOrderByCreatorId}
+        onChangeDate={onChangeDate}
         onClickAccept={onClickAccept}
+        HistoryCount={HistoryCount?.fetchCountOfOrderByCreatorId}
       />
     </MyPageLayoutContainer>
   );

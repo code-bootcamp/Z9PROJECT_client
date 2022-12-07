@@ -29,8 +29,8 @@ export default function QnaPresenterCreator(P: IQnaPresenterCreatorProps) {
           <Pagination
             size="small"
             total={listCount}
-            onChange={onClickPage}
             current={currentPage}
+            onChange={onClickPage}
           />
         </ul>
       </S.BoardBody>
