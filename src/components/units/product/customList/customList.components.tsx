@@ -1,9 +1,9 @@
-import { InstagramOutlined, YoutubeOutlined } from "@ant-design/icons";
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
-import CreatorsModal from "../../../commons/modal/creatorsModal";
-import { FETCH_PRODUCTS_BY_PAGES } from "../list/list.queries";
 import * as S from "./customList.styles";
+import { useQuery } from "@apollo/client";
+import { FETCH_PRODUCTS_BY_PAGES } from "../list/list.queries";
+import CreatorsModal from "../../../commons/modal/creatorsModal";
+import { InstagramOutlined, YoutubeOutlined } from "@ant-design/icons";
 
 export default function ComponentPage(P: any) {
   const { el } = P;

@@ -3,13 +3,12 @@ import { useState } from "react";
 import * as S from "../layout.styles";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import { hamburgerState } from "../../store";
 import { useMutation, useQuery } from "@apollo/client";
 import { FETCH_USER, LOGOUT } from "../layout.queries";
 import { useMoveToPage } from "../../hooks/useMoveToPage";
 import { PointFormatter } from "../../../../commons/utils";
-import { accessTokenState } from "../../../../commons/store";
 import { styleSet } from "../../../../commons/styles/styleSet";
+import { accessTokenState, hamburgerState } from "../../../../commons/store";
 
 export default function HeaderPage() {
   const { onClickMoveToPage, onClickMobileToPage } = useMoveToPage();
