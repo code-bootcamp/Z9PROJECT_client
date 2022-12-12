@@ -1,10 +1,11 @@
 import { BaseOptionType, DefaultOptionType } from "antd/lib/select";
-import { MutableRefObject } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import {
   FieldValues,
   UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
 
@@ -95,4 +96,13 @@ export type IEditorPageProps = {
   contentsRef: MutableRefObject<any> | undefined;
   onChangeContents: (text: any) => void;
   initialValue?: string | undefined;
+};
+
+export type IExportUseEffectProps = {
+  fetchProduct: any;
+  optionLength: string[];
+  setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
+  onChangeCategory: (value: unknown) => void;
+  setOption: Dispatch<SetStateAction<number>>;
 };
