@@ -84,7 +84,6 @@ export default function UserRegisterContainer() {
         setTimeout(() => {
           setOpenTime(false);
         }, 180000);
-        console.log(result.data.postSmsToken.message);
       } catch (error) {
         ErrorModal(error as string);
       }
