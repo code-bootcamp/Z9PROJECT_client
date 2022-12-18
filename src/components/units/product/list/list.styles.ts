@@ -310,3 +310,9 @@ export const New = styled.img`
     top: 2%;
   }
 `;
+
+export const LoadText = styled.p`
+  padding-top: 5rem;
+  font-size: ${styleSet.fontSize.s7};
+  text-align: center;
+`;
