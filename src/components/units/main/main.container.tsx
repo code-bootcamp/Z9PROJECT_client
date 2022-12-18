@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { useCallback, useState } from "react";
 import MainPresenter from "./main.presenter";
+import { useCallback, useState } from "react";
 import { FETCH_PRODUCTS_BY_PAGES } from "./main.querise";
 
 export default function MainContainer() {

@@ -1,10 +1,10 @@
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import ProductListMap from "./list.map";
 import {
   COUNT_PRODUCT_BY_STATUS,
   FETCH_PRODUCTS_BY_PAGES,
 } from "./list.queries";
+import { useQuery } from "@apollo/client";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");

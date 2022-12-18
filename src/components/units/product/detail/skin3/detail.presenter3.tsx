@@ -5,17 +5,17 @@ import {
   MinusOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
-import * as S from "../skin1/detail.styles";
-import { IDetailPresenterProps } from "../detail.types";
-import Product01 from "../miniProduct.tsx/product01";
-import QuestionWriter from "../../../question/write/questionWriter";
-import QuestionMap from "../../../question/list/questionList.map";
-import { categoryContents, categoryTitle } from "../../register/atom/category";
+import dynamic from "next/dynamic";
 import * as DOMPurify from "dompurify";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
+import * as S from "../skin1/detail.styles";
+import Product01 from "../miniProduct.tsx/product01";
+import { IDetailPresenterProps } from "../detail.types";
 import TimerDetail from "../../../../commons/hooks/timerDetail";
+import QuestionMap from "../../../question/list/questionList.map";
+import QuestionWriter from "../../../question/write/questionWriter";
+import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
+import { categoryContents, categoryTitle } from "../../register/atom/category";
 const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });

@@ -1,5 +1,5 @@
-import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
+import ProductListPresenter from "./list.presenter";
 
 export default function ProductListMap(P: any) {
   const { onClickTab, tab, data, onLoadMore, listData } = P;
