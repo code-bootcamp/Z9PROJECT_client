@@ -1,16 +1,16 @@
-import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { MouseEvent, useEffect, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
+  FETCH_USER,
+  LIKE_PRODUCT,
   CREATE_ORDER,
+  FETCH_PRODUCT,
   FETCH_IS_LIKED,
   DELETE_PRODUCT,
-  FETCH_PRODUCT,
-  LIKE_PRODUCT,
-  FETCH_COUNT_OF_QUESTIONS,
   ADD_PRODUCT_VIEW_COUNT,
-  FETCH_USER,
+  FETCH_COUNT_OF_QUESTIONS,
 } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
@@ -18,17 +18,25 @@ import ProductDetailPresenter3 from "./skin3/detail.presenter3";
 
 export default function ProductDetailContainer() {
   const router = useRouter();
+  const [graph, setGraph] = useState(0);
   const [count, setCount] = useState(1);
   const [cart, setCart] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
-  const [important, setImportant] = useState(false);
-  const [graph, setGraph] = useState(0);
-  const [fetchOption, setFetchOption] = useState<any>([{}]);
   const [option, setOption] = useState<any>([{}]);
+  const [important, setImportant] = useState(false);
+  const [fetchOption, setFetchOption] = useState<any>([{}]);
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const [addProductViewCount] = useMutation(ADD_PRODUCT_VIEW_COUNT);
+  const [likeProduct] = useMutation(LIKE_PRODUCT, {
+    refetchQueries: [
+      {
+        query: FETCH_IS_LIKED,
+        variables: { productId: String(router.query.useditemId) },
+      },
+    ],
+  });
 
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
@@ -39,6 +47,10 @@ export default function ProductDetailContainer() {
     variables: { productId: String(router.query.useditemId) },
   });
   const { data: fetchUser } = useQuery(FETCH_USER);
+
+  const { data: fetchIsLiked } = useQuery(FETCH_IS_LIKED, {
+    variables: { productId: String(router.query.useditemId) },
+  });
 
   useEffect(() => {
     if (data === null || data === undefined) return;
@@ -70,6 +82,7 @@ export default function ProductDetailContainer() {
       },
     ]);
   }, [data]);
+
   useEffect(() => {
     const temp: any = [];
     fetchOption.forEach((el: any) => {
@@ -77,19 +90,6 @@ export default function ProductDetailContainer() {
     });
     setOption(temp);
   }, [fetchOption]);
-
-  const [likeProduct] = useMutation(LIKE_PRODUCT, {
-    refetchQueries: [
-      {
-        query: FETCH_IS_LIKED,
-        variables: { productId: String(router.query.useditemId) },
-      },
-    ],
-  });
-
-  const { data: fetchIsLiked } = useQuery(FETCH_IS_LIKED, {
-    variables: { productId: String(router.query.useditemId) },
-  });
 
   useEffect(() => {
     if (fetchIsLiked?.fetchIsLiked === true) {
@@ -122,12 +122,6 @@ export default function ProductDetailContainer() {
     });
   };
 
-  const discount = Math.floor(
-    ((data?.fetchProduct.originPrice - data?.fetchProduct.discountPrice) /
-      data?.fetchProduct.originPrice) *
-      100
-  );
-
   const onClickOrder = async () => {
     try {
       await createOrder({
@@ -147,13 +141,6 @@ export default function ProductDetailContainer() {
     } catch (error) {
       ErrorModal(error as string);
     }
-  };
-
-  const onClickTab = () => {
-    setImportant(true);
-  };
-  const onClickTab2 = () => {
-    setImportant(false);
   };
 
   const onClickDelete = async () => {
@@ -184,6 +171,19 @@ export default function ProductDetailContainer() {
       variables: { productId: String(router.query.useditemId) },
     });
   };
+
+  const onClickTab = () => {
+    setImportant(true);
+  };
+  const onClickTab2 = () => {
+    setImportant(false);
+  };
+
+  const discount = Math.floor(
+    ((data?.fetchProduct.originPrice - data?.fetchProduct.discountPrice) /
+      data?.fetchProduct.originPrice) *
+      100
+  );
 
   return (
     <>

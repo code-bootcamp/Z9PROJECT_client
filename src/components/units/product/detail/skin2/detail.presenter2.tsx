@@ -1,15 +1,15 @@
-import { MessageOutlined } from "@ant-design/icons";
 import DOMPurify from "dompurify";
 import dynamic from "next/dynamic";
+import * as S from "./detail.styles2";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
+import { MessageOutlined } from "@ant-design/icons";
+import Product01 from "../miniProduct.tsx/product01";
+import { IDetailPresenterProps } from "../detail.types";
 import QuestionMap from "../../../question/list/questionList.map";
 import QuestionWriter from "../../../question/write/questionWriter";
+import { useMoveToPage } from "../../../../commons/hooks/useMoveToPage";
 import { categoryContents, categoryTitle } from "../../register/atom/category";
-import { IDetailPresenterProps } from "../detail.types";
-import Product01 from "../miniProduct.tsx/product01";
-import * as S from "./detail.styles2";
 const ViewerPage = dynamic(async () => await import("../atom/viewer"), {
   ssr: false,
 });

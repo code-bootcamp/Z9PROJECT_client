@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import ProductListMap from "./list.map";
+import { useQuery } from "@apollo/client";
 import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
 
 export default function ProductListContainer() {

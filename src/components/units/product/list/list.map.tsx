@@ -1,10 +1,9 @@
-import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
+import ProductListPresenter from "./list.presenter";
 
 export default function ProductListMap(P: any) {
   const { onClickTab, tab, data, onLoadMore } = P;
   const btnArray = ["전체", "진행예정", "진행중", "종료"];
-  console.log(data?.fetchProductsByPages.length);
   return (
     <>
       <S.Container>
