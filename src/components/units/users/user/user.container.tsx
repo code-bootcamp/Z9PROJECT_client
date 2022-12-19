@@ -75,7 +75,7 @@ export default function UserRegisterContainer() {
   const onClickCertNumber = async () => {
     if (!openTime) {
       try {
-        const result = await postSmsToken({
+        await postSmsToken({
           variables: {
             phoneNumber: getValues("phoneNumber"),
           },

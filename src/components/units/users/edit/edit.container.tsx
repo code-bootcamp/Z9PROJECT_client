@@ -63,7 +63,7 @@ export default function EditContainer() {
   const onClickCertNumber = async () => {
     if (!openTime) {
       try {
-        const result = await postSmsToken({
+        await postSmsToken({
           variables: {
             phoneNumber: getValues("phoneNumber"),
           },
