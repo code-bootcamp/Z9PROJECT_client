@@ -55,7 +55,7 @@ export default function EditContainer() {
   const onChangeCertifiFile = (file: File) => {
     setCertFile(file);
   };
-  const onChageProfileFile = (url: string, file: File) => {
+  const onChangeProfileFile = (url: string, file: File) => {
     setProfilePreview(url);
     setProfileFile(file);
   };
@@ -185,7 +185,7 @@ export default function EditContainer() {
       onClickUpdate={onClickUpdate}
       profilePreview={profilePreview}
       onClickCertNumber={onClickCertNumber}
-      onChageProfileFile={onChageProfileFile}
+      onChangeProfileFile={onChangeProfileFile}
       onClickCertConfirm={onClickCertConfirm}
       onClickNameConfirm={onClickNameConfirm}
       onChangeCertifiFile={onChangeCertifiFile}

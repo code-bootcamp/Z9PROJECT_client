@@ -12,7 +12,7 @@ export type IUserPresenterProps = {
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
-  onChageProfileFile: (url: string, file: File) => void;
+  onChangeProfileFile: (url: string, file: File) => void;
   profilePreview: string;
   onClickCertNumber: () => void;
   onClickCertConfirm: () => void;

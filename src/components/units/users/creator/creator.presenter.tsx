@@ -15,7 +15,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
     handleSubmit,
     formState,
     onChangeCertifiFile,
-    onChageProfileFile,
+    onChangeProfileFile,
     profilePreview,
     onClickCertNumber,
     onClickCertConfirm,
@@ -264,7 +264,7 @@ export default function CreatorPresenter(P: ICreatorPresenterProps) {
                 <img src="/users/user/img_id.svg" alt="기본 이미지" />
               )}
             </S.ProfileWrapper>
-            <Upload02 onChageProfileFile={onChageProfileFile} />
+            <Upload02 onChangeProfileFile={onChangeProfileFile} />
           </S.UpoloadWrapper>
           <S.Concept
             placeholder="주력 콘텐츠를 입력하세요. 예) 뷰티, 브이로그, 게임"

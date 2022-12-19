@@ -1,5 +1,5 @@
-import { FieldValues, UseFormGetValues, UseFormWatch } from "react-hook-form";
 import { IChangeInput } from "../edit.types";
+import { FieldValues, UseFormGetValues, UseFormWatch } from "react-hook-form";
 
 type IChangeInputProps = {
   watch: UseFormWatch<FieldValues>;

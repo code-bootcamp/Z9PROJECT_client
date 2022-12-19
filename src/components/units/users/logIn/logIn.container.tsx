@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { useForm } from "react-hook-form";
@@ -7,7 +8,6 @@ import { gql, useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorModal } from "../../../commons/modal/modal";
 import { accessTokenState } from "../../../../commons/store";
-import { useEffect } from "react";
 
 const schma = yup.object({
   email: yup.string().email("이메일 형식 확인").required("필수"),

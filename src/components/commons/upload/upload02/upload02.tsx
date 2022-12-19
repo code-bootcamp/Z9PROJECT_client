@@ -32,7 +32,7 @@ const Input = styled.input`
 `;
 
 type IUpload02Props = {
-  onChageProfileFile: (url: string, file: File) => void;
+  onChangeProfileFile: (url: string, file: File) => void;
   isEdit?: boolean;
 };
 
@@ -41,7 +41,7 @@ type IStylesProps = {
 };
 
 export default function Upload02(P: IUpload02Props) {
-  const { onChageProfileFile, isEdit } = P;
+  const { onChangeProfileFile, isEdit } = P;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickUpload = () => {
@@ -55,7 +55,7 @@ export default function Upload02(P: IUpload02Props) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = (e: ProgressEvent<FileReader>) => {
-      onChageProfileFile(String(e.target?.result), file);
+      onChangeProfileFile(String(e.target?.result), file);
     };
   };
 

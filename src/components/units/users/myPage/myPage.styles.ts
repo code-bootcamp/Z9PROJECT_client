@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { styleSet } from "../../../../commons/styles/styleSet";
 import { IStylesProps } from "./myPage.types";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
   padding: 50px 0;

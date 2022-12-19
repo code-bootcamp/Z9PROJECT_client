@@ -19,7 +19,7 @@ export type IEditPresenterProps = {
   onClickCertNumber: () => Promise<void>;
   onClickCertConfirm: () => Promise<void>;
   onClickNameConfirm: () => Promise<void>;
-  onChageProfileFile: (url: string, file: File) => void;
+  onChangeProfileFile: (url: string, file: File) => void;
   onChangeCertifiFile: (file: File) => void;
 };
 

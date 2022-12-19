@@ -1,10 +1,12 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import * as yup from "yup";
+import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import UserPresenter from "./user.presenter";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useMutation } from "@apollo/client";
-import { v4 as uuidv4 } from "uuid";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ChangeEvent, useEffect, useState } from "react";
+import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
   CHECK_NICKNAME,
   CREATE_USER,
@@ -12,8 +14,6 @@ import {
   POST_SMS_TOKEN,
   UPLOAD_IMAGE,
 } from "./user.queries";
-import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
-import { useRouter } from "next/router";
 
 const schma = yup.object({
   email: yup.string().email("이메일 형식 확인").required("필수"),
@@ -40,21 +40,20 @@ export default function UserRegisterContainer() {
       resolver: yupResolver(schma),
       mode: "onChange",
     });
-  const [profilePreview, setProfilePreview] = useState("");
+  const [confirmId, setConfirmId] = useState<string>("");
   const [profileFile, setProfileFile] = useState<File>();
-  const [confirmId, setConfirmId] = useState("");
-  const [openTime, setOpenTime] = useState(false);
+  const [openTime, setOpenTime] = useState<boolean>(false);
+  const [profilePreview, setProfilePreview] = useState<string>("");
   const [createUser] = useMutation(CREATE_USER);
-  const [postSmsToken] = useMutation(POST_SMS_TOKEN);
-  const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
-  const [checkNickname] = useMutation(CHECK_NICKNAME);
   const [uploadImage] = useMutation(UPLOAD_IMAGE);
+  const [postSmsToken] = useMutation(POST_SMS_TOKEN);
+  const [checkNickname] = useMutation(CHECK_NICKNAME);
+  const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
   const router = useRouter();
 
   useEffect(() => {
     setConfirmId(uuidv4());
   }, []);
-
   useEffect(() => {
     if (
       watch("phoneNumber").length === 11 &&
@@ -70,6 +69,10 @@ export default function UserRegisterContainer() {
 
   const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
     setValue("terms", e.target.checked);
+  };
+  const onChangeProfileFile = (url: string, file: File) => {
+    setProfilePreview(url);
+    setProfileFile(file);
   };
 
   const onClickCertNumber = async () => {
@@ -109,7 +112,6 @@ export default function UserRegisterContainer() {
       ErrorModal(error as string);
     }
   };
-
   const onClickNameConfirm = async () => {
     try {
       const result = await checkNickname({
@@ -126,11 +128,6 @@ export default function UserRegisterContainer() {
     } catch (error) {
       if (error instanceof Error) ErrorModal(error.message);
     }
-  };
-
-  const onChageProfileFile = (url: string, file: File) => {
-    setProfilePreview(url);
-    setProfileFile(file);
   };
 
   const onClickSignUp = async (data: any) => {
@@ -167,7 +164,7 @@ export default function UserRegisterContainer() {
       register={register}
       handleSubmit={handleSubmit}
       formState={formState}
-      onChageProfileFile={onChageProfileFile}
+      onChangeProfileFile={onChangeProfileFile}
       profilePreview={profilePreview}
       onClickCertNumber={onClickCertNumber}
       onClickCertConfirm={onClickCertConfirm}

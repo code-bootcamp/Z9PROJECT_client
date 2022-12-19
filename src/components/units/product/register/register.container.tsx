@@ -25,8 +25,8 @@ export default function RegisterContainer(P: IRegisterContainerProps) {
     mode: "onChange",
   });
   const router = useRouter();
-  const nameRef = useRef<any>(null);
   const contentsRef = useRef<any>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const [option, setOption] = useState<number>(0);
   const [imgFiles, setImgFiles] = useState<File[]>();
   const [category, setCategory] = useState<string[]>([""]);

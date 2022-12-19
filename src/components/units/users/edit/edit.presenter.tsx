@@ -21,7 +21,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
     onClickCertNumber,
     onClickCertConfirm,
     onClickNameConfirm,
-    onChageProfileFile,
+    onChangeProfileFile,
     onChangeCertifiFile,
   } = P;
 
@@ -39,7 +39,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
               <img src="/test.jpeg" alt="기본이미지" />
             )}
           </S.ProfileWrapper>
-          <Upload02 onChageProfileFile={onChageProfileFile} isEdit={true} />
+          <Upload02 onChangeProfileFile={onChangeProfileFile} isEdit={true} />
         </S.UploadWrapper>
 
         <S.SubTitle className="h2">나의 정보</S.SubTitle>
