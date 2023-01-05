@@ -16,7 +16,7 @@ export type ICreatorPresenterProps = {
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
   onChangeCertifiFile: (file: File) => void;
-  onChageProfileFile: (url: string, file: File) => void;
+  onChangeProfileFile: (url: string, file: File) => void;
   profilePreview: string;
   onClickCertNumber: () => void;
   onClickCertConfirm: () => void;

@@ -1,10 +1,10 @@
+import "animate.css";
 import {
   InstagramOutlined,
   SearchOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
 import * as S from "./customList.styles";
-import "animate.css";
 import ComponentPage from "./customList.components";
 
 export default function CustomListPresenter(P: any) {

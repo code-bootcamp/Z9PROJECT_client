@@ -1,28 +1,28 @@
+import * as S from "./edit.styles";
 import CountDown from "../../../commons/count";
+import { IEditPresenterProps } from "./edit.types";
+import ZipcodeModal from "../../../commons/modal/zipcode";
 import Input01 from "../../../commons/input/input01/input01";
 import Input03 from "../../../commons/input/input03/input03";
-import ZipcodeModal from "../../../commons/modal/zipcode";
 import Upload01 from "../../../commons/upload/upload01/upload01";
 import Upload02 from "../../../commons/upload/upload02/upload02";
-import * as S from "./edit.styles";
-import { IEditPresenterProps } from "./edit.types";
 
 export default function EditPresenter(P: IEditPresenterProps) {
   const {
     register,
-    handleSubmit,
-    formState,
-    onChangeCertifiFile,
-    onChageProfileFile,
-    profilePreview,
-    fetchUser,
-    onClickUpdate,
     openTime,
     setValue,
+    formState,
+    fetchUser,
     onClickMore,
+    handleSubmit,
+    onClickUpdate,
+    profilePreview,
     onClickCertNumber,
     onClickCertConfirm,
     onClickNameConfirm,
+    onChangeProfileFile,
+    onChangeCertifiFile,
   } = P;
 
   return (
@@ -39,7 +39,7 @@ export default function EditPresenter(P: IEditPresenterProps) {
               <img src="/test.jpeg" alt="기본이미지" />
             )}
           </S.ProfileWrapper>
-          <Upload02 onChageProfileFile={onChageProfileFile} isEdit={true} />
+          <Upload02 onChangeProfileFile={onChangeProfileFile} isEdit={true} />
         </S.UploadWrapper>
 
         <S.SubTitle className="h2">나의 정보</S.SubTitle>

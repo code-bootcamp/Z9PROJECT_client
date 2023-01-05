@@ -1,5 +1,5 @@
-import { EyeOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
+import { EyeOutlined } from "@ant-design/icons";
 import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
@@ -309,4 +309,10 @@ export const New = styled.img`
   @media ${styleSet.breakePoints.mobile} {
     top: 2%;
   }
+`;
+
+export const LoadText = styled.p`
+  padding-top: 5rem;
+  font-size: ${styleSet.fontSize.s7};
+  text-align: center;
 `;

@@ -1,10 +1,9 @@
-import ProductListPresenter from "./list.presenter";
 import * as S from "./list.styles";
+import ProductListPresenter from "./list.presenter";
 
 export default function ProductListMap(P: any) {
-  const { onClickTab, tab, data, onLoadMore } = P;
+  const { onClickTab, tab, data, onLoadMore, listData } = P;
   const btnArray = ["전체", "진행예정", "진행중", "종료"];
-
   return (
     <>
       <S.Container>
@@ -25,9 +24,14 @@ export default function ProductListMap(P: any) {
                 return <ProductListPresenter key={el.id} el={el} tab={tab} />;
               })}
             </div>
-            <S.Button onClick={onLoadMore}>
-              <span>더보기</span>
-            </S.Button>
+            {listData?.countProductByStatus ===
+            data?.fetchProductsByPages.length ? (
+              <S.LoadText>로드할 상품이 없습니다.</S.LoadText>
+            ) : (
+              <S.Button onClick={onLoadMore}>
+                <span>더보기</span>
+              </S.Button>
+            )}
           </S.Main>
         </S.Wrapper>
       </S.Container>

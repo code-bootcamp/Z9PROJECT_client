@@ -23,20 +23,19 @@ export default function CreatorRegisterContainer() {
     });
   const router = useRouter();
   const [certFile, setCertFile] = useState<File>();
-  const [profilePreview, setProfilePreview] = useState("");
+  const [confirmId, setConfirmId] = useState<string>("");
   const [profileFile, setProfileFile] = useState<File>();
-  const [confirmId, setConfirmId] = useState("");
-  const [openTime, setOpenTime] = useState(false);
-  const [createCreator] = useMutation(CREATE_CREATOR);
-  const [postSmsToken] = useMutation(POST_SMS_TOKEN);
-  const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
-  const [checkNickname] = useMutation(CHECK_NICKNAME);
+  const [openTime, setOpenTime] = useState<boolean>(false);
+  const [profilePreview, setProfilePreview] = useState("");
   const [uploadImage] = useMutation(UPLOAD_IMAGE);
+  const [postSmsToken] = useMutation(POST_SMS_TOKEN);
+  const [createCreator] = useMutation(CREATE_CREATOR);
+  const [checkNickname] = useMutation(CHECK_NICKNAME);
+  const [patchSmsToken] = useMutation(PATCH_SMS_TOKEN);
 
   useEffect(() => {
     setConfirmId(uuidv4());
   }, []);
-
   useEffect(() => {
     if (
       watch("phoneNumber").length === 11 &&
@@ -53,12 +52,10 @@ export default function CreatorRegisterContainer() {
   const onChangeChecked = (e: ChangeEvent<HTMLInputElement>) => {
     setValue("terms", e.target.checked);
   };
-
   const onChangeCertifiFile = (file: File) => {
     setCertFile(file);
   };
-
-  const onChageProfileFile = (url: string, file: File) => {
+  const onChangeProfileFile = (url: string, file: File) => {
     setProfilePreview(url);
     setProfileFile(file);
   };
@@ -66,7 +63,7 @@ export default function CreatorRegisterContainer() {
   const onClickCertNumber = async () => {
     if (!openTime) {
       try {
-        const result = await postSmsToken({
+        await postSmsToken({
           variables: {
             phoneNumber: getValues("phoneNumber"),
           },
@@ -75,7 +72,6 @@ export default function CreatorRegisterContainer() {
         setTimeout(() => {
           setOpenTime(false);
         }, 180000);
-        console.log(result.data.postSmsToken.message);
       } catch (error) {
         ErrorModal(error as string);
       }
@@ -165,7 +161,7 @@ export default function CreatorRegisterContainer() {
       handleSubmit={handleSubmit}
       formState={formState}
       onChangeCertifiFile={onChangeCertifiFile}
-      onChageProfileFile={onChageProfileFile}
+      onChangeProfileFile={onChangeProfileFile}
       profilePreview={profilePreview}
       onClickCertNumber={onClickCertNumber}
       onClickCertConfirm={onClickCertConfirm}

@@ -49,3 +49,12 @@ export const FETCH_LIKE_COUNT = gql`
     fetchLikeCount(productId: $productId)
   }
 `;
+
+export const COUNT_PRODUCT_BY_STATUS = gql`
+  query countProductByStatus(
+    $type: PRODUCT_SEARCH_TYPE!
+    $option: PRODUCT_INCLUDE_OPTION!
+  ) {
+    countProductByStatus(type: $type, option: $option)
+  }
+`;

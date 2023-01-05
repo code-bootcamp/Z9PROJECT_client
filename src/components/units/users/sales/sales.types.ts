@@ -3,11 +3,11 @@ import { Dispatch, SetStateAction } from "react";
 export type ISalesPresenterProps = {
   tab: string;
   sellHistory: any;
-  onClickTab: (event: any) => void;
-  setTab: Dispatch<SetStateAction<string>>;
-  onClickPage: (currentPage: number) => void;
   currentPage: number;
   HistoryCount: number;
-  onChangeDate: (_: any, dateString: string[]) => void;
+  onClickTab: (event: any) => void;
   onClickAccept: (id: number) => any;
+  setTab: Dispatch<SetStateAction<string>>;
+  onClickPage: (currentPage: number) => void;
+  onChangeDate: (_: any, dateString: string[]) => void;
 };

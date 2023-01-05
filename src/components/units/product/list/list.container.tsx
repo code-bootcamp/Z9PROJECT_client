@@ -1,7 +1,10 @@
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import ProductListMap from "./list.map";
-import { FETCH_PRODUCTS_BY_PAGES } from "./list.queries";
+import {
+  COUNT_PRODUCT_BY_STATUS,
+  FETCH_PRODUCTS_BY_PAGES,
+} from "./list.queries";
+import { useQuery } from "@apollo/client";
 
 export default function ProductListContainer() {
   const [tab, setTab] = useState<any>("1");
@@ -9,6 +12,9 @@ export default function ProductListContainer() {
   const { data, fetchMore } = useQuery(FETCH_PRODUCTS_BY_PAGES, {
     fetchPolicy: "cache-first",
     variables: { page: 1 },
+  });
+  const { data: listData } = useQuery(COUNT_PRODUCT_BY_STATUS, {
+    variables: { type: "ALL", option: "INCLUDE_SOLDED_OUT" },
   });
 
   const onClickTab = (event: any) => {
@@ -42,6 +48,7 @@ export default function ProductListContainer() {
         onLoadMore={onLoadMore}
         tab={tab}
         data={data}
+        listData={listData}
       />
     </>
   );

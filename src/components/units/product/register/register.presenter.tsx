@@ -1,12 +1,13 @@
-import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
-import { HexColorPicker } from "react-colorful";
 import { DatePicker } from "antd";
+import dynamic from "next/dynamic";
 import * as S from "./register.styles";
 import ImgDropzone from "./atom/dropzone";
+import { HexColorPicker } from "react-colorful";
 import { selectCategory } from "./atom/category";
 import { IRegisterPresenterProps } from "./register.types";
+import UseCreator from "../../../commons/hooks/useCreator";
 import Input02 from "../../../commons/input/input02/input02";
-import dynamic from "next/dynamic";
+import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
 const EditorPage = dynamic(async () => await import("./atom/editor"), {
   ssr: false,
 });
@@ -36,6 +37,8 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
     onChangeTextColor,
   } = P;
   const { RangePicker } = DatePicker;
+  UseCreator();
+
   return (
     <S.Container>
       <form
@@ -129,7 +132,6 @@ export default function RegisterPresenter(P: IRegisterPresenterProps) {
               type="text"
               placeholder="예) 100"
               register={register("originalQuantity")}
-              // disabled={true}
             />
           </S.Item>
           <S.Item>

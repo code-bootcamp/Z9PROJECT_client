@@ -13,7 +13,7 @@ export default function UserPresenter(P: IUserPresenterProps) {
     register,
     handleSubmit,
     formState,
-    onChageProfileFile,
+    onChangeProfileFile,
     profilePreview,
     onClickCertNumber,
     onClickCertConfirm,
@@ -199,7 +199,7 @@ export default function UserPresenter(P: IUserPresenterProps) {
                 <img src="/users/user/img_id.svg" alt="기본이미지" />
               )}
             </S.ProfileWrapper>
-            <Upload02 onChageProfileFile={onChageProfileFile} />
+            <Upload02 onChangeProfileFile={onChangeProfileFile} />
           </S.UploadWrapper>
           <S.CountWrapper>
             <S.Label>

@@ -1,9 +1,9 @@
 import { HeartOutlined } from "@ant-design/icons";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import * as S from "./list.styles";
+import { useQuery } from "@apollo/client";
 import Timer from "../../../commons/hooks/timer";
 import { FETCH_LIKE_COUNT, FETCH_PRODUCT_VIEW_COUNT } from "./list.queries";
-import { useQuery } from "@apollo/client";
 
 export default function ProductListPresenter(P: any) {
   const { el, tab } = P;

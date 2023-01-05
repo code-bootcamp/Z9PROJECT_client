@@ -1,15 +1,16 @@
-import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { MouseEvent, useEffect, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 import { ErrorModal, SuccessModal } from "../../../commons/modal/modal";
 import {
+  FETCH_USER,
+  LIKE_PRODUCT,
   CREATE_ORDER,
+  FETCH_PRODUCT,
   FETCH_IS_LIKED,
   DELETE_PRODUCT,
-  FETCH_PRODUCT,
-  LIKE_PRODUCT,
-  FETCH_COUNT_OF_QUESTIONS,
   ADD_PRODUCT_VIEW_COUNT,
+  FETCH_COUNT_OF_QUESTIONS,
 } from "./detail.queries";
 import ProductDetailPresenter from "./skin1/detail.presenter";
 import ProductDetailPresenter2 from "./skin2/detail.presenter2";
@@ -17,97 +18,55 @@ import ProductDetailPresenter3 from "./skin3/detail.presenter3";
 
 export default function ProductDetailContainer() {
   const router = useRouter();
+  const [graph, setGraph] = useState(0);
   const [count, setCount] = useState(1);
   const [cart, setCart] = useState(false);
   const [thumbnail, setThumbnail] = useState("");
+  const [option, setOption] = useState<any>([{}]);
   const [important, setImportant] = useState(false);
-  const [graph, setGraph] = useState(0);
+  const [fetchOption, setFetchOption] = useState<any>([{}]);
 
   const [createOrder] = useMutation(CREATE_ORDER);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const [addProductViewCount] = useMutation(ADD_PRODUCT_VIEW_COUNT);
+  const [likeProduct] = useMutation(LIKE_PRODUCT, {
+    refetchQueries: [
+      {
+        query: FETCH_IS_LIKED,
+        variables: { productId: String(router.query.useditemId) },
+      },
+    ],
+  });
 
   const { data } = useQuery(FETCH_PRODUCT, {
     variables: { productId: String(router.query.useditemId) },
     fetchPolicy: "cache-first",
   });
-
   const { data: countData } = useQuery(FETCH_COUNT_OF_QUESTIONS, {
     fetchPolicy: "cache-first",
     variables: { productId: String(router.query.useditemId) },
   });
+  const { data: fetchUser } = useQuery(FETCH_USER);
+
+  const { data: fetchIsLiked } = useQuery(FETCH_IS_LIKED, {
+    variables: { productId: String(router.query.useditemId) },
+  });
 
   useEffect(() => {
+    if (data === null || data === undefined) return;
     setThumbnail(
       data?.fetchProduct.images
         ? data?.fetchProduct.images[0]
         : "/icon_logo.png"
     );
-  }, [data]);
-
-  let option: any[] = [];
-
-  if (data?.fetchProduct?.option1 !== null)
-    option = [
+    setFetchOption([
       {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-    ];
-  if (data?.fetchProduct?.option2 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
+        value: data?.fetchProduct.option1,
+        label: data?.fetchProduct.option1,
       },
       {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
-      },
-    ];
-  if (data?.fetchProduct?.option3 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-      {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
-      },
-      {
-        value: data?.fetchProduct?.option3,
-        label: data?.fetchProduct?.option3,
-      },
-    ];
-  if (data?.fetchProduct?.option4 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-      {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
-      },
-      {
-        value: data?.fetchProduct?.option3,
-        label: data?.fetchProduct?.option3,
-      },
-      {
-        value: data?.fetchProduct?.option4,
-        label: data?.fetchProduct?.option4,
-      },
-    ];
-  if (data?.fetchProduct?.option5 !== null)
-    option = [
-      {
-        value: data?.fetchProduct?.option1,
-        label: data?.fetchProduct?.option1,
-      },
-      {
-        value: data?.fetchProduct?.option2,
-        label: data?.fetchProduct?.option2,
+        value: data?.fetchProduct.option2,
+        label: data?.fetchProduct.option2,
       },
       {
         value: data?.fetchProduct?.option3,
@@ -121,20 +80,16 @@ export default function ProductDetailContainer() {
         value: data?.fetchProduct?.option5,
         label: data?.fetchProduct?.option5,
       },
-    ];
+    ]);
+  }, [data]);
 
-  const [likeProduct] = useMutation(LIKE_PRODUCT, {
-    refetchQueries: [
-      {
-        query: FETCH_IS_LIKED,
-        variables: { productId: String(router.query.useditemId) },
-      },
-    ],
-  });
-
-  const { data: fetchIsLiked } = useQuery(FETCH_IS_LIKED, {
-    variables: { productId: String(router.query.useditemId) },
-  });
+  useEffect(() => {
+    const temp: any = [];
+    fetchOption.forEach((el: any) => {
+      if (el.value !== null) temp.push(el);
+    });
+    setOption(temp);
+  }, [fetchOption]);
 
   useEffect(() => {
     if (fetchIsLiked?.fetchIsLiked === true) {
@@ -167,12 +122,6 @@ export default function ProductDetailContainer() {
     });
   };
 
-  const discount = Math.floor(
-    ((data?.fetchProduct.originPrice - data?.fetchProduct.discountPrice) /
-      data?.fetchProduct.originPrice) *
-      100
-  );
-
   const onClickOrder = async () => {
     try {
       await createOrder({
@@ -192,13 +141,6 @@ export default function ProductDetailContainer() {
     } catch (error) {
       ErrorModal(error as string);
     }
-  };
-
-  const onClickTab = () => {
-    setImportant(true);
-  };
-  const onClickTab2 = () => {
-    setImportant(false);
   };
 
   const onClickDelete = async () => {
@@ -230,6 +172,19 @@ export default function ProductDetailContainer() {
     });
   };
 
+  const onClickTab = () => {
+    setImportant(true);
+  };
+  const onClickTab2 = () => {
+    setImportant(false);
+  };
+
+  const discount = Math.floor(
+    ((data?.fetchProduct.originPrice - data?.fetchProduct.discountPrice) /
+      data?.fetchProduct.originPrice) *
+      100
+  );
+
   return (
     <>
       {data?.fetchProduct.skin === 1 && (
@@ -254,6 +209,7 @@ export default function ProductDetailContainer() {
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
           option={option}
+          fetchUser={fetchUser}
         />
       )}
       {data?.fetchProduct.skin === 2 && (
@@ -277,6 +233,7 @@ export default function ProductDetailContainer() {
           onClickDelete={onClickDelete}
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
+          fetchUser={fetchUser}
         />
       )}
 
@@ -302,6 +259,7 @@ export default function ProductDetailContainer() {
           handleCopyClipBoard={handleCopyClipBoard}
           countData={countData}
           option={option}
+          fetchUser={fetchUser}
         />
       )}
     </>

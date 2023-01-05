@@ -1,9 +1,10 @@
-import QuestionContainer from "../../question/list/questionList.container";
 import * as S from "./qna.styles";
 import { IQnaPresenterCommonsProps } from "./qna.types";
+import QuestionContainer from "../../question/list/questionList.container";
 
 export default function QnaPresenterCommons(P: IQnaPresenterCommonsProps) {
   const { fetchMyQuestions } = P;
+
   return (
     <S.Container>
       <S.SubTitle>상품 Q&A</S.SubTitle>

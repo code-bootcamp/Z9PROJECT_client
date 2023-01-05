@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { styleSet } from "../../../../commons/styles/styleSet";
 import { IStlyesProps } from "../creator/creator.types";
+import { styleSet } from "../../../../commons/styles/styleSet";
 
 export const Container = styled.section`
   margin: 0 auto;

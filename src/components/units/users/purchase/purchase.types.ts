@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction } from "react";
 
 export type IPurchasePresenterProps = {
   tab: string;
-  purchaseHistory: any;
-  onClickTab: (event: any) => void;
-  setTab: Dispatch<SetStateAction<string>>;
   currentPage: number;
   HistoryCount: number;
-  onClickPage: (currentPage: number) => void;
+  purchaseHistory: any;
+  onClickTab: (event: any) => void;
   onClickRefund: (id: number) => any;
+  setTab: Dispatch<SetStateAction<string>>;
+  onClickPage: (currentPage: number) => void;
   onChangeDate: (_: any, dateString: string[]) => void;
 };
 

@@ -129,3 +129,12 @@ export const ADD_PRODUCT_VIEW_COUNT = gql`
     addProductViewCount(productId: $productId)
   }
 `;
+
+export const FETCH_USER = gql`
+  query fetchUser {
+    fetchUser {
+      id
+      nickname
+    }
+  }
+`;

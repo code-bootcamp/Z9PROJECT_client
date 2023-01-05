@@ -121,7 +121,7 @@ export const Contents = styled.p`
   }
 `;
 
-export const Answer = styled.p`
+export const Answer = styled.span`
   color: ${styleSet.colors.black};
   font-family: ${styleSet.font.B};
   display: flex;

@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 import {
   FETCH_CREATORS,
-  FETCH_CREATORS_BY_SNS,
   SEARCH_CREATORS,
+  FETCH_CREATORS_BY_SNS,
 } from "./cudtomList.queries";
 import CustomListPresenter from "./customList.presenter";
 

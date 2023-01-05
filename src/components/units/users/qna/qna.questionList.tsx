@@ -1,20 +1,17 @@
-import { useQuery } from "@apollo/client";
-import { Pagination } from "antd";
 import { useState } from "react";
-import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
-import QuestionContainer from "../../question/list/questionList.container";
-import { FETCH_COUNT_OF_QUESTIONS, FETCH_QUESTIONS } from "./qna.queries";
+import { Pagination } from "antd";
 import * as S from "./qna.styles";
+import { useQuery } from "@apollo/client";
 import { IQuestionListProps } from "./qna.types";
+import { dateFormatter, PriceFormatter } from "../../../../commons/utils";
+import { FETCH_COUNT_OF_QUESTIONS, FETCH_QUESTIONS } from "./qna.queries";
+import QuestionContainer from "../../question/list/questionList.container";
 
 export default function QuestionList(P: IQuestionListProps) {
   const { item } = P;
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const onClickProduct = () => {
-    setIsOpen((open) => !open);
-  };
   const { data: fetchQuestions } = useQuery(FETCH_QUESTIONS, {
     fetchPolicy: "network-only",
     variables: { productId: String(item.id), page: currentPage },
@@ -24,6 +21,9 @@ export default function QuestionList(P: IQuestionListProps) {
     variables: { productId: String(item.id) },
   });
 
+  const onClickProduct = () => {
+    setIsOpen((open) => !open);
+  };
   const onClickPage = (currentPage: number) => {
     setCurrentPage(currentPage);
   };
@@ -46,12 +46,12 @@ export default function QuestionList(P: IQuestionListProps) {
           )}
           <Pagination
             size="small"
-            total={questionsCount?.fetchCountOfQuestions}
-            onChange={onClickPage}
-            current={currentPage}
             defaultCurrent={1}
-            showSizeChanger={false}
             defaultPageSize={5}
+            current={currentPage}
+            onChange={onClickPage}
+            showSizeChanger={false}
+            total={questionsCount?.fetchCountOfQuestions}
           />
         </S.QuestionLi>
       )}

@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
-import MyPageLayoutContainer from "../../../commons/myPageLayout/myPageLayout.container";
+import { useQuery } from "@apollo/client";
 import MyPagePresenter from "./myPage.presenter";
+import MyPageLayoutContainer from "../../../commons/myPageLayout/myPageLayout.container";
 import {
   FETCH_USER,
   POINT_HISTORY,
@@ -9,8 +9,8 @@ import {
 } from "./mypage.queries";
 
 export default function MyPageContainer() {
-  const [tab, setTab] = useState("0");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [tab, setTab] = useState<string>("0");
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [date, setDate] = useState<Date[] | undefined[]>([
     undefined,
     undefined,
@@ -33,11 +33,9 @@ export default function MyPageContainer() {
   const onClickPage = (clickPage: number) => {
     setCurrentPage(clickPage);
   };
-
   const onChangeDate = (date: any) => {
     setDate([date[0]._d, date[1]._d]);
   };
-
   const onClickTab = (e: any) => {
     setTab(e?.currentTarget.id);
     const regex = /[^0-9]/g;
@@ -50,8 +48,6 @@ export default function MyPageContainer() {
     const startDate = new Date(year, month - gap, day);
     setDate([startDate, endDate]);
   };
-
-  // const onClickSearch = () => {};
 
   return (
     <MyPageLayoutContainer>

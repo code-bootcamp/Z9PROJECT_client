@@ -240,8 +240,8 @@ export const Div3 = styled.div`
   flex-direction: column;
   align-items: center;
   & > img {
-    max-height: 100px
-    max-width: 100px
+    max-height: 100px;
+    max-width: 100px;
   }
 `;
 

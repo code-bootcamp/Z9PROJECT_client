@@ -8,14 +8,13 @@ import {
 } from "./purchase.queries";
 
 export default function PurchaseContainer() {
-  const [tab, setTab] = useState("0");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [tab, setTab] = useState<string>("0");
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [date, setDate] = useState<Date[] | undefined[]>([
     undefined,
     undefined,
   ]);
   const [cancelOrderRequest] = useMutation(CANCEL_ORDER_REFUND);
-
   const { data: purchaseHistory } = useQuery(FETCH_ORDER_BY_USER, {
     variables: {
       startDate: date[0],
@@ -33,11 +32,9 @@ export default function PurchaseContainer() {
   const onClickPage = (clickPage: number) => {
     setCurrentPage(clickPage);
   };
-
   const onChangeDate = (date: any) => {
     setDate([date[0]._d, date[1]._d]);
   };
-
   const onClickTab = (e: any) => {
     setTab(e?.currentTarget.id);
     const regex = /[^0-9]/g;
@@ -59,19 +56,17 @@ export default function PurchaseContainer() {
     });
   };
 
-  // const onClickSearch = () => {};
-
   return (
     <PurchasePresenter
       tab={tab}
       setTab={setTab}
       onClickTab={onClickTab}
+      currentPage={currentPage}
       onClickPage={onClickPage}
       onChangeDate={onChangeDate}
-      currentPage={currentPage}
-      HistoryCount={HistoryCount?.fetchCountOfOrderByUserId}
       onClickRefund={onClickRefund}
       purchaseHistory={purchaseHistory}
+      HistoryCount={HistoryCount?.fetchCountOfOrderByUserId}
     />
   );
 }
